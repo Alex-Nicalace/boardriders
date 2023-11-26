@@ -1,0 +1,118 @@
+body {
+  // Скролл заблокирован
+  .lock & {
+    overflow: hidden;
+    touch-action: none;
+  }
+  // Сайт загружен
+  .loaded & {
+    opacity: 1;
+  }
+}
+
+//* Оболочка ============================================================================================================================================================================================================================================================================================================================================================================================================================================
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  // Прижимаем footer
+  > main {
+    flex: 1 1 auto;
+  }
+  // Фикс для слайдеров
+  > * {
+    min-width: 0;
+  }
+}
+
+//* Ограничивающий контейнер ======================================================================================================================================================================================================================
+/*
+(i) Стили будут применяться ко 
+всем классам содержащим *__container
+Например header__container, main__container и т.д.
+Снипет (HTML): cnt
+*/
+@if ($responsiveType==1) {
+  // Отзывчивая
+  [class*='__container'] {
+    @if ($maxWidthContainer>0) {
+      max-width: rem($maxWidthContainer);
+      box-sizing: content-box;
+      margin: 0 auto;
+    }
+    @if ($containerPadding>0) {
+      padding: 0 rem(math.div($containerPadding, 2));
+    }
+  }
+} @else {
+  // По брейк-поинтам
+  [class*='__container'] {
+    margin: 0 auto;
+    @if ($maxWidthContainer>0) {
+      max-width: rem($maxWidthContainer);
+      box-sizing: content-box;
+    } @else {
+      @if ($containerPadding>0) {
+        padding: 0 rem(math.div($containerPadding, 2));
+      }
+    }
+    @media (max-width: $pc) {
+      max-width: rem(970);
+    }
+    @media (max-width: $tablet) {
+      max-width: rem(750);
+    }
+    @media (max-width: $mobile) {
+      max-width: none;
+      @if ($containerPadding>0 and $maxWidthContainer>0) {
+        padding: 0 rem(math.div($containerPadding, 2));
+      }
+    }
+  }
+}
+
+//* делает элемент невидимым в верстке правильным образом с точки зрения симантики
+//* чтобы скринридеры могли правильным образом работать
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%); // новое, заменило clip
+  clip: rect(0 0 0 0); // устаревшее, новое clip-path
+  overflow: hidden;
+}
+
+//* Для всего документа любой скролл. Работает и для якорей:
+//* медиа запрос лишь для того чтобы узнать не запросил ли пользователь избавления от всякого рода подобных анимаций
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+
+//* Стили для отзывчивых картинок (IBG)
+//* если нет возможности использовать свойство aspect-ratio, то с помощью этих стилей и padding-top
+// Сниппет (HTML): ibg (div c картинкой и классами)
+// Сниппет (HTML): ibga (a c картинкой и классами)
+[class*='-ibg'] {
+  position: relative;
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+}
+[class*='-ibg_contain'] {
+  img {
+    object-fit: contain;
+  }
+}
