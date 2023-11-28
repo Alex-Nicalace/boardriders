@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'Grtsk Peta';
+  src: url('../assets/fonts/GrtskPeta-Regular.woff2') format('woff2'),
+    url('../assets/fonts/GrtskPeta-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Grtsk Peta';
+  src: url('../assets/fonts/GrtskPeta-Medium.woff2') format('woff2'),
+    url('../assets/fonts/GrtskPeta-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Grtsk Peta';
+  src: url('../assets/fonts/GrtskPeta-Bold.woff2') format('woff2'),
+    url('../assets/fonts/GrtskPeta-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
