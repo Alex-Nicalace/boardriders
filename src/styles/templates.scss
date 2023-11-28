@@ -1,0 +1,154 @@
+%h0 {
+  color: var(--Black, #000);
+  font-size: rem(48);
+  font-weight: 700;
+  line-height: normal;
+}
+
+/* H1-1 - 32 - medium */
+%h1 {
+  font-size: rem(32);
+  font-weight: 500;
+  line-height: normal;
+}
+
+/* Subtitle 1 - 21 - medium */
+%subtitle-1 {
+  font-size: rem(21);
+  font-weight: 500;
+  line-height: 1.666;
+  letter-spacing: em(-0.42, 21);
+}
+
+/* Subtitle 2 - 18 - medium */
+%subtitle-2 {
+  font-size: rem(18);
+  font-weight: 500;
+  line-height: 1.666;
+  letter-spacing: em(-0.36, 18);
+}
+
+/* Subtitle 3 - 16 - medium */
+%subtitle-3 {
+  font-size: rem(16);
+  font-weight: 500;
+  line-height: 1.875;
+  letter-spacing: em(-0.32, 16);
+}
+
+/* cost Capital - 18 - medium */
+%cost {
+  font-size: rem(18);
+  font-weight: 500;
+  line-height: 1.666;
+  letter-spacing: em(-0.36, 18);
+  text-transform: uppercase;
+}
+
+/* cost  Capital 1- 16 - medium */
+%cost-1 {
+  font-size: rem(16);
+  font-weight: 500;
+  line-height: 1.875;
+  letter-spacing: em(-0.32, 16);
+  text-transform: uppercase;
+}
+
+/* Bttn Capital accent - 18 - medium */
+%button {
+  @extend %cost;
+  color: var(--red);
+}
+
+/* Body 1 - 16 - medium */
+%body-1 {
+  font-size: rem(16);
+  font-weight: 500;
+  line-height: 1.56;
+  letter-spacing: em(-0.32, 16);
+}
+
+/* Body 1-1 - 16 - regular */
+%body-1-1 {
+  @extend %body-1;
+  font-weight: 400;
+}
+
+/* Body 1-1 txt - 16 - regular */
+%body-1-1-txt {
+  @extend %body-1;
+  font-weight: 400;
+  line-height: 1.875;
+}
+
+/* Body 2 - 14 medium */
+%body-2 {
+  font-size: rem(14);
+  font-weight: 500;
+  line-height: 1.785;
+  letter-spacing: em(-0.28, 14);
+}
+
+/* Body 2-1 - 14 - regular */
+%body-2-1 {
+  @extend %body-2;
+  font-weight: 400;
+}
+
+/* Body 3 - Underline - 14 medium */
+%body-3 {
+  @extend %body-2;
+  text-decoration-line: underline;
+}
+
+/* Body 4 - Underline - 14 - regular */
+%body-4 {
+  @extend %body-2;
+  font-weight: 400;
+  text-decoration-line: underline;
+}
+
+/* Caption - 12 medium */
+%caption {
+  font-size: rem(12);
+  font-weight: 500;
+  line-height: 1.666;
+  letter-spacing: em(-0.24, 12);
+}
+
+/* Caption1 - 12 - regular */
+%caption-1 {
+  @extend %caption;
+  color: var(--dark-grey);
+  font-weight: 400;
+}
+
+/* Body 4 Capital - 12 - medium */
+%body-4-capital {
+  @extend %caption;
+  text-transform: uppercase;
+}
+
+%link {
+  @extend %caption;
+  color: var(--dark-grey);
+  text-decoration-line: underline;
+}
+
+/* Caption capital - 8 -medium */
+%caption-capital {
+  color: var(--dark-grey);
+  font-size: rem(8);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: em(0.16, 8);
+  text-transform: uppercase;
+}
+
+/* Caption capital - 8 -medium */
+%caption-capital-1 {
+  @extend %caption-capital;
+  font-size: rem(10);
+  line-height: 1;
+  letter-spacing: em(0.3, 10);
+}
