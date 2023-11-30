@@ -1,0 +1,11 @@
+@use '/src/styles/common/mixins.scss' as *;
+
+.option {
+  transition: all 0.3s ease 0s;
+  &:hover {
+    color: var(--dark-gray);
+  }
+  &:not(:last-child) {
+    margin-bottom: em(15, 14);
+  }
+}

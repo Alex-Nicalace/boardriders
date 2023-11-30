@@ -1,0 +1,61 @@
+@use '/src/styles/common/mixins.scss' as *;
+
+.select {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  // .select__wrapper
+  &__wrapper {
+    position: relative;
+    padding: rem(13) rem(20);
+    display: inline-grid;
+    grid-template-columns: 1fr auto;
+    column-gap: rem(10);
+    align-items: center;
+    border: rem(1) solid var(--gray);
+    z-index: 1;
+
+    &:hover {
+      box-shadow: rem(0) rem(5) rem(15) rem(0) rgba(0, 0, 0, 0.05);
+    }
+  }
+  // .select__value
+  &__value {
+  }
+  // .select__icon
+  &__icon {
+    transition: all 0.3s ease 0s;
+  }
+  // .select__list
+  &__list {
+    position: absolute;
+    top: 100%;
+    min-width: 100%;
+    padding: rem(25) rem(20);
+    background-color: var(--white);
+    border: rem(1) solid var(--gray);
+    border-top: none;
+  }
+  // .select__options
+  &__options {
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      // ширина и цвет
+      width: rem(5);
+      background-color: var(--gray);
+    }
+    &::-webkit-scrollbar-thumb {
+      // цвет бегунка
+      background-color: var(--black);
+    }
+    scrollbar-color: var(--black) var(--gray);
+  }
+  // .select_opened
+  &_opened {
+    .select__icon {
+      // transform: rotate(180deg);
+      transform: scale(1, -1);
+    }
+  }
+}
