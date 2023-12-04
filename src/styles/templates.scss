@@ -1,3 +1,5 @@
+@use '/src/styles/common/mixins.scss' as *;
+
 %h0 {
   color: var(--Black, #000);
   font-size: rem(48);

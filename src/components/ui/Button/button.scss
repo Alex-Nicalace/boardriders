@@ -1,0 +1,84 @@
+@use '/src/styles/common/mixins.scss' as *;
+@use '/src/styles/templates.scss' as *;
+
+.button-primary {
+  @extend %subtitle-3;
+  padding: rem(10);
+  background-color: var(--black);
+  color: var(--white);
+  transition: all 0.3s ease 0s;
+
+  @media (pointer: fine) {
+    &:hover {
+      color: var(--dark-gray);
+    }
+  }
+
+  &:active {
+    color: var(--light-gray);
+  }
+
+  &:disabled {
+    background-color: var(--gray);
+    color: var(--dark-gray);
+  }
+
+  &_outlined {
+    background-color: transparent;
+    border: rem(1) solid var(--black);
+    color: var(--black);
+
+    &:active {
+      color: var(--black);
+    }
+
+    &:disabled {
+      background-color: transparent;
+      border-color: var(--gray--1);
+      color: var(--gray);
+    }
+  }
+}
+
+.button-secondary {
+  padding: rem(25);
+  color: var(--white);
+  font-size: rem(18);
+  font-weight: 500;
+  line-height: 1.111;
+  letter-spacing: em(-0.36, 18);
+  text-transform: uppercase;
+  background-color: var(--red);
+  transition: all 0.3s ease 0s;
+
+  @media (pointer: fine) {
+    &:hover {
+      color: var(--gray);
+    }
+  }
+
+  &:active {
+    color: var(--white);
+  }
+
+  &:disabled {
+    background-color: var(--gray);
+    color: var(--dark-gray);
+  }
+
+  &_outlined {
+    background-color: transparent;
+    border: rem(1) solid var(--red);
+    color: var(--red);
+
+    &:active {
+      color: var(--dark-gray);
+    }
+
+    &:disabled {
+      background-color: transparent;
+      border-color: var(--gray--1);
+      color: var(--gray);
+    }
+  }
+}
