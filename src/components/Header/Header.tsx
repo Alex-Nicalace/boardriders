@@ -5,27 +5,11 @@ import Select from '../ui/Select';
 import Option from '../ui/Option';
 
 import './header.scss';
-import useMatchMedia from '../../hooks/useMatchMedia';
+import MediaQuery from '../ui/MediaQuery';
 
-const queries = [
-  '(max-width: 479.98px)',
-  '(min-width: 480px) and (max-width: 767.98px)',
-  '(min-width: 768px) and (max-width: 991.98px)',
-  '(min-width: 992px) and (max-width: 1390px)',
-  '(min-width: 1391px)',
-];
 // interface IHeaderProps {}
 function Header(): JSX.Element {
   const [city, setCity] = useState('Москва');
-  const [isMobileSmall, isMobile, isTablet, isDesktop, isLargeDesktop] =
-    useMatchMedia(queries);
-  console.log({
-    isSmallMobile: isMobileSmall,
-    isMobile,
-    isTablet,
-    isDesktop,
-    isLargeDesktop,
-  });
 
   function handleChangeCity(value: string) {
     setCity(value);
@@ -73,26 +57,31 @@ function Header(): JSX.Element {
               </li>
             </ul>
           </nav>
-          <ul className="topbar-header__advantages advantages-topbar-header">
-            <li className="advantages-topbar-header__item">
-              <TrackIcon className="advantages-topbar-header__icon" />
-              <span className="advantages-topbar-header__text">
-                Бесплатная доставка *
-              </span>
-            </li>
-            <li className="advantages-topbar-header__item">
-              <PayLocation className="advantages-topbar-header__icon" />
-              <span className="advantages-topbar-header__text">
-                Оплата при получении
-              </span>
-            </li>
-            <li className="advantages-topbar-header__item">
-              <Refund className="advantages-topbar-header__icon" />
-              <span className="advantages-topbar-header__text">
-                Возврат в течение 14 дней
-              </span>
-            </li>
-          </ul>
+          <MediaQuery minWidth={1210}>
+            <ul className="topbar-header__advantages advantages-topbar-header">
+              <li className="advantages-topbar-header__item">
+                <TrackIcon
+                  className="advantages-topbar-header__icon"
+                  height={20}
+                />
+                <span className="advantages-topbar-header__text">
+                  Бесплатная доставка *
+                </span>
+              </li>
+              <li className="advantages-topbar-header__item">
+                <PayLocation className="advantages-topbar-header__icon" />
+                <span className="advantages-topbar-header__text">
+                  Оплата при получении
+                </span>
+              </li>
+              <li className="advantages-topbar-header__item">
+                <Refund className="advantages-topbar-header__icon" />
+                <span className="advantages-topbar-header__text">
+                  Возврат в течение 14 дней
+                </span>
+              </li>
+            </ul>
+          </MediaQuery>
         </div>
       </div>
     </header>
