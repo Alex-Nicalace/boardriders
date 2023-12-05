@@ -30,3 +30,18 @@ h4 {
   letter-spacing: em(-0.28, 14);
   text-transform: uppercase;
 }
+
+a {
+  @extend %subtitle-3;
+  transition: all 0.3s ease 0s;
+
+  @media (pointer: fine) {
+    &:hover {
+      color: var(--dark-gray);
+    }
+  }
+
+  &:active {
+    color: var(--black);
+  }
+}
