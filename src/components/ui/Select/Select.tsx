@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { IOptionProps } from '../Option';
+import { IOptionProps } from '../Option/Option';
 import { visibilityScrollDocument } from '../../../utils/visibilityScrollDocument';
 import styles from './select.module.scss';
 import './select.scss';
