@@ -5,11 +5,11 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import IconDown from '../icons/IconDown';
-import { IOptionProps } from '../Option/Option';
+import { IOptionProps } from '../Option';
 import { visibilityScrollDocument } from '../../../utils/visibilityScrollDocument';
 import styles from './select.module.scss';
 import './select.scss';
+import { SelectIcon } from '../Icons';
 
 interface ISelectProps {
   children: ReactElement<IOptionProps> | ReactElement<IOptionProps>[];
@@ -19,15 +19,17 @@ interface ISelectProps {
   optionsStyle?: React.CSSProperties;
   name?: string;
   id?: string;
+  className?: string;
 }
 function Select({
   children,
   value,
-  IconElement = <IconDown />,
+  IconElement = <SelectIcon />,
   onChange = () => {},
   optionsStyle = {},
   name,
   id,
+  className,
 }: ISelectProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
@@ -75,7 +77,9 @@ function Select({
   return (
     <div
       ref={selectRef}
-      className={`select ${isOpen ? 'select_opened' : ''} ${styles.select}`}
+      className={`${className ? className + ' ' : ''}select ${
+        isOpen ? 'select_opened' : ''
+      } ${styles.select}`}
       onClick={handleToggleOpen}
     >
       <div className="select__wrapper">
