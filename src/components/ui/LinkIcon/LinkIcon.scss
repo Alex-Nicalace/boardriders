@@ -1,0 +1,15 @@
+@use '/src/styles/common/mixins.scss' as *;
+@use '/src/styles/templates.scss' as *;
+
+.link-icon {
+  display: inline-grid;
+  justify-items: center;
+  gap: rem(5);
+  // .link-icon__icon
+  &__icon {
+  }
+  // .link-icon__text
+  &__text {
+    @extend %caption-capital;
+  }
+}

@@ -1,11 +1,22 @@
 import { useState } from 'react';
 
-import { LocationIcon, PayLocation, Refund, TrackIcon } from '../ui/Icons';
+import {
+  Avatar,
+  Cart,
+  LocationIcon,
+  PayLocation,
+  Refund,
+  Search,
+  Star,
+  TrackIcon,
+} from '../ui/Icons';
+import logo from '../../assets/icons/logo.png';
 import Select from '../ui/Select';
 import Option from '../ui/Option';
 
 import './header.scss';
 import MediaQuery from '../ui/MediaQuery';
+import LinkIcon from '../ui/LinkIcon/LinkIcon';
 
 // interface IHeaderProps {}
 function Header(): JSX.Element {
@@ -38,7 +49,7 @@ function Header(): JSX.Element {
               <Option value="Пенза">Пенза</Option>
             </Select>
           </div>
-          <nav className="topbar-header__nav nav-topbar-header">
+          <div className="topbar-header__nav nav-topbar-header">
             <ul className="nav-topbar-header__list">
               <li className="nav-topbar-header__item">
                 <a href="/" className="nav-topbar-header__link">
@@ -56,7 +67,7 @@ function Header(): JSX.Element {
                 </a>
               </li>
             </ul>
-          </nav>
+          </div>
           <MediaQuery minWidth={1210}>
             <ul className="topbar-header__advantages advantages-topbar-header">
               <li className="advantages-topbar-header__item">
@@ -82,6 +93,74 @@ function Header(): JSX.Element {
               </li>
             </ul>
           </MediaQuery>
+        </div>
+      </div>
+      <div className="header__midbar midbar-header">
+        <div className="midbar-header__container">
+          <nav className="midbar-header__nav">
+            <ul className="midbar-header__nav-gender tab">
+              <li className="tab__item">
+                <a href="/" className="tab__link active">
+                  Мужчины
+                </a>
+              </li>
+              <li className="tab__item">
+                <a href="/" className="tab__link">
+                  Женщины
+                </a>
+              </li>
+              <li className="tab__item">
+                <a href="/" className="tab__link">
+                  Детям
+                </a>
+              </li>
+            </ul>
+            <a href="/" className="midbar-header__logo">
+              <img
+                src={logo}
+                alt="Логотип бренда Boardriders"
+                className="midbar-header__logo-img"
+              />
+            </a>
+            <ul className="midbar-header__nav-account">
+              <li className="midbar-header__item">
+                <LinkIcon
+                  className="midbar-header__link"
+                  IconComponent={Avatar}
+                  to="/"
+                >
+                  Войти
+                </LinkIcon>
+              </li>
+              <li className="midbar-header__item">
+                <LinkIcon
+                  className="midbar-header__link"
+                  IconComponent={Star}
+                  to="/"
+                >
+                  Избранное
+                </LinkIcon>
+              </li>
+              <li className="midbar-header__item">
+                <LinkIcon
+                  className="midbar-header__link"
+                  IconComponent={Cart}
+                  to="/"
+                >
+                  Корзина
+                </LinkIcon>
+              </li>
+              <li className="midbar-header__item">
+                <LinkIcon
+                  className="midbar-header__link"
+                  IconComponent={Search}
+                  to="/"
+                >
+                  ПОИСК
+                </LinkIcon>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </header>
