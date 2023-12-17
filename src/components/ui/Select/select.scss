@@ -1,4 +1,4 @@
-@use '/src/styles/common/mixins.scss' as *;
+@import '/src/styles/global-scss.scss';
 
 .select {
   position: relative;
@@ -28,9 +28,6 @@
   }
   // .select__list
   &__list {
-    position: absolute;
-    top: 100%;
-    min-width: 100%;
     padding: rem(25) rem(20);
     background-color: var(--white);
     border: rem(1) solid var(--gray);

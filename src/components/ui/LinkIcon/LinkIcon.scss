@@ -1,5 +1,4 @@
-@use '/src/styles/common/mixins.scss' as *;
-@use '/src/styles/templates.scss' as *;
+@import '/src/styles/global-scss.scss';
 
 .link-icon {
   display: inline-grid;

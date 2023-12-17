@@ -1,4 +1,4 @@
-@use '/src/styles/common/mixins.scss' as *;
+@import '/src/styles/global-scss.scss';
 
 .option {
   transition: all 0.3s ease 0s;

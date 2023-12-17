@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   Avatar,
@@ -14,9 +15,10 @@ import logo from '../../assets/icons/logo.png';
 import Select from '../ui/Select';
 import Option from '../ui/Option';
 
-import './header.scss';
+import './Header.scss';
 import MediaQuery from '../ui/MediaQuery';
 import LinkIcon from '../ui/LinkIcon/LinkIcon';
+import Menu from '../ui/Menu/Menu';
 
 // interface IHeaderProps {}
 function Header(): JSX.Element {
@@ -52,19 +54,19 @@ function Header(): JSX.Element {
           <div className="topbar-header__nav nav-topbar-header">
             <ul className="nav-topbar-header__list">
               <li className="nav-topbar-header__item">
-                <a href="/" className="nav-topbar-header__link">
+                <Link to="#" className="nav-topbar-header__link">
                   Магазины
-                </a>
+                </Link>
               </li>
               <li className="nav-topbar-header__item">
-                <a href="/" className="nav-topbar-header__link">
+                <Link to="#" className="nav-topbar-header__link">
                   Помощь
-                </a>
+                </Link>
               </li>
               <li className="nav-topbar-header__item">
-                <a href="/" className="nav-topbar-header__link">
+                <Link to="#" className="nav-topbar-header__link">
                   Блоги
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -98,30 +100,24 @@ function Header(): JSX.Element {
       <div className="header__midbar midbar-header">
         <div className="midbar-header__container">
           <nav className="midbar-header__nav">
-            <ul className="midbar-header__nav-gender tab">
-              <li className="tab__item">
-                <a href="/" className="tab__link active">
-                  Мужчины
-                </a>
-              </li>
-              <li className="tab__item">
-                <a href="/" className="tab__link">
-                  Женщины
-                </a>
-              </li>
-              <li className="tab__item">
-                <a href="/" className="tab__link">
-                  Детям
-                </a>
-              </li>
-            </ul>
-            <a href="/" className="midbar-header__logo">
+            <Menu
+              classNameList="midbar-header__categories switchable-menu"
+              classNameItem="switchable-menu__item"
+              classNameLink="switchable-menu__link"
+              // typeLink="NavLink"
+              items={[
+                { to: '#', title: 'Мужчинам', className: 'active' },
+                { to: '#', title: 'Женщинам' },
+                { to: '#', title: 'Детям' },
+              ]}
+            />
+            <Link to="/" className="midbar-header__logo">
               <img
                 src={logo}
                 alt="Логотип бренда Boardriders"
                 className="midbar-header__logo-img"
               />
-            </a>
+            </Link>
             <ul className="midbar-header__nav-account">
               <li className="midbar-header__item">
                 <LinkIcon
@@ -160,6 +156,36 @@ function Header(): JSX.Element {
                 </LinkIcon>
               </li>
             </ul>
+          </nav>
+        </div>
+      </div>
+      <div className="header__botbar botbar-header">
+        <div className="botbar-header__container">
+          <nav className="botbar-header__nav">
+            <Menu
+              classNameList="botbar-header__menu"
+              classNameItem="botbar-header__item"
+              classNameLink="botbar-header__link"
+              items={[
+                { to: '#', title: 'Новинки' },
+                { to: '#', title: 'Сноуборд' },
+                { to: '#', title: 'Лыжи' },
+                { to: '#', title: 'Скейт' },
+                { to: '#', title: 'Лонгборд' },
+                { to: '#', title: 'Вейкборд' },
+                { to: '#', title: 'Серф' },
+                { to: '#', title: 'Sup' },
+                { to: '#', title: 'Одежда' },
+                { to: '#', title: 'Обувь' },
+                { to: '#', title: 'Аксессуары' },
+                { to: '#', title: 'Бренды' },
+                {
+                  to: '#',
+                  title: 'Распродажа',
+                  className: 'botbar-header__link_red',
+                },
+              ]}
+            />
           </nav>
         </div>
       </div>

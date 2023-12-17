@@ -1,4 +1,4 @@
-import './option.scss';
+import './Option.scss';
 
 export interface IOptionProps {
   children: React.ReactNode;

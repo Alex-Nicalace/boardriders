@@ -8,7 +8,7 @@ import React, {
 import { IOptionProps } from '../Option/Option';
 import { visibilityScrollDocument } from '../../../utils/visibilityScrollDocument';
 import styles from './select.module.scss';
-import './select.scss';
+import './Select.scss';
 import { SelectIcon } from '../Icons';
 
 interface ISelectProps {

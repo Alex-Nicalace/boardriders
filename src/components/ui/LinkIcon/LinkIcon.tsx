@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './LinkIcon.scss';
 
 interface ILinkIconProps {
@@ -18,10 +19,10 @@ function LinkIcon({
   to,
 }: ILinkIconProps): JSX.Element {
   return (
-    <a href={to} className={`${className} link-icon`}>
+    <Link to={to} className={`${className} link-icon`}>
       <IconComponent className="link-icon__icon" />
       <span className="link-icon__text">{children}</span>
-    </a>
+    </Link>
   );
 }
 

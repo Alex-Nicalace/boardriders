@@ -1,6 +1,3 @@
-@use '/src/styles/common/mixins.scss' as *;
-@use '/src/styles/templates.scss' as *;
-
 .button-primary {
   @extend %subtitle-3;
   padding: rem(10);
