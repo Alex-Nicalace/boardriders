@@ -1,13 +1,9 @@
 @import '/src/styles/global-scss.scss';
 
 .burger {
-  // display: none;
-  // @media (max-width: $tablet) {
-  // display: block;
   position: relative;
   width: rem(30);
   height: rem(24);
-  // cursor: pointer;
   z-index: 1;
   span,
   &::before,
