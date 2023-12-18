@@ -1,11 +1,12 @@
 @import '/src/styles/global-scss.scss';
 
-.link-icon {
+.icon-button {
   display: inline-grid;
   justify-items: center;
   gap: rem(5);
   // .link-icon__icon
   &__icon {
+    @include adaptiveValue('width', 24, 20);
   }
   // .link-icon__text
   &__text {
