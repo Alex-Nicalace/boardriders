@@ -2,13 +2,12 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
-  Avatar,
-  Cart,
+  AvatarIcon,
+  CartIcon,
   LocationIcon,
   PayLocation,
-  Refund,
-  Search,
-  Star,
+  RefundIcon,
+  StarIcon,
   TrackIcon,
 } from '../ui/Icons';
 import logo from '../../assets/icons/logo.png';
@@ -17,8 +16,10 @@ import Option from '../ui/Option';
 
 import './Header.scss';
 import MediaQuery from '../ui/MediaQuery';
-import LinkIcon from '../ui/LinkIcon/LinkIcon';
+import IconButton from '../ui/IconButton';
 import Menu from '../ui/Menu/Menu';
+import BurgerButton from '../ui/BurgerButton';
+import Search from './Search';
 
 // interface IHeaderProps {}
 function Header(): JSX.Element {
@@ -30,47 +31,50 @@ function Header(): JSX.Element {
 
   return (
     <header className="header">
-      <div className="header__topbar topbar-header">
-        <div className="topbar-header__container">
-          <div className="topbar-header__delivery-region delivery-region">
-            <label htmlFor="delivery-region" className="delivery-region__label">
-              <LocationIcon className="delivery-region__icon" />
-              <span className="delivery-region__text">
-                Ваш регион доставки:
-              </span>
-            </label>
-            <Select
-              className="delivery-region__select"
-              name="delivery-region"
-              id="delivery-region"
-              value={city}
-              onChange={handleChangeCity}
-            >
-              <Option value="Москва">Москва</Option>
-              <Option value="Санкт-Петербург">Санкт-Петербург</Option>
-              <Option value="Пенза">Пенза</Option>
-            </Select>
-          </div>
-          <div className="topbar-header__nav nav-topbar-header">
-            <ul className="nav-topbar-header__list">
-              <li className="nav-topbar-header__item">
-                <Link to="#" className="nav-topbar-header__link">
-                  Магазины
-                </Link>
-              </li>
-              <li className="nav-topbar-header__item">
-                <Link to="#" className="nav-topbar-header__link">
-                  Помощь
-                </Link>
-              </li>
-              <li className="nav-topbar-header__item">
-                <Link to="#" className="nav-topbar-header__link">
-                  Блоги
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <MediaQuery minWidth={1210}>
+      <MediaQuery minWidth="tablet">
+        <div className="header__topbar topbar-header">
+          <div className="topbar-header__container">
+            <div className="topbar-header__delivery-region delivery-region">
+              <label
+                htmlFor="delivery-region"
+                className="delivery-region__label"
+              >
+                <LocationIcon className="delivery-region__icon" />
+                <span className="delivery-region__text">
+                  Ваш регион доставки:
+                </span>
+              </label>
+              <Select
+                className="delivery-region__select"
+                name="delivery-region"
+                id="delivery-region"
+                value={city}
+                onChange={handleChangeCity}
+              >
+                <Option value="Москва">Москва</Option>
+                <Option value="Санкт-Петербург">Санкт-Петербург</Option>
+                <Option value="Пенза">Пенза</Option>
+              </Select>
+            </div>
+            <div className="topbar-header__nav nav-topbar-header">
+              <ul className="nav-topbar-header__list">
+                <li className="nav-topbar-header__item">
+                  <Link to="#" className="nav-topbar-header__link">
+                    Магазины
+                  </Link>
+                </li>
+                <li className="nav-topbar-header__item">
+                  <Link to="#" className="nav-topbar-header__link">
+                    Помощь
+                  </Link>
+                </li>
+                <li className="nav-topbar-header__item">
+                  <Link to="#" className="nav-topbar-header__link">
+                    Блоги
+                  </Link>
+                </li>
+              </ul>
+            </div>
             <ul className="topbar-header__advantages advantages-topbar-header">
               <li className="advantages-topbar-header__item">
                 <TrackIcon
@@ -88,15 +92,15 @@ function Header(): JSX.Element {
                 </span>
               </li>
               <li className="advantages-topbar-header__item">
-                <Refund className="advantages-topbar-header__icon" />
+                <RefundIcon className="advantages-topbar-header__icon" />
                 <span className="advantages-topbar-header__text">
                   Возврат в течение 14 дней
                 </span>
               </li>
             </ul>
-          </MediaQuery>
+          </div>
         </div>
-      </div>
+      </MediaQuery>
       <div className="header__midbar midbar-header">
         <div className="midbar-header__container">
           <nav className="midbar-header__nav">
@@ -111,50 +115,58 @@ function Header(): JSX.Element {
                 { to: '#', title: 'Детям' },
               ]}
             />
+
+            <MediaQuery maxWidth="tablet">
+              <ul className="toolbar-header">
+                <li className="toolbar-header__item">
+                  <BurgerButton />
+                </li>
+                <li className="toolbar-header__item">
+                  <Search className="midbar-header__search" />
+                </li>
+              </ul>
+            </MediaQuery>
+
             <Link to="/" className="midbar-header__logo">
               <img
                 src={logo}
                 alt="Логотип бренда Boardriders"
                 className="midbar-header__logo-img"
+                width={242}
+                height={50}
               />
             </Link>
-            <ul className="midbar-header__nav-account">
-              <li className="midbar-header__item">
-                <LinkIcon
+            <ul className="midbar-header__right-toolbar toolbar-header">
+              <MediaQuery minWidth="tablet">
+                <li className="toolbar-header__item">
+                  <IconButton IconComponent={AvatarIcon} to="/">
+                    Войти
+                  </IconButton>
+                </li>
+              </MediaQuery>
+              <li className="toolbar-header__item">
+                <IconButton
                   className="midbar-header__link"
-                  IconComponent={Avatar}
-                  to="/"
-                >
-                  Войти
-                </LinkIcon>
-              </li>
-              <li className="midbar-header__item">
-                <LinkIcon
-                  className="midbar-header__link"
-                  IconComponent={Star}
+                  IconComponent={StarIcon}
                   to="/"
                 >
                   Избранное
-                </LinkIcon>
+                </IconButton>
               </li>
-              <li className="midbar-header__item">
-                <LinkIcon
+              <li className="toolbar-header__item">
+                <IconButton
                   className="midbar-header__link"
-                  IconComponent={Cart}
+                  IconComponent={CartIcon}
                   to="/"
                 >
                   Корзина
-                </LinkIcon>
+                </IconButton>
               </li>
-              <li className="midbar-header__item">
-                <LinkIcon
-                  className="midbar-header__link"
-                  IconComponent={Search}
-                  to="/"
-                >
-                  ПОИСК
-                </LinkIcon>
-              </li>
+              <MediaQuery minWidth="tablet">
+                <li className="toolbar-header__item">
+                  <Search />
+                </li>
+              </MediaQuery>
             </ul>
           </nav>
         </div>
