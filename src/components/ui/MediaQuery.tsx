@@ -5,10 +5,12 @@ type TypesDevice = 'smallMobile' | 'mobile' | 'tablet' | 'pc';
 
 type Devices = Record<TypesDevice, number>;
 
+export type WidthQuery = number | TypesDevice;
+
 type MediaQueryProps = {
   children?: React.ReactNode;
-  maxWidth?: number | TypesDevice;
-  minWidth?: number | TypesDevice;
+  maxWidth?: WidthQuery;
+  minWidth?: WidthQuery;
 };
 
 const devices: Devices = {
@@ -34,18 +36,22 @@ function MediaQuery({
   const mediaQuery = useMemo(() => {
     const minWidthNumber =
       typeof minWidth === 'string' ? devices[minWidth] : minWidth;
-
     const maxWidthNumber =
       typeof maxWidth === 'string' ? devices[maxWidth] : maxWidth;
 
-    return minWidthNumber && maxWidthNumber
-      ? `(min-width: ${minWidthNumber}px) and (max-width: ${maxWidthNumber}px)`
-      : `(min-width: ${minWidthNumber}px)` ||
-          `(max-width: ${maxWidthNumber}px)`;
+    const minWidthQuery = minWidthNumber
+      ? `(min-width: ${minWidthNumber}px)`
+      : '';
+    const maxWidthQuery = maxWidthNumber
+      ? `(max-width: ${maxWidthNumber}px)`
+      : '';
+
+    return minWidthQuery && maxWidthQuery
+      ? `${minWidthQuery} and ${maxWidthQuery})`
+      : minWidthQuery || maxWidthQuery;
   }, [minWidth, maxWidth]);
 
   const [isMatch] = useMatchMedia([mediaQuery]);
-
   return <>{isMatch && children}</>;
 }
 
