@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { MenuItem } from './MenuItem';
 import { LinkNative } from './LinkNative';
 
-interface IMenuItemData {
+export interface IMenuItemData {
   title: string;
   to: string;
   classNameItem?: string;
