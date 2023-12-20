@@ -1,9 +1,13 @@
 import { Link, NavLink } from 'react-router-dom';
+import { MenuItem } from './MenuItem';
+import { LinkNative } from './LinkNative';
 
 interface IMenuItemData {
   title: string;
   to: string;
-  className?: string;
+  classNameItem?: string;
+  classNameLink?: string;
+  submenuElement?: React.ReactNode;
 }
 
 interface IMenuProps {
@@ -11,7 +15,7 @@ interface IMenuProps {
   classNameList?: string;
   classNameItem?: string;
   classNameLink?: string;
-  typeLink?: 'a' | 'Link' | 'NavLink';
+  linkAs?: 'a' | 'Link' | 'NavLink';
 }
 
 function Menu({
@@ -19,40 +23,28 @@ function Menu({
   classNameList = '',
   classNameItem = '',
   classNameLink = '',
-  typeLink = 'Link',
+  linkAs = 'Link',
 }: IMenuProps): JSX.Element {
   const LinkComponent =
-    typeLink === 'a' ? A : typeLink === 'Link' ? Link : NavLink;
+    linkAs === 'a' ? LinkNative : linkAs === 'Link' ? Link : NavLink;
   return (
     <ul className={classNameList}>
       {items.map((item) => (
-        <li className={classNameItem} key={item.title}>
+        <MenuItem
+          classNameItem={`${classNameItem} ${item.classNameItem || ''}`}
+          submenuElement={item.submenuElement}
+          key={item.title}
+        >
           <LinkComponent
             to={item.to}
-            className={`${classNameLink} ${item.className}`}
+            className={`${classNameLink} ${item.classNameLink || ''}`}
           >
             {item.title}
           </LinkComponent>
-        </li>
+        </MenuItem>
       ))}
     </ul>
   );
 }
 
 export default Menu;
-
-function A({
-  children,
-  to,
-  className,
-}: {
-  children: React.ReactNode;
-  to: string;
-  className: string;
-}): JSX.Element {
-  return (
-    <a className={className} href={to}>
-      {children}
-    </a>
-  );
-}
