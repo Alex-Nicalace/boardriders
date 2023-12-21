@@ -1,15 +1,17 @@
 import { useState } from 'react';
+import { IMenuItemData } from './Menu';
+import Submenu from './Submenu';
 
-interface IMenuItem {
+interface IMenuItemProps {
   classNameItem?: string;
-  submenuElement?: React.ReactNode;
+  submenuData?: IMenuItemData['submenu'];
   children?: React.ReactNode;
 }
 export function MenuItem({
   classNameItem,
-  submenuElement,
+  submenuData,
   children,
-}: IMenuItem): JSX.Element {
+}: IMenuItemProps): JSX.Element {
   const [showSubmenu, setShowSubmenu] = useState(false);
   return (
     <li
@@ -18,7 +20,12 @@ export function MenuItem({
       onMouseLeave={() => setShowSubmenu(false)}
     >
       {children}
-      {showSubmenu && submenuElement}
+      {showSubmenu && submenuData && (
+        <Submenu
+          sections={submenuData.sections}
+          imgLinkData={submenuData.imgLinkData}
+        />
+      )}
     </li>
   );
 }

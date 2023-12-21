@@ -7,7 +7,23 @@ export interface IMenuItemData {
   to: string;
   classNameItem?: string;
   classNameLink?: string;
-  submenuElement?: React.ReactNode;
+  submenu?: {
+    sections: {
+      title: string;
+      isWideSection?: boolean;
+      links: {
+        to: string;
+        title: string;
+        classNameItem?: string;
+        classNameLink?: string;
+      }[];
+    }[];
+    imgLinkData?: {
+      src: string;
+      to: string;
+      title?: string;
+    };
+  };
 }
 
 interface IMenuProps {
@@ -32,7 +48,7 @@ function Menu({
       {items.map((item) => (
         <MenuItem
           classNameItem={`${classNameItem} ${item.classNameItem || ''}`}
-          submenuElement={item.submenuElement}
+          submenuData={item.submenu}
           key={item.title}
         >
           <LinkComponent

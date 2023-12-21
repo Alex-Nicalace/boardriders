@@ -1,22 +1,10 @@
 import { SubMenuSection } from './SubMenuSection';
 import { SubMenuImgLink } from './SubMenuImgLink';
+import { IMenuItemData } from './Menu';
 
 export interface ISubmenuProps {
-  sections: {
-    title: string;
-    isWideSection?: boolean;
-    links: {
-      to: string;
-      title: string;
-      classNameItem?: string;
-      classNameLink?: string;
-    }[];
-  }[];
-  imgLinkData?: {
-    src: string;
-    to: string;
-    title?: string;
-  };
+  sections: Required<IMenuItemData>['submenu']['sections'];
+  imgLinkData?: Required<IMenuItemData>['submenu']['imgLinkData'];
 }
 function Submenu({ sections, imgLinkData }: ISubmenuProps): JSX.Element {
   return (
