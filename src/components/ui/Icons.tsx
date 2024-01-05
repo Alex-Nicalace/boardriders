@@ -7,6 +7,7 @@ import AvatarIcon from '/src/assets/icons/avatar.svg?react';
 import StarIcon from '/src/assets/icons/star.svg?react';
 import CartIcon from '/src/assets/icons/cart.svg?react';
 import SearchIcon from '/src/assets/icons/search.svg?react';
+import ArrowLeftIcon from '/src/assets/icons/arrow-left.svg?react';
 
 function TrackIcon(
   params: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -24,4 +25,5 @@ export {
   StarIcon,
   CartIcon,
   SearchIcon,
+  ArrowLeftIcon,
 };

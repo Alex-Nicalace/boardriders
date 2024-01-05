@@ -1,0 +1,30 @@
+@import '/src/styles/global-scss.scss';
+
+.delivery-region {
+  display: flex;
+  align-items: center;
+  // .delivery-region__label
+  &__label {
+    margin-right: rem(10);
+    display: flex;
+    align-items: center;
+  }
+  // .delivery-region__select
+  &__select {
+    .select__wrapper {
+      padding: 0;
+      column-gap: rem(12);
+      border: none;
+    }
+    .select__list {
+      color: var(--black);
+    }
+  }
+  // .delivery-region__icon
+  &__icon {
+    margin-right: rem(15);
+  }
+  // .delivery-region__text
+  &__text {
+  }
+}

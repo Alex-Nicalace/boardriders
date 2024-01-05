@@ -16,6 +16,8 @@ type ButtonProps = {
   children: React.ReactNode;
   variant?: 'contained' | 'outlined';
   type?: 'primary' | 'secondary';
+  className?: string;
+  fullWidth?: boolean;
 } & ExclusiveProps;
 
 function Button({
@@ -24,22 +26,24 @@ function Button({
   disabled,
   variant = 'contained',
   type = 'primary',
+  className = '',
+  fullWidth = false,
 }: ButtonProps): JSX.Element {
   const isLink = !!to;
+  const classNameValue = `${className} button-${type} button-${type}_${variant} ${
+    fullWidth ? `button-${type}_fullwidth` : ''
+  }`;
 
   if (isLink) {
     return (
-      <Link className="button" to={to}>
+      <Link className={classNameValue} to={to}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button
-      className={`button-${type} button-${type}_${variant}`}
-      disabled={disabled}
-    >
+    <button className={classNameValue} disabled={disabled}>
       {children}
     </button>
   );

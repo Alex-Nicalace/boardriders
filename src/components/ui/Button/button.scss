@@ -1,4 +1,7 @@
+@import '/src/styles/global-scss.scss';
+
 .button-primary {
+  display: inline-block;
   @extend %subtitle-3;
   padding: rem(10);
   background-color: var(--black);
@@ -20,7 +23,9 @@
     color: var(--dark-gray);
   }
 
+  // .button-primary_outlined
   &_outlined {
+    padding: rem(9);
     background-color: transparent;
     border: rem(1) solid var(--black);
     color: var(--black);
@@ -35,9 +40,15 @@
       color: var(--gray);
     }
   }
+
+  // .button-primary_fullwidth
+  &_fullwidth {
+    width: 100%;
+  }
 }
 
 .button-secondary {
+  display: inline-block;
   padding: rem(25);
   color: var(--white);
   font-size: rem(18);
@@ -63,6 +74,7 @@
     color: var(--dark-gray);
   }
 
+  // .button-secondary_outlined
   &_outlined {
     background-color: transparent;
     border: rem(1) solid var(--red);
@@ -77,5 +89,10 @@
       border-color: var(--gray--1);
       color: var(--gray);
     }
+  }
+
+  // .button-secondary_fullwidth
+  &_fullwidth {
+    width: 100%;
   }
 }

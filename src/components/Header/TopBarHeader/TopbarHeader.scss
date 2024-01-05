@@ -1,0 +1,45 @@
+@import '/src/styles/global-scss.scss';
+
+.advantages-topbar-header {
+  display: flex;
+  // gap: rem(30);
+  @include adaptiveValue('gap', 30, 15, $containerWidth, 992, 1);
+  // .advantages-topbar-header__item
+  &__item {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: rem(15);
+    @include adaptiveValue('gap', 15, 7, $containerWidth, 992, 1);
+    align-items: center;
+  }
+  // .advantages-topbar-header__icon
+  &__icon {
+    fill: var(--gray--1);
+  }
+  // .advantages-topbar-header__text
+  &__text {
+  }
+}
+
+.topbar-header {
+  padding: rem(15) 0;
+  @extend %caption;
+  background-color: var(--black);
+  color: var(--light-gray);
+  @include adaptiveValue('font-size', 12, 10, $containerWidth, 992, 1);
+  // @include adaptiveValue('font-size', 12, 10);
+  // .topbar-header__container
+  &__container {
+    display: flex;
+    // gap: rem(35);
+    @include adaptiveValue('gap', 35, 17, $containerWidth, 992, 1);
+  }
+  // .topbar-header__delivery-region
+  &__delivery-region {
+  }
+  // .topbar-header__advantages
+  &__advantages {
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+}

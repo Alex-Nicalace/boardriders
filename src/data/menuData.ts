@@ -1,6 +1,32 @@
-export const MENU_DATA = [
+interface ILinkData {
+  title: string;
+  to: string;
+  // isMark?: boolean;
+  isAccented?: boolean;
+}
+
+export interface IMenuData extends ILinkData {
+  submenu?: {
+    sections: {
+      title: string;
+      isWideSection?: boolean;
+      links: ILinkData[];
+    }[];
+    imgLinkData?: {
+      src: string;
+      to: string;
+      title?: string;
+    };
+  };
+}
+
+export function isIMenuData(obj: any): obj is IMenuData {
+  return 'title' in obj && 'to' in obj;
+}
+
+export const MENU_DATA: IMenuData[] = [
   {
-    to: '#',
+    to: '/test',
     title: 'Колекции',
     submenu: {
       sections: [
@@ -11,7 +37,7 @@ export const MENU_DATA = [
             {
               to: '#',
               title: 'Новая коллекция',
-              classNameItem: 'submenu__item_disk',
+              // isMark: true,
             },
             { to: '#', title: 'Online Exclusive' },
             {
@@ -21,7 +47,7 @@ export const MENU_DATA = [
             {
               to: '#',
               title: 'Quiksilver Outdoor',
-              classNameItem: 'submenu__item_disk',
+              // isMark: true,
             },
             {
               to: '#',
@@ -33,7 +59,7 @@ export const MENU_DATA = [
             {
               to: '#',
               title: 'DC Shoes x FTP',
-              classNameItem: 'submenu__item_disk',
+              // isMark: true,
             },
             { to: '#', title: 'RVCA x Mister Cartoon' },
             { to: '#', title: 'DC Shoes Deadpool' },
@@ -46,7 +72,7 @@ export const MENU_DATA = [
             {
               to: '#',
               title: 'Все категории',
-              classNameLink: 'submenu__link_red',
+              isAccented: true,
             },
           ],
         },
@@ -63,7 +89,7 @@ export const MENU_DATA = [
             {
               to: '#',
               title: 'Все бренды',
-              classNameLink: 'submenu__link_red',
+              isAccented: true,
             },
           ],
         },
@@ -107,7 +133,7 @@ export const MENU_DATA = [
             {
               to: '#',
               title: 'Все категории',
-              classNameLink: 'submenu__link_red',
+              isAccented: true,
             },
           ],
         },
@@ -121,7 +147,7 @@ export const MENU_DATA = [
             {
               to: '#',
               title: 'Все бренды',
-              classNameLink: 'submenu__link_red',
+              isAccented: true,
             },
           ],
         },
@@ -193,7 +219,7 @@ export const MENU_DATA = [
             {
               to: '#',
               title: 'Все категории',
-              classNameLink: 'submenu__link_red',
+              isAccented: true,
             },
           ],
         },
@@ -208,7 +234,7 @@ export const MENU_DATA = [
             {
               to: '#',
               title: 'Все бренды',
-              classNameLink: 'submenu__link_red',
+              isAccented: true,
             },
           ],
         },
@@ -276,7 +302,7 @@ export const MENU_DATA = [
             {
               to: '#',
               title: 'Все категории',
-              classNameLink: 'submenu__link_red',
+              isAccented: true,
             },
           ],
         },
@@ -293,7 +319,7 @@ export const MENU_DATA = [
             {
               to: '#',
               title: 'Все бренды',
-              classNameLink: 'submenu__link_red',
+              isAccented: true,
             },
           ],
         },
@@ -313,6 +339,6 @@ export const MENU_DATA = [
   {
     to: '#',
     title: 'Распродажа',
-    classNameLink: 'botbar-header__link_red',
+    isAccented: true,
   },
 ];

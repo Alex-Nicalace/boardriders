@@ -1,0 +1,46 @@
+@import '/src/styles/global-scss.scss';
+
+.botbar-header {
+  position: relative;
+  background-color: var(--gray-2);
+  // .botbar-header__container
+  &__container {
+  }
+  // .botbar-header__nav
+  &__nav {
+  }
+  // .botbar-header__menu
+  &__menu {
+    display: flex;
+    // @include adaptiveValue('gap', 25, 15, $containerWidth, 992, 1);
+  }
+  // .botbar-header__item
+  &__item {
+    @include adaptiveValue('padding-right', 25, 15, $containerWidth, 992, 1);
+  }
+  // .botbar-header__link
+  &__link {
+    // position: relative;
+    @extend %body-2;
+    display: inline-block;
+    padding: rem(17) 0 rem(15);
+    border-bottom: rem(2) solid transparent;
+    @include adaptiveValue('font-size', 14, 12, $containerWidth, 992, 1);
+    @media (pointer: fine) {
+      &:hover {
+        color: var(--black);
+        border-color: currentColor;
+      }
+    }
+    // .botbar-header__link_red
+    &_red {
+      color: var(--red);
+      @media (pointer: fine) {
+        &:hover {
+          color: var(--red);
+          border-color: var(--black);
+        }
+      }
+    }
+  }
+}

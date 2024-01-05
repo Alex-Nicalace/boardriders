@@ -7,12 +7,6 @@ type Devices = Record<TypesDevice, number>;
 
 export type WidthQuery = number | TypesDevice;
 
-type MediaQueryProps = {
-  children?: React.ReactNode;
-  maxWidth?: WidthQuery;
-  minWidth?: WidthQuery;
-};
-
 const devices: Devices = {
   smallMobile: 479.98,
   mobile: 767.98,
@@ -28,11 +22,16 @@ const devices: Devices = {
 //   '(min-width: 1391px)',
 // ];
 
+type TMediaQueryProps = {
+  children?: React.ReactNode;
+  maxWidth?: WidthQuery;
+  minWidth?: WidthQuery;
+};
 function MediaQuery({
   maxWidth,
   minWidth,
   children,
-}: MediaQueryProps): JSX.Element {
+}: TMediaQueryProps): JSX.Element {
   const mediaQuery = useMemo(() => {
     const minWidthNumber =
       typeof minWidth === 'string' ? devices[minWidth] : minWidth;

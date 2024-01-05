@@ -1,0 +1,90 @@
+@import '/src/styles/global-scss.scss';
+
+.submenu {
+  // max-height: rem(404);
+  padding-top: rem(45);
+  padding-bottom: rem(45);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background-color: var(--gray-2);
+  border-top: rem(1) solid var(--gray);
+  // .submenu__container
+  &__container {
+    // column-count: 4;
+    display: flex;
+    gap: rem(25);
+  }
+  // .submenu__section
+  &__section {
+    flex-grow: 1;
+    &_wide {
+      flex-grow: 2;
+    }
+  }
+  // .submenu__title
+  &__title {
+    &:not(:last-child) {
+      margin-bottom: em(15, 21);
+    }
+  }
+  // .submenu__list
+  &__list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    // max-height: rem(272);
+    max-height: rem(300);
+  }
+  // .submenu__item
+  &__item {
+    @media (any-hover: hover) {
+      &:hover {
+        list-style-type: disc;
+        &::marker {
+          color: var(--red);
+        }
+      }
+    }
+
+    &:not(:last-child) {
+      margin-bottom: em(10, 14);
+    }
+  }
+  // .submenu__link
+  &__link {
+    @extend %body-2;
+    // .submenu__link_red
+    &_red {
+      color: var(--red);
+
+      @media (pointer: fine) {
+        &:hover {
+          color: var(--red-light);
+        }
+      }
+    }
+  }
+  // .submenu__action
+  &__action {
+    flex: 0 0 percent(400, 1360);
+    align-self: center;
+  }
+  // .submenu__figure
+  &__figure {
+    width: 100%;
+    height: 100%;
+  }
+  // .submenu__img
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  // .submenu__figcaption
+  &__figcaption {
+    margin-top: rem(15);
+    @extend %body-2;
+  }
+}
