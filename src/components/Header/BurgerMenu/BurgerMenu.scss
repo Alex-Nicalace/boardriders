@@ -8,6 +8,7 @@
   height: 100%;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.8);
+  z-index: 9;
 
   // .burger-menu__box
   &__box {
