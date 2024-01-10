@@ -114,5 +114,9 @@
         background-color: var(--black);
       }
     }
+
+    @media (min-width: $mobile) {
+      display: none;
+    }
   }
 }

@@ -1,0 +1,30 @@
+@import '/src/styles/global-scss.scss';
+
+.links-brands {
+  @include adaptiveValue('padding-top', 60, 25);
+  @include adaptiveValue('padding-bottom', 60, 25);
+  // .links-brands__container
+  &__container {
+  }
+  // .links-brands__slider
+  &__slider {
+  }
+  &__wrapper {
+  }
+  // .links-brands__slide
+  &__slide {
+  }
+  // .links-brands__link
+  &__link {
+    display: flex;
+    justify-content: center;
+  }
+  // .links-brands__img
+  &__img {
+    // width: 100%;
+    @include adaptiveValue('width', 60, 27);
+    height: rem(60);
+    object-fit: contain;
+    opacity: 0.7;
+  }
+}
