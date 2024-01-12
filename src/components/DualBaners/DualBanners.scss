@@ -1,0 +1,25 @@
+@import '/src/styles/global-scss.scss';
+
+.dual-baners {
+  // .dual-baners__container
+  &__container {
+  }
+  // .dual-baners__list
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: rem(20);
+
+    @media (max-width: $mobileSmall) {
+      flex-direction: column;
+    }
+  }
+  // .dual-baners__item
+  &__item {
+    // min-width: rem(290);
+    flex: 0 0 percent(667, 1360);
+    @media (max-width: $mobileSmall) {
+    }
+  }
+}

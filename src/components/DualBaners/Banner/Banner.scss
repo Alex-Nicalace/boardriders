@@ -1,0 +1,28 @@
+@import '/src/styles/global-scss.scss';
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  // .banner__img
+  &__img {
+    width: 100%;
+    aspect-ratio: 667/269;
+    object-fit: cover;
+  }
+  // .banner__title
+  &__title {
+    @include adaptiveValue('padding-top', 23, 10);
+    @include adaptiveValue('padding-bottom', 23, 10);
+    background-color: var(--black);
+    color: var(--white);
+    text-align: center;
+    @include adaptiveValue('font-size', 21, 16);
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+
+    @media (max-width: $mobileSmall) {
+      font-weight: 500;
+    }
+  }
+}

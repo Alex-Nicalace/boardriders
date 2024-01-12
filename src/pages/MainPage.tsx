@@ -1,3 +1,4 @@
+import DualBanners from '../components/DualBaners';
 import Header from '../components/Header';
 import LinksBrands from '../components/LinksBrands';
 import MainSlider from '../components/MainSlider';
@@ -10,6 +11,7 @@ function MainPage(): JSX.Element {
       <main className="page">
         <MainSlider />
         <LinksBrands />
+        <DualBanners />
       </main>
     </>
   );
