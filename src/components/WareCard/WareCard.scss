@@ -1,0 +1,103 @@
+@import '/src/styles/global-scss.scss';
+
+.ware-card {
+  max-width: rem(321);
+  // .ware-card__top
+  &__top {
+    position: relative;
+    &:not(:last-child) {
+      margin-bottom: em(10, 14);
+    }
+  }
+  &__link {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    padding: rem(50) rem(25);
+    background-color: var(--light-gray);
+  }
+  // .ware-card__img-wrap
+  &__img-wrap {
+    position: relative;
+    display: block;
+    aspect-ratio: 1/1;
+
+    @media (pointer: fine) {
+      &:hover {
+        .ware-card__img {
+          &:nth-child(1) {
+            opacity: 0;
+          }
+          &:nth-child(2) {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+  // .ware-card__img
+  &__img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease 0s;
+
+    &:nth-child(2) {
+      opacity: 0;
+    }
+  }
+  &__favorite {
+    position: absolute;
+    top: rem(15);
+    right: rem(15);
+  }
+  // .ware-card__discount
+  &__discount {
+    position: absolute;
+    padding: 0 rem(10);
+    left: 0;
+    bottom: 0;
+    background-color: var(--red);
+    color: var(--white);
+    font-size: rem(14);
+    font-weight: rem(500);
+    line-height: 1.78;
+    letter-spacing: rem(-0.28);
+  }
+  // .ware-card__footer
+  &__footer {
+  }
+  // .ware-card__title
+  &__title {
+    &:not(:last-child) {
+      margin-bottom: em(5, 16);
+    }
+  }
+  // .ware-card__descr
+  &__descr {
+    @extend %body-2;
+    color: var(--dark-gray);
+
+    &:not(:last-child) {
+      margin-bottom: em(10, 14);
+    }
+  }
+  // .ware-card__price
+  &__price {
+    @extend %cost;
+    & > *:not(:last-child) {
+      margin-right: em(15, 18);
+    }
+    // .ware-card__price_new
+    &_new {
+      color: var(--red);
+    }
+    // .ware-card__price_old
+    &_old {
+      text-decoration: line-through;
+    }
+  }
+}
