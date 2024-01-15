@@ -11,8 +11,8 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: rem(40);
-    height: rem(40);
+    @include adaptiveValue('width', 40, 32);
+    @include adaptiveValue('height', 40, 32);
     background-color: var(--white);
     border-radius: 50%;
     cursor: pointer;
@@ -21,6 +21,8 @@
     svg {
       fill: var(--white);
       stroke: var(--black);
+      @include adaptiveValue('width', 20, 16);
+      @include adaptiveValue('height', 20, 16);
     }
   }
 }

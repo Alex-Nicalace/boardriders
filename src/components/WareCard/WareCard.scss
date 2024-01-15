@@ -75,6 +75,11 @@
     &:not(:last-child) {
       margin-bottom: em(5, 16);
     }
+    @media (max-width: $mobileSmall) {
+      h3 {
+        font-size: rem(14);
+      }
+    }
   }
   // .ware-card__descr
   &__descr {
@@ -90,6 +95,9 @@
     @extend %cost;
     & > *:not(:last-child) {
       margin-right: em(15, 18);
+    }
+    @media (max-width: $mobileSmall) {
+      font-size: rem(16);
     }
     // .ware-card__price_new
     &_new {
