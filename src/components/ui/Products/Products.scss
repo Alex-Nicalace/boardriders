@@ -71,7 +71,7 @@
   }
   &__button-more {
     text-align: center;
-    button {
+    .button-primary {
       @include adaptiveValue('min-width', 322, 278);
     }
   }

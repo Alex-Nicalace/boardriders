@@ -3,81 +3,38 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/scss';
 
 import './Products.scss';
-import WareCard from '../WareCard';
-import Button from '../ui/Button';
-import { ArrowLeftIcon, ArrowRightIcon } from '../ui/Icons';
-import useMatchMedia from '../../hooks/useMatchMedia';
+import WareCard from '../../WareCard';
+import Button from '../Button';
+import { ArrowLeftIcon, ArrowRightIcon } from '../Icons';
+import useMatchMedia from '../../../hooks/useMatchMedia';
 
-const PATH = '/src/assets/img/products-new/';
-const PRODUCTS_DATA = [
-  {
-    wareId: '1',
-    imgMain: PATH + '01.png',
-    imgSecond: PATH + '01-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
-    price: 34392,
-    to: '#',
-  },
-  {
-    wareId: '2',
-    imgMain: PATH + '02.png',
-    imgSecond: PATH + '02-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
-    price: 34392,
-    newPrice: 17392,
-    discount: -50,
-    to: '#',
-  },
-  {
-    wareId: '3',
-    imgMain: PATH + '03.png',
-    imgSecond: PATH + '03-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
-    price: 34392,
-    to: '#',
-  },
-  {
-    wareId: '4',
-    imgMain: PATH + '04.png',
-    imgSecond: PATH + '04-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
-    price: 34392,
-    to: '#',
-  },
-  // -----------
-  {
-    wareId: '5',
-    imgMain: PATH + '01.png',
-    imgSecond: PATH + '01-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
-    price: 34392,
-    to: '#',
-  },
-  {
-    wareId: '6',
-    imgMain: PATH + '02.png',
-    imgSecond: PATH + '02-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
-    price: 34392,
-    newPrice: 17392,
-    discount: -50,
-    to: '#',
-  },
-];
-// interface IProductsProps {}
-function Products(): JSX.Element {
+interface IWareData {
+  wareId: string;
+  imgMain: string;
+  imgSecond?: string;
+  title: string;
+  descr: string;
+  price: number;
+  newPrice?: number;
+  discount?: number;
+  to: string;
+}
+interface IProductsProps {
+  title: string;
+  productsData: IWareData[];
+  moreTo?: string;
+}
+function Products({
+  title,
+  productsData,
+  moreTo,
+}: IProductsProps): JSX.Element {
   const [isSmall] = useMatchMedia(['(max-width: 573px)']);
 
   return (
     <section className="products">
       <div className="products__container">
-        <h2 className="products__title">Новинки</h2>
+        <h2 className="products__title">{title}</h2>
         <div className="products__outer-wrap-slider">
           <Swiper
             key={+isSmall}
@@ -114,7 +71,7 @@ function Products(): JSX.Element {
               },
             }}
           >
-            {PRODUCTS_DATA.map((data) => (
+            {productsData.map((data) => (
               <SwiperSlide className="products__slide" key={data.wareId}>
                 <WareCard wareDate={data} />
               </SwiperSlide>
@@ -132,7 +89,7 @@ function Products(): JSX.Element {
           )}
         </div>
         <div className="products__button-more">
-          <Button>Показать больше</Button>
+          <Button to={moreTo}>Показать больше</Button>
         </div>
       </div>
     </section>
