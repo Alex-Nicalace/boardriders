@@ -3,7 +3,7 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/scss';
 
 import './Products.scss';
-import WareCard from '../../WareCard';
+import WareCard from '../WareCard';
 import Button from '../Button';
 import { ArrowLeftIcon, ArrowRightIcon } from '../Icons';
 import useMatchMedia from '../../../hooks/useMatchMedia';

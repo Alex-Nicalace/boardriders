@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './WareCard.scss';
-import Favorite from '../ui/Favorite';
+import Favorite from '../Favorite';
 interface IWareData {
   wareId: string;
   imgMain: string;
