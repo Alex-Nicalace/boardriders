@@ -6,7 +6,7 @@ import { MENU_DATA, isIMenuData } from '../../../data/menuData';
 import { useBurgerContext } from '../../../hooks/useBurgerContext';
 import ListLinks from '../../ListLinks';
 import Submenu from '../MainMenu/Submenu';
-import { ArrowLeftIcon } from '../../ui/Icons';
+import { ArrowLeftIcon, ArrowRightIcon } from '../../ui/Icons';
 import Button from '../../ui/Button';
 import DeliveryRegion from '../DeliveryRegion';
 import SecondaryLinks from '../SecondaryLinks';
@@ -47,7 +47,7 @@ function BurgerMenu(): JSX.Element {
                         <span className="burger-menu__title">
                           {value.title}
                         </span>
-                        <ArrowLeftIcon className="burger-menu__arrow" />
+                        <ArrowRightIcon className="burger-menu__arrow" />
                       </button>
                     ) : (
                       <Link className="burger-menu__link" to={value.to}>

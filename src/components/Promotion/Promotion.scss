@@ -1,0 +1,43 @@
+@import '/src/styles/global-scss.scss';
+
+.promotion {
+  // .promotion__container
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+  // .promotion__title
+  &__title {
+    padding-bottom: rem(10);
+    @include adaptiveValue('padding-top', 25, 20);
+    @extend %subtitle-1;
+    text-align: center;
+    order: 2;
+  }
+  // .promotion__descr
+  &__descr {
+    margin: 0 auto;
+    max-width: rem(668);
+    @extend %body-2;
+    color: var(--dark-gray);
+    text-align: center;
+    order: 3;
+  }
+  // .promotion__wrap-img
+  &__link {
+    order: 1;
+
+    @media (max-width: $mobile) {
+      margin: 0 rem(-15);
+    }
+  }
+  &__img {
+    width: 100%;
+    aspect-ratio: 1360/395;
+    object-fit: cover;
+
+    @media (max-width: $mobile) {
+      aspect-ratio: 414/200;
+    }
+  }
+}
