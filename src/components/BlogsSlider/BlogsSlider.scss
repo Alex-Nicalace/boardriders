@@ -1,0 +1,26 @@
+@import '/src/styles/global-scss.scss';
+
+.blogs-slider {
+  // .blogs-slider__slide
+  &__slide {
+    width: auto;
+    height: auto;
+    flex: 0 0 percent(1580, 1680);
+
+    & > * {
+      height: 100%;
+    }
+  }
+  &__button {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 1;
+    &_prev {
+      left: 0;
+    }
+    &_next {
+      right: 0;
+    }
+  }
+}

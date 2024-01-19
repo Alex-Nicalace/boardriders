@@ -2,23 +2,23 @@
 
 .blog-card {
   display: grid;
-  grid-template: 'm w' / percent(827, 1680) 1fr;
+  grid-template: 'm w' / percent(827, 1580) 1fr;
   background-color: var(--black);
   color: var(--white);
 
   @media (max-width: $mobile) {
     padding: rem(40) rem(15) 0;
     grid-template:
-      'l'
-      'm'
-      't'
-      'c'
-      'a';
+      'l' auto
+      'm' auto
+      't' auto
+      'c' 1fr
+      'a' auto;
   }
   // .blog-card__wrap
   &__wrap {
-    padding: percent(50, 853);
-    padding-right: percent(75, 853);
+    padding: percent(50, 753);
+    padding-right: percent(75, 753);
     grid-area: w;
 
     display: grid;
@@ -26,7 +26,7 @@
       'l a' auto
       't t' auto
       'c c' auto
-      'r r' 1fr / #{percent(827, 1680)} 1fr;
+      'r r' 1fr / 1fr auto;
 
     @media (max-width: $mobile) {
       display: contents;
@@ -84,11 +84,9 @@
   // .blog-card__all
   &__all-blogs {
     grid-area: a;
-    justify-self: end;
 
     @media (max-width: $mobile) {
       margin: 0 rem(-15);
-      justify-self: normal;
       text-align: center;
       box-shadow: 0px -1px 0px 0px rgba(255, 255, 255, 0.2);
       & > * {

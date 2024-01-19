@@ -1,0 +1,16 @@
+@import '/src/styles/global-scss.scss';
+
+.button-slider {
+  width: rem(32);
+  height: rem(98);
+  background-color: rgba(255, 255, 255, 0.9);
+
+  svg {
+    width: percent(11, 32);
+    height: percent(22, 98);
+  }
+
+  &[disabled] {
+    display: none;
+  }
+}

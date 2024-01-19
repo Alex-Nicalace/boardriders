@@ -39,23 +39,9 @@
   // .main-slider__button
   &__button {
     position: absolute;
-    // width: percent(32, 1680);
-    // height: percent(98, 482);
-    width: rem(32);
-    height: rem(98);
     top: 50%;
     transform: translate(0, -50%);
-    background-color: rgba(255, 255, 255, 0.9);
     z-index: 1;
-
-    svg {
-      width: percent(11, 32);
-      height: percent(22, 98);
-    }
-
-    &[disabled] {
-      display: none;
-    }
 
     // .main-slider__button_prev
     &_prev {

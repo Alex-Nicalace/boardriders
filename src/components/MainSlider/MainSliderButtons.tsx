@@ -1,14 +1,16 @@
-import { ArrowLeftIcon, ArrowRightIcon } from '../ui/Icons';
+import ButtonSlider from '../ui/ButtonSlider';
 
 export function MainSliderButtons() {
   return (
     <>
-      <button className="main-slider__button main-slider__button_prev">
-        <ArrowLeftIcon />
-      </button>
-      <button className="main-slider__button main-slider__button_next">
-        <ArrowRightIcon />
-      </button>
+      <ButtonSlider
+        direction="left"
+        className="main-slider__button main-slider__button_prev"
+      />
+      <ButtonSlider
+        direction="right"
+        className="main-slider__button main-slider__button_next"
+      />
     </>
   );
 }
