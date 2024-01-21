@@ -35,3 +35,10 @@ $mobileSmall: em(479.98); // Телефоны S
 // 1 = отзывчивость (у контейнера нет брейкпоинтов),
 // 2 = по брейк-поинтам (контейнер меняет свою ширину по брейк-поинтам)
 $responsiveType: 1;
+
+$breakpoints: (
+  'pc': $pc,
+  'tablet': $tablet,
+  'mobile': $mobile,
+  'mobileSmall': $mobileSmall,
+);
