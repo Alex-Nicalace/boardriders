@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { BurgerContext } from '../Context/BurgerContext';
+import { BurgerContext } from './BurgerContext';
 
 export function useBurgerContext() {
   const context = useContext(BurgerContext);

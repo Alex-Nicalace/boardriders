@@ -1,4 +1,4 @@
-import { useBurgerContext } from '../../../hooks/useBurgerContext';
+import { useBurgerContext } from '../../../Context/useBurgerContext';
 import './BurgerButton.scss';
 
 function BurgerButton(): JSX.Element {

@@ -24,6 +24,9 @@ export default function BurgerProvider({
       } else {
         document.documentElement.classList.remove('lock', 'menu-open');
       }
+
+      return () =>
+        document.documentElement.classList.remove('lock', 'menu-open');
     },
     [isOpen]
   );

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './BurgerMenu.scss';
 import { MENU_DATA, isIMenuData } from '../../../data/menuData';
-import { useBurgerContext } from '../../../hooks/useBurgerContext';
+import { useBurgerContext } from '../../../Context/useBurgerContext';
 import ListLinks from '../../ListLinks';
 import Submenu from '../MainMenu/Submenu';
 import { ArrowLeftIcon, ArrowRightIcon } from '../../ui/Icons';
