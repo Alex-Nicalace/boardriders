@@ -1,21 +1,12 @@
-import { useState } from 'react';
-
-import { LocationIcon } from '../../ui/Icons';
-import Select from '../../ui/Select';
-import Option from '../../ui/Option';
+import { LocationIcon, SelectIcon } from '../../ui/Icons';
 import './DeliveryRegion.scss';
+import Select from '../../ui/Select/Select';
 
 interface IDeliveryRegionProps {
   className?: string;
 }
 
 function DeliveryRegion({ className }: IDeliveryRegionProps): JSX.Element {
-  const [city, setCity] = useState('Москва');
-
-  function handleChangeCity(value: string) {
-    setCity(value);
-  }
-
   return (
     <div className={`${className} delivery-region`}>
       <label htmlFor="delivery-region" className="delivery-region__label">
@@ -26,12 +17,14 @@ function DeliveryRegion({ className }: IDeliveryRegionProps): JSX.Element {
         className="delivery-region__select"
         name="delivery-region"
         id="delivery-region"
-        value={city}
-        onChange={handleChangeCity}
+        // value={city}
+        initValue="20"
+        // onChange={handleChangeCity}
+        iconElement={<SelectIcon />}
       >
-        <Option value="Москва">Москва</Option>
-        <Option value="Санкт-Петербург">Санкт-Петербург</Option>
-        <Option value="Пенза">Пенза</Option>
+        <Select.Option value="10">Москва</Select.Option>
+        <Select.Option value="20">Санкт-Петербург</Select.Option>
+        <Select.Option value="30">Пенза</Select.Option>
       </Select>
     </div>
   );

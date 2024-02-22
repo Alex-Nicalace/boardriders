@@ -3,39 +3,73 @@
 .select {
   position: relative;
   display: inline-block;
-  cursor: pointer;
+
   // .select__wrapper
   &__wrapper {
-    position: relative;
     padding: rem(13) rem(20);
     display: inline-grid;
     grid-template-columns: 1fr auto;
-    column-gap: rem(10);
+    column-gap: 10px;
     align-items: center;
+    column-gap: rem(10);
     border: rem(1) solid var(--gray);
     z-index: 1;
+
+    border: 1px solid gray;
+    cursor: pointer;
 
     &:hover {
       box-shadow: rem(0) rem(5) rem(15) rem(0) rgba(0, 0, 0, 0.05);
     }
   }
-  // .select__value
-  &__value {
+
+  // .select__input
+  &__input {
+    bottom: 0px;
+    left: 0px;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    box-sizing: border-box;
   }
+
   // .select__icon
   &__icon {
     transition: all 0.3s ease 0s;
   }
-  // .select__list
-  &__list {
-    padding: rem(25) rem(20);
-    background-color: var(--white);
-    border: rem(1) solid var(--gray);
-    border-top: none;
+
+  // .select__value
+  &__value {
   }
-  // .select__options
-  &__options {
-    overflow: auto;
+
+  // .select_opened
+  &_opened {
+    .select__icon {
+      // transform: rotate(180deg);
+      transform: scale(1, -1);
+    }
+  }
+}
+
+.options {
+  position: absolute;
+  background-color: var(--white);
+  border: rem(1) solid var(--gray);
+  border-top: none;
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  transition: all 0.3s ease-in-out;
+  z-index: 20;
+
+  // .options__wrapper
+  &__wrapper {
+    padding: rem(25) rem(20);
+  }
+
+  &__items {
+    // overflow: auto;
 
     &::-webkit-scrollbar {
       // ширина и цвет
@@ -46,13 +80,27 @@
       // цвет бегунка
       background-color: var(--black);
     }
-    scrollbar-color: var(--black) var(--gray);
-  }
-  // .select_opened
-  &_opened {
-    .select__icon {
-      // transform: rotate(180deg);
-      transform: scale(1, -1);
+
+    @supports (not selector(::-webkit-scrollbar)) {
+      scrollbar-color: var(--black) var(--gray);
+      scrollbar-width: thin;
     }
+  }
+
+  &__item {
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    &:hover {
+      color: var(--dark-gray);
+    }
+    &:not(:last-child) {
+      margin-bottom: em(15, 14);
+    }
+  }
+
+  &_opened {
+    opacity: 1;
+    visibility: visible;
+    max-height: 100vh;
   }
 }

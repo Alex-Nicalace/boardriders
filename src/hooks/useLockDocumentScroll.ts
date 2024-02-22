@@ -1,0 +1,21 @@
+import { useEffect } from 'react';
+
+/**
+ * Пользовательский хук для блокировки прокрутки документа при вызове.
+ *
+ * @return {void} Нет возвращаемого значения
+ */
+export function useLockDocumentScroll(ignore = false) {
+  useEffect(function () {
+    if (ignore) return;
+    const widthScroll =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.paddingRight = `${widthScroll}px`;
+
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.paddingRight = '';
+    };
+  });
+}

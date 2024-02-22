@@ -1,126 +1,136 @@
-import React, {
+import {
   Children,
   ReactElement,
-  useEffect,
-  useRef,
+  createContext,
+  isValidElement,
   useState,
 } from 'react';
-import { IOptionProps } from '../Option/Option';
-import { visibilityScrollDocument } from '../../../utils/visibilityScrollDocument';
-import styles from './select.module.scss';
 import './Select.scss';
-import { SelectIcon } from '../Icons';
+import { ListOptions } from './ListOptions';
+import { OptionProps, Option } from './Option';
 
-interface ISelectProps {
-  children: ReactElement<IOptionProps> | ReactElement<IOptionProps>[];
+interface ISelectContext {
+  selected: string;
+  close(): void;
+  setSelected: (value: ISelectContext['selected']) => void;
+  isLockScroll: boolean;
+  triggerEl: Element | null;
+  isClosing: boolean;
+  closing(): void;
+}
+
+export const SelectContext = createContext<ISelectContext>({
+  selected: '',
+  close() {},
+  setSelected() {},
+  isLockScroll: true,
+  triggerEl: null,
+  isClosing: false,
+  closing() {},
+});
+
+type SelectProps = {
+  children: ReactElement<OptionProps>[] | ReactElement<OptionProps>;
   value?: string;
-  IconElement?: JSX.Element;
+  initValue?: string;
   onChange?: (value: string) => void;
-  optionsStyle?: React.CSSProperties;
   name?: string;
   id?: string;
   className?: string;
-}
+  listOptions?: {
+    className?: string;
+  };
+  iconElement: JSX.Element;
+  isLockScroll?: boolean;
+};
 function Select({
   children,
   value,
-  IconElement = <SelectIcon />,
+  initValue,
   onChange = () => {},
-  optionsStyle = {},
   name,
   id,
   className,
-}: ISelectProps): JSX.Element {
+  iconElement,
+  isLockScroll = true,
+  listOptions = {},
+}: SelectProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-  const selectRef = useRef<HTMLDivElement>(null);
+  const [isClosing, setIsClosing] = useState(false);
+  const [valueInner, setValueInner] = useState(initValue ?? '');
+  const [triggerEl, setTriggerEl] = useState<Element | null>(null);
 
-  // поиск элемента из выпадающего списка который соотвестветвует выбранному значению
-  const element = Children.toArray(children).find(
-    (el) => React.isValidElement(el) && el.props.value === value
+  const selected = value ?? valueInner;
+  const setSelected = value === undefined ? setValueInner : onChange;
+
+  const close = () => {
+    setIsOpen(false);
+    setIsClosing(false);
+  };
+  const closing = () => setIsClosing(true);
+
+  const toggle = () => {
+    if (isOpen) {
+      closing();
+    } else {
+      setIsOpen(true);
+    }
+  };
+
+  const optionSelectedTemp = Children.toArray(children).find(
+    (child) =>
+      isValidElement<OptionProps>(child) && child.props.value === selected
   );
-  // достать внутренность из элемента
-  const valueEl = React.isValidElement(element) ? element.props.children : null;
+  const optionSelected =
+    isValidElement<OptionProps>(optionSelectedTemp) &&
+    optionSelectedTemp?.props.children;
 
-  function handleToggleOpen() {
-    setIsOpen((isOpen) => !isOpen);
+  function handleClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (!(e.target instanceof Element)) return;
+
+    toggle();
+    const selectEl = e.target.closest('.select');
+    if (!selectEl) return;
+
+    setTriggerEl(selectEl);
   }
 
-  useEffect(
-    function () {
-      if (isOpen) {
-        return visibilityScrollDocument.hide();
-      } else {
-        visibilityScrollDocument.visible();
-      }
-    },
-    [isOpen]
-  );
-
-  useEffect(
-    function () {
-      if (!isOpen) return;
-
-      function handleClickOutside(e: MouseEvent) {
-        if (
-          selectRef.current &&
-          !selectRef.current.contains(e.target as Node)
-        ) {
-          setIsOpen(false);
-          document.removeEventListener('click', handleClickOutside);
-        }
-      }
-      document.addEventListener('click', handleClickOutside);
-    },
-    [isOpen]
-  );
-
   return (
-    <div
-      ref={selectRef}
-      className={`${className ? className + ' ' : ''}select ${
-        isOpen ? 'select_opened' : ''
-      } ${styles.select}`}
-      onClick={handleToggleOpen}
+    <SelectContext.Provider
+      value={{
+        selected,
+        close,
+        setSelected,
+        isLockScroll,
+        triggerEl,
+        isClosing,
+        closing,
+      }}
     >
-      <div className="select__wrapper">
-        <div className="select__value">{valueEl}</div>
-        <div className="select__icon">{IconElement}</div>
-        <input
-          key={value}
-          className="select__input"
-          aria-hidden={true}
-          tabIndex={-1}
-          aria-invalid={false}
-          defaultValue={value}
-          name={name}
-          id={id}
-        />
-      </div>
-
-      {isOpen && (
-        <div className="select__list" tabIndex={-1}>
-          <ul
-            className="select__options"
-            role="listbox"
+      <div className={`${className} select ${isOpen ? 'select_opened' : ''}`}>
+        <div className="select__wrapper" onClick={handleClick}>
+          <div className="select__value">{optionSelected}</div>
+          <div className="select__icon">{iconElement}</div>
+          <input
+            className="select__input"
+            aria-hidden={true}
             tabIndex={-1}
-            style={optionsStyle}
-          >
-            {React.Children.map(children, (child) => {
-              if (React.isValidElement(child)) {
-                const isSelected = child.props.value === value;
-                return React.cloneElement(child, {
-                  isSelected,
-                  className: isSelected ? 'option_selected' : '',
-                  onClick: () => onChange(child.props.value),
-                });
-              }
-              return null;
-            })}
-          </ul>
+            aria-invalid={false}
+            value={selected}
+            name={name}
+            id={id}
+          />
         </div>
-      )}
-    </div>
+        {isOpen && (
+          <ListOptions className={listOptions.className}>
+            {children}
+          </ListOptions>
+        )}
+      </div>
+    </SelectContext.Provider>
   );
 }
+
+Select.Option = Option;
 
 export default Select;
