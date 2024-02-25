@@ -1,18 +1,21 @@
-import { useEffect } from 'react';
+import { Children, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useLockDocumentScroll } from '../../../hooks/useLockDocumentScroll';
-import { useOutsideClick } from '../../../hooks/useOutsideClick';
+import { useLockDocumentScroll } from '../../hooks/useLockDocumentScroll';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { useSelectContext } from './useSelectContext';
+import extractTextFromReactNode from '../../utils/extractTextFromReactNode';
 
 type ListOptionsProps = {
   children: React.ReactNode;
   className?: string;
 };
-export function ListOptions({ children, className = '' }: ListOptionsProps) {
-  const { isLockScroll, close, triggerEl, isClosing, closing } =
+function ListOptions({ children, className = '' }: ListOptionsProps) {
+  const { isLockScroll, close, triggerEl, isClosing, closing, isSearchable } =
     useSelectContext();
+  const [serachValue, setSerachValue] = useState('');
   useLockDocumentScroll(!isLockScroll);
   const listElRef = useOutsideClick<HTMLDivElement>(closing);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(function setPositionListOptions() {
     const listEl = listElRef.current;
@@ -65,9 +68,22 @@ export function ListOptions({ children, className = '' }: ListOptionsProps) {
   });
 
   function handleAnimationEnd(e: React.TransitionEvent<HTMLDivElement>) {
+    // фокус можно осуществить только после завершения анимации
+    inputRef.current?.focus();
+
     if (!isClosing) return;
 
     if (e.target === listElRef.current) close();
+  }
+
+  function filterOptions(children: React.ReactNode) {
+    if (!isSearchable) return children;
+
+    return Children.toArray(children).filter((child) =>
+      extractTextFromReactNode(child)
+        .toLowerCase()
+        .includes(serachValue.toLowerCase())
+    );
   }
 
   const listOptionsElement = (
@@ -78,8 +94,18 @@ export function ListOptions({ children, className = '' }: ListOptionsProps) {
       onTransitionEnd={handleAnimationEnd}
     >
       <div className="options__wrapper">
+        {isSearchable && (
+          <div className="options__search">
+            <input
+              ref={inputRef}
+              className="options__search-input"
+              value={serachValue}
+              onChange={(e) => setSerachValue(e.target.value)}
+            />
+          </div>
+        )}
         <ul className="options__items" role="listbox" tabIndex={-1}>
-          {children}
+          {filterOptions(children)}
         </ul>
       </div>
     </div>
@@ -89,3 +115,5 @@ export function ListOptions({ children, className = '' }: ListOptionsProps) {
 
   return listOptionsElement;
 }
+
+export default ListOptions;

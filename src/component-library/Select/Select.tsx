@@ -1,33 +1,8 @@
-import {
-  Children,
-  ReactElement,
-  createContext,
-  isValidElement,
-  useState,
-} from 'react';
+import { Children, ReactElement, isValidElement, useState } from 'react';
 import './Select.scss';
-import { ListOptions } from './ListOptions';
-import { OptionProps, Option } from './Option';
-
-interface ISelectContext {
-  selected: string | string[] | undefined;
-  close(): void;
-  onClickOfListItem: (value: string) => void;
-  isLockScroll: boolean;
-  triggerEl: Element | null;
-  isClosing: boolean;
-  closing(): void;
-}
-
-export const SelectContext = createContext<ISelectContext>({
-  selected: '',
-  close() {},
-  onClickOfListItem() {},
-  isLockScroll: true,
-  triggerEl: null,
-  isClosing: false,
-  closing() {},
-});
+import ListOptions from './ListOptions';
+import Option, { OptionProps } from './Option';
+import { SelectContext } from './SelectContext';
 
 type TSingleSelectProps = {
   isMulti?: false;
@@ -74,6 +49,7 @@ type TCommonSelectProps = {
   iconElement: JSX.Element;
   isLockScroll?: boolean;
   placreholder?: string;
+  isSearchable?: boolean;
 };
 
 // type TSelectProps = {
@@ -109,6 +85,7 @@ function Select(props: TSelectProps): JSX.Element {
     placreholder = 'Выберите...',
     iconItemRemove = '✕',
     isCloseDropdownWhenClicked = false,
+    isSearchable = false,
   } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -220,7 +197,8 @@ function Select(props: TSelectProps): JSX.Element {
 
   function handleClickOfListItem(value: string) {
     setSelected(value);
-    if (isCloseDropdownWhenClicked) {
+    if (isCloseDropdownWhenClicked || !props.isMulti) {
+      // isCloseDropdownWhenClicked - для селекта с мультиселектом иначе не имеет значения
       closing();
     }
   }
@@ -235,6 +213,7 @@ function Select(props: TSelectProps): JSX.Element {
         triggerEl,
         isClosing,
         closing,
+        isSearchable,
       }}
     >
       <div className={`${className} select ${isOpen ? 'select_opened' : ''}`}>

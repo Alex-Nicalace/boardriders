@@ -1,15 +1,12 @@
 import { useSelectContext } from './useSelectContext';
+import './Option.scss';
 
 export type OptionProps = {
   children: React.ReactNode;
   value: string;
   className?: string;
 };
-export function Option({
-  children,
-  value,
-  className = '',
-}: OptionProps): JSX.Element {
+function Option({ children, value, className = '' }: OptionProps): JSX.Element {
   const { onClickOfListItem, selected } = useSelectContext();
   const isSelected = Array.isArray(selected)
     ? selected.includes(value)
@@ -29,3 +26,5 @@ export function Option({
     </li>
   );
 }
+
+export default Option;
