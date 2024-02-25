@@ -39,8 +39,29 @@
     transition: all 0.3s ease 0s;
   }
 
-  // .select__value
-  &__value {
+  // .select__selected
+  &__selected {
+  }
+
+  // .select__list-selected
+  &__list-selected {
+    display: flex;
+    gap: rem(15);
+  }
+
+  // .select__item-selected
+  &__item-selected {
+    display: flex;
+    align-items: center;
+    gap: rem(10);
+  }
+
+  // .select__item-displaying
+  &__item-displaying {
+  }
+
+  // .select__item-remove
+  &__item-remove {
   }
 
   // .select_opened

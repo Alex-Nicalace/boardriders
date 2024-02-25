@@ -10,20 +10,17 @@ export function Option({
   value,
   className = '',
 }: OptionProps): JSX.Element {
-  const { setSelected, closing, selected } = useSelectContext();
-  const isSelected = selected === value;
-
-  function handleClick() {
-    setSelected(value);
-    closing();
-  }
+  const { onClickOfListItem, selected } = useSelectContext();
+  const isSelected = Array.isArray(selected)
+    ? selected.includes(value)
+    : selected === value;
 
   return (
     <li
       className={`${className} options__item ${
         isSelected ? 'options__item_selected' : ''
       }`}
-      onClick={handleClick}
+      onClick={() => onClickOfListItem(value)}
       data-value={value}
       role="option"
       aria-selected={isSelected ? true : false}
