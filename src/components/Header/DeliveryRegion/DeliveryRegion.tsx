@@ -1,6 +1,6 @@
 import { LocationIcon, SelectIcon } from '../../ui/Icons';
 import './DeliveryRegion.scss';
-import Select from '../../../component-library/Select/Select';
+import Select from '../../../component-library/Select';
 
 interface IDeliveryRegionProps {
   className?: string;
