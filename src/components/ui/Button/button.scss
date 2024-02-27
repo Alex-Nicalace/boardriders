@@ -6,6 +6,7 @@
   padding: rem(10);
   background-color: var(--black);
   color: var(--white);
+  text-align: center;
   transition: all 0.3s ease 0s;
 
   @media (pointer: fine) {
@@ -26,7 +27,7 @@
   // .button-primary_outlined
   &_outlined {
     padding: rem(9);
-    background-color: transparent;
+    background-color: var(--white);
     border: rem(1) solid var(--black);
     color: var(--black);
 
@@ -57,6 +58,7 @@
   letter-spacing: em(-0.36, 18);
   text-transform: uppercase;
   background-color: var(--red);
+  text-align: center;
   transition: all 0.3s ease 0s;
 
   @media (pointer: fine) {

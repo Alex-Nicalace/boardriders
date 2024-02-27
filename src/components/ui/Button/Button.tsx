@@ -5,47 +5,47 @@ import './Button.scss';
 
 type TCustomProps = {
   variant?: 'contained' | 'outlined';
-  type?: 'primary' | 'secondary';
+  color?: 'primary' | 'secondary';
   fullWidth?: boolean;
 };
 
-type TCuctomButtonProps = TCustomProps &
-  ButtonHTMLAttributes<HTMLButtonElement>;
-type TCuctomLinkProps = TCustomProps & LinkProps;
+interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+  to?: never;
+}
+type TButtonOrLink = IButton | LinkProps;
 
-type TButtonProps = TCuctomButtonProps | TCuctomLinkProps;
-
-function isCuctomLinkProps(obj: any): obj is TCuctomLinkProps {
+type TButtonProps = TButtonOrLink & TCustomProps;
+function isLinkProps(obj: any): obj is LinkProps {
   return 'to' in obj;
 }
 
 function Button(props: TButtonProps): JSX.Element {
   const {
-    children,
     variant = 'contained',
-    type = 'primary',
-    className = '',
+    color = 'primary',
     fullWidth = false,
+    ...rest // пропсы характерные для button или Link
   } = props;
-  const classNameValue = `${className} button-${type} button-${type}_${variant} ${
-    fullWidth ? `button-${type}_fullwidth` : ''
+
+  const defaultProps = rest as TButtonOrLink;
+
+  const classNameValue = `${
+    defaultProps.className || ''
+  } button-${color} button-${color}_${variant} ${
+    fullWidth ? `button-${color}_fullwidth` : ''
   }`;
 
-  if (isCuctomLinkProps(props)) {
+  if (isLinkProps(defaultProps)) {
     return (
-      <Link className={classNameValue} to={props.to} onClick={props.onClick}>
-        {children}
+      <Link {...defaultProps} className={classNameValue} type="">
+        {defaultProps.children}
       </Link>
     );
   }
 
   return (
-    <button
-      className={classNameValue}
-      disabled={props.disabled}
-      onClick={props.onClick}
-    >
-      {children}
+    <button className={classNameValue} {...defaultProps}>
+      {defaultProps.children}
     </button>
   );
 }
