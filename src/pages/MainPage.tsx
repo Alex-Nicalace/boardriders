@@ -6,6 +6,7 @@ import Promotion from '../components/Promotion';
 import NewProducts from '../components/NewProducts';
 import PopularCollection from '../components/PopularCollection';
 import BlogsSlider from '../components/BlogsSlider';
+import JoinAndSubscrube from '../components/JoinAndSubscrube/JoinAndSubscrube';
 
 // interface IMainPageProps {}
 function MainPage(): JSX.Element {
@@ -36,6 +37,7 @@ function MainPage(): JSX.Element {
         />
         <PopularCollection />
         <BlogsSlider />
+        <JoinAndSubscrube />
       </main>
     </>
   );

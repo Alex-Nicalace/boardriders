@@ -1,0 +1,42 @@
+@import '/src/styles/global-scss.scss';
+
+.join-and-subscrube {
+  @include adaptiveValue('padding-top', 50, 60);
+  @include adaptiveValue('padding-bottom', 60, 70);
+  // .join-and-subscrube__container
+  &__container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: percent(25, 1390);
+    row-gap: rem(20);
+
+    & > * {
+      flex: 1 1 percent(682, 1390);
+      min-width: rem(362);
+
+      @include mobileSmall {
+        min-width: auto;
+      }
+    }
+
+    @include mobile-d {
+      // flex-direction: column;
+    }
+  }
+
+  // .join-and-subscrube__join
+  &__join {
+    .button-primary {
+      min-width: rem(292);
+
+      @include mobile-d {
+        min-width: rem(250);
+      }
+    }
+  }
+
+  // .join-and-subscrube__subscrube
+  &__subscrube {
+  }
+}

@@ -1,0 +1,63 @@
+@import '/src/styles/global-scss.scss';
+
+.invitation {
+  padding: rem(15);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  text-align: center;
+
+  aspect-ratio: 668/789;
+
+  @include mobile-d {
+    aspect-ratio: 374/454;
+  }
+  // .invitation__header
+  &__header {
+    order: 2;
+    @extend %h1;
+    @include adaptiveValue('font-size', 32, 21);
+    &:not(:last-child) {
+      margin-bottom: em(15, 32);
+    }
+  }
+  // .invitation__img
+  &__img {
+    order: 1;
+
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 25, 15);
+    }
+  }
+  // .invitation__text
+  &__text {
+    order: 4;
+    @extend %body-1;
+    @include adaptiveValue('font-size', 16, 14);
+    &:not(:last-child) {
+      margin-bottom: em(25, 16);
+    }
+  }
+  // .invitation__element
+  &__element {
+    order: 4;
+  }
+  // .invitation__bg
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

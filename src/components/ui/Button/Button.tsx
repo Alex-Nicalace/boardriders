@@ -4,7 +4,7 @@ import { Link, LinkProps } from 'react-router-dom';
 import './Button.scss';
 
 type TCustomProps = {
-  variant?: 'contained' | 'outlined';
+  variant?: 'contained' | 'outlined' | 'reverse';
   color?: 'primary' | 'secondary';
   fullWidth?: boolean;
 };
