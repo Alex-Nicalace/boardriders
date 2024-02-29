@@ -9,6 +9,8 @@ import CartIcon from './../../assets/icons/cart.svg?react';
 import SearchIcon from './../../assets/icons/search.svg?react';
 import ArrowRightIcon from './../../assets/icons/arrow-right.svg?react';
 import EmailIcon from './../../assets/icons/email.svg?react';
+import EnterIcon from './../../assets/icons/enter.svg?react';
+import ArrowRightClassic from './../../assets/icons/arrow-right-classic.svg?react';
 
 function TrackIcon(
   params: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -37,4 +39,6 @@ export {
   ArrowRightIcon,
   ArrowLeftIcon,
   EmailIcon,
+  EnterIcon,
+  ArrowRightClassic,
 };
