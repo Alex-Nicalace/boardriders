@@ -43,6 +43,7 @@
   }
   // .invitation__element
   &__element {
+    width: min(100%, rem(400));
     order: 4;
   }
   // .invitation__bg

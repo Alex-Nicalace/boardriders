@@ -1,7 +1,6 @@
 @import '/src/styles/global-scss.scss';
 
 .input-main {
-  min-width: rem(421);
   color: var(--black);
   text-align: left;
   // .input-main__wrap
@@ -30,6 +29,10 @@
     // .input-main__adornment_end
     &_end {
       width: rem(75);
+
+      @include mobileSmall {
+        width: rem(50);
+      }
     }
   }
   // .input-main__input

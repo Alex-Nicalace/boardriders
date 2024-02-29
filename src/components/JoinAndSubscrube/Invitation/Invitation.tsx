@@ -5,7 +5,7 @@ import './Invitation.scss';
 type TInvitationProps = {
   className?: string;
   header: string;
-  iconElement: JSX.Element;
+  iconElement?: React.ReactNode;
   text: string;
   imgBg: string;
   actionElement: JSX.Element;
@@ -21,7 +21,9 @@ function Invitation({
   return (
     <article className={`invitation ${className}`}>
       <h2 className="invitation__header">{header}</h2>
-      <div className="invitation__img">{iconElement}</div>
+      {Boolean(iconElement) && (
+        <div className="invitation__img">{iconElement}</div>
+      )}
       <p className="invitation__text">{text}</p>
       <div className="invitation__element">{actionElement}</div>
       <div className="invitation__bg">

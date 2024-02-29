@@ -1,14 +1,16 @@
 import Invitation from './Invitation/Invitation';
 import './JoinAndSubscrube.scss';
 import iconLogo from './../../assets/icons/logo-2.png';
-// import icon from './../../assets/icons/logo-2.png';
-import { EmailIcon } from '../ui/Icons';
+import { EmailIcon, EnterIcon } from '../ui/Icons';
 import imgBgJoin from './../../assets/img/join-and-subscrube/join.jpg';
 import imgBgsubScribe from './../../assets/img/join-and-subscrube/subscribe.jpg';
 import Button from '../ui/Button';
+import InputStyled from '../ui/InputStyled';
+import useMatchMedia from '../../hooks/useMatchMedia';
 
 // type TJoinAndSubscrubeProps = {};
 function JoinAndSubscrube(): JSX.Element {
+  const [isSmall] = useMatchMedia(['(max-width: 479px)']);
   return (
     <div className="join-and-subscrube">
       <div className="join-and-subscrube__container">
@@ -27,10 +29,35 @@ function JoinAndSubscrube(): JSX.Element {
         <Invitation
           className="join-and-subscrube__subscrube"
           header="Скидка -10%"
-          iconElement={<EmailIcon />}
+          iconElement={!isSmall && <EmailIcon />}
           imgBg={imgBgsubScribe}
           text="За подписку на наши новости"
-          actionElement={<Button to="#">Вступить в клуб</Button>}
+          actionElement={
+            <>
+              {!isSmall ? (
+                <InputStyled
+                  varint="second"
+                  placeholder="E-mail"
+                  type="email"
+                  adornmentContent={
+                    <EmailIcon style={{ width: 'auto', height: '16px' }} />
+                  }
+                  buttonContent={
+                    <EnterIcon style={{ width: 'auto', height: '19px' }} />
+                  }
+                />
+              ) : (
+                <InputStyled
+                  varint="main"
+                  placeholder="E-mail"
+                  type="email"
+                  buttonContent={
+                    <EmailIcon style={{ width: 'auto', height: '11px' }} />
+                  }
+                />
+              )}
+            </>
+          }
         />
       </div>
     </div>
