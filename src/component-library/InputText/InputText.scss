@@ -1,0 +1,32 @@
+@import '/src/styles/global-scss.scss';
+.input-text {
+  // .input-text__wrap
+  &__wrap {
+    display: flex;
+    align-items: center;
+  }
+  // .input-text__label
+  &__label {
+  }
+  // .input-text__error
+  &__error {
+  }
+  // .input-text__adornment
+  &__adornment {
+    // .input-text__adornment_start
+    &_start {
+    }
+    // .input-text__adornment_end
+    &_end {
+    }
+  }
+  // .input-text__input
+  &__input {
+    flex-grow: 1;
+  }
+  // .input-text__hint
+  &__hint {
+  }
+  &_error {
+  }
+}
