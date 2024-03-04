@@ -5,7 +5,7 @@ export interface ILink {
   to: string;
   title: string;
 }
-type TListLinksProps = (
+type TListLinksProps<T> = (
   | {
       linkAs: 'a';
       linkProps?: React.AnchorHTMLAttributes<HTMLAnchorElement>;
@@ -20,6 +20,7 @@ type TListLinksProps = (
     }
   | {
       linkAs?: undefined;
+      linkProps?: never;
     }
 ) & {
   listProps?: DetailedHTMLProps<
@@ -29,9 +30,9 @@ type TListLinksProps = (
   itemProps?: DetailedHTMLProps<HTMLAttributes<HTMLLIElement>, HTMLLIElement>;
   getClassNameItem?: (value: unknown) => string;
   getClassNameLink?: (value: unknown) => string;
-  linksData: ILink[];
+  linksData: T extends ILink ? T[] : never;
   bemBlockName?: string;
-  renderToItem?: (value: unknown) => React.ReactNode;
+  renderToItem?: (value: T) => React.ReactNode;
   onMouseEnterItem?: (
     data: unknown,
     event: React.MouseEvent<HTMLLIElement, MouseEvent>
@@ -50,7 +51,7 @@ type TListLinksProps = (
   ) => void;
 };
 
-function ListLinks(props: TListLinksProps): JSX.Element {
+function ListLinks<T>(props: TListLinksProps<T>): JSX.Element {
   const {
     linksData,
     listProps,
