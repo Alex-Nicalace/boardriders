@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import './MainMenu.scss';
 import { MENU_DATA, isIMenuData } from '../../../data/menuData';
-import ListLinks from '../../ListLinks';
+import ListLinks from '../../../component-library/ListLinks';
 import Submenu from './Submenu';
 
 // interface IMainMenuProps {}

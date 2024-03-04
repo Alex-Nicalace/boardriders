@@ -1,4 +1,4 @@
-import ListLinks from '../../ListLinks';
+import ListLinks from '../../../component-library/ListLinks';
 import './SecondaryLinks.scss';
 
 const LINKS_DATA = [

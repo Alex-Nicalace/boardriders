@@ -1,5 +1,5 @@
 import { isIMenuData } from '../../../data/menuData';
-import ListLinks from '../../ListLinks';
+import ListLinks from '../../../component-library/ListLinks';
 import { ISubmenuProps } from './Submenu';
 
 type TSubMenuSectionProps = {

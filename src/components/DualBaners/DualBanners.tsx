@@ -1,4 +1,4 @@
-import ListLinks from '../ListLinks';
+import ListLinks from '../../component-library/ListLinks';
 import Banner from './Banner';
 import { isTBannerData } from './Banner/isTBannerData';
 import './DualBanners.scss';

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './BurgerMenu.scss';
 import { MENU_DATA, isIMenuData } from '../../../data/menuData';
 import { useBurgerContext } from '../../../Context/useBurgerContext';
-import ListLinks from '../../ListLinks';
+import ListLinks from '../../../component-library/ListLinks';
 import Submenu from '../MainMenu/Submenu';
 import { ArrowLeftIcon, ArrowRightIcon } from '../../ui/Icons';
 import Button from '../../ui/Button';

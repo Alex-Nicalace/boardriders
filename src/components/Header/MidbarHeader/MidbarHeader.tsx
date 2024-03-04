@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import './MidbarHeader.scss';
 import logo from '../../../assets/icons/logo.png';
-import ListLinks from '../../ListLinks';
+import ListLinks from '../../../component-library/ListLinks';
 import BurgerButton from '../../ui/BurgerButton';
 import MediaQuery from '../../ui/MediaQuery';
 import Search from '../Search';
