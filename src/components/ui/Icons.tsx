@@ -11,6 +11,11 @@ import ArrowRightIcon from './../../assets/icons/arrow-right.svg?react';
 import EmailIcon from './../../assets/icons/email.svg?react';
 import EnterIcon from './../../assets/icons/enter.svg?react';
 import ArrowRightClassic from './../../assets/icons/arrow-right-classic.svg?react';
+import Facebook from './../../assets/icons/socials/facebook.svg?react';
+import Instagram from './../../assets/icons/socials/instagram.svg?react';
+import Twitch from './../../assets/icons/socials/twitch.svg?react';
+import Twitter from './../../assets/icons/socials/twitter.svg?react';
+import Youtube from './../../assets/icons/socials/youtube.svg?react';
 
 function TrackIcon(
   params: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -41,4 +46,9 @@ export {
   EmailIcon,
   EnterIcon,
   ArrowRightClassic,
+  Facebook,
+  Instagram,
+  Twitch,
+  Twitter,
+  Youtube,
 };
