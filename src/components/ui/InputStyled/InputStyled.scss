@@ -99,6 +99,7 @@
 .input-second {
   color: var(--black);
   text-align: left;
+  background-color: var(--white);
   // .input-second__wrap
   &__wrap {
     padding-left: rem(16);
@@ -108,7 +109,7 @@
     align-items: center;
     column-gap: rem(11);
 
-    background-color: var(--white);
+    background-color: inherit;
     border: rem(1) solid transparent;
     box-shadow: 0 rem(4) rem(15) 0 rgba(0, 0, 0, 0.1);
 
@@ -139,6 +140,8 @@
   &__input {
     padding: rem(15.5) 0;
     flex-grow: 1;
+    color: inherit;
+    background-color: inherit;
     outline: none;
 
     &::placeholder {
@@ -163,6 +166,21 @@
 
     .input-second__hint {
       color: var(--red);
+    }
+  }
+
+  &_dark {
+    color: var(--white);
+    background-color: var(--black);
+    .input-second__wrap {
+      border-color: rgba(255, 255, 255, 0.2);
+
+      &:focus-within {
+        outline: rem(1) solid var(--white);
+      }
+    }
+    .input-second__adornment_start {
+      color: var(--dark-gray);
     }
   }
 }
