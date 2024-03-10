@@ -1,4 +1,11 @@
-import { DetailsHTMLAttributes, useRef } from 'react';
+import {
+  DetailsHTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 type IAnimationData = {
   isClosing: boolean;
@@ -14,6 +21,7 @@ type TDetailsProps = DetailsHTMLAttributes<HTMLDetailsElement> & {
     timingFunction?: string;
   };
   disabled?: boolean;
+  closeOnOutsideClick?: boolean;
 };
 function Details({
   children,
@@ -21,10 +29,10 @@ function Details({
   summaryNode,
   contentNode,
   disabled = false,
+  closeOnOutsideClick = false,
   ...props
 }: TDetailsProps): JSX.Element {
   const { duration = 300, timingFunction = 'ease-out' } = animationOptions;
-  const detailsRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const animationDataRef = useRef<IAnimationData>({
@@ -32,10 +40,22 @@ function Details({
     isExpanding: false,
     animation: null,
   });
+  const [isOpen, setIsOpen] = useState(false);
+  const detailsRef = useOutsideClick<HTMLDetailsElement>(() => {
+    if (isOpen) {
+      shrink();
+    }
+  }, !closeOnOutsideClick);
 
   function handleClick(e: React.MouseEvent<HTMLElement, MouseEvent>) {
     e.preventDefault(); // отменить поведение по умолчанию
     if (disabled) return;
+
+    if (!isOpen) {
+      setIsOpen(true);
+      return;
+    }
+
     const detailsEl = detailsRef.current;
     if (!detailsEl) return;
 
@@ -47,17 +67,6 @@ function Details({
     } else if (isExpanding || detailsEl.open) {
       shrink();
     }
-  }
-
-  function open() {
-    const detailsEl = detailsRef.current;
-    if (!detailsEl) return;
-    if (detailsEl.open) return;
-
-    detailsEl.style.overflow = 'hidden'; // скрыть переполнение
-    detailsEl.style.height = `${detailsEl.offsetHeight}px`; // захардкодить высоту в закрытом сосотоянии
-    detailsEl.open = true; // открыть, но видимости открытия не видно, т.к. высота не позволяет
-    requestAnimationFrame(() => expand()); // запустить анимацию открытия
   }
 
   function shrink() {
@@ -93,61 +102,87 @@ function Details({
     animationData.animation.oncancel = () => (animationData.isClosing = false); // установить обработчик отмены анимации
   }
 
-  function expand() {
-    const detailsEl = detailsRef.current;
-    const summaryEl = summaryRef.current;
-    const contentEl = contentRef.current;
-    if (!detailsEl || !summaryEl || !contentEl) return;
+  const onAnimationFinish = useCallback(
+    function onAnimationFinish(open: boolean) {
+      const detailsEl = detailsRef.current;
+      const summaryEl = summaryRef.current;
+      const contentEl = contentRef.current;
+      if (!detailsEl || !summaryEl || !contentEl) return;
 
-    const animationData = animationDataRef.current;
-    animationData.isExpanding = true; // установить флаг, что анимация в стадии открытия
-    const startHeight = `${detailsEl.offsetHeight}px`; // высота закрытого состояния
-    const endHeight = `${summaryEl.offsetHeight + contentEl.offsetHeight}px`; // высота открытого состояния (высота summary + высота content)
+      const animationData = animationDataRef.current;
+      detailsEl.open = open; // открыть или закрыть detail на основе пораметра open
+      animationData.animation = null; // сбросить анимацию
+      animationData.isClosing = false; // сбросить флаг закрытия
+      animationData.isExpanding = false; // сбросить флаг открытия
+      detailsEl.style.height = detailsEl.style.overflow = ''; // сбросить высоту и overflow
+      setIsOpen(open); // установить флаг открытия
+    },
+    [detailsRef]
+  );
 
-    // если есть текущая анимация, отменить ее
-    if (animationData.animation) {
-      animationData.animation.cancel();
-    }
+  const expand = useCallback(
+    function expand() {
+      const detailsEl = detailsRef.current;
+      const summaryEl = summaryRef.current;
+      const contentEl = contentRef.current;
+      if (!detailsEl || !summaryEl || !contentEl) return;
 
-    // запустить анимацию Web Animation API
-    animationData.animation = detailsEl.animate(
-      {
-        // ключевые кадры от начальной высоты до конечной высоты
-        height: [startHeight, endHeight],
-      },
-      {
-        duration,
-        easing: timingFunction,
+      const animationData = animationDataRef.current;
+      animationData.isExpanding = true; // установить флаг, что анимация в стадии открытия
+      const startHeight = `${detailsEl.offsetHeight}px`; // высота закрытого состояния
+      const endHeight = `${summaryEl.offsetHeight + contentEl.offsetHeight}px`; // высота открытого состояния (высота summary + высота content)
+
+      // если есть текущая анимация, отменить ее
+      if (animationData.animation) {
+        animationData.animation.cancel();
       }
-    );
 
-    // обработчик завершения анимации
-    animationData.animation.onfinish = () => onAnimationFinish(true);
-    // обработчик отмены анимации
-    animationData.animation.oncancel = () =>
-      (animationDataRef.current.isExpanding = false);
-  }
+      // запустить анимацию Web Animation API
+      animationData.animation = detailsEl.animate(
+        {
+          // ключевые кадры от начальной высоты до конечной высоты
+          height: [startHeight, endHeight],
+        },
+        {
+          duration,
+          easing: timingFunction,
+        }
+      );
 
-  function onAnimationFinish(open: boolean) {
-    const detailsEl = detailsRef.current;
-    const summaryEl = summaryRef.current;
-    const contentEl = contentRef.current;
-    if (!detailsEl || !summaryEl || !contentEl) return;
+      // обработчик завершения анимации
+      animationData.animation.onfinish = () => onAnimationFinish(true);
+      // обработчик отмены анимации
+      animationData.animation.oncancel = () =>
+        (animationDataRef.current.isExpanding = false);
+    },
+    [duration, timingFunction, detailsRef, onAnimationFinish]
+  );
 
-    const animationData = animationDataRef.current;
-    detailsEl.open = open; // открыть или закрыть detail на основе пораметра open
-    animationData.animation = null; // сбросить анимацию
-    animationData.isClosing = false; // сбросить флаг закрытия
-    animationData.isExpanding = false; // сбросить флаг открытия
-    detailsEl.style.height = detailsEl.style.overflow = ''; // сбросить высоту и overflow
-  }
+  const open = useCallback(
+    function open() {
+      const detailsEl = detailsRef.current;
+      if (!detailsEl) return;
+
+      detailsEl.style.overflow = 'hidden'; // скрыть переполнение
+      detailsEl.style.height = `${detailsEl.offsetHeight}px`; // захардкодить высоту в закрытом сосотоянии
+      detailsEl.open = true; // открыть, но видимости открытия не видно, т.к. высота не позволяет
+      requestAnimationFrame(() => expand()); // запустить анимацию открытия
+    },
+    [expand, detailsRef]
+  );
+
+  useEffect(() => {
+    if (isOpen) {
+      open();
+    }
+  }, [isOpen, open]);
 
   return (
     <details ref={detailsRef} {...props}>
       <summary ref={summaryRef} onClick={handleClick}>
         {summaryNode}
       </summary>
-      <div ref={contentRef}>{contentNode}</div>
+      {isOpen && <div ref={contentRef}>{contentNode}</div>}
     </details>
   );
 }
