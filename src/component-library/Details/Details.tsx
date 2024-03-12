@@ -1,8 +1,17 @@
-import { DetailsHTMLAttributes, HTMLAttributes, useRef, useState } from 'react';
+import {
+  DetailsHTMLAttributes,
+  HTMLAttributes,
+  forwardRef,
+  useRef,
+  useState,
+} from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import Transition from '../Transition';
 
-type TDetailsProps = DetailsHTMLAttributes<HTMLDetailsElement> & {
+export type TDetailsProps = Omit<
+  DetailsHTMLAttributes<HTMLDetailsElement>,
+  'children'
+> & {
   summaryNode?: React.ReactNode;
   contentNode?: React.ReactNode;
   animationOptions?: {
@@ -14,9 +23,9 @@ type TDetailsProps = DetailsHTMLAttributes<HTMLDetailsElement> & {
   unmountContentOnClose?: boolean;
   summaryProps?: HTMLAttributes<HTMLElement>;
   contentProps?: HTMLAttributes<HTMLDivElement>;
+  onChange?: (open: boolean) => void;
 };
 function Details({
-  children,
   animationOptions = {},
   summaryNode,
   contentNode,
@@ -25,24 +34,43 @@ function Details({
   unmountContentOnClose = true,
   summaryProps = {},
   contentProps = {},
+  open,
+  onChange, // можно этот проп задействовать для изменения внешнего состояния, но можно summaryProps.onClick. Лучше использовать onChange
   ...props
 }: TDetailsProps): JSX.Element {
   const { duration = 300, timingFunction = 'ease-out' } = animationOptions;
+  const [isOpen, setIsOpen] = useState(false);
+  const detailsRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const detailsRef = useOutsideClick<HTMLDetailsElement>(() => {
-    if (isOpen) {
-      setIsOpen(false);
+
+  function onOutsideClick(e: MouseEvent) {
+    if (detailsRef.current?.contains(e.target as Node)) return;
+    if (getIsOpen()) {
+      toggle(false);
     }
-  }, !closeOnOutsideClick);
+  }
+
+  function getIsOpen() {
+    return open ?? isOpen;
+  }
+
+  function toggle(value: boolean = !getIsOpen()) {
+    if (disabled) return;
+
+    if (open === undefined) {
+      setIsOpen(value);
+    } else {
+      onChange?.(value);
+    }
+  }
 
   function onSummaryClick(e: React.MouseEvent<HTMLElement, MouseEvent>) {
     summaryProps.onClick?.(e);
     e.preventDefault(); // отменить поведение по умолчанию
     if (disabled) return;
 
-    setIsOpen((prev) => !prev);
+    toggle(!getIsOpen());
   }
 
   function setHeightInit() {
@@ -86,7 +114,7 @@ function Details({
 
   return (
     <Transition
-      enter={isOpen}
+      enter={getIsOpen()}
       timeout={duration}
       unmountOnExit={false}
       onEnter={setHeightInit}
@@ -101,15 +129,50 @@ function Details({
           <summary {...summaryProps} ref={summaryRef} onClick={onSummaryClick}>
             {summaryNode}
           </summary>
-          {(state !== 'exited' || isOpen || !unmountContentOnClose) && (
-            <div {...contentProps} ref={contentRef}>
+          {(state !== 'exited' || getIsOpen() || !unmountContentOnClose) && (
+            <DetailsContent
+              {...contentProps}
+              ref={contentRef}
+              onOutsideClick={onOutsideClick}
+              closeOnOutsideClick={closeOnOutsideClick}
+            >
               {contentNode}
-            </div>
+            </DetailsContent>
           )}
         </details>
       )}
     </Transition>
   );
 }
+
+// ========================= DetailsContent =========================
+// выделил в отдельную компоненту из-за хука useOutsideClick т.е. чтобы прослушиватель клика
+// вне компонента активировался только при открытом состоянии. Чтобы типа даром не висел когда нет необходимости
+type TDetailsContentProps = HTMLAttributes<HTMLDivElement> & {
+  onOutsideClick: (e: MouseEvent) => void;
+  closeOnOutsideClick: boolean;
+};
+const DetailsContent = forwardRef<HTMLDivElement, TDetailsContentProps>(
+  ({ children, onOutsideClick, closeOnOutsideClick, ...props }, ref) => {
+    const contentRef: React.MutableRefObject<HTMLDivElement | null> =
+      useOutsideClick<HTMLDivElement>(onOutsideClick, !closeOnOutsideClick);
+    return (
+      <div
+        {...props}
+        ref={(node) => {
+          contentRef.current = node;
+
+          if (typeof ref === 'function') {
+            ref(node);
+          } else if (ref) {
+            ref.current = node;
+          }
+        }}
+      >
+        {children}
+      </div>
+    );
+  }
+);
 
 export default Details;
