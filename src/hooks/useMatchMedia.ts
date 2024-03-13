@@ -10,7 +10,9 @@ export type IMatchedMedia = boolean[];
  * @returns масив логических значений
  */
 export default function useMatchMedia(queries: IMediaQuery): IMatchedMedia {
-  const mediaQueryLists = queries.map((q) => window.matchMedia(q));
+  const mediaQueryLists = queries
+    .filter((q) => !!q.trim())
+    .map((q) => window.matchMedia(q));
 
   /**
    * Получает текущее состояние медиа запросов
