@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { Link, LinkProps, NavLink, NavLinkProps } from 'react-router-dom';
 
 export interface ILink {
@@ -6,31 +6,35 @@ export interface ILink {
   title: string;
 }
 type TListLinksProps<T> = (
-  | {
-      linkAs: 'a';
-      linkProps?: React.AnchorHTMLAttributes<HTMLAnchorElement>;
-    }
-  | {
-      linkAs: 'Link';
-      linkProps?: Partial<LinkProps>;
-    }
-  | {
-      linkAs: 'NavLink';
-      linkProps?: Partial<NavLinkProps>;
-    }
-  | {
+  | ((
+      | {
+          linkAs: 'a';
+          linkProps?: React.AnchorHTMLAttributes<HTMLAnchorElement>;
+        }
+      | {
+          linkAs: 'Link';
+          linkProps?: Partial<LinkProps>;
+        }
+      | {
+          linkAs: 'NavLink';
+          linkProps?: Partial<NavLinkProps>;
+        }
+    ) & {
+      linksData: T extends ILink ? T[] : never;
+    })
+  | ({
       linkAs?: undefined;
       linkProps?: never;
-    }
+    } & {
+      linksData: T[];
+    })
 ) & {
-  listProps?: DetailedHTMLProps<
-    HTMLAttributes<HTMLUListElement>,
-    HTMLUListElement
-  >;
-  itemProps?: DetailedHTMLProps<HTMLAttributes<HTMLLIElement>, HTMLLIElement>;
+  listProps?: HTMLAttributes<HTMLUListElement>;
+  itemProps?: HTMLAttributes<HTMLLIElement>;
   getClassNameItem?: (value: unknown) => string;
   getClassNameLink?: (value: unknown) => string;
-  linksData: T extends ILink ? T[] : never;
+  // linksData: T extends ILink ? T[] : never;
+  // linksData: TListLinksProps.linksData<T>;
   bemBlockName?: string;
   renderToItem?: (value: T) => React.ReactNode;
   onMouseEnterItem?: (
