@@ -33,8 +33,6 @@ function Accordion({
   const [isMatch] = useMatchMedia([mediaQuery]);
   const isAllExpanded = isMatch === false;
 
-  console.log(isMatch);
-
   function toggle(id: string) {
     if (isAllExpanded) return;
 

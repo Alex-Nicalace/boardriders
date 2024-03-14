@@ -18,6 +18,8 @@
 
 [Transition.tsx](./src/component-library/Transition/Transition.tsx) - Генерирует эффект перехода для указанных дочерних элементов на основе состояния и указанного времени ожидания. Появилась необходимость для анимации условного рендеринга. В поисках решения подобных задач попал на либу [react-transition-group](https://reactcommunity.org/react-transition-group), но так как решение уже было начато решил сделать свою реализацию.
 
+[MediaQuery.tsx](./src/component-library/MediaQuery/MediaQuery.tsx) - В зависимости от ширины документа скрывает дочерние компоненты. Необходим кастомный хук [useMatchMedia.ts](./src/hooks/useMatchMedia.ts)
+
 ## Кастомные хуки
 
 [useLockDocumentScroll.ts](./src/hooks/useLockDocumentScroll.ts) Пользовательский хук для блокировки прокрутки документа при вызове.
