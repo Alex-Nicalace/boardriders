@@ -16,6 +16,7 @@ import Instagram from './../../assets/icons/socials/instagram.svg?react';
 import Twitch from './../../assets/icons/socials/twitch.svg?react';
 import Twitter from './../../assets/icons/socials/twitter.svg?react';
 import Youtube from './../../assets/icons/socials/youtube.svg?react';
+import TelephoneIcon from './../../assets/icons/telephone.svg?react';
 
 function TrackIcon(
   params: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -51,4 +52,5 @@ export {
   Twitch,
   Twitter,
   Youtube,
+  TelephoneIcon,
 };

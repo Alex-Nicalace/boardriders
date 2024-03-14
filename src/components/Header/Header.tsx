@@ -1,5 +1,5 @@
 import './Header.scss';
-import MediaQuery from '../ui/MediaQuery';
+import MediaQuery from '../../component-library/MediaQuery';
 import BurgerMenu from './BurgerMenu';
 import MainMenu from './MainMenu';
 import TopbarHeader from './TopBarHeader';

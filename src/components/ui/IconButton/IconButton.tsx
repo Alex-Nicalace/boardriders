@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './IconButton.scss';
-import MediaQuery from '../MediaQuery';
+import MediaQuery from '../../../component-library/MediaQuery';
 
 interface ILinkIconProps {
   children?: React.ReactNode;
