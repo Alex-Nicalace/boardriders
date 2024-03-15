@@ -134,17 +134,21 @@ const CONTACTS_DATA = [
   },
 ];
 
+const MEDIAQUERY = ['(max-width: 991.98px)', '(max-width: 767.98px)'];
+
 // type TFooterProps = {};
 function Footer(): JSX.Element {
-  const [isSmallerThanPC] = useMatchMedia(['(max-width: 991.98px)']);
+  const [isSmallerThanPC, isSmallerThanMobile] = useMatchMedia(MEDIAQUERY);
 
   return (
     <footer className="footer">
       <div className="footer__container">
         <div className="footer__top">
-          <Link to="/" className="footer__logo">
-            <img className="footer__logo-img" src={logoIcon} alt="Логотип" />
-          </Link>
+          {!isSmallerThanMobile && (
+            <Link to="/" className="footer__logo">
+              <img className="footer__logo-img" src={logoIcon} alt="Логотип" />
+            </Link>
+          )}
           <div className="footer__subscribe">
             <InputStyled
               varint="second"
@@ -168,8 +172,8 @@ function Footer(): JSX.Element {
             </p>
             <div className="footer__links-apps">
               <a
-                href="https://www.apple.com/app-store/"
                 className="footer__app-link"
+                href="https://www.apple.com/app-store/"
               >
                 <img
                   className="footer__app-store-img"
@@ -178,8 +182,8 @@ function Footer(): JSX.Element {
                 />
               </a>
               <a
-                href="https://play.google.com/store/apps"
                 className="footer__app-link"
+                href="https://play.google.com/store/apps"
               >
                 <img
                   className="footer__app-store-img"

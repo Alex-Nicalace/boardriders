@@ -34,6 +34,10 @@
   // .footer__subscribe
   &__subscribe {
     flex: 0 1 percent(667, 1360);
+
+    @include mobile-d {
+      flex: 0 1 100%;
+    }
   }
   // .footer__middle
   &__middle {
@@ -108,6 +112,7 @@
   }
   // .footer__app-store-img
   &__app-store-img {
+    width: 100%;
   }
   // .footer__qr
   &__qr {
