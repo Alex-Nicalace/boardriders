@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState } from 'react';
+import { HTMLAttributes, useMemo, useState } from 'react';
 import { AccordionContext } from './AccordionContext';
 import Details, { TDetailsProps } from '../Details';
 import { useAccordionContext } from './useAccordionContext';
@@ -29,8 +29,11 @@ function Accordion({
     setOpenId([]);
   }, !closeOnOutsideClick);
   const { screenWidth, triggerOnWidth = 'max-width' } = responsive || {};
-  const mediaQuery = responsive ? `(${triggerOnWidth}: ${screenWidth}px)` : '';
-  const [isMatch] = useMatchMedia([mediaQuery]);
+  const mediaQuery = useMemo(
+    () => (screenWidth ? [`(${triggerOnWidth}: ${screenWidth}px)`] : []),
+    [screenWidth, triggerOnWidth]
+  );
+  const [isMatch] = useMatchMedia(mediaQuery);
   const isAllExpanded = isMatch === false;
 
   function toggle(id: string) {

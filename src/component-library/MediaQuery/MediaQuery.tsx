@@ -7,7 +7,7 @@ type Devices = Record<TypesDevice, number>;
 
 export type WidthQuery = number | TypesDevice;
 
-const devices: Devices = {
+const DEVICES: Devices = {
   smallMobile: 479.98,
   mobile: 767.98,
   tablet: 991.98,
@@ -34,9 +34,9 @@ function MediaQuery({
 }: TMediaQueryProps): JSX.Element {
   const mediaQuery = useMemo(() => {
     const minWidthNumber =
-      typeof minWidth === 'string' ? devices[minWidth] : minWidth;
+      typeof minWidth === 'string' ? DEVICES[minWidth] : minWidth;
     const maxWidthNumber =
-      typeof maxWidth === 'string' ? devices[maxWidth] : maxWidth;
+      typeof maxWidth === 'string' ? DEVICES[maxWidth] : maxWidth;
 
     const minWidthQuery = minWidthNumber
       ? `(min-width: ${minWidthNumber}px)`
@@ -46,11 +46,12 @@ function MediaQuery({
       : '';
 
     return minWidthQuery && maxWidthQuery
-      ? `${minWidthQuery} and ${maxWidthQuery})`
-      : minWidthQuery || maxWidthQuery;
+      ? [`${minWidthQuery} and ${maxWidthQuery})`]
+      : [minWidthQuery || maxWidthQuery];
   }, [minWidth, maxWidth]);
 
-  const [isMatch] = useMatchMedia([mediaQuery]);
+  const [isMatch] = useMatchMedia(mediaQuery);
+
   return <>{isMatch && children}</>;
 }
 

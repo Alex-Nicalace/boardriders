@@ -8,9 +8,11 @@ import Button from '../ui/Button';
 import InputStyled from '../ui/InputStyled';
 import useMatchMedia from '../../hooks/useMatchMedia';
 
+const MEDIAQUERY = ['(max-width: 479px)'];
+
 // type TJoinAndSubscrubeProps = {};
 function JoinAndSubscrube(): JSX.Element {
-  const [isSmall] = useMatchMedia(['(max-width: 479px)']);
+  const [isSmall] = useMatchMedia(MEDIAQUERY);
   return (
     <div className="join-and-subscrube">
       <div className="join-and-subscrube__container">

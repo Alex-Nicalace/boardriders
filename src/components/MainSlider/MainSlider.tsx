@@ -32,14 +32,13 @@ const DATA_SLIDES = [
   },
 ];
 
+const MEDIAQUERY = [`(min-width: 1500px)`, `(max-width: 767.98px)`];
+
 interface IMainSliderProps {
   className?: string;
 }
 function MainSlider({ className = '' }: IMainSliderProps): JSX.Element {
-  const [isLarge, isMobile] = useMatchMedia([
-    `(min-width: 1500px)`,
-    `(max-width: 767.98px)`,
-  ]);
+  const [isLarge, isMobile] = useMatchMedia(MEDIAQUERY);
 
   return (
     <section className={`${className} main-slider`}>

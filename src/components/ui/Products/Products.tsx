@@ -19,6 +19,9 @@ interface IWareData {
   discount?: number;
   to: string;
 }
+
+const MEDIAQUERY = ['(max-width: 573px)'];
+
 interface IProductsProps {
   title: string;
   productsData: IWareData[];
@@ -29,7 +32,7 @@ function Products({
   productsData,
   moreTo,
 }: IProductsProps): JSX.Element {
-  const [isSmall] = useMatchMedia(['(max-width: 573px)']);
+  const [isSmall] = useMatchMedia(MEDIAQUERY);
 
   return (
     <section className="products">

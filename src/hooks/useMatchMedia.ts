@@ -1,7 +1,6 @@
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 
 export type IMediaQuery = string[];
-
 export type IMatchedMedia = boolean[];
 
 /**
@@ -10,9 +9,10 @@ export type IMatchedMedia = boolean[];
  * @returns масив логических значений
  */
 export default function useMatchMedia(queries: IMediaQuery): IMatchedMedia {
-  const mediaQueryLists = queries
-    .filter((q) => !!q.trim())
-    .map((q) => window.matchMedia(q));
+  const mediaQueryLists = useMemo(
+    () => queries.map((q) => window.matchMedia(q)),
+    [queries]
+  );
 
   /**
    * Получает текущее состояние медиа запросов
