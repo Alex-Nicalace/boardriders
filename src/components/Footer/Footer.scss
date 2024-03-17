@@ -1,12 +1,71 @@
 @import '/src/styles/global-scss.scss';
 
 .footer {
-  padding-bottom: rem(50);
-  background-color: var(--black);
-  color: var(--white);
+  position: relative;
+
+  --polygon: polygon(
+    0 #{percent(38, 699)},
+
+    25.75% 15.46%,
+    #{percent(443, 1680)} #{percent(108, 699)},
+    27.05% 15.17%,
+
+    44.7% 2px,
+    #{percent(762, 1680)} 0,
+    46.04% 1px,
+
+    76.35% 15.16%,
+    #{percent(1294, 1680)} #{percent(108, 699)},
+    77.7% 15.45%,
+
+    100% #{percent(60, 699)},
+    100% 100%,
+    0 100%
+  );
 
   @include tablet-d {
-    padding-bottom: rem(20);
+    --polygon: polygon(
+      0 #{rem(38)},
+      #{percent(120, 414)} 0,
+      #{percent(313, 414)} #{rem(53)},
+      100% #{rem(38)},
+      100% 100%,
+      0 100%
+    );
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: var(--polygon);
+  }
+
+  &::before {
+    top: rem(-15);
+    background-color: var(--white);
+  }
+
+  &::after {
+    top: rem(-22);
+    background-color: var(--black);
+    z-index: -1;
+  }
+
+  &__wrapper {
+    padding-top: rem(183);
+    padding-bottom: rem(50);
+    background-color: var(--black);
+    color: var(--white);
+
+    @include tablet-d {
+      padding-bottom: rem(20);
+    }
+
+    clip-path: var(--polygon);
   }
   // .footer__container
   &__container {
@@ -55,7 +114,6 @@
   // .footer__apps
   &__apps {
     display: grid;
-    grid-template-columns: auto 1fr;
     grid-template:
       'h h'
       's q';
@@ -63,6 +121,7 @@
 
     @include pc-d {
       width: min-content;
+      min-width: rem(320);
     }
 
     @include tablet-d {
@@ -104,7 +163,7 @@
   }
   // .footer__app-store
   &__app-link {
-    // grid-column: 1/2;
+    // min-width: rem(150);
 
     &:not(:last-child) {
       margin-bottom: rem(15);

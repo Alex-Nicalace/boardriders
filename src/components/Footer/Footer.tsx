@@ -142,116 +142,122 @@ function Footer(): JSX.Element {
 
   return (
     <footer className="footer">
-      <div className="footer__container">
-        <div className="footer__top">
-          {!isSmallerThanMobile && (
-            <Link to="/" className="footer__logo">
-              <img className="footer__logo-img" src={logoIcon} alt="Логотип" />
-            </Link>
-          )}
-          <div className="footer__subscribe">
-            <InputStyled
-              varint="second"
-              placeholder="Подпишись на рассылку и получи -10% скидку"
-              type="email"
-              adornmentContent={
-                <EmailIcon style={{ width: 'auto', height: '16px' }} />
-              }
-              buttonContent={
-                <EnterIcon style={{ width: 'auto', height: '19px' }} />
-              }
-              className=" input-second_dark"
-            />
-          </div>
-        </div>
-        <div className="footer__middle">
-          {isSmallerThanPC && <SocialsLinks />}
-          <div className="footer__apps">
-            <p className="footer__title-apps footer__title">
-              Доступ к ранним релизам в приложении
-            </p>
-            <div className="footer__links-apps">
-              <a
-                className="footer__app-link"
-                href="https://www.apple.com/app-store/"
-              >
+      <div className="footer__wrapper">
+        <div className="footer__container">
+          <div className="footer__top">
+            {!isSmallerThanMobile && (
+              <Link to="/" className="footer__logo">
                 <img
-                  className="footer__app-store-img"
-                  src={appStoreIcon}
-                  alt="App Store"
+                  className="footer__logo-img"
+                  src={logoIcon}
+                  alt="Логотип"
                 />
-              </a>
-              <a
-                className="footer__app-link"
-                href="https://play.google.com/store/apps"
-              >
-                <img
-                  className="footer__app-store-img"
-                  src={googlePlayIcon}
-                  alt="Google Play"
-                />
-              </a>
-            </div>
-            {!isSmallerThanPC && (
-              <div className="footer__qr">
-                <img className="footer__qr-img" src={qrIcon} alt="QR" />
-              </div>
+              </Link>
             )}
+            <div className="footer__subscribe">
+              <InputStyled
+                varint="second"
+                placeholder="Подпишись на рассылку и получи -10% скидку"
+                type="email"
+                adornmentContent={
+                  <EmailIcon style={{ width: 'auto', height: '16px' }} />
+                }
+                buttonContent={
+                  <EnterIcon style={{ width: 'auto', height: '19px' }} />
+                }
+                className=" input-second_dark"
+              />
+            </div>
           </div>
-          <Accordion
-            className="footer__spoilers"
-            closeOnOutsideClick
-            isSingleOpen
-            responsive={{ screenWidth: 991.98 }}
-            itemSettings={{
-              className: 'footer__spoiler',
-              summaryProps: {
-                className: 'footer__title footer__summary',
-              },
-              contentProps: {
-                className: 'footer__spoiler-content',
-              },
-            }}
-          >
-            <Accordion.Item
-              id="Контакты"
-              summaryNode="Контакты"
-              contentNode={
-                <ListLinks
-                  linksData={CONTACTS_DATA}
-                  listProps={{ className: 'footer__list-contacts' }}
-                  itemProps={{ className: 'footer__item-contact' }}
-                  renderToItem={({ icon, title, text }) => (
-                    <div className="footer__contact">
-                      <div className="footer__contact-icon">{icon}</div>
-                      <div className="footer__contact-title">{title}</div>
-                      <div className="footer__contact-text">{text}</div>
-                    </div>
-                  )}
-                />
-              }
-            />
-            {LINKS_DATA.map(({ title, links }) => (
+          <div className="footer__middle">
+            {isSmallerThanPC && <SocialsLinks />}
+            <div className="footer__apps">
+              <p className="footer__title-apps footer__title">
+                Доступ к ранним релизам в приложении
+              </p>
+              <div className="footer__links-apps">
+                <a
+                  className="footer__app-link"
+                  href="https://www.apple.com/app-store/"
+                >
+                  <img
+                    className="footer__app-store-img"
+                    src={appStoreIcon}
+                    alt="App Store"
+                  />
+                </a>
+                <a
+                  className="footer__app-link"
+                  href="https://play.google.com/store/apps"
+                >
+                  <img
+                    className="footer__app-store-img"
+                    src={googlePlayIcon}
+                    alt="Google Play"
+                  />
+                </a>
+              </div>
+              {!isSmallerThanPC && (
+                <div className="footer__qr">
+                  <img className="footer__qr-img" src={qrIcon} alt="QR" />
+                </div>
+              )}
+            </div>
+            <Accordion
+              className="footer__spoilers"
+              closeOnOutsideClick
+              isSingleOpen
+              responsive={{ screenWidth: 991.98 }}
+              itemSettings={{
+                className: 'footer__spoiler',
+                summaryProps: {
+                  className: 'footer__title footer__summary',
+                },
+                contentProps: {
+                  className: 'footer__spoiler-content',
+                },
+              }}
+            >
               <Accordion.Item
-                summaryNode={title}
-                key={title}
-                id={title}
+                id="Контакты"
+                summaryNode="Контакты"
                 contentNode={
                   <ListLinks
-                    linksData={links}
-                    linkAs="Link"
-                    listProps={{ className: 'footer__list-links' }}
-                    itemProps={{ className: 'footer__list-item' }}
-                    linkProps={{ className: 'footer__link' }}
+                    linksData={CONTACTS_DATA}
+                    listProps={{ className: 'footer__list-contacts' }}
+                    itemProps={{ className: 'footer__item-contact' }}
+                    renderToItem={({ icon, title, text }) => (
+                      <div className="footer__contact">
+                        <div className="footer__contact-icon">{icon}</div>
+                        <div className="footer__contact-title">{title}</div>
+                        <div className="footer__contact-text">{text}</div>
+                      </div>
+                    )}
                   />
                 }
               />
-            ))}
-          </Accordion>
-        </div>
-        <div className="footer__bottom">
-          {!isSmallerThanPC && <SocialsLinks />}
-          <p className="footer__copyright">© 2020. Все права защищены.</p>
+              {LINKS_DATA.map(({ title, links }) => (
+                <Accordion.Item
+                  summaryNode={title}
+                  key={title}
+                  id={title}
+                  contentNode={
+                    <ListLinks
+                      linksData={links}
+                      linkAs="Link"
+                      listProps={{ className: 'footer__list-links' }}
+                      itemProps={{ className: 'footer__list-item' }}
+                      linkProps={{ className: 'footer__link' }}
+                    />
+                  }
+                />
+              ))}
+            </Accordion>
+          </div>
+          <div className="footer__bottom">
+            {!isSmallerThanPC && <SocialsLinks />}
+            <p className="footer__copyright">© 2020. Все права защищены.</p>
+          </div>
         </div>
       </div>
     </footer>
