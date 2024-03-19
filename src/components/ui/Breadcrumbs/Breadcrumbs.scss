@@ -1,0 +1,18 @@
+@import '/src/styles/global-scss.scss';
+
+.breadcrumbs {
+  &__list {
+    display: flex;
+    align-items: center;
+  }
+  &__item {
+    &:not(:last-child) {
+      &::after {
+        content: '/';
+        margin: 0 rem(5);
+      }
+    }
+  }
+  &__link {
+  }
+}
