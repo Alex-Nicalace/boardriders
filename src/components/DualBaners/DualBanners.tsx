@@ -1,6 +1,5 @@
 import ListLinks from '../../component-library/ListLinks';
 import Banner from './Banner';
-import { isTBannerData } from './Banner/isTBannerData';
 import './DualBanners.scss';
 
 const PATH = '/src/assets/img/dual-banners/';
@@ -26,11 +25,9 @@ function DualBanners(): JSX.Element {
       <div className="dual-baners__container">
         <ListLinks
           linksData={BANNERS_DATA}
-          // bemBlockName="dual-baners"
           listProps={{ className: 'dual-baners__list' }}
           itemProps={{ className: 'dual-baners__item' }}
           renderToItem={(value) => {
-            if (!isTBannerData(value)) return;
             const { img, to, title } = value;
             return <Banner img={`${PATH}${img}`} title={title} to={to} />;
           }}

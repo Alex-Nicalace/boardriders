@@ -28,7 +28,6 @@ function MainMenu(): JSX.Element {
             }}
             onMouseLeaveItem={() => setItemMenuHover('')}
             renderToItem={(value) => {
-              if (!isIMenuData(value)) return;
               if (itemMenuHover !== value.title) return;
               return (
                 <>

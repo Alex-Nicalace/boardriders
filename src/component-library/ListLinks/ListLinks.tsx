@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { AnchorHTMLAttributes, HTMLAttributes } from 'react';
 import { Link, LinkProps, NavLink, NavLinkProps } from 'react-router-dom';
 
 export interface ILink {
@@ -22,19 +22,16 @@ type TListLinksProps<T> = (
     ) & {
       linksData: T extends ILink ? T[] : never;
     })
-  | ({
+  | {
       linkAs?: undefined;
       linkProps?: never;
-    } & {
-      linksData: T[];
-    })
+      linksData: T extends Pick<ILink, 'title'> ? T[] : never;
+    }
 ) & {
   listProps?: HTMLAttributes<HTMLUListElement>;
   itemProps?: HTMLAttributes<HTMLLIElement>;
   getClassNameItem?: (value: unknown) => string;
   getClassNameLink?: (value: unknown) => string;
-  // linksData: T extends ILink ? T[] : never;
-  // linksData: TListLinksProps.linksData<T>;
   bemBlockName?: string;
   renderToItem?: (value: T) => React.ReactNode;
   onMouseEnterItem?: (
@@ -57,7 +54,6 @@ type TListLinksProps<T> = (
 
 function ListLinks<T>(props: TListLinksProps<T>): JSX.Element {
   const {
-    linksData,
     listProps,
     itemProps,
     getClassNameItem = () => '',
@@ -69,36 +65,30 @@ function ListLinks<T>(props: TListLinksProps<T>): JSX.Element {
     onMouseEnterItemInner = () => {},
     onMouseLeaveItemInner = () => {},
   } = props;
+  const LinkElement =
+    props.linkAs === 'NavLink'
+      ? NavLink
+      : props.linkAs === 'Link'
+      ? Link
+      : LinkNative;
+
   return (
     <ul
       {...listProps}
       className={`${listProps?.className || ''} ${bemBlockName || ''}`}
     >
-      {linksData.map((linkData) => (
-        <li
-          key={linkData.title}
-          {...itemProps}
-          onMouseEnter={(e) => onMouseEnterItem(linkData, e)}
-          onMouseLeave={(e) => onMouseLeaveItem(linkData, e)}
-          className={`${itemProps?.className || ''} ${
-            bemBlockName ? bemBlockName + '__item' : ''
-          } ${getClassNameItem(linkData)}`}
-        >
-          {props.linkAs === 'a' && (
-            <a
-              {...props.linkProps}
-              onMouseEnter={(e) => onMouseEnterItemInner(linkData, e)}
-              onMouseLeave={(e) => onMouseLeaveItemInner(linkData, e)}
-              href={linkData.to}
-              className={`${props.linkProps?.className || ''} ${
-                bemBlockName ? bemBlockName + '__link' : ''
-              } ${getClassNameLink(linkData)}`}
-            >
-              {linkData.title}
-            </a>
-          )}
-          {props.linkAs === 'Link' && (
-            <Link
+      {props.linkAs &&
+        props.linksData.map((linkData) => (
+          <li
+            key={linkData.title}
+            {...itemProps}
+            onMouseEnter={(e) => onMouseEnterItem(linkData, e)}
+            onMouseLeave={(e) => onMouseLeaveItem(linkData, e)}
+            className={`${itemProps?.className || ''} ${
+              bemBlockName ? bemBlockName + '__item' : ''
+            } ${getClassNameItem(linkData)}`}
+          >
+            <LinkElement
               {...props.linkProps}
               onMouseEnter={(e) => onMouseEnterItemInner(linkData, e)}
               onMouseLeave={(e) => onMouseLeaveItemInner(linkData, e)}
@@ -108,25 +98,36 @@ function ListLinks<T>(props: TListLinksProps<T>): JSX.Element {
               } ${getClassNameLink(linkData)}`}
             >
               {linkData.title}
-            </Link>
-          )}
-          {props.linkAs === 'NavLink' && (
-            <NavLink
-              {...props.linkProps}
-              onMouseEnter={(e) => onMouseEnterItemInner(linkData, e)}
-              onMouseLeave={(e) => onMouseLeaveItemInner(linkData, e)}
-              to={linkData.to}
-              className={`${props.linkProps?.className || ''} ${
-                bemBlockName ? bemBlockName + '__link' : ''
-              } ${getClassNameLink(linkData)}`}
-            >
-              {linkData.title}
-            </NavLink>
-          )}
-          {renderToItem(linkData)}
-        </li>
-      ))}
+            </LinkElement>
+            {renderToItem(linkData)}
+          </li>
+        ))}
+      {!props.linkAs &&
+        props.linksData.map((linkData) => (
+          <li
+            key={linkData.title}
+            {...itemProps}
+            onMouseEnter={(e) => onMouseEnterItem(linkData, e)}
+            onMouseLeave={(e) => onMouseLeaveItem(linkData, e)}
+            className={`${itemProps?.className || ''} ${
+              bemBlockName ? bemBlockName + '__item' : ''
+            } ${getClassNameItem(linkData)}`}
+          >
+            {renderToItem(linkData)}
+          </li>
+        ))}
     </ul>
+  );
+}
+
+function LinkNative({
+  children,
+  ...props
+}: Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & { to?: string }) {
+  return (
+    <a {...props} href={props.to}>
+      {children}
+    </a>
   );
 }
 

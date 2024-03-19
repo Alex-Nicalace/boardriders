@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './BurgerMenu.scss';
-import { MENU_DATA, isIMenuData } from '../../../data/menuData';
+import { MENU_DATA } from '../../../data/menuData';
 import { useBurgerContext } from '../../../Context/useBurgerContext';
 import ListLinks from '../../../component-library/ListLinks';
 import Submenu from '../MainMenu/Submenu';
@@ -32,7 +32,6 @@ function BurgerMenu(): JSX.Element {
               listProps={{ className: 'burger-menu__menu' }}
               itemProps={{ className: 'burger-menu__item' }}
               renderToItem={(value) => {
-                if (!isIMenuData(value)) return;
                 return (
                   <>
                     {value.submenu ? (

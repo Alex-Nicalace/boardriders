@@ -121,15 +121,22 @@ const LINKS_DATA = [
   },
 ];
 
-const CONTACTS_DATA = [
+const CONTACTS_DATA: {
+  icon: JSX.Element;
+  title: string;
+  header: React.ReactNode;
+  text: React.ReactNode;
+}[] = [
   {
     icon: <TelephoneIcon style={{ width: 'auto', height: '23px' }} />,
-    title: <a href="tel:88005117468">8 (800) 511-74-68</a>,
+    title: 'Телефон',
+    header: <a href="tel:88005117468">8 (800) 511-74-68</a>,
     text: 'Бесплатная горячая линия Ежедневно с 9 до 21',
   },
   {
     icon: <EmailIcon style={{ width: 'auto', height: '20px' }} />,
-    title: 'Контактный Email',
+    title: 'Email',
+    header: 'Контактный Email',
     text: <a href="mailto:info@brd.ru">info@brd.ru</a>,
   },
 ];
@@ -226,10 +233,10 @@ function Footer(): JSX.Element {
                     linksData={CONTACTS_DATA}
                     listProps={{ className: 'footer__list-contacts' }}
                     itemProps={{ className: 'footer__item-contact' }}
-                    renderToItem={({ icon, title, text }) => (
+                    renderToItem={({ icon, header, text }) => (
                       <div className="footer__contact">
                         <div className="footer__contact-icon">{icon}</div>
-                        <div className="footer__contact-title">{title}</div>
+                        <div className="footer__contact-title">{header}</div>
                         <div className="footer__contact-text">{text}</div>
                       </div>
                     )}
