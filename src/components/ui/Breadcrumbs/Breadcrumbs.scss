@@ -13,6 +13,16 @@
       }
     }
   }
-  &__link {
+  &__link,
+  &__item {
+    font-weight: 400;
+    font-size: rem(12);
+    letter-spacing: -0.02em;
+  }
+
+  &_white {
+    .breadcrumbs__item {
+      color: var(--light-gray);
+    }
   }
 }
