@@ -1,22 +1,21 @@
 import ListLinks from '../../component-library/ListLinks';
-import Banner from './Banner';
+import Banner from '../ui/Banner';
 import './DualBanners.scss';
+import img1 from '../../assets/img/dual-banners/01.jpg';
+import img2 from '../../assets/img/dual-banners/02.jpg';
 
-const PATH = '/src/assets/img/dual-banners/';
 const BANNERS_DATA = [
   {
-    img: '01.jpg',
+    img: img1,
     to: '#',
     title: 'НАЗВАНИЕ АКЦИИ №1',
   },
   {
-    img: '02.jpg',
+    img: img2,
     to: '#',
     title: 'НАЗВАНИЕ АКЦИИ №2',
   },
 ];
-
-export type TBannerData = (typeof BANNERS_DATA)[number];
 
 // interface IDualBanersProps {}
 function DualBanners(): JSX.Element {
@@ -29,7 +28,7 @@ function DualBanners(): JSX.Element {
           itemProps={{ className: 'dual-baners__item' }}
           renderToItem={(value) => {
             const { img, to, title } = value;
-            return <Banner img={`${PATH}${img}`} title={title} to={to} />;
+            return <Banner img={img} title={title} to={to} />;
           }}
         />
       </div>

@@ -1,0 +1,13 @@
+@import '/src/styles/global-scss.scss';
+
+.promo-block {
+  @include adaptiveValue('padding-top', 25, 15);
+  @include adaptiveValue('padding-bottom', 50, 15);
+  background-color: var(--black);
+  // .promo-block__container
+  &__container {
+  }
+  &__breadcrumbs {
+    @include adaptiveValue('margin-bottom', 45, 20);
+  }
+}

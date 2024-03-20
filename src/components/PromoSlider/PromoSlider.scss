@@ -1,0 +1,17 @@
+@import '/src/styles/global-scss.scss';
+
+.promo-slider {
+  @include mobile-d {
+    overflow: visible;
+    // margin: 0 rem(-15);
+  }
+  // .promo-slider__wrapper
+  &__wrapper {
+  }
+  // .promo-slider__slide
+  &__slide {
+    @include mobile-d {
+      flex: 0 0 percent(374, 384);
+    }
+  }
+}
