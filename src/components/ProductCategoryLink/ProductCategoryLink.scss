@@ -1,0 +1,27 @@
+@import '/src/styles/global-scss.scss';
+
+.product-category-link {
+  --width: #{rem(124)};
+  display: inline-flex;
+  width: var(--width);
+  flex-direction: column;
+  gap: rem(10);
+  // .product-category-link__img
+  &__img {
+    padding: rem(10);
+    flex: 0 0 var(--width);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--light-gray);
+    img {
+      object-fit: cover;
+    }
+  }
+  // .product-category-link__title
+  &__title {
+    align-self: center;
+    @extend %body-2-1;
+  }
+}
