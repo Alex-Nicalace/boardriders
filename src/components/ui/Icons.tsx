@@ -17,6 +17,8 @@ import Twitch from './../../assets/icons/socials/twitch.svg?react';
 import Twitter from './../../assets/icons/socials/twitter.svg?react';
 import Youtube from './../../assets/icons/socials/youtube.svg?react';
 import TelephoneIcon from './../../assets/icons/telephone.svg?react';
+import ArrowLeftThinIcon from './../../assets/icons/arrow-left-thin.svg?react';
+import ArrowRightThinIcon from './../../assets/icons/arrow-right-thin.svg?react';
 
 function TrackIcon(
   params: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -53,4 +55,6 @@ export {
   Twitter,
   Youtube,
   TelephoneIcon,
+  ArrowLeftThinIcon,
+  ArrowRightThinIcon,
 };

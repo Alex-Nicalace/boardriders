@@ -3,6 +3,9 @@
 .promo-block {
   @include adaptiveValue('padding-top', 25, 15);
   @include adaptiveValue('padding-bottom', 50, 15);
+  &:not(:last-child) {
+    @include adaptiveValue('margin-bottom', 50, 35);
+  }
   background-color: var(--black);
   // .promo-block__container
   &__container {

@@ -1,0 +1,35 @@
+@import '/src/styles/global-scss.scss';
+
+.product-categories-slider {
+  &:not(:last-child) {
+    margin-bottom: rem(50);
+  }
+  // .product-categories-slider__container
+  &__container {
+    position: relative;
+  }
+  // .product-categories-slider__slider
+  &__slider {
+  }
+  // .product-categories-slider__slide
+  &__slide {
+    // width: auto;
+  }
+  // .product-categories-slider__slider-btn
+  &__slider-btn {
+    position: absolute;
+    top: percent(45, 158);
+    z-index: 1;
+    &[disabled] {
+      display: none;
+    }
+    // .product-categories-slider__slider-btn_left
+    &_left {
+      left: rem(-36);
+    }
+    // .product-categories-slider__slider-btn_right
+    &_right {
+      right: rem(-36);
+    }
+  }
+}
