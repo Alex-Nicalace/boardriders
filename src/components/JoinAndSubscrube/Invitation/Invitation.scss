@@ -18,8 +18,6 @@
   // .invitation__header
   &__header {
     order: 2;
-    @extend %h1;
-    @include adaptiveValue('font-size', 32, 21);
     &:not(:last-child) {
       margin-bottom: em(15, 32);
     }

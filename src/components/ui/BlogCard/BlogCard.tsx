@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './BlogCard.scss';
 import Picture, { IPictureProps } from '../../Picture';
+import Title from '../Title';
 
 interface IBlogCardProps {
   title: string;
@@ -19,7 +20,14 @@ function BlogCard({
   return (
     <article className="blog-card">
       <div className="blog-card__wrap">
-        <h3 className="blog-card__title">{title}</h3>
+        <Title
+          className="blog-card__title"
+          as="h2"
+          kind="h1-32-h2-21"
+          color="white"
+        >
+          {title}
+        </Title>
         <span className="blog-card__label">Блоги</span>
         <div className="blog-card__all-blogs">
           <Link to={allBlogsPath} className="blog-card__link ">

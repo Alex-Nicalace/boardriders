@@ -1,0 +1,28 @@
+@import '/src/styles/global-scss.scss';
+
+.header {
+  color: var(--black);
+  //header_h1-32-h2-21
+  &_h1-32-h2-21 {
+    @include adaptiveValue('font-size', 32, 21);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: em(-0.02, 32);
+
+    @include mobile-d {
+      line-height: 1.43;
+    }
+  }
+
+  &_white {
+    color: var(--white);
+  }
+}
+
+.title-sup {
+  // margin-left: em(15, 16);
+  @include adaptiveValue('margin-left', 15, 5);
+  // font-size: em(16, 32);
+  @include adaptiveValue('font-size', 16, 14);
+  color: var(--gray--1);
+}

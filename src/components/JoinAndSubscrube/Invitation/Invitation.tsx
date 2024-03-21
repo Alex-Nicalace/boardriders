@@ -1,3 +1,4 @@
+import Title from '../../ui/Title';
 import './Invitation.scss';
 
 // import Button from '../../ui/Button';
@@ -20,7 +21,14 @@ function Invitation({
 }: TInvitationProps): JSX.Element {
   return (
     <article className={`invitation ${className}`}>
-      <h2 className="invitation__header">{header}</h2>
+      <Title
+        className="invitation__header"
+        as="h2"
+        kind="h1-32-h2-21"
+        color="white"
+      >
+        {header}
+      </Title>
       {Boolean(iconElement) && (
         <div className="invitation__img">{iconElement}</div>
       )}

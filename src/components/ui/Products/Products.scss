@@ -14,10 +14,6 @@
   }
   // .products__title
   &__title {
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: em(-0.64, 32);
-    @include adaptiveValue('font-size', 32, 21);
     text-align: center;
 
     &:not(:last-child) {

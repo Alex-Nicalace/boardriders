@@ -7,6 +7,7 @@ import WareCard from '../WareCard';
 import Button from '../Button';
 import { ArrowLeftIcon, ArrowRightIcon } from '../Icons';
 import useMatchMedia from '../../../hooks/useMatchMedia';
+import Title from '../Title';
 
 interface IWareData {
   wareId: string;
@@ -37,7 +38,9 @@ function Products({
   return (
     <section className="products">
       <div className="products__container">
-        <h2 className="products__title">{title}</h2>
+        <Title className="products__title" kind="h1-32-h2-21" as="h2">
+          {title}
+        </Title>
         <div className="products__outer-wrap-slider">
           <Swiper
             key={+isSmall}
@@ -90,6 +93,7 @@ function Products({
               </button>
             </>
           )}
+          T
         </div>
         <div className="products__button-more">
           <Button to={moreTo}>Показать больше</Button>

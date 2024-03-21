@@ -34,11 +34,8 @@
   }
   // .blog-card__title
   &__title {
-    max-width: rem(410);
+    max-width: rem(420);
     grid-area: t;
-    @extend %h1;
-    @include adaptiveValue('font-size', 32, 21);
-    text-transform: none;
     &:not(:last-child) {
       // @include adaptiveValue('margin-bottom', 40, 10);
       margin-bottom: em(40, 32);
