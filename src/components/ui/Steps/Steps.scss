@@ -1,0 +1,16 @@
+@import '/src/styles/global-scss.scss';
+
+.steps {
+  margin: 0 percent(12, 1360);
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: rem(5);
+
+  // .steps__step
+  &__step {
+    min-width: rem(302);
+    // flex: 0 1 25%;
+    flex: 0 1 percent(357, 1336);
+    margin: 0 percent(-12, 1360);
+  }
+}
