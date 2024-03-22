@@ -1,4 +1,5 @@
 import ProductCategoriesSlider from '../components/ProductCategoriesSlider';
+import ProductCategoryFilterCards from '../components/ProductCategoryFilterCards';
 import PromoSlider from '../components/PromoSlider';
 import useMatchMedia from '../hooks/useMatchMedia';
 
@@ -11,6 +12,12 @@ function Catalog(): JSX.Element {
     <>
       <PromoSlider />
       {isScreenWidthGreaterThan1500 && <ProductCategoriesSlider />}
+      <ProductCategoryFilterCards />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </>
   );
 }
