@@ -19,6 +19,9 @@ import Youtube from './../../assets/icons/socials/youtube.svg?react';
 import TelephoneIcon from './../../assets/icons/telephone.svg?react';
 import ArrowLeftThinIcon from './../../assets/icons/arrow-left-thin.svg?react';
 import ArrowRightThinIcon from './../../assets/icons/arrow-right-thin.svg?react';
+import AnthropometricIcon from './../../assets/icons/anthropometric.svg?react';
+import DynamicsIcon from './../../assets/icons/dynamics.svg?react';
+import MountainIcon from './../../assets/icons/mountain.svg?react';
 
 function TrackIcon(
   params: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -57,4 +60,7 @@ export {
   TelephoneIcon,
   ArrowLeftThinIcon,
   ArrowRightThinIcon,
+  AnthropometricIcon,
+  DynamicsIcon,
+  MountainIcon,
 };
