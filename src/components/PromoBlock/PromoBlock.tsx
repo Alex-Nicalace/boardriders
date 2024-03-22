@@ -19,17 +19,19 @@ const BREADCRUMBS: TBreadcrumbsData = [
 type TPromoBlockProps = {
   children: React.ReactNode;
   backgroundImage?: string;
+  className?: string;
 };
 function PromoBlock({
   children,
   backgroundImage,
+  className = '',
 }: TPromoBlockProps): JSX.Element {
   const style: React.CSSProperties = {
     ...(backgroundImage && { backgroundImage, backgroundSize: 'cover' }),
   };
 
   return (
-    <div className="promo-block" style={style}>
+    <div className={`promo-block ${className}`} style={style}>
       <div className="promo-block__container">
         <Breadcrumbs
           className="promo-block__breadcrumbs"

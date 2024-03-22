@@ -1,9 +1,6 @@
 @import '/src/styles/global-scss.scss';
 
 .product-categories-slider {
-  &:not(:last-child) {
-    margin-bottom: rem(50);
-  }
   // .product-categories-slider__container
   &__container {
     position: relative;

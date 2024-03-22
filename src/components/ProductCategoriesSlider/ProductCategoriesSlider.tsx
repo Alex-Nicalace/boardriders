@@ -2,7 +2,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
 import ProductCategoryLink from '../ProductCategoryLink';
-import './ProductCategoriesSlider.scss';
 import { ArrowLeftThinIcon, ArrowRightThinIcon } from '../ui/Icons';
 
 import snowboardImg from '../../assets/img/product-categories-slider/snowboard.png';
@@ -14,6 +13,8 @@ import pantsImg from '../../assets/img/product-categories-slider/pants.png';
 import helmetsImg from '../../assets/img/product-categories-slider/helmets.png';
 import glassesImg from '../../assets/img/product-categories-slider/glasses.png';
 import glovesImg from '../../assets/img/product-categories-slider/gloves.png';
+
+import './ProductCategoriesSlider.scss';
 
 const SLIDE_DATA = [
   {
@@ -84,10 +85,12 @@ const SLIDE_DATA = [
   },
 ];
 
-// type TProductCategoriesSliderProps = {};
-function ProductCategoriesSlider(/*{}: TProductCategoriesSliderProps*/): JSX.Element {
+type TProductCategoriesSliderProps = { className?: string };
+function ProductCategoriesSlider({
+  className: cllassName = '',
+}: TProductCategoriesSliderProps): JSX.Element {
   return (
-    <div className="product-categories-slider">
+    <div className={`product-categories-slider ${cllassName}`}>
       <div className="product-categories-slider__container">
         <Swiper
           className="product-categories-slider__slider"

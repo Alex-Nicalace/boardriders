@@ -40,10 +40,10 @@ const BANNERS_DATA = [
   },
 ];
 
-// type TPromoSliderProps = {};
-function PromoSlider(): JSX.Element {
+type TPromoSliderProps = { className?: string };
+function PromoSlider({ className = '' }: TPromoSliderProps): JSX.Element {
   return (
-    <PromoBlock>
+    <PromoBlock className={className}>
       <Swiper
         className="promo-slider"
         wrapperClass="promo-slider__wrapper"

@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import AppLayout from './components/AppLayout';
-import Catalog from './pages/Catalog';
+import CatalogPage from './pages/CatalogPage';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
 
           {
             path: '/catalog',
-            element: <Catalog />,
+            element: <CatalogPage />,
           },
 
           {
