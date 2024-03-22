@@ -1,0 +1,65 @@
+@import '/src/styles/global-scss.scss';
+
+.step {
+  // margin-right: rem(-20);
+  position: relative;
+  display: inline-block;
+  // width: rem(374);
+  height: rem(89);
+  --step-polygon: polygon(
+    0 0,
+    #{percent(343, 374)} 0,
+    100% 50%,
+    #{percent(343, 374)} 100%,
+    0 100%,
+    #{percent(31, 374)} 50%,
+    0 0
+  );
+
+  // .step__wrap
+  &__wrap {
+    height: inherit;
+    background-color: var(--white);
+    clip-path: var(--step-polygon);
+  }
+
+  &__content {
+    margin: 0 percent(31, 374);
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: rem(-1);
+    left: rem(-1);
+    right: rem(-1);
+    bottom: rem(-1);
+    clip-path: var(--step-polygon);
+    background-color: var(--gray);
+    // z-index: -1;
+  }
+
+  &:first-child {
+    --step-polygon: polygon(
+      0 0,
+      #{percent(343, 374)} 0,
+      100% 50%,
+      #{percent(343, 374)} 100%,
+      0 100%,
+      0 0
+    );
+  }
+  &:last-child {
+    --step-polygon: polygon(
+      0 0,
+      100% 0,
+      100% 100%,
+      #{percent(343, 374)} 100%,
+      0 100%,
+      #{percent(31, 374)} 50%,
+      0 0
+    );
+  }
+}
