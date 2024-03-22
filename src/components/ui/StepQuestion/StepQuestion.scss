@@ -1,0 +1,52 @@
+@import '/src/styles/global-scss.scss';
+
+.step-question {
+  height: 100%;
+  display: grid;
+  grid-template:
+    'n q i'
+    'n a i' / auto 1fr auto;
+  align-content: center;
+  column-gap: rem(15);
+  @extend %subtitle-3;
+  // .step-question__question
+  &__question {
+    grid-area: q;
+  }
+  // .step-question__num-step
+  &__num-step {
+    grid-area: n;
+
+    font-weight: 500;
+    font-size: rem(48);
+    letter-spacing: -0.02em;
+    line-height: normal;
+  }
+  // .step-question__answer
+  &__answer {
+    grid-area: a;
+    display: flex;
+    gap: rem(12);
+
+    font-weight: 500;
+    font-size: rem(12);
+    line-height: 1.67;
+    letter-spacing: -0.02em;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+  }
+  // .step-question__icon
+  &__icon {
+    grid-area: i;
+    align-self: center;
+    svg {
+      max-width: rem(50);
+      fill: var(--gray);
+    }
+  }
+
+  &_intro {
+    grid-template: none;
+    column-gap: normal;
+  }
+}
