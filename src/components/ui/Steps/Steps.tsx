@@ -29,10 +29,10 @@ const STEPS = [
     iconElement: <DynamicsIcon />,
   },
 ];
-// type TStepsProps = { }
-function Steps(/*{ }: TStepsProps*/): JSX.Element {
+type TStepsProps = { className?: string };
+function Steps({ className = '' }: TStepsProps): JSX.Element {
   return (
-    <div className="steps">
+    <div className={`steps ${className}`}>
       <Step className="steps__step">
         <StepQuestion intro="Подбери борд" />
       </Step>
