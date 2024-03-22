@@ -2,12 +2,18 @@ import { Link } from 'react-router-dom';
 import Picture, { IPictureProps } from '../Picture';
 import './Promotion.scss';
 
-interface IPromotionProps extends IPictureProps {
+type TPromotionProps = IPictureProps & {
   to: string;
-}
-function Promotion({ sources, img, to }: IPromotionProps): JSX.Element {
+  className?: string;
+};
+function Promotion({
+  sources,
+  img,
+  to,
+  className = '',
+}: TPromotionProps): JSX.Element {
   return (
-    <section className="promotion">
+    <section className={`${className} promotion`}>
       <div className="promotion__container">
         <h2 className="promotion__title">Название Акции</h2>
         <p className="promotion__descr">

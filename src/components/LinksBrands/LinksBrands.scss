@@ -1,8 +1,6 @@
 @import '/src/styles/global-scss.scss';
 
 .links-brands {
-  @include adaptiveValue('padding-top', 60, 25);
-  @include adaptiveValue('padding-bottom', 60, 25);
   // .links-brands__container
   &__container {
   }

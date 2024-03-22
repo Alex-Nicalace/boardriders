@@ -63,9 +63,16 @@ const PRODUCTS_DATA = [
   },
 ];
 
-// interface INewProductsProps {}
-function NewProducts(): JSX.Element {
-  return <Products title="Новинки" productsData={PRODUCTS_DATA} moreTo="#" />;
+type TNewProductsProps = { className?: string };
+function NewProducts({ className = '' }: TNewProductsProps): JSX.Element {
+  return (
+    <Products
+      title="Новинки"
+      productsData={PRODUCTS_DATA}
+      moreTo="#"
+      className={className}
+    />
+  );
 }
 
 export default NewProducts;

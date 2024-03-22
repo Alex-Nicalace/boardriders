@@ -10,11 +10,13 @@ import useMatchMedia from '../../hooks/useMatchMedia';
 
 const MEDIAQUERY = ['(max-width: 479px)'];
 
-// type TJoinAndSubscrubeProps = {};
-function JoinAndSubscrube(): JSX.Element {
+type TJoinAndSubscrubeProps = { className?: string };
+function JoinAndSubscrube({
+  className = '',
+}: TJoinAndSubscrubeProps): JSX.Element {
   const [isSmall] = useMatchMedia(MEDIAQUERY);
   return (
-    <div className="join-and-subscrube">
+    <div className={`${className} join-and-subscrube`}>
       <div className="join-and-subscrube__container">
         <Invitation
           className="join-and-subscrube__join"

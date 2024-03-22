@@ -17,10 +17,10 @@ const BANNERS_DATA = [
   },
 ];
 
-// interface IDualBanersProps {}
-function DualBanners(): JSX.Element {
+type TDualBanersProps = { className?: string };
+function DualBanners({ className = '' }: TDualBanersProps): JSX.Element {
   return (
-    <div className="dual-baners">
+    <div className={`${className} dual-baners`}>
       <div className="dual-baners__container">
         <ListLinks
           linksData={BANNERS_DATA}

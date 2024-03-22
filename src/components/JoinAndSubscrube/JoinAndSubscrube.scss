@@ -1,8 +1,6 @@
 @import '/src/styles/global-scss.scss';
 
 .join-and-subscrube {
-  @include adaptiveValue('padding-top', 50, 60);
-  @include adaptiveValue('padding-bottom', 85, 70);
   // .join-and-subscrube__container
   &__container {
     display: flex;

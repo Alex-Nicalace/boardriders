@@ -65,10 +65,13 @@ const PRODUCTS_DATA = [
   },
 ];
 
-// interface INewProductsProps {}
-function PopularCollection(): JSX.Element {
+type TNewProductsProps = {
+  className?: string;
+};
+function PopularCollection({ className = '' }: TNewProductsProps): JSX.Element {
   return (
     <Products
+      className={`${className} popular-collection`}
       title="DC Shoes популярное в коллекции"
       productsData={PRODUCTS_DATA}
       moreTo="#"

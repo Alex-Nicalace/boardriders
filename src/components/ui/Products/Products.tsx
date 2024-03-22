@@ -23,20 +23,22 @@ interface IWareData {
 
 const MEDIAQUERY = ['(max-width: 573px)'];
 
-interface IProductsProps {
+type TProductsProps = {
   title: string;
   productsData: IWareData[];
   moreTo?: string;
-}
+  className?: string;
+};
 function Products({
   title,
   productsData,
   moreTo,
-}: IProductsProps): JSX.Element {
+  className = '',
+}: TProductsProps): JSX.Element {
   const [isSmall] = useMatchMedia(MEDIAQUERY);
 
   return (
-    <section className="products">
+    <section className={`${className} products`}>
       <div className="products__container">
         <Title className="products__title" kind="h1-32-h2-21" as="h2">
           {title}

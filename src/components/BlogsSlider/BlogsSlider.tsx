@@ -102,11 +102,11 @@ const DATA_SLIDER = [
     allBlogsPath: '#',
   },
 ];
-// interface IBlogsSliderProps {}
-function BlogsSlider(): JSX.Element {
+type TBlogsSliderProps = { className?: string };
+function BlogsSlider({ className = '' }: TBlogsSliderProps): JSX.Element {
   return (
     <Swiper
-      className="blogs-slider"
+      className={`${className} blogs-slider`}
       wrapperClass="blogs-slider__wrapper-slider"
       modules={[Navigation]}
       // spaceBetween={50}

@@ -8,9 +8,7 @@ function AppLayout(): JSX.Element {
   return (
     <BurgerProvider>
       <Header />
-      <main className="page">
-        <Outlet />
-      </main>
+      <Outlet />
       <Footer />
     </BurgerProvider>
   );

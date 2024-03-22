@@ -1,0 +1,25 @@
+@import '/src/styles/global-scss.scss';
+
+.main-page {
+  &__main-slider {
+    margin-top: rem(25);
+  }
+  &__links-brands {
+    @include adaptiveValue('padding-top', 60, 25);
+    @include adaptiveValue('padding-bottom', 60, 25);
+  }
+  &__dual-baners {
+  }
+  &__products {
+    @include adaptiveValue('padding-top', 100, 60);
+    @include adaptiveValue('padding-bottom', 100, 60);
+  }
+  &__promotion {
+  }
+  &__blogs-slider {
+  }
+  &__join-and-subscrube {
+    @include adaptiveValue('padding-top', 50, 60);
+    @include adaptiveValue('padding-bottom', 85, 70);
+  }
+}
