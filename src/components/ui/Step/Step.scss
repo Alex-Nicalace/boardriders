@@ -62,4 +62,10 @@
       0 0
     );
   }
+
+  &_filled {
+    .step__wrap {
+      background-color: var(--light-gray);
+    }
+  }
 }
