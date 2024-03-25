@@ -62,27 +62,6 @@ const SLIDE_DATA = [
     title: 'Перчатки',
     to: '#',
   },
-  // -------------------
-  {
-    img: pantsImg,
-    title: 'Штаны',
-    to: '#',
-  },
-  {
-    img: helmetsImg,
-    title: 'Шлемы',
-    to: '#',
-  },
-  {
-    img: glassesImg,
-    title: 'Очки',
-    to: '#',
-  },
-  {
-    img: glovesImg,
-    title: 'Перчатки',
-    to: '#',
-  },
 ];
 
 type TProductCategoriesSliderProps = { className?: string };
@@ -104,7 +83,7 @@ function ProductCategoriesSlider({
           }}
         >
           {SLIDE_DATA.map(({ img, title, to }) => (
-            <SwiperSlide className="product-categories-slider__slide">
+            <SwiperSlide className="product-categories-slider__slide" key={img}>
               <ProductCategoryLink img={img} title={title} to={to} />
             </SwiperSlide>
           ))}
