@@ -32,7 +32,7 @@ const DATA_SLIDER = [
         },
         {
           media: '(max-width: 767px)',
-          srcSet: '/src/assets/img/blogs-slider/01.jpg',
+          srcSet: '/src/assets/img/blogs-slider/01-small.jpg',
         },
       ],
       img: {
@@ -62,7 +62,7 @@ const DATA_SLIDER = [
         },
         {
           media: '(max-width: 767px)',
-          srcSet: '/src/assets/img/blogs-slider/02.jpg',
+          srcSet: '/src/assets/img/blogs-slider/02-small.jpg',
         },
       ],
       img: {
@@ -89,7 +89,7 @@ const DATA_SLIDER = [
         },
         {
           media: '(max-width: 767px)',
-          srcSet: '/src/assets/img/blogs-slider/03.jpg',
+          srcSet: '/src/assets/img/blogs-slider/03-small.jpg',
         },
       ],
       img: {
