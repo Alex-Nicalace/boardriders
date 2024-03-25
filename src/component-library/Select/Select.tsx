@@ -228,6 +228,7 @@ function Select(props: TSelectProps): JSX.Element {
             value={selected}
             name={name}
             id={id}
+            readOnly
           />
         </div>
         {isOpen && (
