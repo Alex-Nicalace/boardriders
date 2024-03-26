@@ -4,7 +4,6 @@
   position: absolute;
   background-color: var(--white);
   border: rem(1) solid var(--gray);
-  border-top: none;
   opacity: 0;
   visibility: hidden;
   max-height: 0;
@@ -37,7 +36,7 @@
 
   &__item {
     cursor: pointer;
-    transition: all 0.3s ease 0s;
+    transition: color 0.3s ease 0s;
     &:hover {
       color: var(--dark-gray);
     }

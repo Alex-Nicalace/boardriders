@@ -40,6 +40,7 @@ function ListOptions({ children, className = '' }: ListOptionsProps) {
       listEl.style.top = isListOptionsBelowViewport
         ? triggerRect.bottom - heightListOptions - triggerRect.height / 2 + 'px'
         : triggerRect.bottom + 'px';
+      listEl.style.minWidth = triggerRect.width + 'px'; // подстраиваем ширину списка по ширине кнопки
     } else {
       listEl.style.position = 'absolute';
       listEl.style[horizontalPosition] = '0';

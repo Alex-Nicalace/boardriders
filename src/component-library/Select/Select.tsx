@@ -48,24 +48,11 @@ type TCommonSelectProps = {
   };
   iconElement: JSX.Element;
   isLockScroll?: boolean;
-  placreholder?: string;
+  placreholder?: React.ReactNode;
   isSearchable?: boolean;
+  tabIndex?: number;
 };
 
-// type TSelectProps = {
-//   children: ReactElement<OptionProps>[] | ReactElement<OptionProps>;
-//   value?: string;
-//   initValue?: string;
-//   onChange?: (value: string) => void;
-//   name?: string;
-//   id?: string;
-//   className?: string;
-//   listOptions?: {
-//     className?: string;
-//   };
-//   iconElement: JSX.Element;
-//   isLockScroll?: boolean;
-// };
 type TSelectProps = (
   | TSingleSelectProps
   | TMultiSelectProps
@@ -78,7 +65,7 @@ function Select(props: TSelectProps): JSX.Element {
     children,
     name,
     id,
-    className,
+    className = '',
     iconElement,
     isLockScroll = true,
     listOptions = {},
@@ -86,6 +73,7 @@ function Select(props: TSelectProps): JSX.Element {
     iconItemRemove = '✕',
     isCloseDropdownWhenClicked = false,
     isSearchable = false,
+    tabIndex = 0,
   } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -95,6 +83,7 @@ function Select(props: TSelectProps): JSX.Element {
   const [triggerEl, setTriggerEl] = useState<Element | null>(null);
 
   const selected = props.value ?? valueInner;
+  const isEmpty = !selected || selected.length === 0;
 
   function setSelected(value: string) {
     if (props.isMulti) {
@@ -131,7 +120,7 @@ function Select(props: TSelectProps): JSX.Element {
   }
 
   function getDisplay() {
-    if (!selected || selected.length === 0) {
+    if (isEmpty) {
       return placreholder;
     }
     if (Array.isArray(selected)) {
@@ -216,7 +205,12 @@ function Select(props: TSelectProps): JSX.Element {
         isSearchable,
       }}
     >
-      <div className={`${className} select ${isOpen ? 'select_opened' : ''}`}>
+      <div
+        className={`select ${isOpen ? 'select_opened' : ''} ${
+          isEmpty ? 'select_empty' : ''
+        } ${className}`}
+        tabIndex={tabIndex}
+      >
         <div className="select__wrapper" onClick={handleClick}>
           <div className="select__selected">{getDisplay()}</div>
           <div className="select__icon">{iconElement}</div>
