@@ -1,0 +1,38 @@
+@import '/src/styles/global-scss.scss';
+
+.toggle-button {
+  padding: rem(15) rem(20);
+  display: grid;
+  border-radius: rem(4);
+  background: var(--light-gray);
+  // .toggle-button__icon
+  &__icon {
+    display: none;
+    transition: transform 0.3s ease 0s;
+  }
+  // .toggle-button__text
+  &__text {
+    @extend %body-4-capital;
+    text-wrap: nowrap;
+    overflow: hidden;
+
+    @include tablet-d {
+      font-size: rem(16);
+      text-transform: none;
+    }
+  }
+  &_active {
+    .toggle-button__icon {
+      transform: scale(1, -1);
+    }
+  }
+  &_icon {
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    column-gap: rem(10);
+
+    .toggle-button__icon {
+      display: block;
+    }
+  }
+}
