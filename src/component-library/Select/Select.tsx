@@ -1,8 +1,15 @@
-import { Children, ReactElement, isValidElement, useState } from 'react';
+import {
+  Children,
+  ReactElement,
+  isValidElement,
+  useRef,
+  useState,
+} from 'react';
 import './Select.scss';
 import ListOptions from './ListOptions';
 import Option, { OptionProps } from './Option';
 import { SelectContext } from './SelectContext';
+import Transition, { TTransition } from '../Transition';
 
 type TSingleSelectProps = {
   isMulti?: false;
@@ -51,6 +58,16 @@ type TCommonSelectProps = {
   placreholder?: React.ReactNode;
   isSearchable?: boolean;
   tabIndex?: number;
+  animationOptions?: {
+    duration?: number;
+  };
+};
+
+const TRANSITION_STYLES: Record<TTransition, string> = {
+  entering: 'options_opened',
+  entered: 'options_opened',
+  exiting: '',
+  exited: '',
 };
 
 type TSelectProps = (
@@ -74,16 +91,17 @@ function Select(props: TSelectProps): JSX.Element {
     isCloseDropdownWhenClicked = false,
     isSearchable = false,
     tabIndex = 0,
+    animationOptions = {},
   } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
   const [valueInner, setValueInner] = useState<string | string[] | undefined>(
     props.isMulti ? props.initValue ?? [] : props.initValue ?? ''
   );
-  const [triggerEl, setTriggerEl] = useState<Element | null>(null);
+  const selectRef = useRef<HTMLDivElement>(null);
 
   const selected = props.value ?? valueInner;
   const isEmpty = !selected || selected.length === 0;
+  const { duration = 300 } = animationOptions;
 
   function setSelected(value: string) {
     if (props.isMulti) {
@@ -147,18 +165,10 @@ function Select(props: TSelectProps): JSX.Element {
 
   function close() {
     setIsOpen(false);
-    setIsClosing(false);
-  }
-  function closing() {
-    setIsClosing(true);
   }
 
   function toggle() {
-    if (isOpen) {
-      closing();
-    } else {
-      setIsOpen(true);
-    }
+    setIsOpen((prev) => !prev);
   }
 
   function getNodeSelected(value: string) {
@@ -178,17 +188,13 @@ function Select(props: TSelectProps): JSX.Element {
     if (e.target.closest('.select__item-remove')) return;
 
     toggle();
-    const selectEl = e.target.closest('.select');
-    if (!selectEl) return;
-
-    setTriggerEl(selectEl);
   }
 
   function handleClickOfListItem(value: string) {
     setSelected(value);
     if (isCloseDropdownWhenClicked || !props.isMulti) {
       // isCloseDropdownWhenClicked - для селекта с мультиселектом иначе не имеет значения
-      closing();
+      close();
     }
   }
 
@@ -196,16 +202,11 @@ function Select(props: TSelectProps): JSX.Element {
     <SelectContext.Provider
       value={{
         selected,
-        close,
         onClickOfListItem: handleClickOfListItem,
-        isLockScroll,
-        triggerEl,
-        isClosing,
-        closing,
-        isSearchable,
       }}
     >
       <div
+        ref={selectRef}
         className={`select ${isOpen ? 'select_opened' : ''} ${
           isEmpty ? 'select_empty' : ''
         } ${className}`}
@@ -225,11 +226,23 @@ function Select(props: TSelectProps): JSX.Element {
             readOnly
           />
         </div>
-        {isOpen && (
-          <ListOptions className={listOptions.className}>
-            {children}
-          </ListOptions>
-        )}
+        <Transition enter={isOpen} timeout={duration}>
+          {(state) =>
+            (state !== 'exited' || isOpen) && (
+              <ListOptions
+                selectRef={selectRef}
+                isLockScroll={isLockScroll}
+                isSearchable={isSearchable}
+                className={`${TRANSITION_STYLES[state]} ${
+                  listOptions.className ?? ''
+                }`}
+                close={close}
+              >
+                {children}
+              </ListOptions>
+            )
+          }
+        </Transition>
       </div>
     </SelectContext.Provider>
   );
