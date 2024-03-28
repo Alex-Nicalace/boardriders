@@ -14,7 +14,7 @@ function initState(toggler: boolean, appear: boolean): TTransition {
 }
 
 type TTransitionProps = {
-  children: JSX.Element | ((state: TTransition) => JSX.Element);
+  children: React.ReactNode | ((state: TTransition) => React.ReactNode);
   enter: boolean;
   timeout: number;
   appear?: boolean;
@@ -30,20 +30,20 @@ type TTransitionProps = {
 /**
  * Генерирует эффект перехода для указанных дочерних элементов на основе состояния и указанного времени ожидания.
  *
- * @param {TTransitionProps} props
- * @param {boolean} [props.enter] - Флаг указывающий на вход или выход из перехода
- * @param {React.ReactNode} [props.children] - Дочерний элемент, к которому применяется эффект перехода
- * @param {number} [props.timeout] - Длительность эффекта перехода
- * @param {boolean} [props.appear] - Флаг указывающий на появление перехода
- * @param {boolean} [props.mountOnEnter=false] - Флаг указывающий на монтирование компонента только при входе "entered"
- * @param {boolean} [props.unmountOnExit=true] - Флаг указывающий на размонтирование компонента при выходе
- * @param {function} [props.onEnter] - Функция, вызываемая до применения статуса "entering"
- * @param {function} [props.onEntering] - Функция, вызываемая после применения статуса "entering"
- * @param {function} [props.onEntered] - Функция, вызываемая после применения статуса "entered"
- * @param {function} [props.onExit] - Функция, вызываемая до применения статуса "exiting"
- * @param {function} [props.onExiting] - Функция, вызываемая после применения статуса "exiting"
- * @param {function} [props.onExited] - Функция, вызываемая после применения статуса "exited"
- * @return {React.ReactNode} Дочерние элементы с примененным переходом на основе состояния и времени ожидания
+ * @param props - Свойства
+ * @param [props.enter] - Флаг указывающий на вход или выход из перехода
+ * @param [props.children] - Дочерний элемент, к которому применяется эффект перехода
+ * @param [props.timeout] - Длительность эффекта перехода
+ * @param [props.appear] - Флаг указывающий на появление перехода
+ * @param [props.mountOnEnter=false] - Флаг указывающий на монтирование компонента только при входе "entered"
+ * @param [props.unmountOnExit=true] - Флаг указывающий на размонтирование компонента при выходе
+ * @param [props.onEnter] - Функция, вызываемая до применения статуса "entering"
+ * @param [props.onEntering] - Функция, вызываемая после применения статуса "entering"
+ * @param [props.onEntered] - Функция, вызываемая после применения статуса "entered"
+ * @param [props.onExit] - Функция, вызываемая до применения статуса "exiting"
+ * @param [props.onExiting] - Функция, вызываемая после применения статуса "exiting"
+ * @param [props.onExited] - Функция, вызываемая после применения статуса "exited"
+ * @return Дочерние элементы с примененным переходом на основе состояния и времени ожидания
  */
 function Transition({
   enter,
