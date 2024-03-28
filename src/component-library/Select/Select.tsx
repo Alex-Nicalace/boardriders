@@ -2,6 +2,7 @@ import {
   Children,
   ReactElement,
   isValidElement,
+  useCallback,
   useRef,
   useState,
 } from 'react';
@@ -98,10 +99,19 @@ function Select(props: TSelectProps): JSX.Element {
     props.isMulti ? props.initValue ?? [] : props.initValue ?? ''
   );
   const selectRef = useRef<HTMLDivElement>(null);
+  const selectWrapperRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<Map<string, HTMLLIElement>>();
 
   const selected = props.value ?? valueInner;
   const isEmpty = !selected || selected.length === 0;
   const { duration = 300 } = animationOptions;
+
+  const getMapItems = useCallback(function getMapItems() {
+    if (!itemsRef.current) {
+      itemsRef.current = new Map(); // единожды инициализируем Map
+    }
+    return itemsRef.current;
+  }, []);
 
   function setSelected(value: string) {
     if (props.isMulti) {
@@ -182,7 +192,16 @@ function Select(props: TSelectProps): JSX.Element {
     );
   }
 
-  function handleClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  function handleClickItem(value: string) {
+    setSelected(value);
+    if (isCloseDropdownWhenClicked || !props.isMulti) {
+      // isCloseDropdownWhenClicked - для селекта с мультиселектом иначе не имеет значения
+      close();
+      selectWrapperRef.current?.focus(); // установить фокус на кнопку после выбора элемента
+    }
+  }
+
+  function handleTriggerClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     if (!(e.target instanceof Element)) return;
     // в ражиме мультиселекта игнорируем клик на кнопку удаления одного из ранее выбранных элементов
     if (e.target.closest('.select__item-remove')) return;
@@ -190,11 +209,12 @@ function Select(props: TSelectProps): JSX.Element {
     toggle();
   }
 
-  function handleClickOfListItem(value: string) {
-    setSelected(value);
-    if (isCloseDropdownWhenClicked || !props.isMulti) {
-      // isCloseDropdownWhenClicked - для селекта с мультиселектом иначе не имеет значения
-      close();
+  function handleTriggerKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (
+      (e.key === 'Enter' || e.key === 'ArrowDown') &&
+      selectWrapperRef.current
+    ) {
+      selectWrapperRef.current.click();
     }
   }
 
@@ -202,7 +222,8 @@ function Select(props: TSelectProps): JSX.Element {
     <SelectContext.Provider
       value={{
         selected,
-        onClickOfListItem: handleClickOfListItem,
+        clickItem: handleClickItem,
+        getMapItems,
       }}
     >
       <div
@@ -210,9 +231,19 @@ function Select(props: TSelectProps): JSX.Element {
         className={`select ${isOpen ? 'select_opened' : ''} ${
           isEmpty ? 'select_empty' : ''
         } ${className}`}
-        tabIndex={tabIndex}
       >
-        <div className="select__wrapper" onClick={handleClick}>
+        <div
+          ref={selectWrapperRef}
+          className="select__wrapper"
+          onClick={handleTriggerClick}
+          tabIndex={tabIndex}
+          onKeyDown={handleTriggerKeyDown}
+          role="button"
+          aria-expanded={isOpen}
+          aria-haspopup="listbox"
+          aria-controls={isOpen ? 'list-options' : undefined}
+          aria-label={name}
+        >
           <div className="select__selected">{getDisplay()}</div>
           <div className="select__icon">{iconElement}</div>
           <input
@@ -237,6 +268,7 @@ function Select(props: TSelectProps): JSX.Element {
                   listOptions.className ?? ''
                 }`}
                 close={close}
+                shouldFocus={state === 'entered' && isOpen}
               >
                 {children}
               </ListOptions>

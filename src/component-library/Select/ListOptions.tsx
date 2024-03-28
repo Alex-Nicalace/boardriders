@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useLockDocumentScroll } from '../../hooks/useLockDocumentScroll';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import extractTextFromReactNode from '../../utils/extractTextFromReactNode';
+import { useSelectContext } from './useSelectContext';
 
 type ListOptionsProps = {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ type ListOptionsProps = {
   isLockScroll: boolean;
   isSearchable: boolean;
   close: () => void;
+  shouldFocus?: boolean;
 };
 function ListOptions({
   children,
@@ -19,6 +21,7 @@ function ListOptions({
   isLockScroll,
   isSearchable,
   close,
+  shouldFocus = true,
 }: ListOptionsProps) {
   const [serachValue, setSerachValue] = useState('');
   useLockDocumentScroll(!isLockScroll);
@@ -29,6 +32,7 @@ function ListOptions({
     }
   });
   const inputRef = useRef<HTMLInputElement>(null);
+  const { getMapItems, selected } = useSelectContext();
 
   useEffect(function setPositionListOptions() {
     const listEl = listElRef.current;
@@ -68,6 +72,32 @@ function ListOptions({
     };
   });
 
+  useEffect(
+    function setFocus() {
+      if (!shouldFocus || typeof selected !== 'string') return;
+
+      // фокус на выбранную опцию или на первую опцию
+      if (selected) {
+        getMapItems().get(selected)?.focus();
+      } else {
+        Array.from(getMapItems())[0]?.[1].focus();
+      }
+    },
+    [shouldFocus, getMapItems, selected]
+  );
+
+  useEffect(
+    function setFocus() {
+      if (!shouldFocus) return;
+
+      inputRef.current?.focus();
+    },
+    [shouldFocus]
+  );
+
+  /**
+   * фильтруем список опции по введенному значению
+   */
   function filterOptions(children: React.ReactNode) {
     if (!isSearchable) return children;
 
@@ -78,8 +108,32 @@ function ListOptions({
     );
   }
 
+  /**
+   * если нажали escape или tab - закрывать список
+   */
+  function handleOptionsKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.key === 'Escape' || e.key === 'Tab') {
+      e.preventDefault();
+      close(); // если нажали escape или tab - закрывать список
+      const selectWrapperEl = selectRef.current?.firstElementChild;
+      if (selectWrapperEl && selectWrapperEl instanceof HTMLElement)
+        selectWrapperEl.focus();
+    }
+  }
+
+  function handleSearchKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'ArrowDown') {
+      Array.from(getMapItems())[0]?.[1].focus();
+    }
+  }
+
   const listOptionsElement = (
-    <div ref={listElRef} className={`options ${className}`} tabIndex={-1}>
+    <div
+      ref={listElRef}
+      className={`options ${className}`}
+      tabIndex={-1}
+      onKeyDown={handleOptionsKeyDown}
+    >
       <div className="options__wrapper">
         {isSearchable && (
           <div className="options__search">
@@ -88,6 +142,7 @@ function ListOptions({
               className="options__search-input"
               value={serachValue}
               onChange={(e) => setSerachValue(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
             />
           </div>
         )}

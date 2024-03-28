@@ -20,6 +20,10 @@
     &:hover {
       box-shadow: rem(0) rem(5) rem(15) rem(0) rgba(0, 0, 0, 0.05);
     }
+
+    &:focus {
+      outline: rem(1) solid var(--dark-gray);
+    }
   }
 
   // .select__input
@@ -68,6 +72,10 @@
   &_opened {
     .select__icon {
       transform: scale(1, -1);
+    }
+
+    .select__wrapper {
+      outline: rem(1) solid var(--dark-gray);
     }
   }
 }
