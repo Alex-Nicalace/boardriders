@@ -22,6 +22,7 @@ import ArrowRightThinIcon from './../../assets/icons/arrow-right-thin.svg?react'
 import AnthropometricIcon from './../../assets/icons/anthropometric.svg?react';
 import DynamicsIcon from './../../assets/icons/dynamics.svg?react';
 import MountainIcon from './../../assets/icons/mountain.svg?react';
+import CheckIcon from './../../assets/icons/check.svg?react';
 
 function TrackIcon(
   params: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -63,4 +64,5 @@ export {
   AnthropometricIcon,
   DynamicsIcon,
   MountainIcon,
+  CheckIcon,
 };
