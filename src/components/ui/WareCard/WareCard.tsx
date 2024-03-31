@@ -15,8 +15,9 @@ interface IWareData {
 }
 interface IWareCardProps {
   wareDate: IWareData;
+  className?: string;
 }
-function WareCard({ wareDate }: IWareCardProps): JSX.Element {
+function WareCard({ wareDate, className = '' }: IWareCardProps): JSX.Element {
   const {
     imgMain,
     imgSecond,
@@ -29,7 +30,7 @@ function WareCard({ wareDate }: IWareCardProps): JSX.Element {
     to,
   } = wareDate;
   return (
-    <article className="ware-card">
+    <article className={`ware-card ${className}`}>
       <div className="ware-card__top">
         <Link to={to} className="ware-card__link">
           <span className="ware-card__img-wrap">
