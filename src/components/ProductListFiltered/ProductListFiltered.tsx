@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './ProductListFiltered.scss';
 import Steps from '../ui/Steps';
 import Title from '../ui/Title';
@@ -7,7 +8,7 @@ import Select from '../../component-library/Select';
 import { SelectIcon } from '../ui/Icons';
 import useMatchMedia from '../../hooks/useMatchMedia';
 import WareCard from '../ui/WareCard';
-import { useEffect, useRef, useState } from 'react';
+import Transition, { TTransition } from '../../component-library/Transition';
 
 const ID = 'sort_' + randomString();
 
@@ -309,6 +310,13 @@ const PRODUCTS_DATA = [
   },
 ];
 
+const TRANSITION_STYLES: Record<TTransition, string> = {
+  entering: '',
+  entered: '',
+  exiting: 'product-list-filtered_filters-hide',
+  exited: 'product-list-filtered_filters-hide',
+};
+
 const MEDIAQUERIES = ['( max-width: 991.98px )'];
 
 type TProductListFilteredProps = { className?: string };
@@ -316,172 +324,168 @@ function ProductListFiltered({
   className = '',
 }: TProductListFilteredProps): JSX.Element {
   const [hideFilter, setHideFilter] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
   const [isSmallerThanTablet] = useMatchMedia(MEDIAQUERIES);
 
   function toggleHideFilter() {
     setHideFilter((prev) => !prev);
   }
 
-  useEffect(
-    function () {
-      const sectionEl = sectionRef.current;
-      if (!sectionEl) return;
-
-      sectionEl.classList.toggle(
-        'product-list-filtered_filters-hide',
-        hideFilter
-      );
-
-      return () => {
-        sectionEl.classList.remove('product-list-filtered_filters-hide');
-      };
-    },
-    [hideFilter]
-  );
-
   return (
-    <section ref={sectionRef} className={`product-list-filtered ${className}`}>
-      <div className="product-list-filtered__container">
-        <Title
-          className="product-list-filtered__title"
-          as="h2"
-          kind="h1-32-h2-21"
-          supNode="358"
+    <Transition unmountOnExit={false} enter={!hideFilter} timeout={300}>
+      {(state) => (
+        <section
+          className={`product-list-filtered ${TRANSITION_STYLES[state]} ${className}`}
         >
-          Сноуборд
-        </Title>
-        <Steps className="product-list-filtered__steps" />
-        <div className="product-list-filtered__toolbar">
-          {!isSmallerThanTablet ? (
-            <>
-              <ToggleButton
-                className="product-list-filtered__toolbar-toggle"
-                labelActive="Скрыть фильтры"
-                labelNotActive="Показать фильтры"
-                isActive={!hideFilter}
-                onClick={toggleHideFilter}
-              />
-              <div className="product-list-filtered__sort">
-                <span className="product-list-filtered__sort-label">
-                  <label htmlFor={ID}>Сортировать по:</label>
-                </span>
-                <Select
-                  className="product-list-filtered__sort-select"
-                  iconElement={<SelectIcon />}
-                  id={ID}
+          <div className="product-list-filtered__container">
+            <Title
+              className="product-list-filtered__title"
+              as="h2"
+              kind="h1-32-h2-21"
+              supNode="358"
+            >
+              Сноуборд
+            </Title>
+            <Steps className="product-list-filtered__steps" />
+            <div className="product-list-filtered__toolbar">
+              {!isSmallerThanTablet ? (
+                <>
+                  <ToggleButton
+                    className="product-list-filtered__toolbar-toggle"
+                    labelActive="Скрыть фильтры"
+                    labelNotActive="Показать фильтры"
+                    isActive={!hideFilter}
+                    onClick={toggleHideFilter}
+                  />
+                  <div className="product-list-filtered__sort">
+                    <span className="product-list-filtered__sort-label">
+                      <label htmlFor={ID}>Сортировать по:</label>
+                    </span>
+                    <Select
+                      className="product-list-filtered__sort-select"
+                      iconElement={<SelectIcon />}
+                      id={ID}
+                    >
+                      {SORTS.map((sort) => (
+                        <Select.Option key={sort.value} value={sort.value}>
+                          {sort.text}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Select
+                    className="product-list-filtered__sort-select"
+                    iconElement={<SelectIcon />}
+                    id={ID}
+                    placreholder="Сортировать"
+                  >
+                    {SORTS.map((sort) => (
+                      <Select.Option key={sort.value} value={sort.value}>
+                        {sort.text}
+                      </Select.Option>
+                    ))}
+                  </Select>
+                  <ToggleButton
+                    className="product-list-filtered__toolbar-toggle"
+                    isNotShowIcon
+                    labelActive="Фильтры"
+                    isActive={!hideFilter}
+                    onClick={toggleHideFilter}
+                  />
+                </>
+              )}
+            </div>
+            <div className="product-list-filtered__body">
+              {(state !== 'exited' || !hideFilter) && (
+                <div
+                  className="product-list-filtered__filters"
+                  style={{ border: '1px solid red' }}
                 >
-                  {SORTS.map((sort) => (
-                    <Select.Option key={sort.value} value={sort.value}>
-                      {sort.text}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </div>
-            </>
-          ) : (
-            <>
-              <Select
-                className="product-list-filtered__sort-select"
-                iconElement={<SelectIcon />}
-                id={ID}
-                placreholder="Сортировать"
-              >
-                {SORTS.map((sort) => (
-                  <Select.Option key={sort.value} value={sort.value}>
-                    {sort.text}
-                  </Select.Option>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Facilis quis, possimus rem hic, nam necessitatibus, magni fuga
+                  velit minus aliquid eaque esse magnam voluptatibus libero
+                  suscipit quia laboriosam! Sapiente, odit? Lorem ipsum, dolor
+                  sit amet consectetur adipisicing elit. Perferendis quod itaque
+                  voluptatum asperiores, ipsam quas ut voluptatem saepe aperiam
+                  sequi porro modi quae debitis consectetur distinctio aut,
+                  maxime excepturi, accusamus magnam fuga repellendus! Ipsam et
+                  eius, aspernatur, blanditiis qui harum quasi nemo esse iusto
+                  voluptatibus id ipsa at iure tempora dolorem, quidem sed.
+                  Eligendi labore alias commodi, nam, atque ratione a aliquam
+                  nesciunt fugiat debitis dignissimos molestiae, quidem aliquid?
+                  Nesciunt repellat placeat laborum illo nulla corrupti ipsam,
+                  asperiores ad ullam adipisci et odio autem fuga vitae!
+                  Deleniti ab perferendis, consequatur aliquam id quidem eveniet
+                  alias voluptates, laudantium quos facere adipisci suscipit
+                  omnis, a aspernatur. Quaerat nam nemo magnam quam consequatur
+                  numquam iusto, quidem nihil doloremque vero molestiae ad
+                  veniam et ratione, ab eligendi aperiam repellat at repellendus
+                  nisi neque in itaque? Dignissimos ipsam natus perferendis
+                  asperiores! Eum dignissimos sit magnam architecto molestiae,
+                  doloremque vero cupiditate perferendis omnis sed esse
+                  deleniti. Quibusdam exercitationem a nobis esse inventore
+                  velit nulla ipsam quasi quisquam, expedita explicabo ut
+                  excepturi autem dolorum sit blanditiis. Quae voluptas dolores
+                  consequuntur illum neque. Qui laudantium doloribus voluptatem
+                  sed nam quam nisi? In at dicta veritatis, doloremque
+                  voluptatibus cumque et nobis deserunt animi minima, nisi esse
+                  qui autem maxime temporibus voluptatem perspiciatis pariatur
+                  molestias eveniet ex blanditiis dolor ipsum! Assumenda tenetur
+                  necessitatibus repellat mollitia soluta quos non odit.
+                  Quibusdam iure accusamus, amet sed ratione veniam enim
+                  laboriosam? Necessitatibus, consequuntur. Accusantium vitae
+                  cum iusto alias eaque nobis. Quibusdam illo molestiae placeat
+                  deleniti autem recusandae corporis et veritatis! Consequatur
+                  iure tempora rem et repellendus odit praesentium commodi
+                  nesciunt, neque magni, voluptates vel nemo voluptas! Similique
+                  adipisci rem architecto odio incidunt nobis quae doloribus
+                  numquam, quidem fuga saepe impedit doloremque autem fugit
+                  ipsam facere eveniet perferendis veritatis, dolore vel aliquam
+                  amet! Voluptates incidunt amet ad eum nemo sed, at accusantium
+                  pariatur voluptas ratione maiores id blanditiis tempora
+                  repellat ea hic consequatur adipisci quasi numquam. Corrupti,
+                  necessitatibus ex. Facilis impedit eos sed, repellendus
+                  corporis neque officia laboriosam, quibusdam excepturi
+                  temporibus libero obcaecati. Tenetur sed velit cum voluptas
+                  temporibus ab consequuntur incidunt, culpa nulla laborum
+                  perspiciatis! Perferendis itaque natus non aperiam. Debitis,
+                  eos sed. Cumque aliquid est commodi rerum repudiandae corrupti
+                  eum saepe ex! Sit adipisci ducimus eius esse, velit fugit? Quo
+                  iusto deleniti blanditiis neque, esse perspiciatis unde
+                  doloribus eligendi fuga minima cum, officia dolores ipsa ad!
+                  Quis est sint cumque sed laborum, exercitationem vel ipsam quo
+                  quas blanditiis maiores adipisci enim at eius ab maxime quia
+                  harum eveniet laudantium? Nesciunt officia aut expedita
+                  repellendus hic facere eum est cupiditate, nihil animi rerum.
+                  Quam, placeat veniam porro earum expedita illo. Earum
+                  perferendis obcaecati eveniet molestias nisi sequi provident
+                  nesciunt accusantium similique ullam animi eligendi atque,
+                  alias rerum, unde quasi possimus, qui totam voluptatem hic
+                  quod reprehenderit? Excepturi omnis, reiciendis quas quia
+                  debitis reprehenderit magnam. Alias tempore corrupti,
+                  voluptatum dolores perferendis voluptatibus cupiditate libero
+                  magni maxime at modi, labore saepe molestiae optio voluptas.
+                  Eaque officia doloribus cum non aliquid commodi eius facilis,
+                  iure quod quae quisquam aliquam natus placeat ex eveniet qui
+                  omnis aspernatur.
+                </div>
+              )}
+              <div className="product-list-filtered__products">
+                {PRODUCTS_DATA.map((product) => (
+                  <WareCard
+                    key={product.wareId}
+                    className="product-list-filtered__product"
+                    wareDate={product}
+                  />
                 ))}
-              </Select>
-              <ToggleButton
-                className="product-list-filtered__toolbar-toggle"
-                isNotShowIcon
-                labelActive="Фильтры"
-                isActive={!hideFilter}
-                onClick={toggleHideFilter}
-              />
-            </>
-          )}
-        </div>
-        <div className="product-list-filtered__body">
-          <div
-            className="product-list-filtered__filters"
-            style={{ border: '1px solid red' }}
-          >
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis
-            quis, possimus rem hic, nam necessitatibus, magni fuga velit minus
-            aliquid eaque esse magnam voluptatibus libero suscipit quia
-            laboriosam! Sapiente, odit? Lorem ipsum, dolor sit amet consectetur
-            adipisicing elit. Perferendis quod itaque voluptatum asperiores,
-            ipsam quas ut voluptatem saepe aperiam sequi porro modi quae debitis
-            consectetur distinctio aut, maxime excepturi, accusamus magnam fuga
-            repellendus! Ipsam et eius, aspernatur, blanditiis qui harum quasi
-            nemo esse iusto voluptatibus id ipsa at iure tempora dolorem, quidem
-            sed. Eligendi labore alias commodi, nam, atque ratione a aliquam
-            nesciunt fugiat debitis dignissimos molestiae, quidem aliquid?
-            Nesciunt repellat placeat laborum illo nulla corrupti ipsam,
-            asperiores ad ullam adipisci et odio autem fuga vitae! Deleniti ab
-            perferendis, consequatur aliquam id quidem eveniet alias voluptates,
-            laudantium quos facere adipisci suscipit omnis, a aspernatur.
-            Quaerat nam nemo magnam quam consequatur numquam iusto, quidem nihil
-            doloremque vero molestiae ad veniam et ratione, ab eligendi aperiam
-            repellat at repellendus nisi neque in itaque? Dignissimos ipsam
-            natus perferendis asperiores! Eum dignissimos sit magnam architecto
-            molestiae, doloremque vero cupiditate perferendis omnis sed esse
-            deleniti. Quibusdam exercitationem a nobis esse inventore velit
-            nulla ipsam quasi quisquam, expedita explicabo ut excepturi autem
-            dolorum sit blanditiis. Quae voluptas dolores consequuntur illum
-            neque. Qui laudantium doloribus voluptatem sed nam quam nisi? In at
-            dicta veritatis, doloremque voluptatibus cumque et nobis deserunt
-            animi minima, nisi esse qui autem maxime temporibus voluptatem
-            perspiciatis pariatur molestias eveniet ex blanditiis dolor ipsum!
-            Assumenda tenetur necessitatibus repellat mollitia soluta quos non
-            odit. Quibusdam iure accusamus, amet sed ratione veniam enim
-            laboriosam? Necessitatibus, consequuntur. Accusantium vitae cum
-            iusto alias eaque nobis. Quibusdam illo molestiae placeat deleniti
-            autem recusandae corporis et veritatis! Consequatur iure tempora rem
-            et repellendus odit praesentium commodi nesciunt, neque magni,
-            voluptates vel nemo voluptas! Similique adipisci rem architecto odio
-            incidunt nobis quae doloribus numquam, quidem fuga saepe impedit
-            doloremque autem fugit ipsam facere eveniet perferendis veritatis,
-            dolore vel aliquam amet! Voluptates incidunt amet ad eum nemo sed,
-            at accusantium pariatur voluptas ratione maiores id blanditiis
-            tempora repellat ea hic consequatur adipisci quasi numquam.
-            Corrupti, necessitatibus ex. Facilis impedit eos sed, repellendus
-            corporis neque officia laboriosam, quibusdam excepturi temporibus
-            libero obcaecati. Tenetur sed velit cum voluptas temporibus ab
-            consequuntur incidunt, culpa nulla laborum perspiciatis! Perferendis
-            itaque natus non aperiam. Debitis, eos sed. Cumque aliquid est
-            commodi rerum repudiandae corrupti eum saepe ex! Sit adipisci
-            ducimus eius esse, velit fugit? Quo iusto deleniti blanditiis neque,
-            esse perspiciatis unde doloribus eligendi fuga minima cum, officia
-            dolores ipsa ad! Quis est sint cumque sed laborum, exercitationem
-            vel ipsam quo quas blanditiis maiores adipisci enim at eius ab
-            maxime quia harum eveniet laudantium? Nesciunt officia aut expedita
-            repellendus hic facere eum est cupiditate, nihil animi rerum. Quam,
-            placeat veniam porro earum expedita illo. Earum perferendis
-            obcaecati eveniet molestias nisi sequi provident nesciunt
-            accusantium similique ullam animi eligendi atque, alias rerum, unde
-            quasi possimus, qui totam voluptatem hic quod reprehenderit?
-            Excepturi omnis, reiciendis quas quia debitis reprehenderit magnam.
-            Alias tempore corrupti, voluptatum dolores perferendis voluptatibus
-            cupiditate libero magni maxime at modi, labore saepe molestiae optio
-            voluptas. Eaque officia doloribus cum non aliquid commodi eius
-            facilis, iure quod quae quisquam aliquam natus placeat ex eveniet
-            qui omnis aspernatur.
+              </div>
+            </div>
           </div>
-          <div className="product-list-filtered__products">
-            {PRODUCTS_DATA.map((product) => (
-              <WareCard
-                key={product.wareId}
-                className="product-list-filtered__product"
-                wareDate={product}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      )}
+    </Transition>
   );
 }
 

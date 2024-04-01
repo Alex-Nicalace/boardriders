@@ -47,7 +47,6 @@
   // .product-list-filtered__toolbar-toggle
   &__toolbar-toggle {
     flex: 0 0 rem(321);
-    transition: flex-basis 0.3s ease 0s;
 
     @include tablet-d {
       flex: 0 0 50%;
@@ -98,12 +97,11 @@
     display: flex;
     overflow: hidden;
     column-gap: percent(25, 1360);
-    transition: gap 0.3s ease 0.3s;
   }
   // .product-list-filtered__filters
   &__filters {
     flex: 0 0 rem(321);
-    transition: flex-basis 0.3s ease 0s, transform 0.3s ease 0.3s;
+    transition: transform 0.3s ease 0s;
   }
   // .product-list-filtered__products
   &__products {
@@ -119,7 +117,8 @@
   }
   // .product-list-filtered__product
   &__product {
-    flex: 0 0 var(--width-column);
+    flex-basis: var(--width-column);
+
     @include tablet-d {
       max-width: none;
       flex: 0 0 percent(181, 384);
@@ -131,16 +130,12 @@
     --gap-products: #{percent(25, 1360)};
 
     .product-list-filtered {
-      &__body {
-        gap: 0;
-      }
       &__filters {
         transform: translateY(-100%);
-        flex-basis: 0;
-        width: 0;
-        transition: transform 0.3s ease 0s, flex-basis 0.3s ease 0.3s;
       }
-
+      &__product {
+        transition: flex-basis 0.3s ease 0.3s;
+      }
       &__toolbar-toggle {
         @include tablet-u {
           flex-basis: var(--width-column);
