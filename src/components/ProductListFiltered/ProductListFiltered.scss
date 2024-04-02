@@ -100,6 +100,7 @@
   }
   // .product-list-filtered__filters
   &__filters {
+    padding: rem(25) 0;
     flex: 0 0 rem(321);
     transition: transform 0.3s ease 0s;
   }

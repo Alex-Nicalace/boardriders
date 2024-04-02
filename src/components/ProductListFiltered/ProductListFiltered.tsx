@@ -9,6 +9,7 @@ import { SelectIcon } from '../ui/Icons';
 import useMatchMedia from '../../hooks/useMatchMedia';
 import WareCard from '../ui/WareCard';
 import Transition, { TTransition } from '../../component-library/Transition';
+import FilterFieldset from '../FilterFieldset';
 
 const ID = 'sort_' + randomString();
 
@@ -317,6 +318,67 @@ const TRANSITION_STYLES: Record<TTransition, string> = {
   exited: 'product-list-filtered_filters-hide',
 };
 
+const FILTER_CATEGORY = {
+  label: 'Категории товаров',
+  name: 'category',
+  items: [
+    { value: 'cnowboards', label: 'Сноуборды', count: 24 },
+    { value: 'fasteners', label: 'Крепления', count: 48 },
+    { value: 'shoes', label: 'Обувь', count: 60 },
+    { value: 'sets', label: 'Наборы', count: 13 },
+    { value: 'jackets', label: 'Куртки', count: 81 },
+    { value: 'pants', label: 'Штаны', count: 55 },
+    { value: 'helmets', label: 'Шлемы', count: 13 },
+    { value: 'watches', label: 'Очки', count: 81 },
+    { value: 'gloves', label: 'Перчатки', count: 55 },
+  ],
+};
+
+const FILTER_BRAND = {
+  label: 'Бренды',
+  name: 'brand',
+  items: [
+    { value: 'DC Shoes', count: 24 },
+    { value: 'Quicksilver', count: 48 },
+    { value: 'BoardRiders', count: 60 },
+    { value: 'Billabong', count: 13 },
+    { value: 'Adidas', count: 81 },
+    { value: 'The Tree', count: 55 },
+    { value: 'DC_Shoes', count: 24 },
+    { value: 'Quic_ksilver', count: 48 },
+    { value: 'Board_Riders', count: 60 },
+    { value: 'Bill_abong', count: 13 },
+    { value: 'Adidas_', count: 81 },
+    { value: 'The_Tree', count: 55 },
+  ],
+};
+
+const FILTER_SIZE = {
+  label: 'Размер',
+  name: 'size',
+  items: [
+    { value: 'XS', count: 24 },
+    { value: 'S', count: 48 },
+    { value: 'S/M', count: 60 },
+    { value: 'M', count: 13 },
+    { value: 'M/L', count: 81 },
+    { value: 'L', count: 55 },
+  ],
+};
+
+const FILTER_TECHNOLOGY = {
+  label: 'Технологии',
+  name: 'technology',
+  items: [
+    { value: 'BOA', count: 24 },
+    { value: 'Step On', count: 48 },
+    { value: 'Est', count: 60 },
+    { value: 'Magne Traction', count: 13 },
+    { value: 'The Channel', count: 81 },
+    { value: 'Recco', count: 55 },
+  ],
+};
+
 const MEDIAQUERIES = ['( max-width: 991.98px )'];
 
 type TProductListFilteredProps = { className?: string };
@@ -399,77 +461,28 @@ function ProductListFiltered({
             </div>
             <div className="product-list-filtered__body">
               {(state !== 'exited' || !hideFilter) && (
-                <div
-                  className="product-list-filtered__filters"
-                  style={{ border: '1px solid red' }}
-                >
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Facilis quis, possimus rem hic, nam necessitatibus, magni fuga
-                  velit minus aliquid eaque esse magnam voluptatibus libero
-                  suscipit quia laboriosam! Sapiente, odit? Lorem ipsum, dolor
-                  sit amet consectetur adipisicing elit. Perferendis quod itaque
-                  voluptatum asperiores, ipsam quas ut voluptatem saepe aperiam
-                  sequi porro modi quae debitis consectetur distinctio aut,
-                  maxime excepturi, accusamus magnam fuga repellendus! Ipsam et
-                  eius, aspernatur, blanditiis qui harum quasi nemo esse iusto
-                  voluptatibus id ipsa at iure tempora dolorem, quidem sed.
-                  Eligendi labore alias commodi, nam, atque ratione a aliquam
-                  nesciunt fugiat debitis dignissimos molestiae, quidem aliquid?
-                  Nesciunt repellat placeat laborum illo nulla corrupti ipsam,
-                  asperiores ad ullam adipisci et odio autem fuga vitae!
-                  Deleniti ab perferendis, consequatur aliquam id quidem eveniet
-                  alias voluptates, laudantium quos facere adipisci suscipit
-                  omnis, a aspernatur. Quaerat nam nemo magnam quam consequatur
-                  numquam iusto, quidem nihil doloremque vero molestiae ad
-                  veniam et ratione, ab eligendi aperiam repellat at repellendus
-                  nisi neque in itaque? Dignissimos ipsam natus perferendis
-                  asperiores! Eum dignissimos sit magnam architecto molestiae,
-                  doloremque vero cupiditate perferendis omnis sed esse
-                  deleniti. Quibusdam exercitationem a nobis esse inventore
-                  velit nulla ipsam quasi quisquam, expedita explicabo ut
-                  excepturi autem dolorum sit blanditiis. Quae voluptas dolores
-                  consequuntur illum neque. Qui laudantium doloribus voluptatem
-                  sed nam quam nisi? In at dicta veritatis, doloremque
-                  voluptatibus cumque et nobis deserunt animi minima, nisi esse
-                  qui autem maxime temporibus voluptatem perspiciatis pariatur
-                  molestias eveniet ex blanditiis dolor ipsum! Assumenda tenetur
-                  necessitatibus repellat mollitia soluta quos non odit.
-                  Quibusdam iure accusamus, amet sed ratione veniam enim
-                  laboriosam? Necessitatibus, consequuntur. Accusantium vitae
-                  cum iusto alias eaque nobis. Quibusdam illo molestiae placeat
-                  deleniti autem recusandae corporis et veritatis! Consequatur
-                  iure tempora rem et repellendus odit praesentium commodi
-                  nesciunt, neque magni, voluptates vel nemo voluptas! Similique
-                  adipisci rem architecto odio incidunt nobis quae doloribus
-                  numquam, quidem fuga saepe impedit doloremque autem fugit
-                  ipsam facere eveniet perferendis veritatis, dolore vel aliquam
-                  amet! Voluptates incidunt amet ad eum nemo sed, at accusantium
-                  pariatur voluptas ratione maiores id blanditiis tempora
-                  repellat ea hic consequatur adipisci quasi numquam. Corrupti,
-                  necessitatibus ex. Facilis impedit eos sed, repellendus
-                  corporis neque officia laboriosam, quibusdam excepturi
-                  temporibus libero obcaecati. Tenetur sed velit cum voluptas
-                  temporibus ab consequuntur incidunt, culpa nulla laborum
-                  perspiciatis! Perferendis itaque natus non aperiam. Debitis,
-                  eos sed. Cumque aliquid est commodi rerum repudiandae corrupti
-                  eum saepe ex! Sit adipisci ducimus eius esse, velit fugit? Quo
-                  iusto deleniti blanditiis neque, esse perspiciatis unde
-                  doloribus eligendi fuga minima cum, officia dolores ipsa ad!
-                  Quis est sint cumque sed laborum, exercitationem vel ipsam quo
-                  quas blanditiis maiores adipisci enim at eius ab maxime quia
-                  harum eveniet laudantium? Nesciunt officia aut expedita
-                  repellendus hic facere eum est cupiditate, nihil animi rerum.
-                  Quam, placeat veniam porro earum expedita illo. Earum
-                  perferendis obcaecati eveniet molestias nisi sequi provident
-                  nesciunt accusantium similique ullam animi eligendi atque,
-                  alias rerum, unde quasi possimus, qui totam voluptatem hic
-                  quod reprehenderit? Excepturi omnis, reiciendis quas quia
-                  debitis reprehenderit magnam. Alias tempore corrupti,
-                  voluptatum dolores perferendis voluptatibus cupiditate libero
-                  magni maxime at modi, labore saepe molestiae optio voluptas.
-                  Eaque officia doloribus cum non aliquid commodi eius facilis,
-                  iure quod quae quisquam aliquam natus placeat ex eveniet qui
-                  omnis aspernatur.
+                <div className="product-list-filtered__filters">
+                  <FilterFieldset
+                    defaultOpen={true}
+                    data={FILTER_CATEGORY}
+                    className="product-list-filtered__filter"
+                  />
+                  <FilterFieldset
+                    defaultOpen={true}
+                    data={FILTER_BRAND}
+                    className="product-list-filtered__filter"
+                    isSearchable
+                  />
+                  <FilterFieldset
+                    defaultOpen={true}
+                    data={FILTER_SIZE}
+                    className="product-list-filtered__filter"
+                  />
+                  <FilterFieldset
+                    defaultOpen={true}
+                    data={FILTER_TECHNOLOGY}
+                    className="product-list-filtered__filter"
+                  />
                 </div>
               )}
               <div className="product-list-filtered__products">
