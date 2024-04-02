@@ -24,6 +24,7 @@ export type TDetailsProps = Omit<
   summaryProps?: HTMLAttributes<HTMLElement>;
   contentProps?: HTMLAttributes<HTMLDivElement>;
   onChange?: (open: boolean) => void;
+  defaultOpen?: boolean;
 };
 function Details({
   animationOptions = {},
@@ -36,10 +37,11 @@ function Details({
   contentProps = {},
   open,
   onChange, // можно этот проп задействовать для изменения внешнего состояния, но можно summaryProps.onClick. Лучше использовать onChange
+  defaultOpen = false,
   ...props
 }: TDetailsProps): JSX.Element {
   const { duration = 300, timingFunction = 'ease-out' } = animationOptions;
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(defaultOpen);
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
