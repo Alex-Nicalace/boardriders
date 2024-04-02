@@ -79,4 +79,33 @@
       color: var(--dark-gray);
     }
   }
+  // .checkbox_radio
+  &_radio {
+    .checkbox__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &::before {
+        content: '';
+        height: rem(0);
+        width: rem(0);
+        border-radius: 50%;
+        background-color: var(--red);
+        transition: all 0.3s ease 0s;
+      }
+    }
+
+    .checkbox__input {
+      &:checked {
+        & + .checkbox__icon {
+          background-color: transparent;
+          &::before {
+            height: rem(10);
+            width: rem(10);
+          }
+        }
+      }
+    }
+  }
 }

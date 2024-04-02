@@ -9,6 +9,7 @@ type TCheckboxProps = {
   checked?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
+  type?: 'checkbox' | 'radio';
 };
 function Checkbox({
   name,
@@ -18,14 +19,19 @@ function Checkbox({
   checked,
   onChange,
   value,
+  type = 'checkbox',
 }: TCheckboxProps): JSX.Element {
   const isReactElement = typeof label === 'object';
 
   return (
-    <label className={`checkbox ${className}`}>
+    <label
+      className={`${className} checkbox ${
+        type === 'radio' ? 'checkbox_radio' : ''
+      }`}
+    >
       <input
         className="checkbox__input sr-only"
-        type="checkbox"
+        type={type}
         name={name}
         id={id}
         checked={checked}
@@ -33,7 +39,7 @@ function Checkbox({
         value={value}
       />
       <span className="checkbox__icon">
-        <CheckIcon className="checkbox__icon-check" />
+        {type === 'checkbox' && <CheckIcon className="checkbox__icon-check" />}
       </span>
       {!isReactElement && <span className="checkbox__label">{label}</span>}
       {isReactElement && label}
