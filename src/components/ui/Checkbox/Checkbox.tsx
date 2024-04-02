@@ -8,6 +8,7 @@ type TCheckboxProps = {
   className?: string;
   checked?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
 };
 function Checkbox({
   name,
@@ -16,6 +17,7 @@ function Checkbox({
   className = '',
   checked,
   onChange,
+  value,
 }: TCheckboxProps): JSX.Element {
   const isReactElement = typeof label === 'object';
 
@@ -28,6 +30,7 @@ function Checkbox({
         id={id}
         checked={checked}
         onChange={onChange}
+        value={value}
       />
       <span className="checkbox__icon">
         <CheckIcon className="checkbox__icon-check" />
