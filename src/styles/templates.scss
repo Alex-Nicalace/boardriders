@@ -152,3 +152,20 @@
   line-height: 1;
   letter-spacing: em(0.3, 10);
 }
+
+%scrollbar {
+  &::-webkit-scrollbar {
+    // ширина и цвет
+    width: rem(5);
+    background-color: var(--gray);
+  }
+  &::-webkit-scrollbar-thumb {
+    // цвет бегунка
+    background-color: var(--black);
+  }
+
+  @supports (not selector(::-webkit-scrollbar)) {
+    scrollbar-color: var(--black) var(--gray);
+    scrollbar-width: thin;
+  }
+}
