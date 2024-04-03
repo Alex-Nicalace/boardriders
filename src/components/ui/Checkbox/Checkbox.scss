@@ -1,9 +1,10 @@
 @import '/src/styles/global-scss.scss';
 
 .checkbox {
-  display: inline-flex;
+  display: inline-grid;
+  grid-template: 'i l' '. h' / auto 1fr;
   align-items: center;
-  gap: rem(10);
+  column-gap: rem(10);
   cursor: pointer;
   // .checkbox__input
   &__input {
@@ -35,6 +36,7 @@
   }
   // .checkbox__icon
   &__icon {
+    grid-area: i;
     width: rem(16);
     height: rem(16);
     display: flex;
@@ -54,8 +56,8 @@
   }
   // .checkbox__label
   &__label {
+    grid-area: l;
     @extend %body-2;
-    flex-grow: 1;
     color: var(--black);
     transition: color 0.3s ease 0s;
     // .checkbox__label_counter
@@ -72,6 +74,12 @@
   &__label-count {
     color: var(--gray--1);
     transition: color 0.3s ease 0s;
+  }
+  &__hint {
+    grid-area: h;
+
+    @extend %caption-capital;
+    color: var(--dark-gray);
   }
   // .checkbox:hover
   &:hover {

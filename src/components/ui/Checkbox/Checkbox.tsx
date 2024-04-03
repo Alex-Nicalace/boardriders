@@ -10,6 +10,7 @@ type TCheckboxProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   type?: 'checkbox' | 'radio';
+  hint?: React.ReactNode;
 };
 function Checkbox({
   name,
@@ -20,6 +21,7 @@ function Checkbox({
   onChange,
   value,
   type = 'checkbox',
+  hint,
 }: TCheckboxProps): JSX.Element {
   const isReactElement = typeof label === 'object';
 
@@ -43,6 +45,7 @@ function Checkbox({
       </span>
       {!isReactElement && <span className="checkbox__label">{label}</span>}
       {isReactElement && label}
+      {hint && <span className="checkbox__hint">{hint}</span>}
     </label>
   );
 }
@@ -51,7 +54,7 @@ type TLabelProps = {
   label: React.ReactNode;
   count: number;
 };
-function Label({ label, count }: TLabelProps): JSX.Element {
+function LabelAmount({ label, count }: TLabelProps): JSX.Element {
   return (
     <span className="checkbox__label checkbox__label_counter">
       <span className="checkbox__label-item">{label}</span>
@@ -60,6 +63,6 @@ function Label({ label, count }: TLabelProps): JSX.Element {
   );
 }
 
-Checkbox.Label = Label;
+Checkbox.LabelAmount = LabelAmount;
 
 export default Checkbox;
