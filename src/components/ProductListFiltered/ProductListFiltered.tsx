@@ -10,6 +10,7 @@ import useMatchMedia from '../../hooks/useMatchMedia';
 import WareCard from '../ui/WareCard';
 import Transition, { TTransition } from '../../component-library/Transition';
 import FilterFieldset from '../FilterFieldset';
+import ColorLabel from '../ColorLabel';
 
 const ID = 'sort_' + randomString();
 
@@ -379,6 +380,19 @@ const FILTER_TECHNOLOGY = {
   ],
 };
 
+const FILTER_COLOR = {
+  label: 'Цвет',
+  name: 'color',
+  items: [
+    { value: '#000', label: 'Черный', count: 24 },
+    { value: '#fff', label: 'Белый', count: 48 },
+    { value: '#eb5757', label: 'Красный', count: 60 },
+    { value: '#2d9cdb', label: 'Синий', count: 13 },
+    { value: '#f2c94c', label: 'Желтый', count: 81 },
+    { value: '#f2994a', label: 'Оранжевый', count: 55 },
+  ],
+};
+
 const MEDIAQUERIES = ['( max-width: 991.98px )'];
 
 type TProductListFilteredProps = { className?: string };
@@ -387,6 +401,14 @@ function ProductListFiltered({
 }: TProductListFilteredProps): JSX.Element {
   const [hideFilter, setHideFilter] = useState(false);
   const [isSmallerThanTablet] = useMatchMedia(MEDIAQUERIES);
+
+  const filterColor = {
+    ...FILTER_COLOR,
+    items: FILTER_COLOR.items.map((item) => ({
+      ...item,
+      label: <ColorLabel color={item.value} label={item.label} />,
+    })),
+  };
 
   function toggleHideFilter() {
     setHideFilter((prev) => !prev);
@@ -481,6 +503,11 @@ function ProductListFiltered({
                   <FilterFieldset
                     defaultOpen={true}
                     data={FILTER_TECHNOLOGY}
+                    className="product-list-filtered__filter"
+                  />
+                  <FilterFieldset
+                    defaultOpen={true}
+                    data={filterColor}
                     className="product-list-filtered__filter"
                   />
                 </div>

@@ -1,0 +1,20 @@
+@import '/src/styles/global-scss.scss';
+
+.color-label {
+  display: flex;
+  align-items: center;
+  column-gap: rem(6);
+  // .color-label__color
+  &__color {
+    width: rem(5);
+    height: rem(16);
+    border-radius: rem(10);
+
+    &_white {
+      border: rem(1) solid var(--black);
+    }
+  }
+  // .color-label__label
+  &__label {
+  }
+}
