@@ -393,6 +393,38 @@ const FILTER_COLOR = {
   ],
 };
 
+const FILTER_SHOP = {
+  label: 'Забрать сейчас: Москва',
+  name: 'shop',
+  items: [
+    {
+      label: 'Название магазина',
+      hint: 'ул. Энтузиастов 45. Метро Бабушкинская',
+      value: 'shop1',
+    },
+    {
+      label: 'Название магазина',
+      hint: 'ул. Энтузиастов 45. Метро Бабушкинская',
+      value: 'shop2',
+    },
+    {
+      label: 'Название магазина',
+      hint: 'ул. Энтузиастов 45. Метро Бабушкинская',
+      value: 'shop3',
+    },
+    {
+      label: 'Название магазина',
+      hint: 'ул. Энтузиастов 45. Метро Бабушкинская',
+      value: 'shop4',
+    },
+    {
+      label: 'Название магазина',
+      hint: 'ул. Энтузиастов 45. Метро Бабушкинская',
+      value: 'shop5',
+    },
+  ],
+};
+
 const MEDIAQUERIES = ['( max-width: 991.98px )'];
 
 type TProductListFilteredProps = { className?: string };
@@ -508,6 +540,11 @@ function ProductListFiltered({
                   <FilterFieldset
                     defaultOpen={true}
                     data={filterColor}
+                    className="product-list-filtered__filter"
+                  />
+                  <FilterFieldset
+                    defaultOpen={true}
+                    data={FILTER_SHOP}
                     className="product-list-filtered__filter"
                   />
                 </div>
