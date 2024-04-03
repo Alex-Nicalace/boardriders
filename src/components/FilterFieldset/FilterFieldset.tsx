@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './FilterFieldset.scss';
 import Details from '../../component-library/Details';
 import InputStyled from '../ui/InputStyled';
 import Checkbox from '../ui/Checkbox';
+import extractTextFromReactNode from '../../utils/extractTextFromReactNode';
 
 type TFilterFieldsetProps = {
   data: {
@@ -10,8 +11,9 @@ type TFilterFieldsetProps = {
     name: string;
     items: {
       value: string;
-      label?: string;
-      count: number;
+      label?: React.ReactNode;
+      count?: number;
+      hint?: React.ReactNode;
     }[];
   };
   className?: string;
@@ -31,7 +33,7 @@ function FilterFieldset({
     if (!serachValue) return items;
 
     return items.filter((item) =>
-      (item.label ?? item.value)
+      (item.label ? extractTextFromReactNode(item.label) : item.value)
         .toLowerCase()
         .includes(serachValue.toLowerCase())
     );
@@ -67,11 +69,16 @@ function FilterFieldset({
                 name={name}
                 value={item.value}
                 label={
-                  <Checkbox.Label
-                    label={item.label ?? item.value}
-                    count={item.count}
-                  />
+                  item.count ? (
+                    <Checkbox.LabelAmount
+                      label={item.label ?? item.value}
+                      count={item.count}
+                    />
+                  ) : (
+                    item.label ?? item.value
+                  )
                 }
+                hint={item.hint}
               />
             ))}
           </div>
