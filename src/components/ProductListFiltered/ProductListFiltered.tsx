@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import './ProductListFiltered.scss';
 import Steps from '../ui/Steps';
 import Title from '../ui/Title';
 import ToggleButton from '../ToggleButton';
-import randomString from '../../utils/randomString';
 import Select from '../../component-library/Select';
 import { SelectIcon } from '../ui/Icons';
 import useMatchMedia from '../../hooks/useMatchMedia';
@@ -11,8 +10,6 @@ import WareCard from '../ui/WareCard';
 import Transition, { TTransition } from '../../component-library/Transition';
 import FilterFieldset from '../FilterFieldset';
 import ColorLabel from '../ColorLabel';
-
-const ID = 'sort_' + randomString();
 
 const SORTS = [
   {
@@ -432,6 +429,8 @@ function ProductListFiltered({
   className = '',
 }: TProductListFilteredProps): JSX.Element {
   const [hideFilter, setHideFilter] = useState(false);
+  const id = useId();
+  const selectId = id + '-select';
   const [isSmallerThanTablet] = useMatchMedia(MEDIAQUERIES);
 
   const filterColor = {
@@ -474,12 +473,12 @@ function ProductListFiltered({
                   />
                   <div className="product-list-filtered__sort">
                     <span className="product-list-filtered__sort-label">
-                      <label htmlFor={ID}>Сортировать по:</label>
+                      <label htmlFor={selectId}>Сортировать по:</label>
                     </span>
                     <Select
                       className="product-list-filtered__sort-select"
                       iconElement={<SelectIcon />}
-                      id={ID}
+                      id={selectId}
                     >
                       {SORTS.map((sort) => (
                         <Select.Option key={sort.value} value={sort.value}>
@@ -494,7 +493,7 @@ function ProductListFiltered({
                   <Select
                     className="product-list-filtered__sort-select"
                     iconElement={<SelectIcon />}
-                    id={ID}
+                    id={selectId}
                     placreholder="Сортировать"
                   >
                     {SORTS.map((sort) => (
@@ -534,12 +533,12 @@ function ProductListFiltered({
                   />
                   <FilterFieldset
                     defaultOpen={true}
-                    data={FILTER_TECHNOLOGY}
+                    data={filterColor}
                     className="product-list-filtered__filter"
                   />
                   <FilterFieldset
                     defaultOpen={true}
-                    data={filterColor}
+                    data={FILTER_TECHNOLOGY}
                     className="product-list-filtered__filter"
                   />
                   <FilterFieldset
