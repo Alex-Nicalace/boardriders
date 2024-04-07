@@ -15,7 +15,11 @@ type TRangeSliderProps<T> = (
   max: number;
   step?: number;
   name?: string;
-  onChange?: (value: T, activeThumb?: number, e?: PointerEvent) => void;
+  onChange?: (
+    value: T,
+    activeThumb?: number,
+    e?: PointerEvent | React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void;
 };
 
 type TValue = number | number[];
@@ -50,8 +54,8 @@ function RangeSlider<T extends TValue>({
 
   function setValue(
     valueArr: number[],
-    e?: PointerEvent,
-    activeThumb?: number
+    activeThumb?: number,
+    e?: PointerEvent | React.MouseEvent<HTMLDivElement, MouseEvent>
   ) {
     const newValue = (isNumberState ? valueArr[0] : valueArr) as T;
     if (onChange) {
@@ -176,7 +180,7 @@ function RangeSlider<T extends TValue>({
         setVariables(indexThumb + increment, copyValue);
       }
 
-      setValue([...copyValue], e, indexThumb);
+      setValue([...copyValue], indexThumb, e);
     };
 
     moveAt(e.pageX);
@@ -196,8 +200,39 @@ function RangeSlider<T extends TValue>({
     }
   }
 
+  /**
+   * передвинуть ползунок под координаты курсора при клике по шкале
+   */
+  function handleOnClickSlider(
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) {
+    const sliderEl = sliderRef.current;
+    if (!sliderEl) return;
+
+    const sliderCoord = sliderEl.getBoundingClientRect();
+    // получить X клика
+    const valueX = Math.max(
+      Math.min(e.pageX - sliderCoord.left, sliderCoord.width),
+      0
+    );
+    const value = convertPageXToValue(valueX, sliderCoord.width);
+    // найти индекс ближайшего бегунка к курсору
+    const indexUpdate = getValue().reduce(
+      (prevIndex, currentValue, index, arr) =>
+        Math.abs(currentValue - value) < Math.abs(arr[prevIndex] - value)
+          ? index
+          : prevIndex,
+      0
+    );
+    setValue(
+      getValue().map((v, i) => (i === indexUpdate ? value : v)),
+      indexUpdate,
+      e
+    );
+  }
+
   return (
-    <div className="range-slider" ref={sliderRef}>
+    <div className="range-slider" ref={sliderRef} onClick={handleOnClickSlider}>
       <div className="range-slider__rail"></div>
       <div className="range-slider__track" ref={trackRef}></div>
       {getValue().map((value, index) => (
