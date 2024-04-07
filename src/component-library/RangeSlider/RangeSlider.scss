@@ -1,0 +1,84 @@
+@use 'sass:math';
+@import '/src/styles/global-scss.scss';
+
+.range-slider {
+  $height-slider: 25;
+  padding: rem(math.div($height-slider, 2)) 0;
+  position: relative;
+  // height: rem(4);
+  color: var(--red);
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  touch-action: none;
+  &__rail,
+  &__track {
+    height: rem(5);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  // .range-slider__rail
+  &__rail {
+    // вся полоса
+    position: absolute;
+    width: 100%;
+    left: 0;
+    background-color: var(--dark-gray);
+    border-radius: rem(10);
+  }
+  // .range-slider__track
+  &__track {
+    // м/у ползунками
+    position: absolute;
+    width: var(--width, 0);
+    left: var(--left, 0);
+
+    background-color: currentColor;
+  }
+  &__thumb {
+    // ползунки
+
+    position: absolute;
+    top: 50%;
+    left: var(--left, 0);
+
+    width: rem($height-slider);
+    height: rem($height-slider);
+
+    touch-action: none;
+
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: currentColor;
+
+    cursor: pointer;
+
+    input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      clip: rect(0 0 0 0);
+    }
+
+    &::before {
+      padding: rem(2) rem(10);
+      position: absolute;
+      content: '$' attr(data-value);
+      top: rem(-29);
+      left: 50%;
+      transform: translateX(-50%);
+
+      background-color: var(--dark-gray);
+      border-radius: rem(4);
+
+      @extend %caption-capital-1;
+      color: var(--white);
+    }
+  }
+  @media (any-hover: hover) {
+    &:hover {
+      // color: lighten($color-primary, 5%);
+    }
+  }
+}
