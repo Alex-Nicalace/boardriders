@@ -1,0 +1,28 @@
+@import '/src/styles/global-scss.scss';
+
+.checkbox-group {
+  // .checkbox-group__search
+  &__search {
+    .input-main__input {
+      padding: rem(9) rem(15);
+      @extend %caption-1;
+    }
+    &:not(:last-child) {
+      margin-bottom: rem(20);
+    }
+  }
+  // .checkbox-group__list
+  &__list {
+    max-height: rem(200);
+    padding-right: rem(18);
+    padding-left: rem(4);
+    display: grid;
+    row-gap: rem(10);
+    overflow: auto;
+
+    @extend %scrollbar;
+  }
+  // .checkbox-group__filter
+  &__filter {
+  }
+}
