@@ -8,8 +8,9 @@ import { SelectIcon } from '../ui/Icons';
 import useMatchMedia from '../../hooks/useMatchMedia';
 import WareCard from '../ui/WareCard';
 import Transition, { TTransition } from '../../component-library/Transition';
-import FilterFieldset from '../FilterFieldset';
+import CollapsiblePanel from '../CollapsiblePanel';
 import ColorLabel from '../ColorLabel';
+import CheckboxGroup from '../CheckboxGroup';
 
 const SORTS = [
   {
@@ -515,37 +516,68 @@ function ProductListFiltered({
             <div className="product-list-filtered__body">
               {(state !== 'exited' || !hideFilter) && (
                 <div className="product-list-filtered__filters">
-                  <FilterFieldset
+                  <CollapsiblePanel
                     defaultOpen={true}
-                    data={FILTER_CATEGORY}
                     className="product-list-filtered__filter"
-                  />
-                  <FilterFieldset
+                    sammary={FILTER_CATEGORY.label}
+                  >
+                    <CheckboxGroup
+                      items={FILTER_CATEGORY.items}
+                      name={FILTER_CATEGORY.name}
+                    />
+                  </CollapsiblePanel>
+                  <CollapsiblePanel
                     defaultOpen={true}
-                    data={FILTER_BRAND}
                     className="product-list-filtered__filter"
-                    isSearchable
-                  />
-                  <FilterFieldset
+                    sammary={FILTER_BRAND.label}
+                  >
+                    <CheckboxGroup
+                      items={FILTER_BRAND.items}
+                      name={FILTER_BRAND.name}
+                      isSearchable
+                    />
+                  </CollapsiblePanel>
+                  <CollapsiblePanel
                     defaultOpen={true}
-                    data={FILTER_SIZE}
                     className="product-list-filtered__filter"
-                  />
-                  <FilterFieldset
+                    sammary={FILTER_SIZE.label}
+                  >
+                    <CheckboxGroup
+                      items={FILTER_SIZE.items}
+                      name={FILTER_SIZE.name}
+                    />
+                  </CollapsiblePanel>
+
+                  <CollapsiblePanel
                     defaultOpen={true}
-                    data={filterColor}
                     className="product-list-filtered__filter"
-                  />
-                  <FilterFieldset
+                    sammary={filterColor.label}
+                  >
+                    <CheckboxGroup
+                      items={filterColor.items}
+                      name={filterColor.name}
+                    />
+                  </CollapsiblePanel>
+                  <CollapsiblePanel
                     defaultOpen={true}
-                    data={FILTER_TECHNOLOGY}
                     className="product-list-filtered__filter"
-                  />
-                  <FilterFieldset
+                    sammary={FILTER_TECHNOLOGY.label}
+                  >
+                    <CheckboxGroup
+                      items={FILTER_TECHNOLOGY.items}
+                      name={FILTER_TECHNOLOGY.name}
+                    />
+                  </CollapsiblePanel>
+                  <CollapsiblePanel
                     defaultOpen={true}
-                    data={FILTER_SHOP}
                     className="product-list-filtered__filter"
-                  />
+                    sammary={FILTER_SHOP.label}
+                  >
+                    <CheckboxGroup
+                      items={FILTER_SHOP.items}
+                      name={FILTER_SHOP.name}
+                    />
+                  </CollapsiblePanel>
                 </div>
               )}
               <div className="product-list-filtered__products">
