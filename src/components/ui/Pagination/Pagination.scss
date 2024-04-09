@@ -1,0 +1,46 @@
+@import '/src/styles/global-scss.scss';
+
+.pagination {
+  // .pagination__list
+  &__list {
+    display: flex;
+  }
+  // .pagination__item
+  &__item {
+    &_active {
+      color: var(--red);
+    }
+  }
+  // .pagination__button
+  &__button {
+    @extend %body-1;
+    height: rem(40);
+    padding: 0 rem(10);
+
+    &:disabled {
+      cursor: default;
+    }
+    // .pagination__button_prev
+    &_prev {
+      margin-right: rem(20);
+      transform: rotate(90deg);
+    }
+    // .pagination__button_next
+    &_next {
+      margin-left: rem(20);
+      transform: rotate(-90deg);
+    }
+    &_prev,
+    &_next {
+      padding: 0;
+      width: rem(40);
+      color: var(--white);
+      background-color: var(--black);
+
+      &:disabled {
+        color: var(--dark-gray);
+        cursor: not-allowed;
+      }
+    }
+  }
+}
