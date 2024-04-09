@@ -14,12 +14,14 @@ type TCheckboxGroupProps = {
     hint?: React.ReactNode;
   }[];
   className?: string;
+  type?: 'checkbox' | 'radio';
 };
 function CheckboxGroup({
   isSearchable,
   items,
   name,
   className = '',
+  type,
 }: TCheckboxGroupProps): JSX.Element {
   const [serachValue, setSerachValue] = useState('');
 
@@ -47,6 +49,7 @@ function CheckboxGroup({
       <div className="checkbox-group__list">
         {itemsFiltered.map((item) => (
           <Checkbox
+            type={type}
             className="checkbox-group__filter"
             key={item.value}
             name={name}
