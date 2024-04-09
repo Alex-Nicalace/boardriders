@@ -1,0 +1,58 @@
+@import '/src/styles/global-scss.scss';
+
+.range-selector {
+  // .range-selector__inputs
+  &__inputs {
+    display: flex;
+    align-items: center;
+    column-gap: rem(10);
+
+    &:not(:last-child) {
+      margin-bottom: rem(35);
+    }
+
+    &::before {
+      content: '';
+      height: rem(1);
+      width: rem(12);
+      background-color: var(--gray--1);
+      order: 2;
+    }
+
+    /* Для браузеров на базе Webkit (например, Chrome и Safari) */
+    input[type='number']::-webkit-outer-spin-button,
+    input[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Для Firefox */
+    input[type='number'] {
+      -moz-appearance: textfield;
+    }
+
+    .input-main__input {
+      padding: rem(4) rem(10);
+    }
+  }
+  // .range-selector__from
+  &__from {
+    width: rem(109);
+    order: 1;
+  }
+  // .range-selector__to
+  &__to {
+    width: rem(109);
+    order: 3;
+  }
+  // .range-selector__ok
+  &__ok {
+    padding: rem(2.5) rem(10);
+    flex-grow: 1;
+    order: 3;
+  }
+  // .range-selector__slider
+  &__slider {
+    margin: 0 rem(13);
+  }
+}
