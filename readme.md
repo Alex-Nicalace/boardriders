@@ -32,6 +32,10 @@
 
 [useForwardRef.ts](src/hooks/useForwardRef.ts) или можно назвать `useCopyRef` Когда используется "Доступ к узлам DOM другого компонента" посредством использования `forwardRef` и в самом дочернем элементе необходимо использовать ссылку, то этот хук в помощь. в итоге и родительский компонент имеет ссылку и местная ссылка в деле и обе ссылке указывают на один и тот же узел
 
+## Хуки
+
+[useId](https://react.dev/reference/react/useId) - генерации уникальных идентификаторов
+
 ## CSS
 
 ### clip-path
@@ -39,3 +43,11 @@
 Использовал для декорации футера
 
 `clip-path: polygon(x y, x,y, ... )` - [Footer.scss](./src/components/Footer/Footer.scss)
+
+## Utils
+
+[extractTextFromReactNode.ts](src/utils/extractTextFromReactNode.ts) - Функция принимает `React.ReactNode` и возвращает только текстовые данные. Функция рекурсивная.
+
+[randomString.ts](src/utils/randomString.ts) - случайная строка. То для каких целей я использовал в проекте можно заменить хуком `useId`
+
+[visibilityScrollDocument.ts](src/utils/visibilityScrollDocument.ts) - скрыть/показать скролл документа, перестал использовать после создания хука [useLockDocumentScroll.ts](./src/hooks/useLockDocumentScroll.ts)
