@@ -11,6 +11,7 @@ type TRangeSliderProps<T> = (
       defaultValue: T;
     }
 ) & {
+  className?: string;
   min: number;
   max: number;
   step?: number;
@@ -25,6 +26,7 @@ type TRangeSliderProps<T> = (
 type TValue = number | number[];
 
 function RangeSlider<T extends TValue>({
+  className = '',
   min,
   max,
   step = 1,
@@ -47,9 +49,12 @@ function RangeSlider<T extends TValue>({
   const getValue = useCallback(
     function getValue() {
       const result = (value as TValue) ?? valueState;
-      return Array.isArray(result) ? [...result] : [result];
+      // результат отсортировать и ограничить максимальным и минимальным значением
+      return (Array.isArray(result) ? [...result] : [result])
+        .sort((a, b) => a - b)
+        .map((v) => Math.min(Math.max(v, min), max));
     },
-    [value, valueState]
+    [value, valueState, min, max]
   );
 
   function setValue(
@@ -232,7 +237,11 @@ function RangeSlider<T extends TValue>({
   }
 
   return (
-    <div className="range-slider" ref={sliderRef} onClick={handleOnClickSlider}>
+    <div
+      className={`range-slider ${className}`}
+      ref={sliderRef}
+      onClick={handleOnClickSlider}
+    >
       <div className="range-slider__rail"></div>
       <div className="range-slider__track" ref={trackRef}></div>
       {getValue().map((value, index) => (
