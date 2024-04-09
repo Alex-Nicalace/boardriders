@@ -1,6 +1,5 @@
 import { ButtonHTMLAttributes } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
-
 import './Button.scss';
 
 type TCustomProps = {
@@ -15,9 +14,6 @@ interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 type TButtonOrLink = IButton | LinkProps;
 
 type TButtonProps = TButtonOrLink & TCustomProps;
-function isLinkProps(obj: any): obj is LinkProps {
-  return 'to' in obj;
-}
 
 function Button(props: TButtonProps): JSX.Element {
   const {
@@ -27,25 +23,23 @@ function Button(props: TButtonProps): JSX.Element {
     ...rest // пропсы характерные для button или Link
   } = props;
 
-  const defaultProps = rest as TButtonOrLink;
-
   const classNameValue = `${
-    defaultProps.className || ''
+    rest.className || ''
   } button-${color} button-${color}_${variant} ${
     fullWidth ? `button-${color}_fullwidth` : ''
   }`;
 
-  if (isLinkProps(defaultProps)) {
+  if (rest.to !== undefined) {
     return (
-      <Link {...defaultProps} className={classNameValue} type="">
-        {defaultProps.children}
+      <Link {...rest} className={classNameValue} type="">
+        {rest.children}
       </Link>
     );
   }
 
   return (
-    <button className={classNameValue} {...defaultProps}>
-      {defaultProps.children}
+    <button {...rest} className={classNameValue}>
+      {rest.children}
     </button>
   );
 }
