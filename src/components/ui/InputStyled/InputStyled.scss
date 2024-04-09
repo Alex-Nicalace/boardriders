@@ -37,6 +37,7 @@
   }
   // .input-main__input
   &__input {
+    width: 100%;
     @extend %body-2;
     padding: rem(11.5) rem(19);
     border: 1px solid var(--gray);

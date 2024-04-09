@@ -41,7 +41,7 @@
 
   // .collapsible-panel[open]
   &[open] {
-    .filter-fieldset__summary-marker {
+    .collapsible-panel__summary-marker {
       &::after {
         opacity: 0;
         visibility: hidden;
