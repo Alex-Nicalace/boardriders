@@ -11,6 +11,7 @@ import Transition, { TTransition } from '../../component-library/Transition';
 import CollapsiblePanel from '../CollapsiblePanel';
 import ColorLabel from '../ColorLabel';
 import CheckboxGroup from '../CheckboxGroup';
+import RangeSelector from '../RangeSelector';
 
 const SORTS = [
   {
@@ -333,6 +334,15 @@ const FILTER_CATEGORY = {
   ],
 };
 
+const FILTER_SHOW = {
+  label: 'Смотреть',
+  name: 'show',
+  items: [
+    { value: 'all', label: 'Все товары', count: 368 },
+    { value: 'sale', label: 'Только со скидкой', count: 48 },
+  ],
+};
+
 const FILTER_BRAND = {
   label: 'Бренды',
   name: 'brand',
@@ -529,6 +539,17 @@ function ProductListFiltered({
                   <CollapsiblePanel
                     defaultOpen={true}
                     className="product-list-filtered__filter"
+                    sammary={FILTER_SHOW.label}
+                  >
+                    <CheckboxGroup
+                      items={FILTER_SHOW.items}
+                      name={FILTER_SHOW.name}
+                      type="radio"
+                    />
+                  </CollapsiblePanel>
+                  <CollapsiblePanel
+                    defaultOpen={true}
+                    className="product-list-filtered__filter"
                     sammary={FILTER_BRAND.label}
                   >
                     <CheckboxGroup
@@ -547,7 +568,9 @@ function ProductListFiltered({
                       name={FILTER_SIZE.name}
                     />
                   </CollapsiblePanel>
-
+                  <CollapsiblePanel defaultOpen={true} sammary="Цена, ₽">
+                    <RangeSelector />
+                  </CollapsiblePanel>
                   <CollapsiblePanel
                     defaultOpen={true}
                     className="product-list-filtered__filter"
