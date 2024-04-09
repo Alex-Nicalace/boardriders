@@ -53,7 +53,6 @@ function InputText({
         )}
         <input
           className={`${bemBlockName}__input`}
-          type="text"
           {...inputProps}
           aria-invalid={hasError}
         />
