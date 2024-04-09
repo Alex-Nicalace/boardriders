@@ -12,6 +12,8 @@ import CollapsiblePanel from '../CollapsiblePanel';
 import ColorLabel from '../ColorLabel';
 import CheckboxGroup from '../CheckboxGroup';
 import RangeSelector from '../RangeSelector';
+import Pagination from '../ui/Pagination';
+import Button from '../ui/Button';
 
 const SORTS = [
   {
@@ -603,14 +605,23 @@ function ProductListFiltered({
                   </CollapsiblePanel>
                 </div>
               )}
-              <div className="product-list-filtered__products">
-                {PRODUCTS_DATA.map((product) => (
-                  <WareCard
-                    key={product.wareId}
-                    className="product-list-filtered__product"
-                    wareDate={product}
-                  />
-                ))}
+              <div className="product-list-filtered__products-wrapper">
+                <div className="product-list-filtered__products">
+                  {PRODUCTS_DATA.map((product) => (
+                    <WareCard
+                      key={product.wareId}
+                      className="product-list-filtered__product"
+                      wareDate={product}
+                    />
+                  ))}
+                </div>
+                <Pagination
+                  className="product-list-filtered__pagination"
+                  currentPage={1}
+                  totalPages={659}
+                  visiblePageNumbers={4}
+                />
+                <Button>Показать больше</Button>
               </div>
             </div>
           </div>

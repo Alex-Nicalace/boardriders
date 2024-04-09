@@ -111,6 +111,10 @@
     column-gap: var(--gap-products);
     row-gap: rem(50);
 
+    &:not(:last-child) {
+      margin-bottom: rem(75);
+    }
+
     @include tablet-d {
       justify-content: space-between;
       column-gap: normal;
@@ -143,6 +147,14 @@
           transition: flex-basis 0.3s ease 0.3s;
         }
       }
+    }
+  }
+  &__pagination {
+    display: flex;
+    justify-content: center;
+
+    &:not(:last-child) {
+      margin-bottom: rem(75);
     }
   }
 }
