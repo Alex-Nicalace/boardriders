@@ -12,15 +12,21 @@ type TBreadcrumbsProps = {
   data: TBreadcrumbsData;
   color?: 'black' | 'white';
   className?: string;
+  withContainer?: boolean;
 };
 function Breadcrumbs({
   data,
   color,
   className = '',
+  withContainer = false,
 }: TBreadcrumbsProps): JSX.Element {
   const modificator = color === 'white' ? 'breadcrumbs_white' : '';
   return (
-    <nav className={`${className} breadcrumbs ${modificator}`}>
+    <nav
+      className={`breadcrumbs ${modificator} ${
+        withContainer ? 'breadcrumbs__container' : ''
+      } ${className}`}
+    >
       <ListLinks
         linksData={data}
         renderToItem={({ to, title }) =>
@@ -29,7 +35,7 @@ function Breadcrumbs({
               {title}
             </Link>
           ) : (
-            <span>{title}</span>
+            <span className="breadcrumbs__label">{title}</span>
           )
         }
         listProps={{ className: 'breadcrumbs__list' }}

@@ -20,6 +20,10 @@
     letter-spacing: -0.02em;
   }
 
+  &__label {
+    color: var(--dark-gray);
+  }
+
   &_white {
     .breadcrumbs__item {
       color: var(--light-gray);
