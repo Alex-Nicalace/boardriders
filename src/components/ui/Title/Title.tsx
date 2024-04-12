@@ -18,8 +18,8 @@ function Title({
   children,
   color = 'black',
 }: TTitleProps): JSX.Element {
-  const classSummary = `${className} header header_${kind} ${
-    color !== 'black' ? `header_${color}` : ''
+  const classSummary = `${className} title title_${kind} ${
+    color !== 'black' ? `title_${color}` : ''
   }`;
 
   const childrenElement = supNode ? (
