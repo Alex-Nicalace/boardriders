@@ -6,15 +6,13 @@ import imgBgJoin from './../../assets/img/join-and-subscrube/join.jpg';
 import imgBgsubScribe from './../../assets/img/join-and-subscrube/subscribe.jpg';
 import Button from '../ui/Button';
 import InputStyled from '../ui/InputStyled';
-import useMatchMedia from '../../hooks/useMatchMedia';
-
-const MEDIAQUERY = ['(max-width: 479px)'];
+import { useScreenWidth } from '../../Context/useScreenWidthContext';
 
 type TJoinAndSubscrubeProps = { className?: string };
 function JoinAndSubscrube({
   className = '',
 }: TJoinAndSubscrubeProps): JSX.Element {
-  const [isSmall] = useMatchMedia(MEDIAQUERY);
+  const { isLessMobileSmall } = useScreenWidth();
   return (
     <div className={`${className} join-and-subscrube`}>
       <div className="join-and-subscrube__container">
@@ -33,12 +31,12 @@ function JoinAndSubscrube({
         <Invitation
           className="join-and-subscrube__subscrube"
           header="Скидка -10%"
-          iconElement={!isSmall && <EmailIcon />}
+          iconElement={!isLessMobileSmall && <EmailIcon />}
           imgBg={imgBgsubScribe}
           text="За подписку на наши новости"
           actionElement={
             <>
-              {!isSmall ? (
+              {!isLessMobileSmall ? (
                 <InputStyled
                   varint="second"
                   placeholder="E-mail"

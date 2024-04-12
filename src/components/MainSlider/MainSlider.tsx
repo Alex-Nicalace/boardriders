@@ -4,8 +4,8 @@ import { Navigation, Pagination } from 'swiper/modules';
 
 import 'swiper/scss';
 import './MainSlider.scss';
-import useMatchMedia from '../../hooks/useMatchMedia';
 import { MainSliderButtons } from './MainSliderButtons';
+import { useScreenWidth } from '../../Context/useScreenWidthContext';
 
 const PATH = '/src/assets/img/main-slider/';
 const DATA_SLIDES = [
@@ -32,19 +32,17 @@ const DATA_SLIDES = [
   },
 ];
 
-const MEDIAQUERY = [`(min-width: 1500px)`, `(max-width: 767.98px)`];
-
 interface IMainSliderProps {
   className?: string;
 }
 function MainSlider({ className = '' }: IMainSliderProps): JSX.Element {
-  const [isLarge, isMobile] = useMatchMedia(MEDIAQUERY);
+  const { isOverLarge, isLessMobile } = useScreenWidth();
 
   return (
     <section className={`${className} main-slider`}>
       <div className="main-slider__container">
         <Swiper
-          key={`${Number(isLarge)}${Number(isMobile)}`}
+          key={`${Number(isOverLarge)}${Number(isLessMobile)}`}
           className="main-slider__sliders"
           wrapperClass="main-slider__wrapper"
           modules={[Navigation, Pagination]}
@@ -87,9 +85,9 @@ function MainSlider({ className = '' }: IMainSliderProps): JSX.Element {
               </Link>
             </SwiperSlide>
           ))}
-          {!isLarge && !isMobile && <MainSliderButtons />}
+          {!isOverLarge && !isLessMobile && <MainSliderButtons />}
         </Swiper>
-        {isLarge && <MainSliderButtons />}
+        {isOverLarge && <MainSliderButtons />}
       </div>
     </section>
   );

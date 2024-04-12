@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import AppLayout from './components/AppLayout';
 import CatalogPage from './pages/CatalogPage';
+import ScreenWidthProvider from './Context/ScreenWidthContext';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ScreenWidthProvider>
+      <RouterProvider router={router} />
+    </ScreenWidthProvider>
+  );
 }
 
 export default App;

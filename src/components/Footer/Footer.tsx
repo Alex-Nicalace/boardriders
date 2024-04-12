@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Footer.scss';
 import logoIcon from '../../assets/icons/logo-white.png';
 import appStoreIcon from '../../assets/icons/app-store.png';
@@ -16,8 +17,7 @@ import {
 } from '../ui/Icons';
 import ListLinks from '../../component-library/ListLinks';
 import Accordion from '../../component-library/Accordion';
-import { Link } from 'react-router-dom';
-import useMatchMedia from '../../hooks/useMatchMedia';
+import { useScreenWidth } from '../../Context/useScreenWidthContext';
 
 const SOCIALS = [
   {
@@ -141,18 +141,16 @@ const CONTACTS_DATA: {
   },
 ];
 
-const MEDIAQUERY = ['(max-width: 991.98px)', '(max-width: 767.98px)'];
-
 // type TFooterProps = {};
 function Footer(): JSX.Element {
-  const [isSmallerThanPC, isSmallerThanMobile] = useMatchMedia(MEDIAQUERY);
+  const { isLessTablet, isLessMobile } = useScreenWidth();
 
   return (
     <footer className="footer">
       <div className="footer__wrapper">
         <div className="footer__container">
           <div className="footer__top">
-            {!isSmallerThanMobile && (
+            {!isLessMobile && (
               <Link to="/" className="footer__logo">
                 <img
                   className="footer__logo-img"
@@ -177,7 +175,7 @@ function Footer(): JSX.Element {
             </div>
           </div>
           <div className="footer__middle">
-            {isSmallerThanPC && <SocialsLinks />}
+            {isLessTablet && <SocialsLinks />}
             <div className="footer__apps">
               <p className="footer__title-apps footer__title">
                 Доступ к ранним релизам в приложении
@@ -204,7 +202,7 @@ function Footer(): JSX.Element {
                   />
                 </a>
               </div>
-              {!isSmallerThanPC && (
+              {!isLessTablet && (
                 <div className="footer__qr">
                   <img className="footer__qr-img" src={qrIcon} alt="QR" />
                 </div>
@@ -262,7 +260,7 @@ function Footer(): JSX.Element {
             </Accordion>
           </div>
           <div className="footer__bottom">
-            {!isSmallerThanPC && <SocialsLinks />}
+            {!isLessTablet && <SocialsLinks />}
             <p className="footer__copyright">© 2020. Все права защищены.</p>
           </div>
         </div>

@@ -1,5 +1,11 @@
 # Boradriders
 
+## Контекст
+
+[src/Context/BurgerContext.tsx](BurgerContext) - данные об открытом закрытом бургере
+
+[src/Context/ScreenWidthContext.tsx](ScreenWidthContext) - данные о ширине экрана
+
 ## Компоненты, кот. можно применить в других проектах
 
 [InputText](./src/component-library/InputText/InputText.tsx)
@@ -31,6 +37,10 @@
 [usePrevious.ts](./src/hooks/usePrevious.ts) Хук, который возвращает предыдущее значение входного параметра из предыдущего рендера.
 
 [useForwardRef.ts](src/hooks/useForwardRef.ts) или можно назвать `useCopyRef` Когда используется "Доступ к узлам DOM другого компонента" посредством использования `forwardRef` и в самом дочернем элементе необходимо использовать ссылку, то этот хук в помощь. в итоге и родительский компонент имеет ссылку и местная ссылка в деле и обе ссылке указывают на один и тот же узел
+
+[src/Context/useScreenWidthContext.ts](useScreenWidthContext) - данные о ширине экрана
+
+[src/Context/useBurgerContext.ts](useBurgerContext) - данные об открытом бургере
 
 ## Хуки
 
