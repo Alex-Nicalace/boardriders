@@ -4,6 +4,9 @@
   // .pagination__list
   &__list {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: rem(5);
   }
   // .pagination__item
   &__item {

@@ -7,6 +7,7 @@ type TPaginationProps = {
   totalPages: number;
   onPageChange?: (page: number) => void;
   visiblePageNumbers?: number;
+  isShowNavigationButtons?: boolean;
 };
 function Pagination({
   className = '',
@@ -14,6 +15,7 @@ function Pagination({
   totalPages,
   onPageChange = () => {},
   visiblePageNumbers = 5,
+  isShowNavigationButtons = true,
 }: TPaginationProps): JSX.Element {
   const pageNumbers = generatePageNumbers();
 
@@ -83,15 +85,17 @@ function Pagination({
   return (
     <nav className={`pagination ${className}`} aria-label="Page navigation">
       <ul className="pagination__list">
-        <li className="pagination__item">
-          <button
-            className="pagination__button pagination__button_prev"
-            onClick={() => onPageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            <SelectIcon />
-          </button>
-        </li>
+        {isShowNavigationButtons && (
+          <li className="pagination__item">
+            <button
+              className="pagination__button pagination__button_prev"
+              onClick={() => onPageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              <SelectIcon />
+            </button>
+          </li>
+        )}
         {showFirstEllipsis}
         {pageNumbers.map((number) => (
           <li
@@ -109,15 +113,17 @@ function Pagination({
           </li>
         ))}
         {showLastEllipsis}
-        <li className="pagination__item">
-          <button
-            className="pagination__button pagination__button_next"
-            onClick={() => onPageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            <SelectIcon />
-          </button>
-        </li>
+        {isShowNavigationButtons && (
+          <li className="pagination__item">
+            <button
+              className="pagination__button pagination__button_next"
+              onClick={() => onPageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              <SelectIcon />
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );
