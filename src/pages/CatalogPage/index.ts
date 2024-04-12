@@ -1,4 +1,4 @@
-import Catalog from './CatalogPage';
+import CatalogPage from './CatalogPage';
 
-export default Catalog;
+export default CatalogPage;
 export * from './CatalogPage';

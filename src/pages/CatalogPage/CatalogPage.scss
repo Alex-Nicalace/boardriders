@@ -1,16 +1,28 @@
 @import '/src/styles/global-scss.scss';
 
-.catalog {
+.catalog-page {
+  // .catalog-page__breadcrumbs
+  &__breadcrumbs {
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 35, 25);
+    }
+  }
+
+  // .catalog-page__promo-slider
   &__promo-slider {
     &:not(:last-child) {
       @include adaptiveValue('margin-bottom', 50, 35);
     }
   }
+
+  // .catalog-page__product-categories-slider
   &__product-categories-slider {
     &:not(:last-child) {
       margin-bottom: rem(50);
     }
   }
+
+  // .catalog-page__product-category-filter-cards
   &__product-category-filter-cards {
   }
 }
