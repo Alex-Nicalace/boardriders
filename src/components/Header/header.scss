@@ -1,6 +1,9 @@
 @import '/src/styles/global-scss.scss';
 
 .header {
+  @include tablet-d {
+    border-bottom: rem(6) solid var(--light-gray);
+  }
   // .header__topbar
   &__topbar {
   }
