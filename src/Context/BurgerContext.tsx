@@ -20,13 +20,12 @@ export default function BurgerProvider({
   useEffect(
     function () {
       if (isOpen) {
-        document.documentElement.classList.add('lock', 'menu-open');
+        document.documentElement.classList.add('menu-open');
       } else {
-        document.documentElement.classList.remove('lock', 'menu-open');
+        document.documentElement.classList.remove('menu-open');
       }
 
-      return () =>
-        document.documentElement.classList.remove('lock', 'menu-open');
+      return () => document.documentElement.classList.remove('menu-open');
     },
     [isOpen]
   );
