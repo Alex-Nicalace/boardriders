@@ -3,10 +3,10 @@ import { useEffect, useRef } from 'react';
 /**
  * Функция, обрабатывающая клик за пределами указанного элемента.
  *
- * @param {(e: MouseEvent) => void} handler - колбэк функция, которая будет выполнена при клике за пределами элемента
- * @param {boolean} [ignore=false] - флаг для указания игнорирования клика за пределами элемента
- * @param {boolean} [capture=true] - флаг для указания использования фазы захвата
- * @return {React.MutableRefObject<T>} ссылка на элемент
+ * @param handler - колбэк функция, которая будет выполнена при клике за пределами элемента
+ * @param ignore - флаг для указания игнорирования клика за пределами элемента
+ * @param capture - флаг для указания использования фазы захвата
+ * @return  ссылка на элемент
  */
 export function useOutsideClick<T extends HTMLElement>(
   handler: (e: MouseEvent) => void,
@@ -17,6 +17,8 @@ export function useOutsideClick<T extends HTMLElement>(
 
   useEffect(() => {
     if (ignore) return;
+    if (!elenemtRef.current) return;
+
     function handleClick(e: MouseEvent) {
       if (!elenemtRef.current?.contains(e.target as Node)) {
         handler(e);
