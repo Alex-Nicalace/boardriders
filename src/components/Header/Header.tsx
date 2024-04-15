@@ -1,24 +1,20 @@
 import './Header.scss';
-import MediaQuery from '../../component-library/MediaQuery';
 import BurgerMenu from './BurgerMenu';
 import MainMenu from './MainMenu';
 import TopbarHeader from './TopBarHeader';
 import MidbarHeader from './MidbarHeader';
+import { useScreenWidth } from '../../Context/useScreenWidthContext';
 
 // interface IHeaderProps {}
 function Header(): JSX.Element {
+  const { isLessTablet } = useScreenWidth();
+
   return (
     <header className="header">
-      <MediaQuery minWidth="tablet">
-        <TopbarHeader />
-      </MediaQuery>
+      {!isLessTablet && <TopbarHeader />}
       <MidbarHeader />
-      <MediaQuery minWidth="tablet">
-        <MainMenu />
-      </MediaQuery>
-      <MediaQuery maxWidth="tablet">
-        <BurgerMenu />
-      </MediaQuery>
+      {!isLessTablet && <MainMenu />}
+      {isLessTablet && <BurgerMenu />}
     </header>
   );
 }
