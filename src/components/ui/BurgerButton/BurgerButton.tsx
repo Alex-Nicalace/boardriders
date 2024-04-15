@@ -2,15 +2,14 @@ import { useBurgerContext } from '../../../Context/useBurgerContext';
 import './BurgerButton.scss';
 
 function BurgerButton(): JSX.Element {
-  const { isOpen, setOpenMenu } = useBurgerContext();
-  const className = isOpen ? 'burger burger_open' : 'burger';
+  const { setOpenMenu } = useBurgerContext();
 
   function handleToggleOpen() {
     setOpenMenu();
   }
 
   return (
-    <button className={className} onClick={handleToggleOpen}>
+    <button className="burger" onClick={handleToggleOpen}>
       <span></span>
     </button>
   );

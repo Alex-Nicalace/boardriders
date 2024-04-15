@@ -31,7 +31,7 @@ function Button(props: TButtonProps): JSX.Element {
 
   if (rest.to !== undefined) {
     return (
-      <Link {...rest} className={classNameValue} type="">
+      <Link {...rest} className={classNameValue}>
         {rest.children}
       </Link>
     );
