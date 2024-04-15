@@ -1,0 +1,29 @@
+@import '/src/styles/global-scss.scss';
+
+.button-menu {
+  @extend %body-2;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: rem(15);
+  padding: rem(11) rem(20);
+  border-bottom: rem(1) solid rgba(0, 0, 0, 0.08);
+  text-align: left;
+  // .button-menu__body
+  &__body {
+    flex-grow: 1;
+  }
+  // .button-menu__arrow
+  &__arrow {
+    transition: transform 0.3s ease 0s;
+  }
+  // .button-menu__link_active
+  &_active {
+    .burger-menu__arrow {
+      transform: scale(-1, 1);
+    }
+  }
+  &_red {
+    color: var(--red);
+  }
+}

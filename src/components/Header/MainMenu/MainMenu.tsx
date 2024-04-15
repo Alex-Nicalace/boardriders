@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import './MainMenu.scss';
-import { MENU_DATA, isIMenuData } from '../../../data/menuData';
+import { MENU_DATA } from '../../../data/menuData';
 import ListLinks from '../../../component-library/ListLinks';
 import Submenu from './Submenu';
 
@@ -23,7 +23,6 @@ function MainMenu(): JSX.Element {
             }}
             linksData={MENU_DATA}
             onMouseEnterItem={(data) => {
-              if (!isIMenuData(data)) return;
               setItemMenuHover(data.title);
             }}
             onMouseLeaveItem={() => setItemMenuHover('')}
@@ -41,7 +40,6 @@ function MainMenu(): JSX.Element {
               );
             }}
             getClassNameLink={(value) => {
-              if (!isIMenuData(value)) return '';
               return value.isAccented ? 'submenu__link_red' : '';
             }}
           />

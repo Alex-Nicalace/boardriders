@@ -30,24 +30,24 @@ type TListLinksProps<T> = (
 ) & {
   listProps?: HTMLAttributes<HTMLUListElement>;
   itemProps?: HTMLAttributes<HTMLLIElement>;
-  getClassNameItem?: (value: unknown) => string;
-  getClassNameLink?: (value: unknown) => string;
+  getClassNameItem?: (value: T) => string;
+  getClassNameLink?: (value: T) => string;
   bemBlockName?: string;
   renderToItem?: (value: T) => React.ReactNode;
   onMouseEnterItem?: (
-    data: unknown,
+    data: T,
     event: React.MouseEvent<HTMLLIElement, MouseEvent>
   ) => void;
   onMouseLeaveItem?: (
-    data: unknown,
+    data: T,
     event: React.MouseEvent<HTMLElement, MouseEvent>
   ) => void;
   onMouseEnterItemInner?: (
-    data: unknown,
+    data: T,
     event: React.MouseEvent<HTMLElement, MouseEvent>
   ) => void;
   onMouseLeaveItemInner?: (
-    data: unknown,
+    data: T,
     event: React.MouseEvent<HTMLElement, MouseEvent>
   ) => void;
 };

@@ -7,24 +7,21 @@ export interface ISubmenuProps {
   sections: Required<IMenuData>['submenu']['sections'];
   imgLinkData?: Required<IMenuData>['submenu']['imgLinkData'];
   isUsingContainer?: boolean;
-  bemBlockName?: string;
+  mode?: 'desktop' | 'mobile';
   isRenderImgLink?: boolean;
 }
 function Submenu({
   sections,
   imgLinkData,
-  bemBlockName = 'submenu',
+  mode = 'desktop',
   isUsingContainer = true,
   isRenderImgLink = true,
 }: ISubmenuProps): JSX.Element {
+  const bemBlockName = mode === 'desktop' ? 'submenu' : 'burger-submenu';
   const content = (
     <>
       {sections.map((section) => (
-        <SubMenuSection
-          key={section.title}
-          section={section}
-          bemBlockName={bemBlockName}
-        />
+        <SubMenuSection key={section.title} section={section} mode={mode} />
       ))}
       {imgLinkData && isRenderImgLink && (
         <SubMenuImgLink imgLinkData={imgLinkData} bemBlockName={bemBlockName} />
