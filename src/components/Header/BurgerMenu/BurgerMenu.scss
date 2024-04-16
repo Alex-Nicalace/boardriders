@@ -56,14 +56,15 @@
     border-bottom: rem(1) solid rgba(0, 0, 0, 0.08);
   }
 
-  &__delivery-region.delivery-region {
+  &__delivery-region {
     font-size: rem(12);
+    .delivery-region__select {
+      font-size: rem(12);
+    }
   }
 
   &__secondary-links.second-links {
-    .second-links__link {
-      font-size: rem(12);
-    }
+    font-size: rem(12);
   }
 }
 
@@ -82,25 +83,6 @@
   }
   &__item {
   }
-  // &__link {
-  //   @extend %body-2;
-  //   width: 100%;
-  //   display: flex;
-  //   align-items: center;
-  //   gap: rem(15);
-  //   padding: rem(11) rem(20);
-  //   border-bottom: rem(1) solid rgba(0, 0, 0, 0.08);
-  //   text-align: left;
-
-  //   &_active {
-  //     .burger-menu__arrow {
-  //       transform: scale(-1, 1);
-  //     }
-  //   }
-  //   &_red {
-  //     color: var(--red);
-  //   }
-  // }
   &__action {
   }
   &__figure {

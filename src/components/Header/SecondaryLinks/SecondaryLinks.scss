@@ -5,13 +5,14 @@
   align-items: center;
   // margin: 0 rem(-13);
   @include adaptiveValue('gap', 26, 13, $containerWidth, 992, 1);
+  @extend %caption;
+  @include adaptiveValue('font-size', 12, 10, $containerWidth, 992, 1);
   // .second-links__item
   &__item {
     // padding: 0 rem(13);
   }
   // .second-links__link
   &__link {
-    @extend %caption;
-    @include adaptiveValue('font-size', 12, 10, $containerWidth, 992, 1);
+    font: inherit;
   }
 }

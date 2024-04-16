@@ -1,26 +1,22 @@
 import { useState } from 'react';
-
 import './BurgerMenu.scss';
 import { MENU_DATA } from '../../../data/menuData';
-import { useBurgerContext } from '../../../Context/useBurgerContext';
 import ListLinks from '../../../component-library/ListLinks';
 import Submenu from '../MainMenu/Submenu';
 import { ArrowLeftIcon } from '../../ui/Icons';
 import Button from '../../ui/Button';
 import DeliveryRegion from '../DeliveryRegion';
 import SecondaryLinks from '../SecondaryLinks';
-import Popup from '../../Popup';
 import ButtonMenu from '../../ui/ButtonMenu';
 
-function BurgerMenu(): JSX.Element {
-  const { isOpen, setOpenMenu } = useBurgerContext();
+function BurgerMenu() {
   const [expandedMenu, setExpandedMenu] = useState('');
   const expandedMenuData = MENU_DATA.find(
     (item) => item.title === expandedMenu
   );
 
   return (
-    <Popup open={isOpen} close={setOpenMenu}>
+    <div className="burger-menu">
       <nav
         className={`burger-menu__nav ${
           expandedMenu ? 'burger-menu__nav_shifted' : ''
@@ -82,7 +78,7 @@ function BurgerMenu(): JSX.Element {
         <DeliveryRegion className="burger-menu__delivery-region" />
         <SecondaryLinks className="burger-menu__secondary-links" />
       </footer>
-    </Popup>
+    </div>
   );
 }
 

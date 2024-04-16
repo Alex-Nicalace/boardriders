@@ -1,9 +1,9 @@
 import './Header.scss';
-import BurgerMenu from './BurgerMenu';
 import MainMenu from './MainMenu';
 import TopbarHeader from './TopBarHeader';
 import MidbarHeader from './MidbarHeader';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
+import BurgerMenuPopup from '../BurgerMenuPopup';
 
 // interface IHeaderProps {}
 function Header(): JSX.Element {
@@ -14,7 +14,7 @@ function Header(): JSX.Element {
       {!isLessTablet && <TopbarHeader />}
       <MidbarHeader />
       {!isLessTablet && <MainMenu />}
-      {isLessTablet && <BurgerMenu />}
+      {isLessTablet && <BurgerMenuPopup />}
     </header>
   );
 }
