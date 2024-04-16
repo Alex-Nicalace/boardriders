@@ -2,20 +2,24 @@ import { useEffect } from 'react';
 
 /**
  * Пользовательский хук для блокировки прокрутки документа при вызове.
- *
- * @return {void} Нет возвращаемого значения
  */
 export function useLockDocumentScroll(ignore = false) {
+  const docEl = document.documentElement;
+
   useEffect(function () {
-    if (ignore) return;
-    const widthScroll =
-      window.innerWidth - document.documentElement.clientWidth;
-    document.documentElement.style.overflow = 'hidden';
-    document.documentElement.style.paddingRight = `${widthScroll}px`;
+    if (
+      ignore ||
+      (docEl.style.overflow.length && docEl.style.paddingRight.length)
+    )
+      return;
+
+    const initialStyles = docEl.style.cssText;
+    const widthScroll = window.innerWidth - docEl.clientWidth;
+    docEl.style.overflow = 'hidden';
+    docEl.style.paddingRight = `${widthScroll}px`;
 
     return () => {
-      document.documentElement.style.overflow = '';
-      document.documentElement.style.paddingRight = '';
+      docEl.style.cssText = initialStyles;
     };
   });
 }
