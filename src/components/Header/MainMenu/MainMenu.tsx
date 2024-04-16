@@ -5,21 +5,23 @@ import { MENU_DATA } from '../../../data/menuData';
 import ListLinks from '../../../component-library/ListLinks';
 import Submenu from './Submenu';
 
-// interface IMainMenuProps {}
+type TMainMenuProps = {
+  className?: string;
+};
 
-function MainMenu(): JSX.Element {
+function MainMenu({ className = '' }: TMainMenuProps): JSX.Element {
   const [itemMenuHover, setItemMenuHover] = useState('');
 
   return (
-    <div className="header__botbar botbar-header">
-      <div className="botbar-header__container">
-        <nav className="botbar-header__nav">
+    <div className={`main-menu ${className}`}>
+      <div className="main-menu__container">
+        <nav className="main-menu__nav">
           <ListLinks
             linkAs="Link"
-            listProps={{ className: 'botbar-header__menu' }}
-            itemProps={{ className: 'botbar-header__item' }}
+            listProps={{ className: 'main-menu__menu' }}
+            itemProps={{ className: 'main-menu__item' }}
             linkProps={{
-              className: 'botbar-header__link',
+              className: 'main-menu__link',
             }}
             linksData={MENU_DATA}
             onMouseEnterItem={(data) => {

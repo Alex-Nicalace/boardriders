@@ -1,24 +1,24 @@
 @import '/src/styles/global-scss.scss';
 
-.botbar-header {
+.main-menu {
   position: relative;
   background-color: var(--gray-2);
-  // .botbar-header__container
+  // .main-menu__container
   &__container {
   }
-  // .botbar-header__nav
+  // .main-menu__nav
   &__nav {
   }
-  // .botbar-header__menu
+  // .main-menu__menu
   &__menu {
     display: flex;
     // @include adaptiveValue('gap', 25, 15, $containerWidth, 992, 1);
   }
-  // .botbar-header__item
+  // .main-menu__item
   &__item {
     @include adaptiveValue('padding-right', 25, 15, $containerWidth, 992, 1);
   }
-  // .botbar-header__link
+  // .main-menu__link
   &__link {
     // position: relative;
     @extend %body-2;
@@ -32,7 +32,7 @@
         border-color: currentColor;
       }
     }
-    // .botbar-header__link_red
+    // .main-menu__link_red
     &_red {
       color: var(--red);
       @media (pointer: fine) {
