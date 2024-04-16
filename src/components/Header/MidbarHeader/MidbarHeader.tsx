@@ -9,10 +9,12 @@ import Search from '../Search';
 import IconButton from '../../ui/IconButton';
 import { AvatarIcon, CartIcon, StarIcon } from '../../ui/Icons';
 
-// interface IMidbarHeaderProps {}
-function MidbarHeader(): JSX.Element {
+type TMidbarHeaderProps = {
+  className?: string;
+};
+function MidbarHeader({ className = '' }: TMidbarHeaderProps): JSX.Element {
   return (
-    <div className="header__midbar midbar-header">
+    <div className={`midbar-header ${className}`}>
       <div className="midbar-header__container">
         <nav className="midbar-header__nav">
           <ListLinks

@@ -3,11 +3,13 @@ import { PayLocation, RefundIcon, TrackIcon } from '../../ui/Icons';
 import DeliveryRegion from '../DeliveryRegion';
 import SecondaryLinks from '../SecondaryLinks';
 
-// interface ITopBarHeaderProps {}
+type ITopBarHeaderProps = {
+  className?: string;
+};
 
-function TopbarHeader(): JSX.Element {
+function TopbarHeader({ className = '' }: ITopBarHeaderProps): JSX.Element {
   return (
-    <div className="header__topbar topbar-header">
+    <div className={`topbar-header ${className}`}>
       <div className="topbar-header__container">
         <DeliveryRegion className="topbar-header__delivery-region" />
         <SecondaryLinks />
