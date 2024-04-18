@@ -1,24 +1,25 @@
-import { Link } from 'react-router-dom';
+import { Link, LinkProps } from 'react-router-dom';
 import './IconButton.scss';
 import MediaQuery from '../../../component-library/MediaQuery';
+import { ButtonHTMLAttributes } from 'react';
 
-interface ILinkIconProps {
-  children?: React.ReactNode;
-  className?: string;
+type TLinkIconProps = (
+  | (ButtonHTMLAttributes<HTMLButtonElement> & { to?: never })
+  | LinkProps
+) & {
   IconComponent: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
       title?: string | undefined;
     }
   >;
-  to?: string;
-}
+};
 
 function IconButton({
   children,
-  className,
+  className = '',
   IconComponent,
-  to,
-}: ILinkIconProps): JSX.Element {
+  ...props
+}: TLinkIconProps): JSX.Element {
   const inner = (
     <>
       <IconComponent className="icon-button__icon" />
@@ -27,12 +28,18 @@ function IconButton({
       </MediaQuery>
     </>
   );
-  if (!to) {
-    return <button className={`${className} icon-button`}>{inner}</button>;
+  const classes = `icon-button ${className}`;
+
+  if (props.to === undefined) {
+    return (
+      <button {...props} className={`${classes}`} type="button">
+        {inner}
+      </button>
+    );
   }
 
   return (
-    <Link to={to} className={`${className} icon-button`}>
+    <Link {...props} className={`${classes} icon-button`}>
       {inner}
     </Link>
   );

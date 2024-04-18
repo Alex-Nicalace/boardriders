@@ -25,17 +25,27 @@ import MountainIcon from './../../assets/icons/mountain.svg?react';
 import CheckIcon from './../../assets/icons/check.svg?react';
 
 function TrackIcon(
-  params: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
+  props: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
 ) {
-  return <img {...params} src={Track} alt="иконка грузовика" />;
+  return <img {...props} src={Track} alt="иконка грузовика" />;
 }
 
 function ArrowLeftIcon(
-  params: React.SVGProps<SVGSVGElement> & {
+  props: React.SVGProps<SVGSVGElement> & {
     title?: string | undefined;
   }
 ) {
-  return <ArrowRightIcon style={{ transform: 'rotate(180deg)' }} {...params} />;
+  return <ArrowRightIcon style={{ transform: 'rotate(180deg)' }} {...props} />;
+}
+
+function ArrowLeftClassic(
+  props: React.SVGProps<SVGSVGElement> & {
+    title?: string | undefined;
+  }
+) {
+  return (
+    <ArrowRightClassic style={{ transform: 'rotate(180deg)' }} {...props} />
+  );
 }
 
 export {
@@ -65,4 +75,5 @@ export {
   DynamicsIcon,
   MountainIcon,
   CheckIcon,
+  ArrowLeftClassic,
 };

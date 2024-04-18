@@ -1,0 +1,56 @@
+@import '/src/styles/global-scss.scss';
+
+.filters-mobile {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  // .filters-mobile__header
+  &__header {
+    padding: rem(10) rem(17);
+    display: flex;
+    align-items: center;
+    column-gap: rem(25);
+    background-color: var(--light-gray);
+  }
+  // .filters-mobile__title
+  &__title {
+    flex-grow: 1;
+    @extend %subtitle-3;
+  }
+  // .filters-mobile__clear
+  &__clear {
+    @extend %subtitle-3;
+    font-size: rem(14);
+    color: var(--gray-3);
+  }
+  // .filters-mobile__close
+  &__close {
+    font-size: rem(40);
+    line-height: 0;
+  }
+  &__content {
+    flex-grow: 1;
+    display: flex;
+    width: 200%;
+    transition: transform 0.3s ease 0s;
+
+    &_shifted {
+      transform: translateX(-50%);
+    }
+  }
+  &__list {
+    flex: 0 0 50%;
+  }
+  &__filter {
+    height: 100%;
+    padding: rem(25) rem(20) rem(45);
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(10);
+  }
+  &__params {
+    flex-grow: 1;
+  }
+}

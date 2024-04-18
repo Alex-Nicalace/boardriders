@@ -14,13 +14,17 @@ const TRANSITION_STYLES: Record<TTransition, string> = {
 type PopupProps = {
   children: React.ReactNode;
   open?: boolean;
-  close?: () => void;
   className?: string;
+  close?: () => void;
+  onClickOutside?: (e: MouseEvent) => void;
 };
 function Popup({
   children,
   open = false,
   close = () => {},
+  onClickOutside = () => {
+    close();
+  },
   className = '',
 }: PopupProps): JSX.Element {
   return (
@@ -30,7 +34,7 @@ function Popup({
           <PopupContent
             className={`popup ${TRANSITION_STYLES[state]} ${className}`}
             open={state !== 'exited' || open}
-            close={close}
+            onClickOutside={onClickOutside}
           >
             {children}
           </PopupContent>,
@@ -45,13 +49,10 @@ function PopupContent({
   children,
   className = '',
   open = false,
-  close = () => {},
+  onClickOutside = () => {},
 }: PopupProps): JSX.Element {
   useLockDocumentScroll();
-  const contentRef = useOutsideClick<HTMLDivElement>((e) => {
-    if (e.target instanceof HTMLElement && e.target.closest('.burger')) return;
-    close();
-  });
+  const contentRef = useOutsideClick<HTMLDivElement>(onClickOutside);
 
   return createPortal(
     <dialog className={className} open={open}>

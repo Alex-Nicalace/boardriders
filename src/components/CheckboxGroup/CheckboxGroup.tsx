@@ -9,7 +9,7 @@ type TCheckboxGroupProps = {
   isSearchable?: boolean;
   items: {
     value: string;
-    label?: React.ReactNode;
+    title?: React.ReactNode;
     count?: number;
     hint?: React.ReactNode;
   }[];
@@ -29,7 +29,7 @@ function CheckboxGroup({
     if (!serachValue) return items;
 
     return items.filter((item) =>
-      (item.label ? extractTextFromReactNode(item.label) : item.value)
+      (item.title ? extractTextFromReactNode(item.title) : item.value)
         .toLowerCase()
         .includes(serachValue.toLowerCase())
     );
@@ -57,11 +57,11 @@ function CheckboxGroup({
             label={
               item.count ? (
                 <Checkbox.LabelAmount
-                  label={item.label ?? item.value}
+                  label={item.title ?? item.value}
                   count={item.count}
                 />
               ) : (
-                item.label ?? item.value
+                item.title ?? item.value
               )
             }
             hint={item.hint}

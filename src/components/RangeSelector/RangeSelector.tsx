@@ -4,11 +4,19 @@ import RangeSlider from '../../component-library/RangeSlider';
 import Button from '../ui/Button';
 import InputStyled from '../ui/InputStyled';
 
-const MIN = 0;
-const MAX = 200;
-// type TRangeSelectorProps = { }
-function RangeSelector(/*{ }: TRangeSelectorProps*/): JSX.Element {
-  const [rangeValue, setRangeValue] = useState([50, 100]);
+type TRangeSelectorProps = {
+  min: number;
+  max: number;
+  step?: number;
+  className?: string;
+};
+function RangeSelector({
+  min,
+  max,
+  step = 1,
+  className = '',
+}: TRangeSelectorProps): JSX.Element {
+  const [rangeValue, setRangeValue] = useState([min, max]);
   const [from, to] = rangeValue;
 
   function handleChangeRangeValue(
@@ -22,7 +30,7 @@ function RangeSelector(/*{ }: TRangeSelectorProps*/): JSX.Element {
   }
 
   return (
-    <div className="range-selector">
+    <div className={`range-selector ${className}`}>
       <div className="range-selector__inputs">
         <InputStyled
           className="range-selector__from"
@@ -40,9 +48,9 @@ function RangeSelector(/*{ }: TRangeSelectorProps*/): JSX.Element {
       </div>
       <RangeSlider
         className="range-selector__slider"
-        min={MIN}
-        max={MAX}
-        step={1}
+        min={min}
+        max={max}
+        step={step}
         value={rangeValue}
         onChange={setRangeValue}
       />

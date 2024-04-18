@@ -157,4 +157,16 @@
       margin-bottom: rem(75);
     }
   }
+  &__wrap-button-more {
+    display: flex;
+    justify-content: center;
+  }
+  &__button-more {
+    flex-basis: rem(320);
+  }
+  &__params {
+    .checkbox-group__list {
+      max-height: rem(200);
+    }
+  }
 }

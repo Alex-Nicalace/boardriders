@@ -11,9 +11,9 @@ function Header(): JSX.Element {
 
   return (
     <header className="header">
-      {!isLessTablet && <TopbarHeader />}
-      <MidbarHeader />
-      {!isLessTablet && <MainMenu />}
+      {!isLessTablet && <TopbarHeader className="header__topbar" />}
+      <MidbarHeader className="header__midbar" />
+      {!isLessTablet && <MainMenu className="header__main-menu" />}
       {isLessTablet && <BurgerMenuPopup />}
     </header>
   );
