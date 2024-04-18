@@ -26,10 +26,17 @@ function ListOptions({
   const [serachValue, setSerachValue] = useState('');
   useLockDocumentScroll(!isLockScroll);
   const listElRef = useOutsideClick<HTMLDivElement>((e) => {
-    if (e.target instanceof Element) {
-      if (selectRef.current?.contains(e.target)) return;
-      close();
-    }
+    const target = e.target;
+    const selectContainerEl = selectRef.current;
+
+    if (!(target instanceof Element)) return;
+    if (selectContainerEl?.contains(target)) return;
+
+    const inputId = selectContainerEl?.querySelector('input[id]')?.id;
+    const labelFor = target.closest('label[for]')?.getAttribute('for');
+    if (inputId === labelFor) return;
+
+    close();
   });
   const inputRef = useRef<HTMLInputElement>(null);
   const { getMapItems, selected } = useSelectContext();
