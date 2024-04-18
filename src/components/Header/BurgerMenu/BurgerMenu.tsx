@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './BurgerMenu.scss';
 import { MENU_DATA } from '../../../data/menuData';
 import ListLinks from '../../../component-library/ListLinks';
@@ -14,6 +14,12 @@ function BurgerMenu() {
   const expandedMenuData = MENU_DATA.find(
     (item) => item.title === expandedMenu
   );
+
+  useEffect(function addClassToDocument() {
+    document.documentElement.classList.add('menu-open');
+
+    return () => document.documentElement.classList.remove('menu-open');
+  }, []);
 
   return (
     <div className="burger-menu">

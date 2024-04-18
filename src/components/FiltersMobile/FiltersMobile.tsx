@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './FiltersMobile.scss';
 import ListLinks from '../../component-library/ListLinks';
 import { TFiltersData } from '../ProductListFiltered';
@@ -25,6 +25,12 @@ function FiltersMobile({
   const dataForListLinks = data.map(({ title }) => ({
     title,
   }));
+
+  useEffect(function scrollToTop() {
+    // скролл к верху. По макету панель фильтров должна быть под хедером. Но если есть прокрутка,
+    // то сверху имеется некрасивый отступ, поэтому прокручиваю к началу в момент появления панели.
+    window.scrollTo(0, 0);
+  }, []);
 
   function handleShowFilter(titleFilter: string) {
     setExpandedFilter(titleFilter);

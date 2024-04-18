@@ -3,6 +3,7 @@ import MainPage from './pages/MainPage';
 import AppLayout from './components/AppLayout';
 import CatalogPage from './pages/CatalogPage';
 import ScreenWidthProvider from './Context/ScreenWidthContext';
+import Popup from './component-library/Popup';
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ScreenWidthProvider>
-      <RouterProvider router={router} />
+      <Popup>
+        <RouterProvider router={router} />
+      </Popup>
     </ScreenWidthProvider>
   );
 }

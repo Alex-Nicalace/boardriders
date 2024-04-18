@@ -14,7 +14,8 @@ import RangeSelector from '../RangeSelector';
 import Pagination from '../ui/Pagination';
 import Button from '../ui/Button';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
-import FiltersMobilePopup from '../FiltersMobilePopup';
+import Popup from '../../component-library/Popup';
+import FiltersMobile from '../FiltersMobile';
 
 const SORTS = [
   {
@@ -483,12 +484,8 @@ function ProductListFiltered({
   const selectId = id + '-select';
   const { isLessTablet, isLessMobileSmall } = useScreenWidth();
 
-  function toggleHideFilter() {
+  function toggleShowFilter() {
     setIsShowFilters((prev) => !prev);
-  }
-
-  function handleCloseFilters() {
-    setIsShowFilters(false);
   }
 
   return (
@@ -517,7 +514,7 @@ function ProductListFiltered({
                     labelActive="Скрыть фильтры"
                     labelNotActive="Показать фильтры"
                     isActive={isShowFilters}
-                    onClick={toggleHideFilter}
+                    onClick={toggleShowFilter}
                   />
                   <div className="product-list-filtered__sort">
                     <span className="product-list-filtered__sort-label">
@@ -550,12 +547,17 @@ function ProductListFiltered({
                       </Select.Option>
                     ))}
                   </Select>
-                  <ToggleButton
-                    className="product-list-filtered__toolbar-toggle"
-                    isNotShowIcon
-                    labelActive="Фильтры"
-                    isActive={isShowFilters}
-                    onClick={toggleHideFilter}
+                  <Popup.Open
+                    windowName="filters"
+                    render={({ open }) => (
+                      <ToggleButton
+                        className="product-list-filtered__toolbar-toggle"
+                        isNotShowIcon
+                        labelActive="Фильтры"
+                        isActive={isShowFilters}
+                        onClick={open}
+                      />
+                    )}
                   />
                 </>
               )}
@@ -587,11 +589,12 @@ function ProductListFiltered({
                 </div>
               )}
               {isLessTablet && (
-                <FiltersMobilePopup
-                  isOpen={isShowFilters}
-                  close={handleCloseFilters}
-                  // close={handleCloseFilters}
-                  data={FILTERS_DATA}
+                <Popup.Window
+                  windowName="filters"
+                  render={(close) => (
+                    <FiltersMobile data={FILTERS_DATA} close={close} />
+                  )}
+                  onClickOutside={(close) => close()}
                 />
               )}
               <div className="product-list-filtered__products-wrapper">

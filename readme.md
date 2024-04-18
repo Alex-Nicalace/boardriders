@@ -1,8 +1,16 @@
 # Boradriders
 
-## Контекст
+## Попап окно (модальное)
 
-[src/Context/BurgerContext.tsx](BurgerContext) - данные об открытом закрытом бургере
+[Popup.tsx](.src/component-library/Popup/Popup.tsx)
+
+## pattern Compound component pattern & Render props pattern
+
+Попап с 2-мя патернами проектирования:
+
+[Popup.tsx](.src/component-library/Popup/Popup.tsx)
+
+## Контекст
 
 [src/Context/ScreenWidthContext.tsx](ScreenWidthContext) - данные о ширине экрана
 
@@ -21,6 +29,8 @@
 Использовал здесь функционал - "Доступ к узлам DOM другого компонента" посредством использования `forwardRef`
 
 Так же решал задачу присвоения узла нескольким ссылкам. Предоставление колбэка атрибуту `ref` можно использовать для присвоения узла нескольким ссылкам.
+
+[Popup.tsx](.src/component-library/Popup/Popup.tsx) попап окно (модальное)
 
 [Transition.tsx](./src/component-library/Transition/Transition.tsx) - Генерирует эффект перехода для указанных дочерних элементов на основе состояния и указанного времени ожидания. Появилась необходимость для анимации условного рендеринга. В поисках решения подобных задач попал на либу [react-transition-group](https://reactcommunity.org/react-transition-group), но так как решение уже было начато решил сделать свою реализацию.
 

@@ -3,7 +3,8 @@ import MainMenu from './MainMenu';
 import TopbarHeader from './TopBarHeader';
 import MidbarHeader from './MidbarHeader';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
-import BurgerMenuPopup from '../BurgerMenuPopup';
+import Popup from '../../component-library/Popup';
+import BurgerMenu from './BurgerMenu';
 
 // interface IHeaderProps {}
 function Header(): JSX.Element {
@@ -14,7 +15,18 @@ function Header(): JSX.Element {
       {!isLessTablet && <TopbarHeader className="header__topbar" />}
       <MidbarHeader className="header__midbar" />
       {!isLessTablet && <MainMenu className="header__main-menu" />}
-      {isLessTablet && <BurgerMenuPopup />}
+      {isLessTablet && (
+        <Popup.Window
+          windowName="burger"
+          render={() => <BurgerMenu />}
+          onClickOutside={(close, e) => {
+            const el = e.target;
+            if (!(el instanceof HTMLElement)) return;
+            if (el.closest('.burger') || el.closest('.options_opened')) return;
+            close();
+          }}
+        />
+      )}
     </header>
   );
 }

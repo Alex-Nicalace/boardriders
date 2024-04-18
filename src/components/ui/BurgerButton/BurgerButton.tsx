@@ -1,17 +1,16 @@
-import { useBurgerContext } from '../../../Context/useBurgerContext';
+import Popup from '../../../component-library/Popup';
 import './BurgerButton.scss';
 
 function BurgerButton(): JSX.Element {
-  const { setOpenMenu } = useBurgerContext();
-
-  function handleToggleOpen() {
-    setOpenMenu();
-  }
-
   return (
-    <button className="burger" onClick={handleToggleOpen}>
-      <span></span>
-    </button>
+    <Popup.Open
+      windowName="burger"
+      render={({ toggle }) => (
+        <button className="burger" onClick={toggle}>
+          <span></span>
+        </button>
+      )}
+    />
   );
 }
 
