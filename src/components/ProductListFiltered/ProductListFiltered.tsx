@@ -595,6 +595,8 @@ function ProductListFiltered({
                     <FiltersMobile data={FILTERS_DATA} close={close} />
                   )}
                   onClickOutside={(close) => close()}
+                  fullHeight
+                  fullWidth
                 />
               )}
               <div className="product-list-filtered__products-wrapper">

@@ -76,12 +76,16 @@ type WitdowProps = {
   render: (close: () => void) => JSX.Element;
   className?: string;
   onClickOutside?: (close: () => void, e: MouseEvent) => void;
+  fullHeight?: boolean;
+  fullWidth?: boolean;
 };
 function Window({
   windowName,
   render,
   className = '',
   onClickOutside = () => {},
+  fullHeight = false,
+  fullWidth = false,
 }: WitdowProps): JSX.Element {
   const { close, openName } = useContext(PopupContext);
   const isOpen = openName === windowName;
@@ -91,7 +95,9 @@ function Window({
       {(state) =>
         createPortal(
           <WindowBody
-            className={`popup ${TRANSITION_STYLES[state]} ${className}`}
+            className={`popup ${TRANSITION_STYLES[state]} ${
+              fullHeight ? 'popup_full-height' : ''
+            } ${fullWidth ? 'popup_full-width' : ''} ${className}`}
             open={state !== 'exited' || isOpen}
             onClickOutside={onClickOutside}
           >

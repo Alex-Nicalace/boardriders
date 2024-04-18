@@ -25,6 +25,7 @@ function Header(): JSX.Element {
             if (el.closest('.burger') || el.closest('.options_opened')) return;
             close();
           }}
+          fullHeight
         />
       )}
     </header>

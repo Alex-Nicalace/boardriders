@@ -27,19 +27,36 @@
     @include adaptiveValue('padding-top', 87, 75, 992, 320, 1);
     width: percent(320, 414);
     min-width: rem(320);
-    height: 100%;
     background-color: var(--white);
     overflow-y: auto;
     transform: translateX(-100%);
     transition: transform $duration ease 0s;
   }
-
+  // .popup_opened
   &_opened {
     &::before {
       background-color: rgba(0, 0, 0, 0.8);
     }
     .popup__content {
       transform: translateX(0);
+    }
+  }
+  // .popup_full-height
+  &_full-height {
+    .popup__content {
+      height: 100%;
+    }
+  }
+  // .popup_full-width
+  &_full-width {
+    .popup__content {
+      width: 100%;
+    }
+  }
+
+  &_full-height.popup_full-width {
+    &::before {
+      content: normal;
     }
   }
 }
