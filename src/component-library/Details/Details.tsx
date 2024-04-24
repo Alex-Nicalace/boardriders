@@ -62,9 +62,8 @@ function Details({
 
     if (open === undefined) {
       setIsOpen(value);
-    } else {
-      onChange?.(value);
     }
+    onChange?.(value);
   }
 
   function onSummaryClick(e: React.MouseEvent<HTMLElement, MouseEvent>) {
