@@ -1,0 +1,67 @@
+.rating {
+  --rating-star-size: 48px;
+  --rating-star-gap: 0px;
+  --rating-color: currentColor;
+  --rating-gap: 16px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--rating-gap);
+  // .rating__body
+  &__body {
+    flex: 0 0 auto;
+    position: relative;
+    margin: 0 calc(var(--rating-star-gap) / 2 * -1);
+  }
+  // .rating__items
+  &__items {
+    display: flex;
+
+    &_fill,
+    &_opacity {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    // .rating__items_fill
+    &_fill {
+      overflow: hidden;
+    }
+    // .rating__items_opacity
+    &_opacity {
+      opacity: 0;
+      // flex-grow: 1;
+      .rating__item {
+        width: calc(
+          var(--rating-star-size, 48px) + var(--rating-star-gap, 0px)
+        );
+        cursor: pointer;
+      }
+    }
+  }
+  // .rating__item
+  &__item {
+    box-sizing: content-box;
+    padding: 0 calc(var(--rating-star-gap) / 2);
+    height: var(--rating-star-size, 48px);
+    width: var(--rating-star-size, 48px);
+    flex-shrink: 0;
+
+    & > * {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  // .rating__value
+  &__value {
+    color: var(--rating-color, currentColor);
+  }
+  &_disabled {
+    .rating__item {
+      cursor: default;
+    }
+  }
+}

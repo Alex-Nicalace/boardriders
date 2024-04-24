@@ -36,6 +36,8 @@
 
 [MediaQuery.tsx](./src/component-library/MediaQuery/MediaQuery.tsx) - В зависимости от ширины документа скрывает дочерние компоненты. Необходим кастомный хук [useMatchMedia.ts](./src/hooks/useMatchMedia.ts)
 
+[Rating](.src/component-library/Rating/Rating.tsx) - звездный рейтинг
+
 ## Кастомные хуки
 
 [useLockDocumentScroll.ts](./src/hooks/useLockDocumentScroll.ts) Пользовательский хук для блокировки прокрутки документа при вызове.
@@ -46,11 +48,9 @@
 
 [usePrevious.ts](./src/hooks/usePrevious.ts) Хук, который возвращает предыдущее значение входного параметра из предыдущего рендера.
 
-[useForwardRef.ts](src/hooks/useForwardRef.ts) или можно назвать `useCopyRef` Когда используется "Доступ к узлам DOM другого компонента" посредством использования `forwardRef` и в самом дочернем элементе необходимо использовать ссылку, то этот хук в помощь. в итоге и родительский компонент имеет ссылку и местная ссылка в деле и обе ссылке указывают на один и тот же узел
+[useForwardRef.ts](./src/hooks/useForwardRef.ts) или можно назвать `useCopyRef` Когда используется "Доступ к узлам DOM другого компонента" посредством использования `forwardRef` и в самом дочернем элементе необходимо использовать ссылку, то этот хук в помощь. в итоге и родительский компонент имеет ссылку и местная ссылка в деле и обе ссылке указывают на один и тот же узел
 
-[src/Context/useScreenWidthContext.ts](useScreenWidthContext) - данные о ширине экрана
-
-[src/Context/useBurgerContext.ts](useBurgerContext) - данные об открытом бургере
+[useScreenWidthContext](./src/Context/useScreenWidthContext.ts) - данные о ширине экрана
 
 ## Хуки
 
