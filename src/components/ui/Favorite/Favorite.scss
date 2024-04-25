@@ -4,6 +4,9 @@
   &:checked {
     & + .favorite__label {
       background-color: var(--black);
+      svg {
+        stroke: var(--white);
+      }
     }
   }
   // .favorite__label
@@ -23,6 +26,11 @@
       stroke: var(--black);
       @include adaptiveValue('width', 20, 16);
       @include adaptiveValue('height', 20, 16);
+      transition: stroke 0.3s ease 0s;
+    }
+
+    &_border {
+      border: rem(1) solid var(--black);
     }
   }
 }

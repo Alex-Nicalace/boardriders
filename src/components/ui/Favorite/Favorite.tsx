@@ -1,15 +1,31 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import './Favorite.scss';
-import randomString from '../../../utils/randomString';
 import { StarIcon } from '../Icons';
 
 interface IFavoriteProps {
   className?: string;
   checked?: boolean;
+  defaultChecked?: boolean;
+  onChange?: (value: boolean) => void;
+  isFramed?: boolean;
 }
-function Favorite({ checked = false, className }: IFavoriteProps): JSX.Element {
-  const [isFavorite, setIsFavorite] = useState(checked);
-  const id = `favorite-${randomString()}`;
+function Favorite({
+  checked,
+  className = '',
+  onChange,
+  defaultChecked = false,
+  isFramed = false,
+}: IFavoriteProps): JSX.Element {
+  const [isFavorite, setIsFavorite] = useState(defaultChecked);
+  const isChecked = checked ?? isFavorite;
+  const id = `${useId()}-favorite`;
+
+  function handleChange(value: boolean): void {
+    if (checked === undefined) {
+      setIsFavorite(value);
+    }
+    onChange?.(value);
+  }
 
   return (
     <>
@@ -17,10 +33,15 @@ function Favorite({ checked = false, className }: IFavoriteProps): JSX.Element {
         type="checkbox"
         id={id}
         className="favorite sr-only"
-        checked={isFavorite}
-        onChange={() => setIsFavorite(!isFavorite)}
+        checked={isChecked}
+        onChange={() => handleChange(!isChecked)}
       />
-      <label htmlFor={id} className={`favorite__label ${className || ''}`}>
+      <label
+        htmlFor={id}
+        className={`favorite__label ${className} ${
+          isFramed ? 'favorite__label_border' : ''
+        }`}
+      >
         <span className="sr-only">Добавить в избранное</span>
         <StarIcon />
       </label>
