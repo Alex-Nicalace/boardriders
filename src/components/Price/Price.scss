@@ -1,0 +1,39 @@
+@import '/src/styles/global-scss.scss';
+
+.price {
+  display: flex;
+  // align-items: center;
+  // .price__discount
+  &__discount {
+    margin-right: rem(15);
+    padding: 0 rem(7);
+    align-self: center;
+    background-color: var(--red);
+    color: var(--light-gray);
+    line-height: 1.79;
+  }
+  // .price__value
+  &__value {
+    @extend %h1;
+    // .price__value_new
+    &_new {
+      text-decoration: none;
+      color: var(--red);
+    }
+  }
+  // .price__old-value
+  &__old-value {
+    margin-left: rem(12);
+    @extend %body-2-1;
+  }
+  // .price__cheaper
+  &__cheaper {
+    margin-left: rem(11);
+    @extend %body-4;
+
+    &:link {
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
+    }
+  }
+}
