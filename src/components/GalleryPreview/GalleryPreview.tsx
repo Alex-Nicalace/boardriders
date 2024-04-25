@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
-import { Keyboard, Thumbs, Scrollbar } from 'swiper/modules';
+import { Keyboard, Thumbs, Scrollbar, Mousewheel } from 'swiper/modules';
 import './GalleryPreview.scss';
 import 'swiper/scss/scrollbar';
 import 'swiper/scss/thumbs';
@@ -43,13 +43,14 @@ function GalleryPreview({ className = '' }: TGalleryPreviewProps): JSX.Element {
       <Swiper
         className="gallery-preview__thumbs-slider"
         wrapperClass="gallery-preview__thumbs-slider-wrapper"
-        modules={[Thumbs, Keyboard, Scrollbar]}
+        modules={[Thumbs, Keyboard, Scrollbar, Mousewheel]}
         watchSlidesProgress // добавляет класс swiper-slide-thumb-active
         onSwiper={setThumbsSwiper}
-        slidesPerView={5}
+        slidesPerView="auto"
         keyboard
         direction="vertical"
         scrollbar
+        mousewheel={true} // прокрутка колесом мыши, модуль Mousewheel
       >
         {GALLARY_SMALL.map((img) => (
           <SwiperSlide key={img} className="gallery-preview__thumbs-slide">

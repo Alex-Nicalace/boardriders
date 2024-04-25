@@ -9,14 +9,16 @@
   display: flex;
   justify-content: space-between;
   aspect-ratio: 893 / 705;
+  overflow: hidden;
   // .gallery-preview__thumbs-slider
   &__thumbs-slider {
-    flex: 0 0 percent(155, 893);
-    min-width: rem(155);
+    margin: 0;
+    flex: 0 0 rem(150);
   }
   // .gallery-preview__thumbs-slide
   &__thumbs-slide {
-    max-width: percent(118, 155);
+    max-width: percent(118, 150);
+    height: rem(128);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,7 +41,7 @@
   }
   // .gallery-preview__main-slider
   &__main-slider {
-    flex: 0 0 percent(705, 893);
+    max-width: percent(705, 893);
   }
   // .gallery-preview__main-slide
   &__main-slide {
