@@ -1,0 +1,30 @@
+@import '/src/styles/global-scss.scss';
+
+.color-choise {
+  // .color-choise__color
+  &__color {
+    @extend %body-2-1;
+    &:not(:last-child) {
+      margin-bottom: rem(10);
+    }
+  }
+  // .color-choise__title
+  &__title {
+  }
+  // .color-choise__text
+  &__text {
+    text-transform: capitalize;
+  }
+  // .color-choise__list
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(5);
+  }
+  // .color-choise__item
+  &__item {
+  }
+  // .color-choise__checkbox
+  &__checkbox {
+  }
+}
