@@ -1,0 +1,29 @@
+@import '/src/styles/global-scss.scss';
+
+.size-choise {
+  &__link {
+    a {
+      @extend %body-4;
+
+      &:link {
+        text-decoration: underline;
+        text-decoration-skip-ink: none;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-bottom: rem(25);
+    }
+  }
+  // .size-choise__list
+  &__list {
+    display: flex;
+    gap: rem(10);
+  }
+  // .size-choise__item
+  &__item {
+  }
+  // .size-choise__checkbox
+  &__checkbox {
+  }
+}
