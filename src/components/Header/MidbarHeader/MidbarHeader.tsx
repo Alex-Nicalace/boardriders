@@ -9,6 +9,12 @@ import Search from '../Search';
 import IconButton from '../../ui/IconButton';
 import { AvatarIcon, CartIcon, StarIcon } from '../../ui/Icons';
 
+const SWITCHABLE_MENU_DATA = [
+  { to: 'man', title: 'Мужчинам' },
+  { to: 'woman', title: 'Женщинам' },
+  { to: 'children', title: 'Детям' },
+];
+
 type TMidbarHeaderProps = {
   className?: string;
 };
@@ -24,11 +30,7 @@ function MidbarHeader({ className = '' }: TMidbarHeaderProps): JSX.Element {
             }}
             itemProps={{ className: 'switchable-menu__item' }}
             linkProps={{ className: 'switchable-menu__link' }}
-            linksData={[
-              { to: 'man', title: 'Мужчинам' },
-              { to: 'woman', title: 'Женщинам' },
-              { to: 'children', title: 'Детям' },
-            ]}
+            linksData={SWITCHABLE_MENU_DATA}
           />
 
           <MediaQuery maxWidth="tablet">
