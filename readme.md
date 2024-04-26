@@ -71,3 +71,5 @@
 [randomString.ts](src/utils/randomString.ts) - случайная строка. То для каких целей я использовал в проекте можно заменить хуком `useId`
 
 [visibilityScrollDocument.ts](src/utils/visibilityScrollDocument.ts) - скрыть/показать скролл документа, перестал использовать после создания хука [useLockDocumentScroll.ts](./src/hooks/useLockDocumentScroll.ts)
+
+[numberFormat.ts](./src/utils/numberFormat.ts) - форматирование числа разделителем разрядов. В контексте форматирования числа под денежный формат можно восаользоваться объектом `Intl` [Price.tsx](./src/components/Price/Price.tsx)
