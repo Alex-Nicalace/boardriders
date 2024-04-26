@@ -4,6 +4,7 @@ import AppLayout from './components/AppLayout';
 import CatalogPage from './pages/CatalogPage';
 import ScreenWidthProvider from './Context/ScreenWidthContext';
 import Popup from './component-library/Popup';
+import ProductPage from './pages/ProductPage';
 
 const router = createBrowserRouter([
   {
@@ -17,12 +18,14 @@ const router = createBrowserRouter([
             index: true,
             element: <MainPage />,
           },
-
           {
             path: '/catalog',
             element: <CatalogPage />,
           },
-
+          {
+            path: '/card-item',
+            element: <ProductPage />,
+          },
           {
             path: '*',
             element: <MainPage />,
