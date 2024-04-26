@@ -116,4 +116,77 @@
       }
     }
   }
+  // .checkbox_color
+  &-color {
+    display: inline-block;
+    cursor: pointer;
+    &__input {
+      &:checked {
+        & + .checkbox-color__wrap {
+          background-color: var(--light-gray);
+          border-color: var(--gray);
+        }
+      }
+    }
+    // .checkbox_color__wrap
+    &__wrap {
+      display: block;
+      padding: rem(16) rem(10);
+      border: rem(1) solid transparent;
+      transition: all 0.3s ease 0s;
+    }
+    // .checkbox_color__color
+    &__color {
+      display: block;
+      width: rem(48);
+      height: rem(48);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}
+
+.btn-toggle {
+  &__input {
+    &:checked {
+      & + .btn-toggle__inner {
+        background-color: var(--black);
+        color: var(--white);
+      }
+    }
+
+    &:disabled {
+      & + .btn-toggle__inner {
+        background-color: var(--light-gray);
+        color: var(--gray);
+      }
+    }
+  }
+  // .btn-toggle__inner
+  &__inner {
+    @extend %body-2;
+    padding: rem(10);
+    min-width: rem(50);
+    min-height: rem(50);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-gray);
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+
+    @media (pointer: fine) {
+      &:hover {
+        color: var(--dark-gray);
+      }
+    }
+
+    &:active {
+      color: var(--black);
+    }
+  }
 }
