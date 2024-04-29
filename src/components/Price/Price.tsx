@@ -39,15 +39,24 @@ function Price({
       {oldPriceFormated ? (
         <>
           <ins className="price__value price__value_new">{priceFormated}</ins>
-          <del className="price__old-value">{oldPriceFormated}</del>
+          <span className="price__wrap">
+            <del className="price__old-value">{oldPriceFormated}</del>
+            {cheaper && (
+              <Link className="price__cheaper" to="#">
+                Нашли дешевле?
+              </Link>
+            )}
+          </span>
         </>
       ) : (
-        <span className="price__value">{priceFormated}</span>
-      )}
-      {cheaper && (
-        <Link className="price__cheaper" to="#">
-          Нашли дешевле?
-        </Link>
+        <>
+          <span className="price__value">{priceFormated}</span>
+          {cheaper && (
+            <Link className="price__cheaper" to="#">
+              Нашли дешевле?
+            </Link>
+          )}
+        </>
       )}
     </div>
   );

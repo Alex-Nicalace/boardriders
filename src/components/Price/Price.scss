@@ -37,4 +37,8 @@
       text-decoration-skip-ink: none;
     }
   }
+  &__wrap {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
