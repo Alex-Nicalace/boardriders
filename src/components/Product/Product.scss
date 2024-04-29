@@ -9,10 +9,21 @@
       'p b' / 1fr rem(420);
     column-gap: percent(50, 1360);
     justify-content: space-between;
+
+    @include tablet-d {
+      grid-template:
+        'g'
+        'b'
+        'p' / 1fr;
+    }
   }
   // .product__box
   &__box {
     grid-area: b;
+
+    @include tablet-d {
+      margin-bottom: rem(30);
+    }
   }
   // .product__article
   &__article {
@@ -39,8 +50,8 @@
   }
   // .product__brand-logo
   &__brand-logo {
-    max-width: rem(45);
-    margin-right: rem(25);
+    @include adaptiveValue('max-width', 45, 40);
+    @include adaptiveValue('margin-right', 25, 5);
 
     img {
       max-width: 100%;
@@ -48,7 +59,7 @@
   }
   // .product__rating
   &__rating {
-    margin-right: rem(20);
+    @include adaptiveValue('margin-right', 20, 5);
   }
   // .product__reviews
   &__reviews {
@@ -85,21 +96,21 @@
   }
   &__size {
     &:not(:last-child) {
-      margin-bottom: rem(45);
+      @include adaptiveValue('margin-bottom', 45, 40);
     }
   }
   // .product__buttons
   &__buttons {
     display: flex;
     flex-direction: column;
-    row-gap: rem(15);
+    @include adaptiveValue('row-gap', 15, 10);
   }
   // .product__delivery
   &__delivery {
   }
   // .product__gallery
   &__gallery {
-    margin-bottom: rem(50);
+    @include adaptiveValue('margin-bottom', 50, 40);
     grid-area: g;
   }
   // .product__parameters
@@ -154,7 +165,10 @@
     margin-bottom: rem(-15);
     columns: 2;
     column-gap: percent(186, 893);
-    row-gap: rem(15);
+
+    @include mobile-d {
+      columns: auto;
+    }
   }
   &__wrap-list {
     &:not(:last-child) {
