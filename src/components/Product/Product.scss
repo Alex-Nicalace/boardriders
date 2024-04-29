@@ -73,6 +73,10 @@
     padding: rem(25) 0;
     border-top: rem(1) solid #e0e0e0;
     border-bottom: rem(1) solid #e0e0e0;
+
+    &:not(:last-child) {
+      margin-bottom: rem(25);
+    }
   }
   &__color {
     &:not(:last-child) {

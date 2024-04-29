@@ -1,13 +1,19 @@
 import './Product.scss';
 import GalleryPreview from '../GalleryPreview';
 import Rating from '../../component-library/Rating';
-import { StarIcon } from '../ui/Icons';
+import {
+  DeliveryIcon,
+  LocationUnderlineIcon,
+  ShopIcon,
+  StarIcon,
+} from '../ui/Icons';
 import { Link } from 'react-router-dom';
 import Favorite from '../ui/Favorite';
 import Price from '../Price';
 import ColorChoise from '../ColorChoise';
 import SizeChoise from '../SizeChoise';
 import Button from '../ui/Button';
+import ListIconInfo from '../ListIconInfo';
 
 const PATH_PARAMS_IMG = './src/assets/img/product-params/';
 const PARAMS_IMG = ['01.png', '02.png'].map((name) => PATH_PARAMS_IMG + name);
@@ -108,6 +114,53 @@ const SIZES = {
   ],
 };
 
+const DELIVERY_OPTIONS = [
+  {
+    iconElement: <DeliveryIcon />,
+    top: 'Курьером по вашему адресу',
+    bottom: (
+      <>
+        Сегодня / <strong>Бесплатно</strong>
+      </>
+    ),
+  },
+  {
+    iconElement: <ShopIcon />,
+    top: (
+      <>
+        Забрать в одном из <Link to={''}>9 магазинов</Link>
+      </>
+    ),
+    bottom: 'Сегодня / 500 рублей',
+  },
+  {
+    iconElement: <ShopIcon />,
+    top: (
+      <>
+        Заказать доставку в один из <Link to={''}>15 магазинов</Link>
+      </>
+    ),
+    bottom: (
+      <>
+        20 апреля / <strong>Бесплатно</strong>
+      </>
+    ),
+  },
+  {
+    iconElement: <LocationUnderlineIcon />,
+    top: (
+      <>
+        Забрать из <Link to={''}>пункта самовывоза с примеркой</Link>
+      </>
+    ),
+    bottom: (
+      <>
+        20 апреля / <strong>Бесплатно</strong>
+      </>
+    ),
+  },
+];
+
 type TProductProps = { className?: string };
 function Product({ className }: TProductProps): JSX.Element {
   return (
@@ -166,7 +219,15 @@ function Product({ className }: TProductProps): JSX.Element {
               </Button>
             </div>
           </div>
-          <div className="product__delivery">delivery</div>
+          <ListIconInfo
+            className="product__delivery"
+            title={
+              <>
+                Варианты доставки в: <Link to={''}>г. Москва</Link>
+              </>
+            }
+            items={DELIVERY_OPTIONS}
+          />
         </div>
         <GalleryPreview className="product__gallery" />
         <div className="product__parameters product-params">
