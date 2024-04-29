@@ -67,6 +67,12 @@
   text-align: center;
   transition: all 0.3s ease 0s;
 
+  @include mobile-d {
+    padding: rem(20);
+    font-size: rem(16);
+    line-height: 1.25;
+  }
+
   @media (pointer: fine) {
     &:hover {
       color: var(--gray);
