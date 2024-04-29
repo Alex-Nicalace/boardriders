@@ -1,9 +1,19 @@
 import { useState } from 'react';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
-import { Keyboard, Thumbs, Scrollbar, Mousewheel } from 'swiper/modules';
+import {
+  Keyboard,
+  Thumbs,
+  Scrollbar,
+  Mousewheel,
+  Pagination,
+} from 'swiper/modules';
+import { useScreenWidth } from '../../Context/useScreenWidthContext';
+
 import './GalleryPreview.scss';
+
 import 'swiper/scss/scrollbar';
 import 'swiper/scss/thumbs';
+import 'swiper/scss/pagination';
 
 const PATH_BIG_IMG = './src/assets/img/gallery-preview/big-img/';
 const PATH_SMALL_IMG = './src/assets/img/gallery-preview/small-img/';
@@ -36,41 +46,58 @@ const GALLARY_SMALL = [
 type TGalleryPreviewProps = { className?: string };
 function GalleryPreview({ className = '' }: TGalleryPreviewProps): JSX.Element {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
+  const { isLessTablet } = useScreenWidth();
 
   return (
     <div className={`gallery-preview ${className}`}>
       {/* Thumbs slider */}
-      <Swiper
-        className="gallery-preview__thumbs-slider"
-        wrapperClass="gallery-preview__thumbs-slider-wrapper"
-        modules={[Thumbs, Keyboard, Scrollbar, Mousewheel]}
-        watchSlidesProgress // добавляет класс swiper-slide-thumb-active
-        onSwiper={setThumbsSwiper}
-        slidesPerView="auto"
-        keyboard
-        direction="vertical"
-        scrollbar
-        mousewheel={true} // прокрутка колесом мыши, модуль Mousewheel
-      >
-        {GALLARY_SMALL.map((img) => (
-          <SwiperSlide key={img} className="gallery-preview__thumbs-slide">
-            <img
-              className="gallery-preview__thumbs-img gallery-preview__img"
-              src={img}
-              alt=""
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {!isLessTablet && (
+        <Swiper
+          className="gallery-preview__thumbs-slider"
+          wrapperClass="gallery-preview__thumbs-slider-wrapper"
+          modules={[Thumbs, Keyboard, Scrollbar, Mousewheel]}
+          watchSlidesProgress // добавляет класс swiper-slide-thumb-active
+          onSwiper={setThumbsSwiper}
+          slidesPerView="auto"
+          keyboard
+          direction="vertical"
+          scrollbar
+          mousewheel={true} // прокрутка колесом мыши, модуль Mousewheel
+        >
+          {GALLARY_SMALL.map((img) => (
+            <SwiperSlide key={img} className="gallery-preview__thumbs-slide">
+              <img
+                className="gallery-preview__thumbs-img gallery-preview__img"
+                src={img}
+                alt=""
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
 
       {/* Main slider */}
       <Swiper
         className="gallery-preview__main-slider"
-        modules={[Thumbs, Keyboard]}
+        wrapperClass="gallery-preview__main-slider-wrapper"
+        modules={[Thumbs, Keyboard, Pagination]}
         keyboard
         // thumbs={{ swiper: thumbsSwiper }}
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+        }}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        breakpoints={{
+          767.98: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          991.98: {
+            slidesPerView: 'auto',
+            pagination: false,
+            spaceBetween: 0,
+          },
         }}
       >
         {GALLARY_BIG.map((img) => (

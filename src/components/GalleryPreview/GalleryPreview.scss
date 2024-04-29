@@ -6,9 +6,19 @@
   --swiper-scrollbar-size: #{rem(6)};
   --swiper-scrollbar-border-radius: 0;
 
+  --swiper-pagination-bullet-horizontal-gap: #{rem(10)};
+  --swiper-pagination-color: var(--black);
+  --swiper-pagination-bullet-inactive-color: #e0e0e0;
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-bullet-size: #{rem(10)};
+
   display: flex;
   justify-content: space-between;
   aspect-ratio: 893 / 705;
+
+  @include tablet-d {
+    aspect-ratio: auto;
+  }
   overflow: hidden;
   // .gallery-preview__thumbs-slider
   &__thumbs-slider {
@@ -42,9 +52,25 @@
   // .gallery-preview__main-slider
   &__main-slider {
     max-width: percent(705, 893);
+    @include tablet-d {
+      max-width: none;
+    }
+
+    .swiper-pagination {
+      position: static;
+      margin-top: rem(20);
+    }
+  }
+  &__main-slider-wrapper {
+    @include tablet-d {
+      height: auto;
+    }
   }
   // .gallery-preview__main-slide
   &__main-slide {
+    @include tablet-d {
+      aspect-ratio: 1/1;
+    }
   }
   // .gallery-preview__main-img
   &__main-img {
