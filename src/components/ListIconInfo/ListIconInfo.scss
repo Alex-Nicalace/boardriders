@@ -1,0 +1,28 @@
+@import '/src/styles/global-scss.scss';
+
+.list-icon-info {
+  // .list-icon-info__title
+  &__title {
+    // font-weight: 400;
+    font-size: rem(16);
+    line-height: 1.25;
+
+    a {
+      font: inherit;
+      text-decoration: underline;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: rem(25);
+    }
+  }
+  // .list-icon-info__list
+  &__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(10);
+  }
+  // .list-icon-info__item
+  &__item {
+  }
+}
