@@ -18,6 +18,7 @@
   // .size-choise__list
   &__list {
     display: flex;
+    flex-wrap: wrap;
     gap: rem(10);
   }
   // .size-choise__item
