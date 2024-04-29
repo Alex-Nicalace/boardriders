@@ -1,1 +1,26 @@
 @import '/src/styles/global-scss.scss';
+
+.product-page {
+  // .product-page__breadcrumbs
+  &__breadcrumbs {
+    margin-top: rem(25);
+  }
+  // .product-page__steps
+  &__steps {
+    margin-top: rem(35);
+  }
+  // .product-page__container
+  &__container {
+  }
+  // .product-page__main
+  &__main {
+  }
+  // .product-page__product
+  &__product {
+    margin-top: rem(40);
+
+    @include tablet-d {
+      margin-top: 0;
+    }
+  }
+}

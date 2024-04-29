@@ -1,7 +1,9 @@
+import './ProductPage.scss';
 import Main from '../../components/Main';
 import Product from '../../components/Product';
 import Breadcrumbs, { TBreadcrumbsData } from '../../components/ui/Breadcrumbs';
 import Steps from '../../components/ui/Steps';
+import { useScreenWidth } from '../../Context/useScreenWidthContext';
 
 const BREADCRUMBS: TBreadcrumbsData = [
   {
@@ -27,16 +29,22 @@ const BREADCRUMBS: TBreadcrumbsData = [
 
 // type TProductPageProps = { }
 function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
+  const { isLessTablet } = useScreenWidth();
+
   return (
     <div className="product-page">
-      <Breadcrumbs
-        className="product-page__breadcrumbs"
-        data={BREADCRUMBS}
-        withContainer
-      />
-      <div className="product-page__container">
-        <Steps className="product-page__steps" />
-      </div>
+      {!isLessTablet && (
+        <Breadcrumbs
+          className="product-page__breadcrumbs"
+          data={BREADCRUMBS}
+          withContainer
+        />
+      )}
+      {!isLessTablet && (
+        <div className="product-page__steps product-page__container">
+          <Steps />
+        </div>
+      )}
       <Main className="product-page__main">
         <Product className="product-page__product" />
       </Main>
