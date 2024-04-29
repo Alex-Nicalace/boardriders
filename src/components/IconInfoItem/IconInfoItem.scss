@@ -1,0 +1,48 @@
+@import '/src/styles/global-scss.scss';
+
+.icon-info-item {
+  display: flex;
+  align-items: center;
+  column-gap: rem(15);
+  @extend %body-2-1;
+  // line-height: 179%;
+
+  a {
+    font: inherit;
+    line-height: inherit;
+    // text-decoration: underline;
+    &:link {
+      text-decoration: underline;
+    }
+  }
+
+  strong {
+    font-weight: 500;
+    color: var(--green);
+  }
+  // .icon-info-item__wrap-icon
+  &__wrap-icon {
+    width: rem(73);
+    height: rem(70);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: rem(4);
+    background-color: var(--light-gray);
+  }
+  // .icon-info-item__content
+  &__content {
+    // align-self: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(5);
+  }
+  // .icon-info-item__top
+  &__top {
+  }
+  // .icon-info-item__bottom
+  &__bottom {
+    font-weight: 500;
+  }
+}

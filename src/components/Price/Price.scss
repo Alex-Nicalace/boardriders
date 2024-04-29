@@ -29,6 +29,7 @@
   // .price__cheaper
   &__cheaper {
     margin-left: rem(11);
+    align-self: center;
     @extend %body-4;
 
     &:link {
