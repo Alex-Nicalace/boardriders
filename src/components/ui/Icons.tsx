@@ -23,6 +23,9 @@ import AnthropometricIcon from './../../assets/icons/anthropometric.svg?react';
 import DynamicsIcon from './../../assets/icons/dynamics.svg?react';
 import MountainIcon from './../../assets/icons/mountain.svg?react';
 import CheckIcon from './../../assets/icons/check.svg?react';
+import DeliveryIcon from './../../assets/icons/delivery.svg?react';
+import ShopIcon from './../../assets/icons/shop.svg?react';
+import LocationUnderlineIcon from './../../assets/icons/location-underline.svg?react';
 
 function TrackIcon(
   props: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -76,4 +79,7 @@ export {
   MountainIcon,
   CheckIcon,
   ArrowLeftClassic,
+  DeliveryIcon,
+  ShopIcon,
+  LocationUnderlineIcon,
 };
