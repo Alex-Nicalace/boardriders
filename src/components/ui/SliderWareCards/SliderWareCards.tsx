@@ -4,33 +4,24 @@ import 'swiper/scss';
 
 import './SliderWareCards.scss';
 import WareCard, { IWareData } from '../WareCard';
-import Button from '../Button';
 import { ArrowLeftIcon, ArrowRightIcon } from '../Icons';
 import useMatchMedia from '../../../hooks/useMatchMedia';
-import Title from '../Title';
 
 const MEDIAQUERY = ['(max-width: 573px)'];
 
 type TSliderWareCardsProps = {
-  title: string;
   wareData: IWareData[];
-  moreTo?: string;
   className?: string;
 };
 function SliderWareCards({
-  title,
   wareData,
-  moreTo,
   className = '',
 }: TSliderWareCardsProps): JSX.Element {
   const [isSmall] = useMatchMedia(MEDIAQUERY);
 
   return (
-    <section className={`${className} slider-ware-cards`}>
+    <div className={`slider-ware-cards ${className}`}>
       <div className="slider-ware-cards__container">
-        <Title className="slider-ware-cards__title" kind="h1-32-h2-21" as="h2">
-          {title}
-        </Title>
         <div className="slider-ware-cards__outer-wrap-slider">
           <Swiper
             key={+isSmall}
@@ -87,13 +78,8 @@ function SliderWareCards({
             </>
           )}
         </div>
-        {moreTo && (
-          <div className="slider-ware-cards__button-more">
-            <Button to={moreTo}>Показать больше</Button>
-          </div>
-        )}
       </div>
-    </section>
+    </div>
   );
 }
 

@@ -7,6 +7,8 @@ import JoinAndSubscrube from '../../components/JoinAndSubscrube/JoinAndSubscrube
 import Main from '../../components/Main';
 import './MainPage.scss';
 import SliderWareCards from '../../components/ui/SliderWareCards';
+import Title from '../../components/ui/Title';
+import Button from '../../components/ui/Button';
 
 const PATH_NEW = '/src/assets/img/products-new/';
 const NEW_PRODUCTS_DATA = [
@@ -143,12 +145,22 @@ function MainPage(): JSX.Element {
       <MainSlider className="main-page__main-slider" />
       <LinksBrands className="main-page__links-brands" />
       <DualBanners className="main-page__dual-baners" />
-      <SliderWareCards
-        className="main-page__slider-ware"
-        title="Новинки"
-        wareData={NEW_PRODUCTS_DATA}
-        moreTo="#"
-      />
+      <div className="main-page__box-slider-ware">
+        <Title
+          className="main-page__title-slider main-page__container"
+          kind="h1-32-h2-21"
+          as="h2"
+        >
+          Новинки
+        </Title>
+        <SliderWareCards
+          className="main-page__slider-ware"
+          wareData={NEW_PRODUCTS_DATA}
+        />
+        <div className="main-page__container main-page__button-more">
+          <Button to="#">Показать больше</Button>
+        </div>
+      </div>
       <Promotion
         className="main-page__promotion"
         to="#"
@@ -167,12 +179,22 @@ function MainPage(): JSX.Element {
           src: '/src/assets/img/promotion/01-small.jpg',
         }}
       />
-      <SliderWareCards
-        className="main-page__slider-ware"
-        title="DC Shoes популярное в коллекции"
-        wareData={POPULAR_PRODUCTS_DATA}
-        moreTo="#"
-      />
+      <div className="main-page__box-slider-ware">
+        <Title
+          className="main-page__title-slider main-page__container"
+          kind="h1-32-h2-21"
+          as="h2"
+        >
+          DC Shoes популярное в коллекции
+        </Title>
+        <SliderWareCards
+          className="main-page__slider-ware"
+          wareData={POPULAR_PRODUCTS_DATA}
+        />
+        <div className="main-page__container main-page__button-more">
+          <Button to="#">Показать больше</Button>
+        </div>
+      </div>
       <BlogsSlider className="main-page__blogs-slider" />
       <JoinAndSubscrube className="main-page__join-and-subscrube" />
     </Main>

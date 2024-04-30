@@ -6,17 +6,6 @@
   }
   &__outer-wrap-slider {
     position: relative;
-    &:not(:last-child) {
-      @include adaptiveValue('margin-bottom', 75, 40);
-    }
-  }
-  // .products__title
-  &__title {
-    text-align: center;
-
-    &:not(:last-child) {
-      margin-bottom: em(50, 32);
-    }
   }
   // .products__slider
   &__slider {
@@ -61,12 +50,6 @@
 
     &[disabled] {
       color: var(--gray);
-    }
-  }
-  &__button-more {
-    text-align: center;
-    .button-primary {
-      @include adaptiveValue('min-width', 322, 278);
     }
   }
 }

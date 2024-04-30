@@ -1,23 +1,50 @@
 @import '/src/styles/global-scss.scss';
 
 .main-page {
+  // .main-page__title-slider
+  &__title-slider {
+    text-align: center;
+
+    &:not(:last-child) {
+      margin-bottom: em(50, 32);
+    }
+  }
+  // .main-page__button
+  &__button-more {
+    text-align: center;
+    .button-primary {
+      @include adaptiveValue('min-width', 322, 278);
+    }
+  }
+  // .main-page__main-slider
   &__main-slider {
     margin-top: rem(25);
   }
+  // .main-page__links-brands
   &__links-brands {
     @include adaptiveValue('padding-top', 60, 25);
     @include adaptiveValue('padding-bottom', 60, 25);
   }
+  // .main-page__dual-baners
   &__dual-baners {
   }
-  &__slider-ware {
+  // .main-page__slider-ware
+  &__box-slider-ware {
     @include adaptiveValue('padding-top', 100, 60);
     @include adaptiveValue('padding-bottom', 100, 60);
   }
+  &__slider-ware {
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 75, 40);
+    }
+  }
+  // .main-page__promotion
   &__promotion {
   }
+  // .main-page__blogs-slider
   &__blogs-slider {
   }
+  // .main-page__join-and-subscrube
   &__join-and-subscrube {
     @include adaptiveValue('padding-top', 50, 60);
     @include adaptiveValue('padding-bottom', 85, 70);
