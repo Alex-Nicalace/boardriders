@@ -23,4 +23,19 @@
       margin-top: 0;
     }
   }
+  &__title-slider {
+    font-weight: 500;
+    font-size: rem(21);
+    line-height: 1.67;
+    letter-spacing: -0.02em;
+
+    &:not(:last-child) {
+      margin-bottom: rem(30);
+    }
+  }
+  &__box-slider-ware {
+    &:not(:first-child) {
+      @include adaptiveValue('margin-top', 75, 40);
+    }
+  }
 }
