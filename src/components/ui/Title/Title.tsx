@@ -5,7 +5,7 @@ import './Title.scss';
 type TTitleProps = {
   children: React.ReactNode;
   as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  kind: 'h1-32-h2-21';
+  kind?: 'h1-32-h2-21' | 'subtitle-1-21-medium';
   className?: string;
   supNode?: React.ReactNode;
   color?: 'white' | 'black';
