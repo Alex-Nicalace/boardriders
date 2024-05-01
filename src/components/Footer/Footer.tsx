@@ -259,10 +259,10 @@ function Footer(): JSX.Element {
               ))}
             </Accordion>
           </div>
-          <div className="footer__bottom">
+          <address className="footer__bottom">
             {!isLessTablet && <SocialsLinks />}
             <p className="footer__copyright">© 2020. Все права защищены.</p>
-          </div>
+          </address>
         </div>
       </div>
     </footer>
