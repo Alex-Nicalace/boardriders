@@ -47,6 +47,5 @@
   // .main-page__join-and-subscrube
   &__join-and-subscrube {
     @include adaptiveValue('padding-top', 50, 60);
-    @include adaptiveValue('padding-bottom', 85, 70);
   }
 }

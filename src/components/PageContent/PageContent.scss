@@ -1,0 +1,5 @@
+@import '/src/styles/global-scss.scss';
+
+.page-content {
+  @include adaptiveValue('padding-bottom', 85, 70);
+}

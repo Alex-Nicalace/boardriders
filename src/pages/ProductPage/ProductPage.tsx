@@ -1,10 +1,11 @@
 import './ProductPage.scss';
-import Main from '../../components/Main';
 import Product from '../../components/Product';
 import Breadcrumbs, { TBreadcrumbsData } from '../../components/ui/Breadcrumbs';
 import Steps from '../../components/ui/Steps';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import SliderWareCards from '../../components/ui/SliderWareCards';
+import CustomerReviews from '../../components/CustomerReviews';
+import PageContent from '../../components/PageContent';
 
 const BREADCRUMBS: TBreadcrumbsData = [
   {
@@ -98,7 +99,7 @@ function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
   const { isLessTablet } = useScreenWidth();
 
   return (
-    <div className="product-page">
+    <PageContent className="product-page">
       {!isLessTablet && (
         <Breadcrumbs
           className="product-page__breadcrumbs"
@@ -111,9 +112,9 @@ function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
           <Steps />
         </div>
       )}
-      <Main className="product-page__main">
+      <main className="product-page__main">
         <Product className="product-page__product" />
-      </Main>
+      </main>
       <section className="product-page__box-slider-ware">
         <h2 className="product-page__title-slider product-page__container">
           C этим товаром смотрят
@@ -132,7 +133,8 @@ function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
           wareData={POPULAR_PRODUCTS_DATA}
         />
       </section>
-    </div>
+      <CustomerReviews />
+    </PageContent>
   );
 }
 

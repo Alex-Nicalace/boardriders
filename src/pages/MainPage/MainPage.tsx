@@ -4,11 +4,11 @@ import MainSlider from '../../components/MainSlider';
 import Promotion from '../../components/Promotion';
 import BlogsSlider from '../../components/BlogsSlider';
 import JoinAndSubscrube from '../../components/JoinAndSubscrube/JoinAndSubscrube';
-import Main from '../../components/Main';
 import './MainPage.scss';
 import SliderWareCards from '../../components/ui/SliderWareCards';
 import Title from '../../components/ui/Title';
 import Button from '../../components/ui/Button';
+import PageContent from '../../components/PageContent';
 
 const PATH_NEW = '/src/assets/img/products-new/';
 const NEW_PRODUCTS_DATA = [
@@ -141,7 +141,7 @@ const POPULAR_PRODUCTS_DATA = [
 // interface IMainPageProps {}
 function MainPage(): JSX.Element {
   return (
-    <Main className="main-page">
+    <PageContent className="main-page" as="main">
       <MainSlider className="main-page__main-slider" />
       <LinksBrands className="main-page__links-brands" />
       <DualBanners className="main-page__dual-baners" />
@@ -197,7 +197,7 @@ function MainPage(): JSX.Element {
       </div>
       <BlogsSlider className="main-page__blogs-slider" />
       <JoinAndSubscrube className="main-page__join-and-subscrube" />
-    </Main>
+    </PageContent>
   );
 }
 
