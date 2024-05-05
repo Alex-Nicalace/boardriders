@@ -3,6 +3,7 @@ import InputText from '../../component-library/InputText';
 import Rating from '../../component-library/Rating';
 import Button from '../ui/Button';
 import { StarIcon } from '../ui/Icons';
+import { useScreenWidth } from '../../Context/useScreenWidthContext';
 
 type TInputReviewProps = {
   className?: string;
@@ -12,7 +13,9 @@ function InputReview({
   className = '',
   type = 'row',
 }: TInputReviewProps): JSX.Element {
+  const { isLessTablet } = useScreenWidth();
   const bemBlockName = `input-review${type === 'column' ? '-column' : ''}`;
+
   return (
     <InputText
       className={className}
@@ -24,7 +27,7 @@ function InputReview({
             className={`${bemBlockName}__rating`}
             iconActiveElement={<StarIcon fill="#EB5757" stroke="#EB5757" />}
             iconUnactiveElement={<StarIcon fill="transparent" stroke="#000" />}
-            size="20px"
+            size={isLessTablet ? '25px' : '20px'}
             gap="10px"
             isShowValue={false}
           />
