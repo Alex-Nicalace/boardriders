@@ -1,0 +1,56 @@
+.rating-counts {
+  // .rating-counts__list
+  &__list {
+  }
+  // .rating-counts__item
+  &__item {
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-bottom: var(--rating-counts-row-gap);
+    }
+  }
+  // .rating-counts__rating
+  &__rating {
+    margin-right: var(
+      --rating-counts-rating-mr,
+      var(--rating-counts-gap, 10px)
+    );
+  }
+  // .rating-counts__star
+  &__star {
+    margin-right: var(--rating-counts-star-mr, var(--rating-counts-gap, 10px));
+  }
+  // .rating-counts__meter
+  &__meter {
+    flex-grow: 1;
+    margin-right: var(--rating-counts-meter-mr, var(--rating-counts-gap, 10px));
+    // height in Firefox
+    height: var(--rating-counts-meter-hight, 10px);
+    // background in Firefox
+    background: var(--rating-counts-meter-color-bg, #f2f2f2);
+    // border-radius in Firefox
+    border-radius: var(--rating-counts-meter-border-radius, 4px);
+
+    // стили самого <meter> Для Firefox можно просто стилизовать <meter> без префиксов
+    &::-webkit-meter-bar {
+      height: var(--rating-counts-meter-hight, 10px);
+      border: 0;
+      border-radius: var(--rating-counts-meter-border-radius, 4px);
+      background: var(--rating-counts-meter-color-bg, #f2f2f2);
+    }
+    &::-webkit-meter-optimum-value {
+      background: var(--rating-counts-meter-color, green);
+    }
+
+    // стили для индикаторов внутри
+    &::-moz-meter-bar {
+      background: var(--rating-counts-meter-color, green);
+      border-radius: var(--rating-counts-meter-border-radius, 4px);
+    }
+  }
+  // .rating-counts__count
+  &__count {
+  }
+}
