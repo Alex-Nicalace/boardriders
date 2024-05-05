@@ -38,6 +38,8 @@
 
 [Rating](.src/component-library/Rating/Rating.tsx) - звездный рейтинг
 
+[RatingCounts.tsx](src/component-library/RatingCounts/RatingCounts.tsx) - отображает шкалу для каждой оцеки
+
 ## Кастомные хуки
 
 [useLockDocumentScroll.ts](./src/hooks/useLockDocumentScroll.ts) Пользовательский хук для блокировки прокрутки документа при вызове.
