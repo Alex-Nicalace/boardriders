@@ -1,0 +1,116 @@
+@import '/src/styles/global-scss.scss';
+
+.customer-reviews {
+  // .customer-reviews__container
+  &__container {
+    display: grid;
+    grid-template:
+      't t'
+      'r a' / minmax(auto, rem(889)) minmax(rem(200), rem(356));
+    column-gap: rem(20);
+    justify-content: space-between;
+
+    @include tablet-d {
+      grid-template:
+        't'
+        'a'
+        'r';
+    }
+  }
+  // .customer-reviews__title
+  &__title {
+    grid-area: t;
+    &:not(:last-child) {
+      margin-bottom: rem(35);
+    }
+  }
+  // .customer-reviews__review
+  &__review {
+    grid-area: r;
+  }
+  // .customer-reviews__input
+  &__input {
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 50, 40);
+    }
+  }
+  // .customer-reviews__list
+  &__list {
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 75, 40);
+    }
+  }
+  // .customer-reviews__item
+  &__item {
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 55, 40);
+    }
+  }
+  // .customer-reviews__pagination
+  &__pagination {
+    // данные свойства эмитируют сетку в компоненте Review чтобы согласно макета пагинация была выровнена по комментарию
+    display: grid;
+    grid-template-columns: rem(180) 1fr;
+    column-gap: percent(55, 889);
+
+    .pagination {
+      grid-column: 2 / 3;
+    }
+
+    @include mobile-d {
+      grid-template-columns: auto;
+      justify-content: center;
+
+      .pagination {
+        grid-column: auto;
+      }
+    }
+  }
+  // .customer-reviews__rating
+  &__rating {
+    grid-area: a;
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(30);
+
+    @include tablet-d {
+      flex-direction: row;
+      justify-content: space-between;
+
+      margin-bottom: rem(40);
+    }
+  }
+  // .customer-reviews__rating-counts
+  &__rating-counts {
+    @extend %body-1-1;
+
+    @include tablet-d {
+      // flex-grow: 1;
+      flex: 0 0 percent(200, 384);
+    }
+  }
+  // .customer-reviews__average-rating
+  &__average-rating {
+  }
+}
+.average-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // .average-rating__title
+  &__title {
+    @extend %body-2-1;
+  }
+  // .average-rating__value
+  &__value {
+    @include adaptiveValue('font-size', 90, 80);
+    letter-spacing: -0.02em;
+
+    &:not(:last-child) {
+      margin-bottom: rem(15);
+    }
+  }
+  // .average-rating__rating
+  &__rating {
+  }
+}
