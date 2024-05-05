@@ -29,4 +29,8 @@
       color: var(--light-gray);
     }
   }
+  &_independent {
+    padding-top: rem(25);
+    padding-bottom: rem(25);
+  }
 }

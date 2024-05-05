@@ -12,35 +12,43 @@ type TBreadcrumbsProps = {
   data: TBreadcrumbsData;
   color?: 'black' | 'white';
   className?: string;
-  withContainer?: boolean;
+  modificator?: 'independent';
 };
 function Breadcrumbs({
   data,
   color,
   className = '',
-  withContainer = false,
+  modificator,
 }: TBreadcrumbsProps): JSX.Element {
-  const modificator = color === 'white' ? 'breadcrumbs_white' : '';
+  const classes = [
+    color === 'white' && 'breadcrumbs_white',
+    modificator === 'independent' && 'breadcrumbs_independent',
+  ]
+    .filter((v) => v)
+    .join(' ');
+
   return (
-    <nav
-      className={`breadcrumbs ${modificator} ${
-        withContainer ? 'breadcrumbs__container' : ''
-      } ${className}`}
-    >
-      <ListLinks
-        linksData={data}
-        renderToItem={({ to, title }) =>
-          to ? (
-            <Link className="breadcrumbs__link" to={to}>
-              {title}
-            </Link>
-          ) : (
-            <span className="breadcrumbs__label">{title}</span>
-          )
+    <nav className={`breadcrumbs ${classes} ${className}`}>
+      <div
+        className={
+          modificator === 'independent' ? 'breadcrumbs__container' : undefined
         }
-        listProps={{ className: 'breadcrumbs__list' }}
-        itemProps={{ className: 'breadcrumbs__item' }}
-      />
+      >
+        <ListLinks
+          linksData={data}
+          renderToItem={({ to, title }) =>
+            to ? (
+              <Link className="breadcrumbs__link" to={to}>
+                {title}
+              </Link>
+            ) : (
+              <span className="breadcrumbs__label">{title}</span>
+            )
+          }
+          listProps={{ className: 'breadcrumbs__list' }}
+          itemProps={{ className: 'breadcrumbs__item' }}
+        />
+      </div>
     </nav>
   );
 }
