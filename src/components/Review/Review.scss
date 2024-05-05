@@ -1,0 +1,51 @@
+@import '/src/styles/global-scss.scss';
+
+.review {
+  display: grid;
+  grid-template:
+    'r t'
+    'd m' / auto 1fr;
+  row-gap: rem(15);
+  column-gap: percent(55, 889);
+  @extend %body-2-1;
+
+  @include mobile-d {
+    grid-template:
+      'r d'
+      't t'
+      'm m' / 1fr auto;
+    justify-content: space-between;
+    row-gap: rem(10);
+  }
+
+  // .review__header
+  &__header {
+    display: contents;
+  }
+  // .review__title
+  &__title {
+    grid-area: t;
+    @extend %body-2;
+  }
+  // .review__date
+  &__date {
+    grid-area: d;
+    color: var(--gray--1);
+  }
+  // .review__rating
+  &__rating {
+    grid-area: r;
+  }
+  // .review__text
+  &__text {
+    grid-area: m;
+  }
+  &__rating,
+  &__date {
+    padding: 0 rem(20);
+
+    @include mobile-d {
+      padding: 0;
+    }
+  }
+}
