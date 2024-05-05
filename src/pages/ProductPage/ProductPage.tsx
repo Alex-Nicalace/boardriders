@@ -104,7 +104,7 @@ function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
         <Breadcrumbs
           className="product-page__breadcrumbs"
           data={BREADCRUMBS}
-          withContainer
+          modificator="independent"
         />
       )}
       {!isLessTablet && (
@@ -133,7 +133,7 @@ function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
           wareData={POPULAR_PRODUCTS_DATA}
         />
       </section>
-      <CustomerReviews />
+      <CustomerReviews className="product-page__customer-reviews" />
     </PageContent>
   );
 }

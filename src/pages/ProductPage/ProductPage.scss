@@ -3,7 +3,9 @@
 .product-page {
   // .product-page__breadcrumbs
   &__breadcrumbs {
-    margin-top: rem(25);
+    &:not(:last-child) {
+      margin-bottom: rem(10);
+    }
   }
   // .product-page__steps
   &__steps {
@@ -36,6 +38,11 @@
   &__box-slider-ware {
     &:not(:first-child) {
       @include adaptiveValue('margin-top', 75, 40);
+    }
+  }
+  &__customer-reviews {
+    &:not(:first-child) {
+      @include adaptiveValue('margin-top', 85, 40);
     }
   }
 }
