@@ -1,0 +1,67 @@
+@import '/src/styles/global-scss.scss';
+
+.input-number {
+  display: flex;
+  // align-items: center;
+  // .input-number__btn
+  &__btn {
+    position: relative;
+    width: rem(40);
+    color: var(--black);
+    transition: color 0.3s ease 0s;
+    // .input-number__btn_dec
+    &_dec {
+    }
+    // .input-number__btn_inc
+    &_inc {
+    }
+    &_dec::before,
+    &_inc::before,
+    &_inc::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: currentColor;
+    }
+    &_dec::before,
+    &_inc::before {
+      height: rem(2);
+      width: rem(12);
+    }
+    &_inc::after {
+      height: rem(12);
+      width: rem(2);
+    }
+
+    @media (pointer: fine) {
+      &:hover {
+        color: var(--dark-gray);
+      }
+    }
+
+    &:active {
+      color: var(--black);
+    }
+  }
+  // .input-number__input
+  &__input {
+    flex-grow: 1;
+    input {
+      @extend %subtitle-2;
+      padding-top: rem(4);
+      padding-bottom: rem(4);
+      text-align: center;
+      -moz-appearance: textfield;
+
+      /* Для браузеров на базе Webkit (например, Chrome и Safari) */
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      border-radius: rem(4);
+    }
+  }
+}
