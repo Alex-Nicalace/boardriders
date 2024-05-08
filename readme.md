@@ -40,6 +40,8 @@
 
 [RatingCounts.tsx](src/component-library/RatingCounts/RatingCounts.tsx) - отображает шкалу для каждой оцеки
 
+[InputNumber.tsx](./src/components/ui/InputNumber/InputNumber.tsx) - компонент для ввода числа с кнопками инкремента и декремента
+
 ## Кастомные хуки
 
 [useLockDocumentScroll.ts](./src/hooks/useLockDocumentScroll.ts) Пользовательский хук для блокировки прокрутки документа при вызове.
@@ -75,3 +77,14 @@
 [visibilityScrollDocument.ts](src/utils/visibilityScrollDocument.ts) - скрыть/показать скролл документа, перестал использовать после создания хука [useLockDocumentScroll.ts](./src/hooks/useLockDocumentScroll.ts)
 
 [numberFormat.ts](./src/utils/numberFormat.ts) - форматирование числа разделителем разрядов. В контексте форматирования числа под денежный формат можно восаользоваться объектом `Intl` [Price.tsx](./src/components/Price/Price.tsx)
+
+## # Object Intl - перевод и форматирование текста на разных языках
+
+### Intl.NumberFormat
+
+- [Price.tsx](./src/components/Price/Price.tsx)
+- [WareCardCart.tsx](./src/components/ui/WareCardCart/WareCardCart.tsx)
+
+### Intl.DateTimeFormat
+
+- [Review.tsx](./src/components/Review/Review.tsx)
