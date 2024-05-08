@@ -3,6 +3,7 @@ import './InputNumber.scss';
 import InputStyled from '../InputStyled';
 
 type TInputNumberProps = {
+  className?: string;
   min?: number;
   max?: number;
   step?: number;
@@ -10,6 +11,7 @@ type TInputNumberProps = {
   onChange?: (value: number | '' | '-') => void;
 };
 function InputNumber({
+  className = '',
   min,
   max,
   step = 1,
@@ -45,7 +47,7 @@ function InputNumber({
   }
 
   return (
-    <div className="input-number">
+    <div className={`input-number ${className}`}>
       <button
         className="input-number__btn input-number__btn_dec"
         onClick={() => handleClickBtn(-step)}
