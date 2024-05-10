@@ -1,0 +1,25 @@
+@import '/src/styles/global-scss.scss';
+
+.step-number {
+  width: rem(40);
+  height: rem(40);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: rem(3.3) currentColor solid;
+  border-radius: 50%;
+
+  font-weight: 500;
+  font-size: rem(16);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--green);
+
+  svg {
+    fill: currentColor;
+  }
+
+  &_disabled {
+    color: var(--gray);
+  }
+}
