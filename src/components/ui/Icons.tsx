@@ -27,6 +27,7 @@ import DeliveryIcon from './../../assets/icons/delivery.svg?react';
 import ShopIcon from './../../assets/icons/shop.svg?react';
 import LocationUnderlineIcon from './../../assets/icons/location-underline.svg?react';
 import CloseIcon from './../../assets/icons/close.svg?react';
+import CheckStepIcon from './../../assets/icons/check-step.svg?react';
 
 function TrackIcon(
   props: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -84,4 +85,5 @@ export {
   ShopIcon,
   LocationUnderlineIcon,
   CloseIcon,
+  CheckStepIcon,
 };
