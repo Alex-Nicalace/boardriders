@@ -115,4 +115,12 @@
   &_fullwidth {
     width: 100%;
   }
+
+  &_green {
+    background-color: var(--green);
+
+    &:disabled {
+      background-color: var(--light-gray);
+    }
+  }
 }

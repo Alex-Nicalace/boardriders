@@ -2,9 +2,18 @@ import { ButtonHTMLAttributes } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import './Button.scss';
 
-type TCustomProps = {
+type TCustomProps = (
+  | {
+      color?: 'primary';
+
+      nameColor?: never;
+    }
+  | {
+      color: 'secondary';
+      nameColor?: 'green';
+    }
+) & {
   variant?: 'contained' | 'outlined' | 'reverse';
-  color?: 'primary' | 'secondary';
   fullWidth?: boolean;
 };
 
@@ -20,25 +29,30 @@ function Button(props: TButtonProps): JSX.Element {
     variant = 'contained',
     color = 'primary',
     fullWidth = false,
+    nameColor,
     ...rest // пропсы характерные для button или Link
   } = props;
 
-  const classNameValue = `${
-    rest.className || ''
-  } button-${color} button-${color}_${variant} ${
-    fullWidth ? `button-${color}_fullwidth` : ''
-  }`;
+  const classes = [
+    rest.className,
+    `button-${color}`,
+    `button-${color}_${variant}`,
+    fullWidth && `button-${color}_fullwidth`,
+    nameColor && `button-${color}_${nameColor}`,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   if (rest.to !== undefined) {
     return (
-      <Link {...rest} className={classNameValue}>
+      <Link {...rest} className={classes}>
         {rest.children}
       </Link>
     );
   }
 
   return (
-    <button {...rest} className={classNameValue}>
+    <button {...rest} className={classes}>
       {rest.children}
     </button>
   );
