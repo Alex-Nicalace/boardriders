@@ -1,0 +1,134 @@
+@import '/src/styles/global-scss.scss';
+
+.shopping-cart {
+  // .shopping-cart__title
+  &__title {
+    @extend %subtitle-1;
+
+    &:not(:last-child) {
+      margin-bottom: rem(25);
+    }
+
+    @include mobile-d {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 500;
+      font-size: rem(16);
+      line-height: 1.87;
+    }
+  }
+
+  &__label {
+    font-weight: 700;
+    font-size: 21px;
+  }
+  // .shopping-cart__list
+  &__list {
+    padding: rem(20) 0;
+
+    border-top: rem(1) solid #e0e0e0;
+    border-bottom: rem(1) solid #e0e0e0;
+  }
+  // .shopping-cart__item
+  &__item {
+    display: flex;
+    align-items: center;
+    column-gap: rem(20);
+    @extend %body-1;
+
+    &:not(:last-child) {
+      margin-bottom: rem(20);
+    }
+
+    &_disabled {
+      color: var(--dark-gray);
+    }
+
+    @include mobile-d {
+      font-size: rem(18);
+    }
+  }
+  // .shopping-cart__step
+  &__step {
+  }
+  // .shopping-cart__name-item
+  &__name-item {
+    flex-grow: 1;
+  }
+  // .shopping-cart__value-item
+  &__value-item {
+    color: var(--green);
+  }
+  &__totals {
+    padding: rem(25) 0;
+
+    & > * {
+      &:not(:last-child) {
+        margin-bottom: rem(10);
+      }
+    }
+
+    @include mobile-d {
+      padding: rem(20) 0;
+
+      & > * {
+        &:not(:last-child) {
+          margin-bottom: rem(5);
+        }
+      }
+    }
+  }
+  &__total,
+  &__points {
+    display: flex;
+    align-items: center;
+    column-gap: rem(10);
+    justify-content: space-between;
+  }
+  // .shopping-cart__total
+  &__total {
+  }
+  // .shopping-cart__total-text
+  &__total-text {
+    @extend %subtitle-2;
+
+    @include mobile-d {
+      font-size: rem(16);
+      line-height: 1.25;
+    }
+  }
+  // .shopping-cart__total-value
+  &__total-value {
+    @extend %h1;
+    color: var(--red);
+
+    @include mobile-d {
+      font-size: rem(21);
+    }
+  }
+  // .shopping-cart__points
+  &__points {
+    @extend %body-2;
+
+    @include mobile-d {
+      font-size: rem(12);
+      font-weight: 400;
+      line-height: 167%;
+    }
+  }
+  // .shopping-cart__points-text
+  &__points-text {
+    color: var(--dark-gray);
+  }
+  // .shopping-cart__points-value
+  &__points-value {
+  }
+  &__wrapper-buttons {
+    padding-top: rem(25);
+    border-top: rem(1) solid #e0e0e0;
+  }
+  // .shopping-cart__button
+  &__button {
+  }
+}
