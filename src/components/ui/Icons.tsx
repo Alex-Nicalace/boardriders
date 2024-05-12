@@ -28,6 +28,9 @@ import ShopIcon from './../../assets/icons/shop.svg?react';
 import LocationUnderlineIcon from './../../assets/icons/location-underline.svg?react';
 import CloseIcon from './../../assets/icons/close.svg?react';
 import CheckStepIcon from './../../assets/icons/check-step.svg?react';
+import GiftIcon from './../../assets/icons/gift.svg?react';
+import DiscountIcon from './../../assets/icons/discount.svg?react';
+import QuestionInCircleIcon from './../../assets/icons/question-in-circle.svg?react';
 
 function TrackIcon(
   props: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -86,4 +89,7 @@ export {
   LocationUnderlineIcon,
   CloseIcon,
   CheckStepIcon,
+  GiftIcon,
+  DiscountIcon,
+  QuestionInCircleIcon,
 };
