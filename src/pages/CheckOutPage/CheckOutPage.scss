@@ -1,0 +1,24 @@
+@import '/src/styles/global-scss.scss';
+
+.check-out-page {
+  @include adaptiveValue('padding-top', 50, 15);
+  // .check-out__container
+  &__container {
+    display: flex;
+    column-gap: percent(50, 1360);
+  }
+  // .check-out__cart
+  &__cart {
+    flex: 0 0 percent(890, 1360);
+  }
+  // .check-out__shopping-cart
+  &__shopping-cart {
+    flex-grow: 1;
+  }
+  // .check-out__title
+  &__title {
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 25, 10);
+    }
+  }
+}
