@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Price.scss';
+import { useFormaters } from '../../Context/useFormaters';
 
 type TPriceProps = {
   className?: string;
@@ -15,21 +16,12 @@ function Price({
   discount,
   cheaper = true,
 }: TPriceProps): JSX.Element {
-  // Создание объекта Intl
-  const formaterCurrency = new Intl.NumberFormat('ru-RU', {
-    style: 'currency',
-    currency: 'RUB',
-    minimumFractionDigits: 0,
-  });
-  const formaterPercent = new Intl.NumberFormat('ru-RU', {
-    style: 'percent',
-  });
+  const { formaterCurrency, formaterPercent } = useFormaters();
 
-  const priceFormated = formaterCurrency.format(price);
-  const oldPriceFormated =
-    oldPrice !== undefined && formaterCurrency.format(oldPrice);
+  const priceFormated = formaterCurrency(price);
+  const oldPriceFormated = oldPrice !== undefined && formaterCurrency(oldPrice);
   const discountFormated =
-    discount !== undefined && formaterPercent.format(discount / 100);
+    discount !== undefined && formaterPercent(discount / 100);
 
   return (
     <div className={`price ${className}`}>

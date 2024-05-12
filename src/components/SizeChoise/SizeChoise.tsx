@@ -1,6 +1,7 @@
 import './SizeChoise.scss';
 import Checkbox from '../ui/Checkbox';
 import { Link } from 'react-router-dom';
+import { useFormaters } from '../../Context/useFormaters';
 
 type TSizeChoiseProps = {
   name: string;
@@ -14,10 +15,7 @@ function SizeChoise({
   className = '',
   type = 'radio',
 }: TSizeChoiseProps): JSX.Element {
-  const formater = new Intl.NumberFormat('ru-RU', {
-    style: 'decimal',
-    minimumFractionDigits: 0, // не показывать друбную часть, если ее нет
-  });
+  const { formaterDecimal } = useFormaters();
 
   return (
     <div className={`size-choise ${className}`}>
@@ -30,7 +28,7 @@ function SizeChoise({
             <Checkbox
               className="size-choise__checkbox"
               variant="btn-toggle"
-              label={formater.format(item.size)}
+              label={formaterDecimal(item.size)}
               name={name}
               type={type}
               disabled={item.isEnded}

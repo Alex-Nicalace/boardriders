@@ -2,6 +2,7 @@ import './ShoppingCart.scss';
 import StepNumber from '../StepNumber';
 import Button from '../ui/Button';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
+import { useFormaters } from '../../Context/useFormaters';
 
 type TShoppingСartProps = {
   countItems: number;
@@ -22,18 +23,8 @@ function ShoppingCart({
   points,
 }: TShoppingСartProps): JSX.Element {
   const { isLessMobile } = useScreenWidth();
+  const { formaterCurrency, formaterDecimal } = useFormaters();
   const isCanPay = dataSteps.every(({ isDone }) => isDone);
-
-  const formaterCurrency = new Intl.NumberFormat('ru-RU', {
-    style: 'currency',
-    currency: 'RUB',
-    minimumFractionDigits: 0, // не показывать друбную часть, если ее нет
-  });
-
-  const formaterDecimal = new Intl.NumberFormat('ru-RU', {
-    style: 'decimal',
-    minimumFractionDigits: 0, // не показывать друбную часть, если ее нет
-  });
 
   return (
     <div className="shopping-cart">
@@ -73,14 +64,14 @@ function ShoppingCart({
         <div className="shopping-cart__total">
           <span className="shopping-cart__total-text">Итого:</span>
           <span className="shopping-cart__total-value">
-            {formaterCurrency.format(totalPrice)}
+            {formaterCurrency(totalPrice)}
           </span>
         </div>
 
         <div className="shopping-cart__points">
           <span className="shopping-cart__points-text">Баллы за покупку:</span>
           <span className="shopping-cart__points-value">
-            +{formaterDecimal.format(points)} баллов
+            +{formaterDecimal(points)} баллов
           </span>
         </div>
       </div>

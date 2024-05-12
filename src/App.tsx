@@ -6,6 +6,7 @@ import ScreenWidthProvider from './Context/ScreenWidthContext';
 import Popup from './component-library/Popup';
 import ProductPage from './pages/ProductPage';
 import CheckOut from './pages/CheckOut';
+import FormatersProvider from './Context/FormatersContext';
 
 const router = createBrowserRouter([
   {
@@ -44,9 +45,11 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ScreenWidthProvider>
-      <Popup>
-        <RouterProvider router={router} />
-      </Popup>
+      <FormatersProvider>
+        <Popup>
+          <RouterProvider router={router} />
+        </Popup>
+      </FormatersProvider>
     </ScreenWidthProvider>
   );
 }

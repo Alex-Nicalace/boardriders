@@ -1,3 +1,4 @@
+import { useFormaters } from '../../Context/useFormaters';
 import Rating from '../../component-library/Rating';
 import { StarIcon } from '../ui/Icons';
 import './Review.scss';
@@ -13,18 +14,14 @@ function Review({
   message,
   dateString,
 }: TReviewProps): JSX.Element {
-  const formaterDate = new Intl.DateTimeFormat('ru', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+  const { formaterDate } = useFormaters();
 
   return (
     <article className="review">
       <header className="review__header">
         <h2 className="review__title">{name}</h2>
         <time className="review__date" dateTime={dateString}>
-          {formaterDate.format(new Date(dateString))}
+          {formaterDate(new Date(dateString))}
         </time>
         <Rating
           className="review__rating"

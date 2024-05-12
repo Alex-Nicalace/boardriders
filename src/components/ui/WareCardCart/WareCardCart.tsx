@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import './WareCardCart.scss';
 import InputNumber from '../InputNumber';
 import { CloseIcon } from '../Icons';
+import { useFormaters } from '../../../Context/useFormaters';
 
 type TWareCardCartProps = {
   className?: string;
@@ -19,6 +20,7 @@ function WareCardCart({
   mode = 'desktop',
   data: { title, article, img, props, price },
 }: TWareCardCartProps): JSX.Element {
+  const { formaterCurrency } = useFormaters();
   const classes = [
     'ware-card-cart',
     className,
@@ -26,12 +28,6 @@ function WareCardCart({
   ]
     .filter(Boolean)
     .join(' ');
-
-  const formater = new Intl.NumberFormat('ru-RU', {
-    style: 'currency',
-    currency: 'RUB',
-    minimumFractionDigits: 0, // не показывать друбную часть, если ее нет
-  });
 
   return (
     <article className={classes}>
@@ -54,7 +50,7 @@ function WareCardCart({
         ))}
       </ul>
       <InputNumber className="ware-card-cart__input" min={1} max={99} />
-      <div className="ware-card-cart__price">{formater.format(price)}</div>
+      <div className="ware-card-cart__price">{formaterCurrency(price)}</div>
       <button className="ware-card-cart__btn-delete">
         <CloseIcon />
       </button>

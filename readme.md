@@ -82,9 +82,8 @@
 
 ### Intl.NumberFormat
 
-- [Price.tsx](./src/components/Price/Price.tsx)
-- [WareCardCart.tsx](./src/components/ui/WareCardCart/WareCardCart.tsx)
+- [FormatersContext.tsx](./src/Context/FormatersContext.tsx)
 
 ### Intl.DateTimeFormat
 
-- [Review.tsx](./src/components/Review/Review.tsx)
+- [FormatersContext.tsx](./src/Context/FormatersContext.tsx)
