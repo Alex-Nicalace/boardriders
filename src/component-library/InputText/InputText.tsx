@@ -26,13 +26,17 @@ function InputText({
   ...inputProps
 }: TInputTextProps): JSX.Element {
   const hasError = isError || Boolean(error);
+  const classes = [
+    bemBlockName,
+    hasError && `${bemBlockName}_error`,
+    fullWidth && `${bemBlockName}_full-width`,
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <div
-      className={`${className} ${bemBlockName} ${
-        hasError ? `${bemBlockName}_error` : ''
-      } ${fullWidth ? `${bemBlockName}_full-width` : ''}`}
-    >
+    <div className={classes}>
       {(label || error) && (
         <div className={`${bemBlockName}__wrap-label`}>
           {label && (
