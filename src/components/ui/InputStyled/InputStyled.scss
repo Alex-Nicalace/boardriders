@@ -57,7 +57,7 @@
   }
   // .input-main__hint
   &__hint {
-    margin-bottom: rem(5);
+    margin-top: rem(5);
     @extend %caption-1;
     color: #828282;
   }
@@ -183,5 +183,26 @@
     .input-second__adornment_start {
       color: var(--dark-gray);
     }
+  }
+}
+
+.icon-label-hint {
+  display: flex;
+  align-items: center;
+  // .icon-label-hint__icon
+  &__icon {
+    margin-right: rem(10);
+  }
+  // .icon-label-hint__text
+  &__text {
+    margin-right: rem(7);
+
+    @include mobile-d {
+      font-size: rem(14);
+    }
+  }
+  // .icon-label-hint__icon-hint
+  &__icon-hint {
+    color: var(--dark-gray);
   }
 }
