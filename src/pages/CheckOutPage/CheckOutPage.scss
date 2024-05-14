@@ -6,6 +6,11 @@
   &__container {
     display: flex;
     column-gap: percent(50, 1360);
+
+    @include tablet-d {
+      flex-direction: column;
+      row-gap: rem(40);
+    }
   }
   // .check-out__cart
   &__cart {
@@ -20,5 +25,27 @@
     &:not(:last-child) {
       @include adaptiveValue('margin-bottom', 25, 10);
     }
+  }
+  &__cart-list {
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 40, 20);
+    }
+  }
+  // .check-out-page__wrap-bonus-promo
+  &__wrap-bonus-promo {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-between;
+    column-gap: percent(24, 890);
+    row-gap: rem(20);
+  }
+  // .check-out-page__input-bonus
+  &__input-bonus {
+    min-width: rem(290);
+    flex: 1 0 percent(421, 890);
+  }
+  // .check-out-page__input-promo
+  &__input-promo {
+    flex: 1 0 percent(445, 890);
   }
 }

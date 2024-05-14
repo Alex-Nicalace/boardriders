@@ -5,7 +5,7 @@ import CatalogPage from './pages/CatalogPage';
 import ScreenWidthProvider from './Context/ScreenWidthContext';
 import Popup from './component-library/Popup';
 import ProductPage from './pages/ProductPage';
-import CheckOut from './pages/CheckOut';
+import CheckOutPage from './pages/CheckOutPage';
 import FormatersProvider from './Context/FormatersContext';
 
 const router = createBrowserRouter([
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
           },
           {
             path: '/check-out',
-            element: <CheckOut />,
+            element: <CheckOutPage />,
           },
           {
             path: '*',
