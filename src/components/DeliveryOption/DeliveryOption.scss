@@ -1,0 +1,72 @@
+@import '/src/styles/global-scss.scss';
+
+.delivery-option {
+  // .delivery-option__box-region
+  &__box-region {
+    display: flex;
+    justify-content: space-between;
+
+    & > * {
+      flex: 0 0 percent(408, 836);
+
+      @include mobile-d {
+        flex: auto;
+      }
+    }
+
+    @include mobile-d {
+      flex-direction: column;
+      row-gap: rem(15);
+    }
+  }
+  // .delivery-option__region
+  &__region {
+  }
+  // .delivery-option__exclamation
+  &__exclamation {
+    padding-top: rem(25);
+    display: flex;
+    column-gap: rem(10);
+
+    font-size: rem(12);
+    line-height: 1.67;
+    letter-spacing: -0.02em;
+    color: var(--dark-gray);
+
+    @include mobile-d {
+      padding-top: 0;
+    }
+
+    span {
+      padding-top: rem(5);
+    }
+  }
+
+  // .delivery-option__title
+  &__title {
+    @include adaptiveValue('margin-top', 40, 20);
+    @include adaptiveValue('margin-bottom', 25, 10);
+    @extend %subtitle-1;
+    @include adaptiveValue('font-size', 21, 16);
+  }
+  // .delivery-option__list
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    @include adaptiveValue('row-gap', 25, 10);
+  }
+  // .delivery-option__item
+  &__item {
+    flex: 0 0 percent(408, 836);
+
+    @include mobile-d {
+      min-height: rem(115);
+      flex: 0 0 100%;
+    }
+  }
+  // .delivery-option__radio
+  &__radio {
+    height: 100%;
+  }
+}
