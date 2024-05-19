@@ -1,41 +1,54 @@
-@import '/src/styles/global-scss.scss';
-
 .options {
   position: absolute;
-  background-color: var(--white);
-  border: rem(1) solid var(--gray);
+  background-color: var(--select-options-bg, #fff);
+  border: var(--select-options-border, 1px solid #ced4d7);
   opacity: 0;
   visibility: hidden;
   max-height: 0;
-  transition: all 0.3s ease-in-out;
-  z-index: 20;
+  transition: all var(--select-options-transition-duration, 0.3s) ease-in-out;
+  z-index: var(--select-options-z-index, 20);
 
   // .options__wrapper
   &__wrapper {
-    padding: rem(17.5) rem(20);
+    padding: var(--select-options-padding, 17.5px 20px);
   }
 
   &__items {
-    @extend %scrollbar;
+    &::-webkit-scrollbar {
+      // ширина и цвет
+      width: var(--select-options-scrollbar-width, 5px);
+      background-color: var(--select-options-scrollbar-bg, #ced4d7);
+    }
+    &::-webkit-scrollbar-thumb {
+      // цвет бегунка
+      background-color: var(--select-options-scrollbar-thumb-bg, #000);
+    }
+
+    @supports (not selector(::-webkit-scrollbar)) {
+      scrollbar-color: var(--select-options-scrollbar-thumb-bg, #000)
+        var(--select-options-scrollbar-bg, #ced4d7);
+      scrollbar-width: thin;
+    }
   }
 
   &__item {
     cursor: pointer;
-    transition: color 0.3s ease 0s;
+    transition: color var(--select-options-item-transition-duration, 0.3s) ease
+      0s;
     &:hover {
-      color: var(--dark-gray);
+      color: var(--select-options-item-hover-color, #828b8d);
     }
     // &:not(:last-child) {
     //   margin-bottom: em(15, 14);
     // }
-    padding: em(7.5, 14) 0;
+    padding: var(--select-options-item-padding, 0.535em 0);
 
     &:focus {
-      outline: 1px solid var(--dark-gray);
+      outline: var(--select-options-item-focus-outline, 1px solid #828b8d);
     }
 
     &_selected {
-      color: var(--dark-gray);
+      color: var(--select-options-item-selected-color, #828b8d);
     }
   }
 

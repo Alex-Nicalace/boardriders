@@ -12,6 +12,10 @@ import Option, { OptionProps } from './Option';
 import { SelectContext } from './SelectContext';
 import Transition, { TTransition } from '../Transition';
 
+interface ICustomCSSProperties extends React.CSSProperties {
+  '--select-transition-duration'?: string;
+}
+
 type TSingleSelectProps = {
   isMulti?: false;
   initValue?: never;
@@ -54,7 +58,7 @@ type TCommonSelectProps = {
   listOptions?: {
     className?: string;
   };
-  iconElement: JSX.Element;
+  iconSelect?: React.ReactNode;
   isLockScroll?: boolean;
   placreholder?: React.ReactNode;
   isSearchable?: boolean;
@@ -71,7 +75,7 @@ const TRANSITION_STYLES: Record<TTransition, string> = {
   exited: '',
 };
 
-type TSelectProps = (
+export type TSelectProps = (
   | TSingleSelectProps
   | TMultiSelectProps
   | TSingleSelectUncontrolledProps
@@ -84,7 +88,7 @@ function Select(props: TSelectProps): JSX.Element {
     name,
     id,
     className = '',
-    iconElement,
+    iconSelect = '▼',
     isLockScroll = true,
     listOptions = {},
     placreholder = 'Выберите...',
@@ -218,6 +222,19 @@ function Select(props: TSelectProps): JSX.Element {
     }
   }
 
+  const classes = [
+    'select',
+    isOpen && 'select_opened',
+    isEmpty && 'select_empty',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const style: ICustomCSSProperties = {
+    '--select-transition-duration': duration + 'ms',
+  };
+
   return (
     <SelectContext.Provider
       value={{
@@ -226,12 +243,7 @@ function Select(props: TSelectProps): JSX.Element {
         getMapItems,
       }}
     >
-      <div
-        ref={selectRef}
-        className={`select ${isOpen ? 'select_opened' : ''} ${
-          isEmpty ? 'select_empty' : ''
-        } ${className}`}
-      >
+      <div ref={selectRef} className={classes} style={style}>
         <div
           ref={selectWrapperRef}
           className="select__wrapper"
@@ -245,7 +257,7 @@ function Select(props: TSelectProps): JSX.Element {
           aria-label={name}
         >
           <div className="select__selected">{getDisplay()}</div>
-          <div className="select__icon">{iconElement}</div>
+          <div className="select__icon">{iconSelect}</div>
           <input
             className="select__input"
             aria-hidden={true}
@@ -269,6 +281,7 @@ function Select(props: TSelectProps): JSX.Element {
                 }`}
                 close={close}
                 shouldFocus={state === 'entered' && isOpen}
+                transitionDuration={duration}
               >
                 {children}
               </ListOptions>

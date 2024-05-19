@@ -1,28 +1,28 @@
-@import '/src/styles/global-scss.scss';
-
 .select {
   position: relative;
   display: inline-block;
-  @extend %body-2;
 
   // .select__wrapper
   &__wrapper {
     width: 100%;
-    padding: rem(11.5) rem(20);
+    padding: var(--select-padding, 11.5px 20px);
     display: inline-grid;
     grid-template-columns: 1fr auto;
     align-items: center;
-    column-gap: rem(10);
-    border: rem(1) solid var(--gray);
+    column-gap: var(--select-gap, 10px);
+    border: var(--select-border, 1px solid #ced4d7);
 
     cursor: pointer;
 
     &:hover {
-      box-shadow: rem(0) rem(5) rem(15) rem(0) rgba(0, 0, 0, 0.05);
+      box-shadow: var(
+        --select-hover-box-shadow,
+        0 5px 15px rgba(0, 0, 0, 0.05)
+      );
     }
 
-    &:focus {
-      outline: rem(1) solid var(--dark-gray);
+    &:focus-visible {
+      outline: var(--select-focus-outline, 1px solid #828b8d);
     }
   }
 
@@ -39,7 +39,7 @@
 
   // .select__icon
   &__icon {
-    transition: transform 0.3s ease 0s;
+    transition: transform var(--select-transition-duration, 0.3s) ease 0s;
   }
 
   // .select__selected
@@ -50,14 +50,14 @@
   // .select__list-selected
   &__list-selected {
     display: flex;
-    gap: rem(15);
+    gap: var(--select-list-selected-gap, 15px);
   }
 
   // .select__item-selected
   &__item-selected {
     display: flex;
     align-items: center;
-    gap: rem(10);
+    gap: var(--select-item-selected-gap, 10px);
   }
 
   // .select__item-displaying
@@ -71,11 +71,21 @@
   // .select_opened
   &_opened {
     .select__icon {
-      transform: scale(1, -1);
+      transform: var(--select-opened-transform-icon, scale(1, -1));
     }
 
     .select__wrapper {
-      outline: rem(1) solid var(--dark-gray);
+      outline: var(
+        --select-opened-outline,
+        var(--select-focus-outline, 1px solid #828b8d)
+      );
+    }
+  }
+
+  // .select_empty
+  &_empty {
+    .select__selected {
+      color: var(--select-placreholder-color, #828b8d);
     }
   }
 }

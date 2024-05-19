@@ -20,7 +20,7 @@ function DeliveryRegion({ className }: IDeliveryRegionProps): JSX.Element {
         // value={city}
         initValue="20"
         // onChange={handleChangeCity}
-        iconElement={<SelectIcon />}
+        iconSelect={<SelectIcon />}
       >
         <Select.Option value="10">Москва</Select.Option>
         <Select.Option value="20">Санкт-Петербург</Select.Option>

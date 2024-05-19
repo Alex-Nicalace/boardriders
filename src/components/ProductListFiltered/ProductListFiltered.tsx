@@ -522,7 +522,7 @@ function ProductListFiltered({
                     </span>
                     <Select
                       className="product-list-filtered__sort-select"
-                      iconElement={<SelectIcon />}
+                      iconSelect={<SelectIcon />}
                       id={selectId}
                     >
                       {SORTS.map((sort) => (
@@ -537,7 +537,7 @@ function ProductListFiltered({
                 <>
                   <Select
                     className="product-list-filtered__sort-select"
-                    iconElement={<SelectIcon />}
+                    iconSelect={<SelectIcon />}
                     id={selectId}
                     placreholder="Сортировать"
                   >

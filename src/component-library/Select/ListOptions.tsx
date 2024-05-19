@@ -5,6 +5,10 @@ import { useOutsideClick } from '../../hooks/useOutsideClick';
 import extractTextFromReactNode from '../../utils/extractTextFromReactNode';
 import { useSelectContext } from './useSelectContext';
 
+interface ICustomCSSProperties extends React.CSSProperties {
+  '--select-options-transition-duration'?: string;
+}
+
 type ListOptionsProps = {
   children: React.ReactNode;
   selectRef: React.RefObject<HTMLDivElement>;
@@ -13,6 +17,7 @@ type ListOptionsProps = {
   isSearchable: boolean;
   close: () => void;
   shouldFocus?: boolean;
+  transitionDuration?: number;
 };
 function ListOptions({
   children,
@@ -22,6 +27,7 @@ function ListOptions({
   isSearchable,
   close,
   shouldFocus = true,
+  transitionDuration = 300,
 }: ListOptionsProps) {
   const [serachValue, setSerachValue] = useState('');
   useLockDocumentScroll(!isLockScroll);
@@ -34,7 +40,7 @@ function ListOptions({
 
     const inputId = selectContainerEl?.querySelector('input[id]')?.id;
     const labelFor = target.closest('label[for]')?.getAttribute('for');
-    if (inputId === labelFor) return;
+    if (inputId && labelFor && inputId === labelFor) return;
 
     close();
   });
@@ -134,12 +140,18 @@ function ListOptions({
     }
   }
 
+  const classes = ['options', className].filter(Boolean).join(' ');
+  const style: ICustomCSSProperties = {
+    '--select-options-transition-duration': transitionDuration + 'ms',
+  };
+
   const listOptionsElement = (
     <div
       ref={listElRef}
-      className={`options ${className}`}
+      className={classes}
       tabIndex={-1}
       onKeyDown={handleOptionsKeyDown}
+      style={style}
     >
       <div className="options__wrapper">
         {isSearchable && (
