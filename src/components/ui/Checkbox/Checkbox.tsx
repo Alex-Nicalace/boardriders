@@ -33,6 +33,7 @@ export type TCheckboxProps = (
   id?: string;
   className?: string;
   checked?: boolean;
+  defaultChecked?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   type?: 'checkbox' | 'radio';
@@ -43,6 +44,7 @@ function Checkbox({
   id,
   className = '',
   checked,
+  defaultChecked,
   onChange,
   value,
   type = 'checkbox',
@@ -117,7 +119,8 @@ function Checkbox({
         type={type}
         name={name}
         id={id}
-        defaultChecked={checked}
+        defaultChecked={defaultChecked}
+        checked={checked}
         onChange={onChange}
         value={value}
         disabled={disabled}
