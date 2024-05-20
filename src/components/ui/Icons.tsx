@@ -32,6 +32,7 @@ import GiftIcon from './../../assets/icons/gift.svg?react';
 import DiscountIcon from './../../assets/icons/discount.svg?react';
 import QuestionInCircleIcon from './../../assets/icons/question-in-circle.svg?react';
 import ExclamationInCircleIcon from './../../assets/icons/exclamation-in-circle.svg?react';
+import AlertIcon from './../../assets/icons/alert.svg?react';
 
 function TrackIcon(
   props: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -94,4 +95,5 @@ export {
   DiscountIcon,
   QuestionInCircleIcon,
   ExclamationInCircleIcon,
+  AlertIcon,
 };
