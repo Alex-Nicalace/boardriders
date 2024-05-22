@@ -5,6 +5,7 @@ export interface IFormatersContext {
   formaterPercent: (value: number) => string;
   formaterDecimal: (value: number) => string;
   formaterDate: (value: Date) => string;
+  formaterDateWithWeekday: (value: Date) => string;
 }
 
 export const FormatersContext = createContext<IFormatersContext | null>(null);
@@ -27,6 +28,12 @@ function FormatersProvider({ children }: { children: React.ReactNode }) {
       year: 'numeric',
     }).format;
 
+    const formaterDateWithWeekday = new Intl.DateTimeFormat('ru', {
+      day: 'numeric',
+      month: 'long',
+      weekday: 'short',
+    }).format;
+
     const formaterDecimal = new Intl.NumberFormat('ru-RU', {
       style: 'decimal',
       minimumFractionDigits: 0, // не показывать друбную часть, если ее нет
@@ -37,6 +44,7 @@ function FormatersProvider({ children }: { children: React.ReactNode }) {
       formaterPercent,
       formaterDate,
       formaterDecimal,
+      formaterDateWithWeekday,
     };
   }, []);
 
