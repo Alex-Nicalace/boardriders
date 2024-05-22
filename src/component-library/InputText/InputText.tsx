@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, useId } from 'react';
 import './InputText.scss';
 
 interface ICustomProps {
@@ -25,6 +25,8 @@ function InputText({
   fullWidth = false,
   ...inputProps
 }: TInputTextProps): JSX.Element {
+  const initId = useId();
+  const id = inputProps.id || initId;
   const hasError = isError || Boolean(error);
   const classes = [
     bemBlockName,
@@ -40,7 +42,7 @@ function InputText({
       {(label || error) && (
         <div className={`${bemBlockName}__wrap-label`}>
           {label && (
-            <label htmlFor={inputProps.id} className={`${bemBlockName}__label`}>
+            <label htmlFor={id} className={`${bemBlockName}__label`}>
               {label}
             </label>
           )}
@@ -57,6 +59,7 @@ function InputText({
         )}
         <input
           className={`${bemBlockName}__input`}
+          id={id}
           {...inputProps}
           aria-invalid={hasError}
         />
