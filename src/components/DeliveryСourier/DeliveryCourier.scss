@@ -1,0 +1,118 @@
+@import '/src/styles/global-scss.scss';
+
+.delivery-courier {
+  &__wrap-title {
+    @include adaptiveValue('margin-top', 40, 20);
+    @include adaptiveValue('margin-bottom', 25, 10);
+  }
+  &__title-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  // .delivery-courier__title
+  &__title {
+    // @include adaptiveValue('margin-top', 40, 20);
+    // @include adaptiveValue('margin-bottom', 25, 10);
+    @extend %subtitle-1;
+    @include adaptiveValue('font-size', 21, 16);
+  }
+  &__btn-edit {
+    @extend %body-3;
+    color: var(--dark-gray);
+  }
+  // .delivery-courier__address
+  &__box-address {
+    display: grid;
+    grid-template-columns: repeat(2, percent(408, 836));
+    justify-content: space-between;
+    row-gap: rem(25);
+
+    @include mobile {
+      grid-template-columns: 1fr auto;
+      column-gap: rem(20);
+    }
+
+    @include mobileSmall {
+      grid-template-columns: none;
+      justify-content: stretch;
+      row-gap: rem(20);
+    }
+  }
+  // .delivery-courier__check-date
+  &__box-check-date {
+    padding-top: rem(25);
+    width: percent(408, 836);
+
+    @include mobile-d {
+      width: auto;
+    }
+  }
+  // .delivery-courier__full-address
+  &__full-address {
+    font-weight: 500;
+    font-size: rem(16);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+  // .delivery-courier__box-apartment
+  &__box-apartment {
+    display: flex;
+    // justify-content: space-between;
+    column-gap: rem(20);
+
+    & > * {
+      flex: 0 0 percent(120, 408);
+      max-width: rem(120);
+
+      input {
+        text-align: center;
+      }
+    }
+  }
+  // .delivery-courier__street
+  &__street {
+    // flex: 0 0 percent(408, 836);
+  }
+  // .delivery-courier__house
+  &__house {
+    max-width: rem(118);
+
+    input {
+      text-align: center;
+    }
+  }
+  // .delivery-courier__button
+  &__button {
+  }
+  // .delivery-courier__apartment
+  &__apartment {
+  }
+  // .delivery-courier__entrance
+  &__entrance {
+  }
+  // .delivery-courier__floor
+  &__floor {
+  }
+  // .delivery-courier__box-radio
+  &__box-radio {
+  }
+  // .delivery-courier__item-radio
+  &__item-radio {
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 30, 20);
+    }
+  }
+  // .delivery-courier__time
+  &__time {
+  }
+
+  &__box-radio,
+  &__select-date,
+  &__select-time,
+  &__full-address {
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 25, 20);
+    }
+  }
+}
