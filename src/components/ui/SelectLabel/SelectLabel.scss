@@ -14,4 +14,15 @@
     @extend %body-2;
     --select-opened-outline: none;
   }
+
+  // .select-label_full-width
+  &_full-width {
+    display: flex;
+  }
+
+  &_label_gray {
+    .select-label__label {
+      color: var(--dark-gray);
+    }
+  }
 }
