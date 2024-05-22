@@ -6,11 +6,13 @@
   &__input {
     &:checked {
       & + .radio-box__body {
-        border-color: var(--green);
-        background-color: rgba(33, 150, 83, 0.05);
+        &_grid {
+          border-color: var(--green);
+          background-color: rgba(33, 150, 83, 0.05);
+        }
 
         .radio-box__icon {
-          border-color: var(--green);
+          color: var(--green);
 
           &::before {
             width: rem(12);
@@ -23,20 +25,37 @@
         }
       }
     }
+
+    &:disabled {
+      & + .radio-box__body {
+        cursor: not-allowed;
+        color: var(--dark-gray);
+        .radio-box__icon {
+          border-color: currentColor;
+        }
+        .radio-box__price {
+          color: currentColor;
+        }
+      }
+    }
   }
   // .radio-box__body
   &__body {
     flex-grow: 1;
-    padding: rem(20);
     display: grid;
-    grid-template:
-      'i t p' auto
-      '. h h' 1fr / auto 1fr auto;
-    column-gap: rem(15);
-    @include adaptiveValue('row-gap', 10, 5);
-    border: rem(1) solid var(--light-gray);
-    background-color: var(--light-gray);
+    grid-template: 'i t' / auto 1fr;
+    column-gap: rem(14);
     cursor: pointer;
+
+    &_grid {
+      padding: rem(20);
+      grid-template:
+        'i t p' auto
+        '. h h' 1fr / auto 1fr auto;
+      @include adaptiveValue('row-gap', 10, 5);
+      border: rem(1) solid var(--light-gray);
+      background-color: var(--light-gray);
+    }
   }
   // .radio-box__icon
   &__icon {
@@ -47,15 +66,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: rem(2) solid var(--dark-gray);
+    border: rem(2) solid currentColor;
     border-radius: 50%;
+    color: var(--dark-gray);
 
     &::before {
       content: '';
       width: 0;
       height: 0;
       border-radius: 50%;
-      background-color: var(--green);
+      background-color: currentColor;
     }
   }
   // .radio-box__title

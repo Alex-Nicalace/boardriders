@@ -9,9 +9,8 @@ type TRadioBoxProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   disabled?: boolean;
-  title: string;
-  price?: string;
-  hint?: string;
+  children?: React.ReactNode;
+  view?: 'grid' | 'normal';
 };
 function RadioBox({
   className,
@@ -22,9 +21,8 @@ function RadioBox({
   onChange,
   value,
   disabled,
-  title,
-  price,
-  hint,
+  children,
+  view = 'normal',
 }: TRadioBoxProps): JSX.Element {
   return (
     <label className={['radio-box', className].filter(Boolean).join(' ')}>
@@ -39,14 +37,38 @@ function RadioBox({
         value={value}
         disabled={disabled}
       />
-      <span className="radio-box__body">
+      <span
+        className={[
+          'radio-box__body',
+          view === 'grid' && 'radio-box__body_grid',
+        ]
+          .filter(Boolean)
+          .join(' ')}
+      >
         <span className="radio-box__icon"></span>
-        <span className="radio-box__title">{title}</span>
-        {price && <span className="radio-box__price">{price}</span>}
-        {hint && <span className="radio-box__hint">{hint}</span>}
+        {view === 'grid' && children}
+        {view === 'normal' && (
+          <span className="radio-box__title">{children}</span>
+        )}
       </span>
     </label>
   );
 }
+
+function Title({ children }: { children: React.ReactNode }): JSX.Element {
+  return <span className="radio-box__title">{children}</span>;
+}
+
+function Price({ children }: { children: React.ReactNode }): JSX.Element {
+  return <span className="radio-box__price">{children}</span>;
+}
+
+function Hint({ children }: { children: React.ReactNode }): JSX.Element {
+  return <span className="radio-box__hint">{children}</span>;
+}
+
+RadioBox.Title = Title;
+RadioBox.Price = Price;
+RadioBox.Hint = Hint;
 
 export default RadioBox;
