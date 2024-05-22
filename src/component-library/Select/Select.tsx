@@ -66,6 +66,7 @@ type TCommonSelectProps = {
   animationOptions?: {
     duration?: number;
   };
+  fullWidth?: boolean;
 };
 
 const TRANSITION_STYLES: Record<TTransition, string> = {
@@ -97,6 +98,7 @@ function Select(props: TSelectProps): JSX.Element {
     isSearchable = false,
     tabIndex = 0,
     animationOptions = {},
+    fullWidth,
   } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [valueInner, setValueInner] = useState<string | string[] | undefined>(
@@ -226,6 +228,7 @@ function Select(props: TSelectProps): JSX.Element {
     'select',
     isOpen && 'select_opened',
     isEmpty && 'select_empty',
+    fullWidth && 'select_full-width',
     className,
   ]
     .filter(Boolean)
