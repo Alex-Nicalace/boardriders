@@ -1,7 +1,9 @@
+import './DeliveryOption.scss';
 import { ExclamationInCircleIcon } from '../ui/Icons';
 import RadioBox from '../ui/RadioBox';
 import SelectLabel from '../ui/SelectLabel';
-import './DeliveryOption.scss';
+import Notification from '../Notification';
+import DeliveryСourier from '../DeliveryСourier';
 
 const CITYS = ['Москва', 'Санкт-Петербург', 'Пенза'];
 const DELIVERY = [
@@ -13,6 +15,7 @@ const DELIVERY = [
   {
     title: 'Доставить в магазин',
     hint: 'Привезем товар в удобный вам магазин через несколько дней. Заказ храним 5 дней',
+    disabled: true,
   },
   {
     title: 'Курьером сегодня и позже',
@@ -48,18 +51,23 @@ function DeliveryOption(/*{ }: TDeliveryOptionProps*/): JSX.Element {
       </div>
       <div className="delivery-option__title">Способ доставки:</div>
       <ul className="delivery-option__list">
-        {DELIVERY.map((item) => (
-          <li key={item.title} className="delivery-option__item">
+        {DELIVERY.map(({ title, price, hint, disabled }) => (
+          <li key={title} className="delivery-option__item">
             <RadioBox
               className="delivery-option__radio"
               name="delivery"
-              title={item.title}
-              price={item.price}
-              hint={item.hint}
-            />
+              view="grid"
+              disabled={disabled}
+            >
+              <RadioBox.Title>{title}</RadioBox.Title>
+              {price && <RadioBox.Price>{price}</RadioBox.Price>}
+              <RadioBox.Hint>{hint}</RadioBox.Hint>
+            </RadioBox>
           </li>
         ))}
       </ul>
+      {/* <Notification text="Способ доставки «Забрать из магазина» недоступен - сумма заказа меньше 300 ₽" /> */}
+      <DeliveryСourier />
     </div>
   );
 }

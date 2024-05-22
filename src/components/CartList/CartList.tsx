@@ -18,8 +18,7 @@ type TCartListProps = {
 };
 function CartList({ className, cartData }: TCartListProps): JSX.Element {
   const { formaterCurrency } = useFormaters();
-  const { isLessPC, isLessTablet, isLessMobile } = useScreenWidth();
-  console.log(isLessPC);
+  const { isLessMobile } = useScreenWidth();
 
   const totalPrice = cartData.reduce((acc, item) => acc + item.price, 0);
   const totalItems = cartData.length;
