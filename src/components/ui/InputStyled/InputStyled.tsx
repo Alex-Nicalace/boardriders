@@ -21,18 +21,25 @@ type TButtonProps = (
         buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
         buttonContent: React.ReactNode;
       }
-  );
+  ) & {
+    isGrayLabel?: boolean;
+  };
 export type TInputStyledProps = TInputTextProps & TButtonProps;
 function InputStyled({
   varint = 'main',
   buttonProps,
   buttonContent,
   adornmentContent,
+  isGrayLabel,
+  className,
   ...props
 }: TInputStyledProps): JSX.Element {
   return (
     <InputText
       bemBlockName={`input-${varint}`}
+      className={[isGrayLabel && `input-${varint}_label_gray`, className]
+        .filter(Boolean)
+        .join(' ')}
       startAdornment={adornmentContent}
       endAdornment={
         Boolean(buttonContent) && (
