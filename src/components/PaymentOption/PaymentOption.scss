@@ -1,0 +1,44 @@
+@import '/src/styles/global-scss.scss';
+
+.payment-option {
+  // .payment-option__list
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    @include adaptiveValue('row-gap', 25, 10);
+
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 25, 20);
+    }
+  }
+  // .payment-option__item
+  &__item {
+    flex: 0 0 percent(408, 836);
+
+    @include mobile-d {
+      flex: 0 0 100%;
+    }
+  }
+  // .payment-option__radio
+  &__radio {
+    height: 100%;
+  }
+  // .payment-option__pay-cards
+  &__pay-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: rem(10);
+  }
+  // .payment-option__pay-card
+  &__pay-card {
+  }
+  &__btn {
+    width: percent(408, 836);
+
+    @include mobile-d {
+      width: auto;
+    }
+  }
+}
