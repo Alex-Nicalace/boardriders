@@ -1,0 +1,16 @@
+@import '/src/styles/global-scss.scss';
+
+.pay-card {
+  // width: rem(68);
+  @include adaptiveValue('width', 68, 53);
+  @include adaptiveValue('height', 45, 35);
+  // height: rem(45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white);
+  border-radius: rem(2);
+  // .pay-card__img
+  &__img {
+  }
+}
