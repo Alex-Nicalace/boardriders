@@ -42,9 +42,9 @@ const TIMES = [
 function DeliveryCourier(/*{ }: TDeliveryCourierProps*/): JSX.Element {
   const { formaterCurrency, formaterDateWithWeekday } = useFormaters();
   const [isCheckDate, setIsCheckDate] = useState(false);
-  const [address, setAddress] = useState('');
+  const [street, setStreet] = useState('');
   const [building, setBuilding] = useState('');
-  const fullAddress = 'ул. ' + address + ', ' + building;
+  const address = street + ', ' + building;
   const price = 19;
 
   return (
@@ -67,8 +67,8 @@ function DeliveryCourier(/*{ }: TDeliveryCourierProps*/): JSX.Element {
             label="Улица"
             isGrayLabel
             placeholder="Адрес доставки"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
           />
           <InputStyled
             className="delivery-courier__house"
@@ -88,7 +88,7 @@ function DeliveryCourier(/*{ }: TDeliveryCourierProps*/): JSX.Element {
       )}
       {isCheckDate && (
         <div className="delivery-courier__box-check-date">
-          <p className="delivery-courier__full-address">{fullAddress}</p>
+          <p className="delivery-courier__full-address">{address}</p>
           <div className="delivery-courier__box-apartment">
             <InputStyled
               className="delivery-courier__apartment"
