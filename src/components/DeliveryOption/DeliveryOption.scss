@@ -69,4 +69,12 @@
   &__radio {
     height: 100%;
   }
+  &__notification {
+    width: percent(408, 836);
+    @include adaptiveValue('margin-top', 25, 10);
+
+    @include mobile-d {
+      width: auto;
+    }
+  }
 }
