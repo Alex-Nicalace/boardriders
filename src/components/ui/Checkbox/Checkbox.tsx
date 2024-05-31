@@ -17,16 +17,19 @@ export type TCheckboxProps = (
       variant?: 'checkbox';
       label?: React.ReactNode;
       hint?: React.ReactNode;
+      variantIcon?: 'circle' | 'square';
     }
   | ({
       variant: 'btn-color';
       label?: never;
       hint?: never;
+      variantIcon?: never;
     } & TColor)
   | {
       variant: 'btn-toggle';
       label?: string;
       hint?: never;
+      variantIcon?: never;
     }
 ) & {
   name?: string;
@@ -59,7 +62,7 @@ function Checkbox({
     case 'btn-color':
       {
         const { color, pathImg } = props;
-        classes = `${className} checkbox-color`;
+        classes = 'checkbox-color';
         nameBlock = 'checkbox-color';
 
         innerHtml = (
@@ -90,9 +93,16 @@ function Checkbox({
       break;
     default:
       {
-        const { label, hint } = props;
+        const { label, hint, variantIcon } = props;
         const isReactElement = typeof label === 'object';
-        classes = `checkbox ${type === 'radio' ? 'checkbox_radio' : ''}`;
+        // classes = `checkbox ${type === 'radio' ? 'checkbox_radio' : ''}`;
+        classes = [
+          'checkbox',
+          type === 'radio' && 'checkbox_radio',
+          variantIcon === 'square' && 'checkbox_square',
+        ]
+          .filter(Boolean)
+          .join(' ');
 
         innerHtml = (
           <>
@@ -113,7 +123,7 @@ function Checkbox({
   }
 
   return (
-    <label className={`${classes} ${className}`}>
+    <label className={[classes, className].filter(Boolean).join(' ')}>
       <input
         className={`${nameBlock}__input sr-only`}
         type={type}
