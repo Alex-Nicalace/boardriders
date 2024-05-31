@@ -5,6 +5,13 @@
   flex-wrap: wrap;
   gap: rem(10);
   justify-content: space-between;
+
+  & > * {
+    flex: 0 1 percent(408, 836);
+    @include tablet-d {
+      flex: 1 1 100%;
+    }
+  }
   // .delivery-courier-data__address
   &__address {
     font-weight: 500;
