@@ -1,0 +1,106 @@
+@import '/src/styles/global-scss.scss';
+
+.contact-option {
+  display: grid;
+  grid-template:
+    'i i'
+    'n c'
+    'p c'
+    'e c'
+    'm b' / 1fr 1fr;
+  column-gap: percent(20, 836);
+  row-gap: rem(25);
+
+  @include mobile-d {
+    grid-template:
+      'i'
+      'n'
+      'p'
+      'e'
+      'm'
+      'c'
+      'b' / 1fr;
+    row-gap: rem(20);
+  }
+  // .contact-option__invitation
+  &__invitation {
+    grid-area: i;
+    line-height: 1.79;
+    letter-spacing: -0.02em;
+    color: var(--dark-gray);
+
+    @include mobile-d {
+      font-size: rem(12);
+      line-height: 1.67;
+    }
+  }
+  // .contact-option__politicy-link
+  &__politicy-link {
+    font-size: rem(14);
+    color: var(--black);
+    &:link,
+    &:visited {
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
+      color: var(--black);
+
+      @include mobile-d {
+        font-size: rem(12);
+        line-height: 1.67;
+      }
+    }
+  }
+  // .contact-option__name
+  &__name {
+    grid-area: n;
+  }
+  // .contact-option__phone
+  &__phone {
+    grid-area: p;
+  }
+  // .contact-option__box-email
+  &__box-email {
+    grid-area: e;
+  }
+  // .contact-option__email
+  &__email {
+    grid-area: e;
+  }
+  // .contact-option__mailing
+  &__mailing {
+    grid-area: m;
+    margin-top: rem(-15);
+
+    @include mobile-d {
+      margin-top: rem(-10);
+    }
+
+    .checkbox__label {
+      font-weight: 400;
+    }
+  }
+  // .contact-option__comment
+  &__comment {
+    grid-area: c;
+
+    display: flex;
+    flex-direction: column;
+
+    .input-main__wrap {
+      flex-grow: 1;
+    }
+
+    textarea {
+      resize: none;
+
+      @include mobile-d {
+        min-height: rem(90);
+        resize: vertical;
+      }
+    }
+  }
+  // .contact-option__btn-confirm
+  &__btn-confirm {
+    grid-area: b;
+  }
+}
