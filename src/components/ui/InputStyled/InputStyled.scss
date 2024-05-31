@@ -94,6 +94,14 @@
       color: var(--dark-gray);
     }
   }
+
+  @media (pointer: fine) {
+    &:hover {
+      .input-main__input {
+        border-color: var(--black);
+      }
+    }
+  }
 }
 
 %label {
