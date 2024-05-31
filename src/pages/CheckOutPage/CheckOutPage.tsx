@@ -5,6 +5,7 @@ import PageContent from '../../components/PageContent';
 import InputStyled from '../../components/ui/InputStyled';
 import { useId } from 'react';
 import { ArrowRightClassic } from '../../components/ui/Icons';
+import MakeOrder from '../../components/MakeOrder';
 
 const CART_DATA = [
   {
@@ -91,6 +92,8 @@ function CheckOutPage(/*{ }: TCheckOutPageProps*/): JSX.Element {
               buttonContent={<ArrowRightClassic />}
             />
           </div>
+          <h2 className="check-out-page__title">Оформление заказа</h2>
+          <MakeOrder />
         </div>
         <div className="check-out-page__shopping-cart">
           <ShoppingCart

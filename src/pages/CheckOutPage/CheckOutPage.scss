@@ -38,6 +38,10 @@
     // justify-content: space-between;
     column-gap: percent(24, 890);
     row-gap: rem(20);
+
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 60, 40);
+    }
   }
   // .check-out-page__input-bonus
   &__input-bonus {
