@@ -1,11 +1,12 @@
+import { useId } from 'react';
 import './CheckOutPage.scss';
 import CartList from '../../components/CartList';
 import ShoppingCart from '../../components/ShoppingCart';
 import PageContent from '../../components/PageContent';
 import InputStyled from '../../components/ui/InputStyled';
-import { useId } from 'react';
 import { ArrowRightClassic } from '../../components/ui/Icons';
 import MakeOrder from '../../components/MakeOrder';
+import CartEmpty from '../../components/CartEmpty';
 
 const CART_DATA = [
   {
@@ -66,43 +67,49 @@ const CART_STEPS = [
 // type TCheckOutPageProps = { }
 function CheckOutPage(/*{ }: TCheckOutPageProps*/): JSX.Element {
   const id = useId();
+  const isEmpty = true;
 
   return (
     <PageContent className="check-out-page" as="main">
       <div className="check-out-page__container">
-        <div className="check-out-page__cart">
-          <h2 className="check-out-page__title">Корзина</h2>
-          <CartList
-            className="check-out-page__cart-list"
-            cartData={CART_DATA}
-          />
-          <div className="check-out-page__wrap-bonus-promo">
-            <InputStyled
-              className="check-out-page__input-bonus"
-              id={`bonus-${id}`}
-              label={<InputStyled.LabelBonus />}
-              placeholder="Введите номер карты"
-              hint="Номер на обратной стороне карты"
-            />
-            <InputStyled
-              className="check-out-page__input-promo"
-              id={`promo-${id}`}
-              label={<InputStyled.LabelDiscount />}
-              placeholder="Введите промо код"
-              buttonContent={<ArrowRightClassic />}
-            />
-          </div>
-          <h2 className="check-out-page__title">Оформление заказа</h2>
-          <MakeOrder />
-        </div>
-        <div className="check-out-page__shopping-cart">
-          <ShoppingCart
-            countItems={2}
-            dataSteps={CART_STEPS}
-            totalPrice={118790}
-            points={118790}
-          />
-        </div>
+        {isEmpty && <CartEmpty className="check-out-page__empty" />}
+        {!isEmpty && (
+          <>
+            <div className="check-out-page__cart">
+              <h2 className="check-out-page__title">Корзина</h2>
+              <CartList
+                className="check-out-page__cart-list"
+                cartData={CART_DATA}
+              />
+              <div className="check-out-page__wrap-bonus-promo">
+                <InputStyled
+                  className="check-out-page__input-bonus"
+                  id={`bonus-${id}`}
+                  label={<InputStyled.LabelBonus />}
+                  placeholder="Введите номер карты"
+                  hint="Номер на обратной стороне карты"
+                />
+                <InputStyled
+                  className="check-out-page__input-promo"
+                  id={`promo-${id}`}
+                  label={<InputStyled.LabelDiscount />}
+                  placeholder="Введите промо код"
+                  buttonContent={<ArrowRightClassic />}
+                />
+              </div>
+              <h2 className="check-out-page__title">Оформление заказа</h2>
+              <MakeOrder />
+            </div>
+            <div className="check-out-page__shopping-cart">
+              <ShoppingCart
+                countItems={2}
+                dataSteps={CART_STEPS}
+                totalPrice={118790}
+                points={118790}
+              />
+            </div>
+          </>
+        )}
       </div>
     </PageContent>
   );

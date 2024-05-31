@@ -52,4 +52,8 @@
   &__input-promo {
     flex: 1 0 percent(445, 890);
   }
+  // .check-out__empty
+  &__empty {
+    flex-grow: 1;
+  }
 }
