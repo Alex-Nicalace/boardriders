@@ -1,5 +1,6 @@
-import { InputHTMLAttributes, useId } from 'react';
+import { InputHTMLAttributes, TextareaHTMLAttributes, useId } from 'react';
 import './InputText.scss';
+import { omit } from '../../utils/omit';
 
 interface ICustomProps {
   label?: React.ReactNode;
@@ -11,8 +12,26 @@ interface ICustomProps {
   bemBlockName?: string;
   fullWidth?: boolean;
 }
-export type TInputTextProps = ICustomProps &
-  InputHTMLAttributes<HTMLInputElement>;
+
+type TextAreaOnlyKeys = Exclude<
+  keyof TextareaHTMLAttributes<HTMLTextAreaElement>,
+  keyof InputHTMLAttributes<HTMLInputElement>
+>;
+
+type InputOnlyKeys = Exclude<
+  keyof InputHTMLAttributes<HTMLInputElement>,
+  keyof TextareaHTMLAttributes<HTMLTextAreaElement>
+>;
+
+type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+  isTextarea?: false;
+} & { [k in TextAreaOnlyKeys]?: never };
+type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  isTextarea: true;
+} & { [k in InputOnlyKeys]?: never };
+
+export type TInputTextProps = ICustomProps & (InputProps | TextareaProps);
+
 function InputText({
   label,
   error,
@@ -23,10 +42,10 @@ function InputText({
   className = '',
   bemBlockName = 'input-text',
   fullWidth = false,
-  ...inputProps
+  ...props
 }: TInputTextProps): JSX.Element {
   const initId = useId();
-  const id = inputProps.id || initId;
+  const id = props.id || initId;
   const hasError = isError || Boolean(error);
   const classes = [
     bemBlockName,
@@ -57,12 +76,22 @@ function InputText({
             {startAdornment}
           </div>
         )}
-        <input
-          className={`${bemBlockName}__input`}
-          id={id}
-          {...inputProps}
-          aria-invalid={hasError}
-        />
+        {!props.isTextarea && (
+          <input
+            className={`${bemBlockName}__input`}
+            id={id}
+            {...omit(props, 'isTextarea')}
+            aria-invalid={hasError}
+          />
+        )}
+        {props.isTextarea && (
+          <textarea
+            className={`${bemBlockName}__input`}
+            id={id}
+            {...omit(props, 'isTextarea')}
+            aria-invalid={hasError}
+          ></textarea>
+        )}
         {endAdornment && (
           <div
             className={`${bemBlockName}__adornment ${bemBlockName}__adornment_end`}
