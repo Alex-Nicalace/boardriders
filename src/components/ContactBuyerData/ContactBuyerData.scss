@@ -1,0 +1,49 @@
+@import '/src/styles/global-scss.scss';
+
+.contact-buyer-data {
+  width: percent(408, 836);
+
+  @include mobile-d {
+    width: auto;
+  }
+  // .contact-buyer-data__name
+  &__name {
+    @extend %body-1;
+
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 10, 5);
+    }
+  }
+  // .contact-buyer-data__phone
+  &__phone {
+    @extend %body-2-1;
+
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 5, 10);
+    }
+  }
+  // .contact-buyer-data__email
+  &__email {
+    @extend %body-2-1;
+
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 25, 20);
+    }
+  }
+  // .contact-buyer-data__comment
+  &__comment {
+    display: grid;
+    row-gap: rem(5);
+  }
+  // .contact-buyer-data__comment-title
+  &__comment-title {
+    @extend %caption;
+    color: var(--dark-gray);
+  }
+  // .contact-buyer-data__comment-text
+  &__comment-text {
+    padding: rem(15) rem(20);
+    background-color: rgba(33, 150, 83, 0.1);
+    @extend %body-2-1;
+  }
+}
