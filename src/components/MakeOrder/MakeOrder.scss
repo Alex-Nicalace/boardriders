@@ -1,0 +1,12 @@
+@import '/src/styles/global-scss.scss';
+
+.make-order {
+  // .make-order__step
+  &__step {
+    list-style: none;
+
+    &:not(:last-child) {
+      margin-bottom: rem(10);
+    }
+  }
+}
