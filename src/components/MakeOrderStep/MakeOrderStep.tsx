@@ -2,6 +2,7 @@ import StepNumber from '../StepNumber';
 import './MakeOrderStep.scss';
 
 type TMakeOrderStepProps = {
+  className?: string;
   children: React.ReactNode;
   isDone?: boolean;
   disabled?: boolean;
@@ -9,6 +10,7 @@ type TMakeOrderStepProps = {
   name: string;
 };
 function MakeOrderStep({
+  className,
   children,
   isDone,
   disabled,
@@ -16,7 +18,7 @@ function MakeOrderStep({
   name,
 }: TMakeOrderStepProps): JSX.Element {
   return (
-    <div className="make-order-step">
+    <div className={['make-order-step', className].filter(Boolean).join(' ')}>
       <header className="make-order-step__header">
         <StepNumber stepNum={stepNum} isDone={isDone} disabled={disabled} />
         <h3 className="make-order-step__title">{name}</h3>
