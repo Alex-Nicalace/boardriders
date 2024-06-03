@@ -1,0 +1,71 @@
+@import '/src/styles/global-scss.scss';
+
+.order-placed {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // .order-placed__title
+  &__title {
+    order: 2;
+    text-align: center;
+
+    &:not(:last-child) {
+      margin-bottom: rem(40);
+    }
+  }
+  // .order-placed__icon
+  &__icon {
+    order: 1;
+
+    &:not(:last-child) {
+      margin-bottom: rem(20);
+    }
+
+    img {
+      @include adaptiveValue('width', 100, 70);
+    }
+  }
+  // .order-placed__order
+  &__order {
+    order: 3;
+    @extend %body-2;
+    &:not(:last-child) {
+      margin-bottom: rem((40));
+    }
+  }
+  // .order-placed__order-num
+  &__order-num {
+    margin-left: rem(15);
+    font-weight: 700;
+    font-size: rem(32);
+    letter-spacing: 0.07em;
+  }
+  &__info,
+  &__comment {
+    font-weight: 500;
+    @include adaptiveValue('font-size', 16, 14);
+    line-height: 1.87;
+    letter-spacing: -0.02em;
+    text-align: center;
+    text-wrap: pretty;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+  // .order-placed__info
+  &__info {
+    order: 4;
+    max-width: rem(586);
+
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 40, 20);
+    }
+  }
+  // .order-placed__comment
+  &__comment {
+    order: 5;
+    max-width: rem(480);
+  }
+}
