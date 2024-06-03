@@ -7,6 +7,7 @@ import InputStyled from '../../components/ui/InputStyled';
 import { ArrowRightClassic } from '../../components/ui/Icons';
 import MakeOrder from '../../components/MakeOrder';
 import CartEmpty from '../../components/CartEmpty';
+import OrderPlaced from '../../components/OrderPlaced';
 
 const CART_DATA = [
   {
@@ -67,13 +68,13 @@ const CART_STEPS = [
 // type TCheckOutPageProps = { }
 function CheckOutPage(/*{ }: TCheckOutPageProps*/): JSX.Element {
   const id = useId();
-  const isEmpty = true;
+  let tempState = 2;
 
   return (
     <PageContent className="check-out-page" as="main">
       <div className="check-out-page__container">
-        {isEmpty && <CartEmpty className="check-out-page__empty" />}
-        {!isEmpty && (
+        {tempState === 0 && <CartEmpty className="check-out-page__empty" />}
+        {tempState === 1 && (
           <>
             <div className="check-out-page__cart">
               <h2 className="check-out-page__title">Корзина</h2>
@@ -110,9 +111,25 @@ function CheckOutPage(/*{ }: TCheckOutPageProps*/): JSX.Element {
             </div>
           </>
         )}
+        {tempState === 2 && (
+          <OrderPlaced
+            className="check-out-page__order"
+            numOrder={23416}
+            email="infoinfo@gmail.com"
+            phone="+7 654 222 55 42"
+            comment="Товар можно забрать в течение 1 дня с момента получения СМС."
+          />
+        )}
       </div>
     </PageContent>
   );
 }
 
 export default CheckOutPage;
+type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
+  ? 1
+  : 2
+  ? true
+  : false;
+
+type T = Equal<number, number>;

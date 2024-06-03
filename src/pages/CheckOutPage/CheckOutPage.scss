@@ -54,6 +54,12 @@
   }
   // .check-out__empty
   &__empty {
+    @include adaptiveValue('padding-top', 150, 75);
+    @include adaptiveValue('padding-bottom', 110, 30);
     flex-grow: 1;
+  }
+  &__order {
+    @include adaptiveValue('padding-top', 120, 75);
+    @include adaptiveValue('padding-bottom', 85, 30);
   }
 }
