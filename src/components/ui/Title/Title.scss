@@ -18,6 +18,10 @@
     @extend %subtitle-1;
   }
 
+  &_h1-32-16 {
+    @include adaptiveValue('font-size', 32, 16);
+  }
+
   &_white {
     color: var(--white);
   }
