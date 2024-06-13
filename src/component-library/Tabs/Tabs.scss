@@ -1,0 +1,60 @@
+.tabs {
+  --tabs-padding-item-top: 17px;
+  --tabs-padding-item-bottom: 18px;
+  display: flex;
+  border-bottom: 2px solid #000;
+  // .tabs__wrapper
+  &__wrapper {
+    position: relative;
+    overflow-y: var(--tabs-overflow-y, hidden);
+    overflow-x: var(--tabs-overflow-x, hidden);
+    scrollbar-width: var(--tabs-scrollbar-width, none);
+    flex-grow: 1;
+  }
+  &__btn-scroll {
+    &_disabled {
+      display: none;
+      // opacity: 0;
+      // pointer-events: none;
+    }
+  }
+  // .tabs__list
+  &__list {
+    display: flex;
+  }
+  &__item {
+    padding-top: var(
+      --tabs-padding-item-top,
+      var(--tabs-padding-item-block, var(--tabs-padding-item, 0))
+    );
+    padding-right: var(
+      --tabs-padding-item-right,
+      var(--tabs-padding-item-inline, var(--tabs-padding-item, 0))
+    );
+    padding-bottom: var(
+      --tabs-padding-item-bottom,
+      var(--tabs-padding-item-block, var(--tabs-padding-item, 0))
+    );
+    padding-left: var(
+      --tabs-padding-item-left,
+      var(--tabs-padding-item-inline, var(--tabs-padding-item, 0))
+    );
+
+    flex-basis: var(--tabs-basis-item, 210px);
+    flex-shrink: var(--tabs-srink-item, 0);
+    flex-grow: var(--tabs-grow-item, 0);
+
+    font-weight: var(--tabs-font-weight, 500);
+    font-size: var(--tabs-font-size, 14px);
+    line-height: 1.79;
+    letter-spacing: -0.02em;
+    color: var(--tabs-item-color, #000);
+    background-color: var(--tabs-item-bg, transparent);
+    cursor: pointer;
+
+    &_active {
+      color: var(--tabs-item-active-color, #fff);
+      background-color: var(--tabs-item-active-bg, #000);
+    }
+  }
+}
