@@ -42,6 +42,8 @@
 
 [InputNumber.tsx](./src/components/ui/InputNumber/InputNumber.tsx) - компонент для ввода числа с кнопками инкремента и декремента
 
+[Tabs.tsx](./src/component-library/Tabs/Tabs.tsx) - компонент Табы
+
 ## Кастомные хуки
 
 [useLockDocumentScroll.ts](./src/hooks/useLockDocumentScroll.ts) Пользовательский хук для блокировки прокрутки документа при вызове.
@@ -82,7 +84,7 @@
 
 [omit.ts](./src/utils/omit.ts) - функция, исключающая из объекта указанные свойства
 
-[throttle.ts](./src/utils/throttle.ts) - Возвращает заторможенную версию предоставленной функции
+[throttle.ts](./src/utils/throttle.ts) - Возвращает заторможенную версию предоставленной функции используется в [Tabs.tsx](./src/component-library/Tabs/Tabs.tsx)
 
 ## Object Intl - перевод и форматирование текста на разных языках
 

@@ -12,6 +12,7 @@ import {
 import './Tabs.scss';
 import { omit } from '../../utils/omit';
 import { useResizeObserver } from '../../hooks/useResizeObserver';
+import { throttle } from '../../utils/throttle';
 
 interface ICustomCSSProperties extends React.CSSProperties {
   '--tabs-grow-item'?: string;
@@ -26,12 +27,23 @@ type TTabsProps = {
   value?: any;
   defaultValue?: any;
   className?: string;
-  variant?: 'fullWidth' | 'scrollable' | 'standard';
   visibleScrollbar?: 'auto' | 'thin' | 'none';
-  scrollButtons?: 'auto' | false | true;
-  labelButtonPrev?: ReactNode;
-  labelButtonNext?: ReactNode;
-};
+} & (
+  | {
+      variant?: 'fullWidth' | 'standard';
+      scrollButtons?: never;
+      labelButtonPrev?: never;
+      labelButtonNext?: never;
+      isDragScrollableTabs?: never;
+    }
+  | {
+      variant: 'scrollable';
+      scrollButtons?: 'auto' | false | true;
+      labelButtonPrev?: ReactNode;
+      labelButtonNext?: ReactNode;
+      isDragScrollableTabs?: boolean;
+    }
+);
 /**
  * Рендерит компонент Tabs с настраиваемыми возможностями и внешним видом.
  *
@@ -46,6 +58,7 @@ type TTabsProps = {
  *   - scrollButtons: Видимость кнопок прокрутки ('авто', true или false).
  *   - labelButtonPrev: Метка для предыдущей кнопки прокрутки.
  *   - labelButtonNext: Метка для следующей кнопки прокрутки.
+ *   - isDragScrollableTabs: Флаг, показывающий, нужно ли реализовывать прокрутку с помощью захвата мыши.
  * @return {JSX.Element} Отображаемый компонент Tabs.
  */
 function Tabs({
@@ -55,13 +68,12 @@ function Tabs({
   defaultValue,
   className,
   variant = 'standard',
+  isDragScrollableTabs = false,
   visibleScrollbar = 'none',
   scrollButtons = 'auto',
   labelButtonPrev = <span style={{ padding: '10px' }}>{`<`}</span>,
   labelButtonNext = <span style={{ padding: '10px' }}>{`>`}</span>,
 }: TTabsProps): JSX.Element {
-  console.log('Tabs render');
-
   // Проверка типа детей. Если не Tab - выбрасываем ошибку. Не факт, что это нужно, но решил так сделать.
   Children.forEach(children, (child) => {
     if (child.type !== Tab) {
@@ -70,6 +82,7 @@ function Tabs({
   });
   const [selected, setSelected] = useState(defaultValue);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
   const scrollableRef = useRef<HTMLDivElement>(null);
   const isUseInnerState = value === undefined;
   const currentValue = isUseInnerState ? selected : value;
@@ -97,11 +110,60 @@ function Tabs({
 
       scrollElement.scrollTo({
         left: scrollLeft,
-        behavior: 'smooth',
+        behavior: isScrolling ? 'auto' : 'smooth',
       });
     },
-    [scrollLeft]
+    [scrollLeft, isScrolling]
   );
+
+  useEffect(function tabScrollByMouseDrag() {
+    if (!isDragScrollableTabs) return;
+    const scrollableElement = scrollableRef.current;
+    if (!scrollableElement) return;
+
+    const moseDownHandler = (e: MouseEvent) => {
+      e.preventDefault(); // предотвратить запуск выделения (действие браузера)
+      setIsScrolling(true);
+      const scrollableElementRect = scrollableElement.getBoundingClientRect();
+      const shiftX = e.clientX - scrollableElementRect.left;
+
+      const mouseMoveHandler = throttle((e: MouseEvent) => {
+        const x = e.clientX - scrollableElementRect.left;
+        const walk = x - shiftX;
+        const newScrollLeft = Math.min(
+          Math.max(scrollLeft - walk, 0),
+          maxLeftScrollscrollableElement
+        );
+
+        setScrollLeft(newScrollLeft);
+      }, 15);
+
+      const dragEnd = () => {
+        setIsScrolling(false);
+        scrollableElement.removeEventListener('mousemove', mouseMoveHandler);
+        scrollableElement.removeEventListener('mouseup', mouseMoveHandler);
+        scrollableElement.removeEventListener('mouseleave', mouseLeaveHandler);
+      };
+
+      const mouseUpHandler = () => {
+        dragEnd();
+      };
+
+      const mouseLeaveHandler = () => {
+        dragEnd();
+      };
+
+      scrollableElement.addEventListener('mousemove', mouseMoveHandler);
+      scrollableElement.addEventListener('mouseup', mouseUpHandler);
+      scrollableElement.addEventListener('mouseleave', mouseLeaveHandler);
+    };
+
+    scrollableElement.addEventListener('mousedown', moseDownHandler);
+
+    return () => {
+      scrollableElement.removeEventListener('mousedown', moseDownHandler);
+    };
+  });
 
   function setCurrentValue(value: any, event: React.SyntheticEvent) {
     if (isUseInnerState) {
@@ -113,15 +175,9 @@ function Tabs({
   }
 
   function handleScrollButtonClick(direction: 'left' | 'right') {
-    // const scrollElement = scrollableRef.current;
-    // if (!scrollElement) return;
-
-    // console.log(scrollElement.scrollLeft);
-
     const directionToScroll = direction === 'left' ? -1 : 1;
     const preLeftScroll =
       scrollLeft + directionToScroll * scrollableElementWidth;
-    // const maxLeftScroll = scrollElement.scrollWidth - scrollElement.offsetWidth;
     const newLeftScroll = Math.min(
       Math.max(0, preLeftScroll),
       maxLeftScrollscrollableElement
@@ -161,7 +217,9 @@ function Tabs({
 
   return (
     <div
-      className={['tabs', className].filter(Boolean).join(' ')}
+      className={['tabs', isScrolling && 'tabs_scrolling', className]
+        .filter(Boolean)
+        .join(' ')}
       style={style}
     >
       {isScrollButtons && (
@@ -180,11 +238,7 @@ function Tabs({
           {labelButtonPrev}
         </button>
       )}
-      <div
-        className="tabs__wrapper"
-        ref={scrollableRef}
-        // onScroll={(e) => console.log(e)}
-      >
+      <div className="tabs__wrapper" ref={scrollableRef}>
         <div className="tabs__list" role="tablist">
           {Children.map(children, (child, index) => {
             const tabValue =
