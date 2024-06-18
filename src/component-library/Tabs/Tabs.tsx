@@ -121,8 +121,9 @@ function Tabs({
     const scrollableElement = scrollableRef.current;
     if (!scrollableElement) return;
 
-    const moseDownHandler = (e: MouseEvent) => {
+    const moseDownHandler = (e: PointerEvent) => {
       e.preventDefault(); // предотвратить запуск выделения (действие браузера)
+      scrollableElement.setPointerCapture(e.pointerId);
       setIsScrolling(true);
       const scrollableElementRect = scrollableElement.getBoundingClientRect();
       const shiftX = e.clientX - scrollableElementRect.left;
@@ -140,9 +141,13 @@ function Tabs({
 
       const dragEnd = () => {
         setIsScrolling(false);
-        scrollableElement.removeEventListener('mousemove', mouseMoveHandler);
-        scrollableElement.removeEventListener('mouseup', mouseMoveHandler);
-        scrollableElement.removeEventListener('mouseleave', mouseLeaveHandler);
+        // * для обработки событий указателя нужно в CSS touch-action: none, чтобы предотвратить действия браузера по умолчанию;
+        scrollableElement.removeEventListener('pointermove', mouseMoveHandler);
+        scrollableElement.removeEventListener('pointerup', mouseMoveHandler);
+        scrollableElement.removeEventListener(
+          'pointerleave',
+          mouseLeaveHandler
+        );
       };
 
       const mouseUpHandler = () => {
@@ -153,15 +158,15 @@ function Tabs({
         dragEnd();
       };
 
-      scrollableElement.addEventListener('mousemove', mouseMoveHandler);
-      scrollableElement.addEventListener('mouseup', mouseUpHandler);
-      scrollableElement.addEventListener('mouseleave', mouseLeaveHandler);
+      scrollableElement.addEventListener('pointermove', mouseMoveHandler);
+      scrollableElement.addEventListener('pointerup', mouseUpHandler);
+      scrollableElement.addEventListener('pointerleave', mouseLeaveHandler);
     };
 
-    scrollableElement.addEventListener('mousedown', moseDownHandler);
+    scrollableElement.addEventListener('pointerdown', moseDownHandler);
 
     return () => {
-      scrollableElement.removeEventListener('mousedown', moseDownHandler);
+      scrollableElement.removeEventListener('pointerdown', moseDownHandler);
     };
   });
 
