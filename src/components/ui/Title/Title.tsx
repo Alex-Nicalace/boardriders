@@ -9,6 +9,7 @@ type TTitleProps = {
   className?: string;
   supNode?: React.ReactNode;
   color?: 'white' | 'black';
+  withContainer?: boolean;
 };
 function Title({
   as = 'h2',
@@ -17,10 +18,17 @@ function Title({
   className = '',
   children,
   color = 'black',
+  withContainer = false,
 }: TTitleProps): JSX.Element {
-  const classSummary = `${className} title title_${kind} ${
-    color !== 'black' ? `title_${color}` : ''
-  }`;
+  const classSummary = [
+    'title',
+    `title_${kind}`,
+    color !== 'black' && `title_${color}`,
+    withContainer && 'title__container',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const childrenElement = supNode ? (
     <>
