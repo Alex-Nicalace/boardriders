@@ -71,7 +71,7 @@ function CheckOutPage(/*{ }: TCheckOutPageProps*/): JSX.Element {
   let tempState = 2;
 
   return (
-    <PageContent className="check-out-page" as="main">
+    <PageContent className="check-out-page" as="main" paddingTop="50-15">
       <div className="check-out-page__container">
         {tempState === 0 && <CartEmpty className="check-out-page__empty" />}
         {tempState === 1 && (
@@ -126,10 +126,3 @@ function CheckOutPage(/*{ }: TCheckOutPageProps*/): JSX.Element {
 }
 
 export default CheckOutPage;
-type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
-  ? 1
-  : 2
-  ? true
-  : false;
-
-type T = Equal<number, number>;
