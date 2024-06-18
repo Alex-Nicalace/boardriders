@@ -2,4 +2,8 @@
 
 .page-content {
   @include adaptiveValue('padding-bottom', 85, 70);
+
+  &_pt-50-15 {
+    @include adaptiveValue('padding-top', 50, 15);
+  }
 }
