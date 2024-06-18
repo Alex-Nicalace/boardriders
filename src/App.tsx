@@ -7,6 +7,7 @@ import Popup from './component-library/Popup';
 import ProductPage from './pages/ProductPage';
 import CheckOutPage from './pages/CheckOutPage';
 import FormatersProvider from './Context/FormatersContext';
+import AccountPage from './pages/AccountPage';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
           {
             path: '/check-out',
             element: <CheckOutPage />,
+          },
+          {
+            path: '/account',
+            element: <AccountPage />,
           },
           {
             path: '*',
