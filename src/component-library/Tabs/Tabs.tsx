@@ -116,59 +116,17 @@ function Tabs({
     [scrollLeft, isScrolling]
   );
 
-  useEffect(function tabScrollByMouseDrag() {
-    if (!isDragScrollableTabs) return;
-    const scrollableElement = scrollableRef.current;
-    if (!scrollableElement) return;
-
-    const moseDownHandler = (e: PointerEvent) => {
-      e.preventDefault(); // предотвратить запуск выделения (действие браузера)
-      scrollableElement.setPointerCapture(e.pointerId);
-      setIsScrolling(true);
-      const scrollableElementRect = scrollableElement.getBoundingClientRect();
-      const shiftX = e.clientX - scrollableElementRect.left;
-
-      const mouseMoveHandler = throttle((e: MouseEvent) => {
-        const x = e.clientX - scrollableElementRect.left;
-        const walk = x - shiftX;
-        const newScrollLeft = Math.min(
-          Math.max(scrollLeft - walk, 0),
-          maxLeftScrollscrollableElement
-        );
-
-        setScrollLeft(newScrollLeft);
-      }, 15);
-
-      const dragEnd = () => {
-        setIsScrolling(false);
-        // * для обработки событий указателя нужно в CSS touch-action: none, чтобы предотвратить действия браузера по умолчанию;
-        scrollableElement.removeEventListener('pointermove', mouseMoveHandler);
-        scrollableElement.removeEventListener('pointerup', mouseMoveHandler);
-        scrollableElement.removeEventListener(
-          'pointerleave',
-          mouseLeaveHandler
-        );
-      };
-
-      const mouseUpHandler = () => {
-        dragEnd();
-      };
-
-      const mouseLeaveHandler = () => {
-        dragEnd();
-      };
-
-      scrollableElement.addEventListener('pointermove', mouseMoveHandler);
-      scrollableElement.addEventListener('pointerup', mouseUpHandler);
-      scrollableElement.addEventListener('pointerleave', mouseLeaveHandler);
-    };
-
-    scrollableElement.addEventListener('pointerdown', moseDownHandler);
-
-    return () => {
-      scrollableElement.removeEventListener('pointerdown', moseDownHandler);
-    };
-  });
+  useEffect(
+    /**
+     * Сбросить позицию прокрутки, когда экран позволяет разместить табы без прокрутки
+     */
+    function resetScrollPosition() {
+      if (scrollableElementWidth === scrollableElementScrollWidth) {
+        setScrollLeft(0);
+      }
+    },
+    [scrollableElementWidth, scrollableElementScrollWidth]
+  );
 
   function setCurrentValue(value: any, event: React.SyntheticEvent) {
     if (isUseInnerState) {
@@ -189,6 +147,48 @@ function Tabs({
     );
 
     setScrollLeft(newLeftScroll);
+  }
+
+  function handleScrollableElementPointerDown(
+    e: React.PointerEvent<HTMLDivElement>
+  ) {
+    e.preventDefault(); // предотвратить запуск выделения (действие браузера)
+    const scrollableElement = e.currentTarget;
+    setIsScrolling(true);
+    const scrollableElementRect = scrollableElement.getBoundingClientRect();
+    const shiftX = e.clientX - scrollableElementRect.left;
+
+    const mouseMoveHandler = throttle((e: PointerEvent) => {
+      // scrollableElement.setPointerCapture(e.pointerId);
+      const x = e.clientX - scrollableElementRect.left;
+      const walk = x - shiftX;
+      const newScrollLeft = Math.min(
+        Math.max(scrollLeft - walk, 0),
+        maxLeftScrollscrollableElement
+      );
+
+      setScrollLeft(newScrollLeft);
+    }, 15);
+
+    const dragEnd = () => {
+      setIsScrolling(false);
+      // * для обработки событий указателя нужно в CSS touch-action: none, чтобы предотвратить действия браузера по умолчанию;
+      scrollableElement.removeEventListener('pointermove', mouseMoveHandler);
+      scrollableElement.removeEventListener('pointerup', mouseMoveHandler);
+      scrollableElement.removeEventListener('pointerleave', mouseLeaveHandler);
+    };
+
+    const mouseUpHandler = () => {
+      dragEnd();
+    };
+
+    const mouseLeaveHandler = () => {
+      dragEnd();
+    };
+
+    scrollableElement.addEventListener('pointermove', mouseMoveHandler);
+    scrollableElement.addEventListener('pointerup', mouseUpHandler);
+    scrollableElement.addEventListener('pointerleave', mouseLeaveHandler);
   }
 
   function handleTabClick(
@@ -243,7 +243,13 @@ function Tabs({
           {labelButtonPrev}
         </button>
       )}
-      <div className="tabs__wrapper" ref={scrollableRef}>
+      <div
+        className="tabs__wrapper"
+        ref={scrollableRef}
+        onPointerDown={
+          isDragScrollableTabs ? handleScrollableElementPointerDown : undefined
+        }
+      >
         <div className="tabs__list" role="tablist">
           {Children.map(children, (child, index) => {
             const tabValue =
@@ -254,7 +260,6 @@ function Tabs({
               className: `${isSelected ? 'tabs__item_active' : ''}`,
               onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
                 child.props.onClick?.(e); // соббытие, которое явно было установлено в JSX
-                // setCurrentValue(tabValue, e);
                 handleTabClick(e, tabValue);
               },
               tabIndex: isSelected ? 0 : -1,
