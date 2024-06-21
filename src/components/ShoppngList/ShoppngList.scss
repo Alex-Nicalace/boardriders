@@ -1,8 +1,10 @@
 @import '/src/styles/global-scss.scss';
 
 .shoppng-list {
-  list-style-type: none;
-  counter-reset: shoppng-list;
+  &__list {
+    list-style-type: none;
+    counter-reset: shoppng-list;
+  }
   // .shoppng-list__item
   &__item {
     @include adaptiveValue('--shoping-list-item-padding-block', 14, 10);
@@ -23,5 +25,21 @@
       justify-content: center;
       align-items: center;
     }
+  }
+  // .shoppng-list__hint
+  &__hint {
+    margin-top: rem(10);
+    display: flex;
+    align-items: center;
+    column-gap: rem(10);
+  }
+  // .shoppng-list__hint-text
+  &__hint-text {
+    @extend %body-2;
+  }
+  // .shoppng-list__hint-price
+  &__hint-price {
+    @extend %cost-1;
+    color: var(--red);
   }
 }
