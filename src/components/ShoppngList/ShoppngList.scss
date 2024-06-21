@@ -1,0 +1,27 @@
+@import '/src/styles/global-scss.scss';
+
+.shoppng-list {
+  list-style-type: none;
+  counter-reset: shoppng-list;
+  // .shoppng-list__item
+  &__item {
+    @include adaptiveValue('--shoping-list-item-padding-block', 14, 10);
+    padding: var(--shoping-list-item-padding-block) 0;
+    @extend %body-2;
+    display: flex;
+    column-gap: rem(15);
+    counter-increment: shoppng-list; /* Инкрементирует счётчик*/
+
+    &:before {
+      content: counter(shoppng-list);
+      @extend %caption;
+      height: rem(21);
+      flex: 0 0 rem(21);
+      background-color: var(--gray);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
