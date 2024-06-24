@@ -1,0 +1,80 @@
+@import '/src/styles/global-scss.scss';
+
+.order-status {
+  padding: rem(15) 0;
+  display: grid;
+  grid-template:
+    'c s p'
+    '. . i' / auto 1fr auto;
+  align-items: center;
+  @include adaptiveValue('font-size', 14, 12);
+  // @include adaptiveValue('line-height', 1.79, 1.67);
+  column-gap: percent(40, 587);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  // .order-status__code
+  &__code {
+    grid-area: c;
+    text-transform: uppercase;
+  }
+  // .order-status__status
+  &__status {
+    grid-area: s;
+    display: flex;
+    align-items: center;
+    column-gap: rem(10);
+    color: var(--dark-gray);
+  }
+  // .order-status__icon
+  &__icon {
+    width: rem(11);
+    height: rem(15);
+
+    &_red {
+      fill: var(--red);
+    }
+
+    &_gray {
+      fill: var(--dark-gray);
+    }
+
+    &_black {
+      fill: var(--black);
+    }
+  }
+  // .order-status__price
+  &__price {
+    grid-area: p;
+    font-size: rem(14);
+    line-height: 1.79;
+  }
+  // .order-status__is-paid
+  &__is-paid {
+    grid-area: i;
+    font-size: rem(8);
+    @include adaptiveValue('font-size', 8, 12);
+    // @include adaptiveValue('line-height', 1.25, 1.67);
+    text-align: right;
+    text-transform: uppercase;
+    color: var(--dark-gray);
+  }
+
+  &_mobile {
+    padding: rem(10) 0;
+    grid-template:
+      'c p'
+      's i' / 1fr auto;
+    column-gap: rem(10);
+    row-gap: rem(3);
+    .order-status__code {
+      &::before {
+        content: '№';
+        margin-right: rem(8);
+        font-weight: 700;
+      }
+    }
+    .order-status__is-paid {
+      text-transform: capitalize;
+    }
+  }
+}
