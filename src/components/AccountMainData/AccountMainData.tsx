@@ -1,3 +1,4 @@
+import AddressList from '../AddressList';
 import OrderStatusList from '../OrderStatusList';
 import PersonalInfo from '../PersonalInfo';
 import ShoppngList from '../ShoppngList';
@@ -24,6 +25,12 @@ const ORDER_STATUS = [
   { code: '395455-222546-ANU', status: 0, price: 1544, isPaid: false },
   { code: '495455-222546-ANU', status: 1, price: 1545, isPaid: false },
   { code: '595455-222546-ANU', status: 2, price: 45285, isPaid: true },
+];
+
+const ADDRESS_LIST = [
+  'Россия, Московская обл., Москва, ул. Лизы Чайкиной, 1, кв 11 69006',
+  'Россия, Московская обл., Москва, ул. Академика Королева, 12, кв 52 56004',
+  'Россия, Московская обл., Москва, пр. Ленина, 5, кв 36 235561',
 ];
 // type TAccountMainDataProps = { }
 function AccountMainData(/*{ }: TAccountMainDataProps*/): JSX.Element {
@@ -58,6 +65,13 @@ function AccountMainData(/*{ }: TAccountMainDataProps*/): JSX.Element {
             phone="+7 (950) 145 22 55"
             email="ivanov@gmail.com"
           />
+        </StatCard>
+        <StatCard
+          className="account-main-data__stat-card"
+          title="Адреса"
+          labelTarget="Редактировать"
+        >
+          <AddressList data={ADDRESS_LIST} />
         </StatCard>
       </div>
     </div>
