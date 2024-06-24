@@ -27,7 +27,7 @@
   }
   // .order-status__icon
   &__icon {
-    width: rem(11);
+    flex: 0 0 rem(11);
     height: rem(15);
 
     &_red {
@@ -47,6 +47,7 @@
     grid-area: p;
     font-size: rem(14);
     line-height: 1.79;
+    text-align: right;
   }
   // .order-status__is-paid
   &__is-paid {
