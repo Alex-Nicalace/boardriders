@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { TabPanel } from '../../component-library/Tabs';
+import Tabs, { TabPanel } from '../../component-library/Tabs';
 import PageContent from '../../components/PageContent';
 import Title from '../../components/ui/Title';
 import './AccountPage.scss';
 import TabsBlock from '../../components/TabsBlock';
+import AccountMainData from '../../components/AccountMainData';
 
 const TABS = [
   'Главная',
@@ -26,7 +27,6 @@ type TAccountPageProps = {
 };
 function AccountPage({ className }: TAccountPageProps): JSX.Element {
   const [currentTab, setCurrentTab] = useState(0);
-  const [tabs] = useState([...TABS]);
 
   return (
     <PageContent
@@ -43,12 +43,12 @@ function AccountPage({ className }: TAccountPageProps): JSX.Element {
         value={currentTab}
         onChange={setCurrentTab}
       >
-        {tabs.map((tab) => (
+        {TABS.map((tab) => (
           <TabsBlock.Tab key={tab} label={tab} />
         ))}
       </TabsBlock>
       <TabPanel index={0} value={currentTab}>
-        111
+        <AccountMainData />
       </TabPanel>
       <TabPanel index={1} value={currentTab}>
         222
