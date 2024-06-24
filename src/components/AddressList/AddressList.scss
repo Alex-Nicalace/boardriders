@@ -1,0 +1,14 @@
+@import '/src/styles/global-scss.scss';
+
+.address-list {
+  @include adaptiveValue('margin-top', 25, 10);
+
+  column-gap: rem(35);
+  row-gap: rem(40);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  // .address-list__item
+  &__item {
+    @extend %body-2;
+  }
+}
