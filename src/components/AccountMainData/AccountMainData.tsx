@@ -1,4 +1,5 @@
 import OrderStatusList from '../OrderStatusList';
+import PersonalInfo from '../PersonalInfo';
 import ShoppngList from '../ShoppngList';
 import StatCard from '../StatCard';
 import './AccountMainData.scss';
@@ -30,14 +31,33 @@ function AccountMainData(/*{ }: TAccountMainDataProps*/): JSX.Element {
     <div className="account-main-data">
       <div className="account-main-data__container">
         <StatCard
+          className="account-main-data__stat-card"
           title="корзина"
           hint="10 товаров"
           labelTarget="перейти в корзину"
         >
           <ShoppngList data={SHOPPING_LIST} limitListCount={5} />
         </StatCard>
-        <StatCard title="заказы" labelTarget="все заказы">
+        <StatCard
+          className="account-main-data__stat-card"
+          title="заказы"
+          labelTarget="все заказы"
+        >
           <OrderStatusList data={ORDER_STATUS} />
+        </StatCard>
+        <StatCard
+          className="account-main-data__stat-card"
+          title="Личная информация"
+          labelTarget="Редактировать"
+        >
+          <PersonalInfo
+            fullName="Иванов Иван Иванович"
+            sex={1}
+            password="12345678"
+            dateBirth={new Date('1988-10-15')}
+            phone="+7 (950) 145 22 55"
+            email="ivanov@gmail.com"
+          />
         </StatCard>
       </div>
     </div>
