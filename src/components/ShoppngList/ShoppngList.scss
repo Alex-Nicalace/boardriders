@@ -1,6 +1,7 @@
 @import '/src/styles/global-scss.scss';
 
 .shoppng-list {
+  @include adaptiveValue('padding-top', 10, 5);
   &__list {
     list-style-type: none;
     counter-reset: shoppng-list;
