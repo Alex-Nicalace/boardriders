@@ -1,4 +1,5 @@
 import AddressList from '../AddressList';
+import FavouriteList, { TupleIWareData3 } from '../FavouriteList';
 import OrderStatusList from '../OrderStatusList';
 import PersonalInfo from '../PersonalInfo';
 import ShoppngList from '../ShoppngList';
@@ -32,6 +33,40 @@ const ADDRESS_LIST = [
   'Россия, Московская обл., Москва, ул. Академика Королева, 12, кв 52 56004',
   'Россия, Московская обл., Москва, пр. Ленина, 5, кв 36 235561',
 ];
+
+const PATH = '/src/assets/img/products-new/';
+const PRODUCTS_DATA: TupleIWareData3 = [
+  {
+    wareId: '1',
+    imgMain: PATH + '01.png',
+    imgSecond: PATH + '01-hover.png',
+    title: 'LIB TECH',
+    descr: 'Мужской Сноуборд',
+    price: 34392,
+    to: '#',
+  },
+  {
+    wareId: '2',
+    imgMain: PATH + '02.png',
+    imgSecond: PATH + '02-hover.png',
+    title: 'LIB TECH',
+    descr: 'Мужской Сноуборд',
+    price: 34392,
+    newPrice: 17392,
+    discount: -50,
+    to: '#',
+  },
+  {
+    wareId: '3',
+    imgMain: PATH + '03.png',
+    imgSecond: PATH + '03-hover.png',
+    title: 'LIB TECH',
+    descr: 'Мужской Сноуборд',
+    price: 34392,
+    to: '#',
+  },
+];
+
 // type TAccountMainDataProps = { }
 function AccountMainData(/*{ }: TAccountMainDataProps*/): JSX.Element {
   return (
@@ -72,6 +107,13 @@ function AccountMainData(/*{ }: TAccountMainDataProps*/): JSX.Element {
           labelTarget="Редактировать"
         >
           <AddressList data={ADDRESS_LIST} />
+        </StatCard>
+        <StatCard
+          className="account-main-data__stat-card"
+          title="Избранное"
+          labelTarget="перейти в избранное"
+        >
+          <FavouriteList data={PRODUCTS_DATA} />
         </StatCard>
       </div>
     </div>
