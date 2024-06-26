@@ -16,8 +16,13 @@ export interface IWareData {
 interface IWareCardProps {
   wareDate: IWareData;
   className?: string;
+  bgColorImage?: 'light-gray' | 'white';
 }
-function WareCard({ wareDate, className = '' }: IWareCardProps): JSX.Element {
+function WareCard({
+  wareDate,
+  className,
+  bgColorImage = 'light-gray',
+}: IWareCardProps): JSX.Element {
   const {
     imgMain,
     imgSecond,
@@ -30,9 +35,12 @@ function WareCard({ wareDate, className = '' }: IWareCardProps): JSX.Element {
     to,
   } = wareDate;
   return (
-    <article className={`ware-card ${className}`}>
+    <article className={['ware-card', className].filter(Boolean).join(' ')}>
       <div className="ware-card__top">
-        <Link to={to} className="ware-card__link">
+        <Link
+          to={to}
+          className={`ware-card__link ware-card__link_${bgColorImage}`}
+        >
           <span className="ware-card__img-wrap">
             <img
               src={imgMain}
@@ -51,7 +59,12 @@ function WareCard({ wareDate, className = '' }: IWareCardProps): JSX.Element {
           </span>
           {discount && <span className="ware-card__discount">{discount}%</span>}
         </Link>
-        <Favorite className="ware-card__favorite" checked={isFavorite} />
+        <Favorite
+          className="ware-card__favorite"
+          checked={isFavorite}
+          bgColor={bgColorImage === 'white' ? 'light-gray' : 'white'}
+          adaptiveSize="container"
+        />
       </div>
       <footer className="ware-card__footer">
         <Link className="ware-card__title" to={to}>

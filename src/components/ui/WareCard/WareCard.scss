@@ -2,6 +2,23 @@
 
 .ware-card {
   max-width: rem(321);
+  container-type: inline-size;
+
+  @container (max-width: #{rem(200)}) {
+    .ware-card__title {
+      h3 {
+        font-size: rem(14);
+      }
+    }
+    .ware-card__price {
+      font-size: rem(16);
+    }
+    .ware-card__descr {
+      &:not(:last-child) {
+        margin-bottom: rem(5);
+      }
+    }
+  }
   // .ware-card__top
   &__top {
     position: relative;
@@ -14,7 +31,14 @@
     width: 100%;
     position: relative;
     padding: rem(50) rem(25);
-    background-color: var(--light-gray);
+
+    &_light-gray {
+      background-color: var(--light-gray);
+    }
+
+    &_white {
+      background-color: var(--white);
+    }
   }
   // .ware-card__img-wrap
   &__img-wrap {
@@ -75,11 +99,11 @@
     &:not(:last-child) {
       margin-bottom: em(5, 16);
     }
-    @media (max-width: $mobileSmall) {
-      h3 {
-        font-size: rem(14);
-      }
-    }
+    // @media (max-width: $mobileSmall) {
+    //   h3 {
+    //     font-size: rem(14);
+    //   }
+    // }
   }
   // .ware-card__descr
   &__descr {
@@ -96,9 +120,9 @@
     & > *:not(:last-child) {
       margin-right: em(15, 18);
     }
-    @media (max-width: $mobileSmall) {
-      font-size: rem(16);
-    }
+    // @media (max-width: $mobileSmall) {
+    //   font-size: rem(16);
+    // }
     // .ware-card__price_new
     &_new {
       color: var(--red);
