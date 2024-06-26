@@ -104,6 +104,9 @@
     flex: 0 0 rem(321);
     transition: transform 0.3s ease 0s;
   }
+  &__products-wrapper {
+    flex-grow: 1;
+  }
   // .product-list-filtered__products
   &__products {
     display: flex;
