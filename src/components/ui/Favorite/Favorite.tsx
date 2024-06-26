@@ -8,6 +8,8 @@ interface IFavoriteProps {
   defaultChecked?: boolean;
   onChange?: (value: boolean) => void;
   isFramed?: boolean;
+  bgColor?: 'light-gray' | 'white';
+  adaptiveSize?: 'window' | 'container';
 }
 function Favorite({
   checked,
@@ -15,6 +17,8 @@ function Favorite({
   onChange,
   defaultChecked = false,
   isFramed = false,
+  bgColor = 'white',
+  adaptiveSize = 'window',
 }: IFavoriteProps): JSX.Element {
   const [isFavorite, setIsFavorite] = useState(defaultChecked);
   const isChecked = checked ?? isFavorite;
@@ -38,9 +42,15 @@ function Favorite({
       />
       <label
         htmlFor={id}
-        className={`favorite__label ${className} ${
-          isFramed ? 'favorite__label_border' : ''
-        }`}
+        className={[
+          'favorite__label',
+          `favorite__label_${bgColor}`,
+          `favorite__label_${adaptiveSize}`,
+          isFramed && 'favorite__label_border',
+          className,
+        ]
+          .filter(Boolean)
+          .join(' ')}
       >
         <span className="sr-only">Добавить в избранное</span>
         <StarIcon />
