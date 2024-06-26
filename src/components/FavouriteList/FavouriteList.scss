@@ -1,0 +1,15 @@
+@import '/src/styles/global-scss.scss';
+
+.favourite-list {
+  padding-top: rem(20);
+  display: grid;
+  // grid-template-columns: repeat(auto-fill, minmax(162px, 179px));
+  // grid-template-columns: repeat(auto-fill, percent(179, 587));
+  grid-template-columns: repeat(auto-fill, minmax(162px, percent(179, 587)));
+  // column-gap: rem(25);
+  @include adaptiveValue('column-gap', 25, 10, $containerWidth, 414, 1);
+  row-gap: rem(30);
+  // .favourite-list__item
+  &__item {
+  }
+}
