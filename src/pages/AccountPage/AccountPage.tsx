@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Tabs, { TabPanel } from '../../component-library/Tabs';
+import { TabPanel } from '../../component-library/Tabs';
 import PageContent from '../../components/PageContent';
 import Title from '../../components/ui/Title';
 import './AccountPage.scss';
@@ -47,16 +47,19 @@ function AccountPage({ className }: TAccountPageProps): JSX.Element {
           <TabsBlock.Tab key={tab} label={tab} />
         ))}
       </TabsBlock>
-      <TabPanel index={0} value={currentTab}>
-        <AccountMainData />
-      </TabPanel>
-      <TabPanel index={1} value={currentTab}>
-        222
-      </TabPanel>
-      <TabPanel index={2} value={currentTab}>
-        333
-      </TabPanel>
-      {/* </div> */}
+      <div className="account-page__container">
+        <div className="account-page__tabs-panels">
+          <TabPanel index={0} value={currentTab}>
+            <AccountMainData />
+          </TabPanel>
+          <TabPanel index={1} value={currentTab}>
+            222
+          </TabPanel>
+          <TabPanel index={2} value={currentTab}>
+            333
+          </TabPanel>
+        </div>
+      </div>
     </PageContent>
   );
 }

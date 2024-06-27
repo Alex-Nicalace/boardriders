@@ -86,6 +86,8 @@
 
 [throttle.ts](./src/utils/throttle.ts) - Возвращает заторможенную версию предоставленной функции используется в [Tabs.tsx](./src/component-library/Tabs/Tabs.tsx)
 
+[tuple.ts](./src/utils/types/tuple.ts) - самописная утилита для создания кортежа произвольной длины
+
 ## Object Intl - перевод и форматирование текста на разных языках
 
 ### Intl.NumberFormat

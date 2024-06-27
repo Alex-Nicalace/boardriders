@@ -1,1 +1,17 @@
 @import '/src/styles/global-scss.scss';
+
+.account-page {
+  // .account-page__container
+  &__container {
+  }
+  // .account-page__title
+  &__title {
+  }
+  // .account-page__tabs
+  &__tabs {
+  }
+  // .account-page__tabs-panels
+  &__tabs-panels {
+    @include adaptiveValue('margin-top', 50, 20);
+  }
+}
