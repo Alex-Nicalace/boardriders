@@ -1,13 +1,11 @@
 @import '/src/styles/global-scss.scss';
 
 .account-main-data {
-  // .account-main-data__container
-  &__container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    row-gap: rem(25);
-  }
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: rem(25);
+
   &__stat-card {
     flex: 0 0 percent(667, 1360);
 
