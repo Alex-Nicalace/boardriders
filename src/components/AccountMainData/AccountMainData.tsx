@@ -34,6 +34,15 @@ const ADDRESS_LIST = [
   'Россия, Московская обл., Москва, пр. Ленина, 5, кв 36 235561',
 ];
 
+const PERSONAL_INFO = {
+  fullName: 'Иванов Иван Иванович',
+  sex: 1,
+  password: '12345678',
+  dateBirth: new Date('1988-10-15'),
+  phone: '+7 (950) 145 22 55',
+  email: 'ivanov@gmail.com',
+};
+
 const PATH = '/src/assets/img/products-new/';
 const PRODUCTS_DATA: TupleIWareData3 = [
   {
@@ -67,53 +76,50 @@ const PRODUCTS_DATA: TupleIWareData3 = [
   },
 ];
 
+const STAT_CARD_LIST = [
+  {
+    title: 'корзина',
+    hint: '10 товаров',
+    labelTarget: 'перейти в корзину',
+    element: <ShoppngList data={SHOPPING_LIST} limitListCount={5} />,
+  },
+  {
+    title: 'заказы',
+    labelTarget: 'все заказы',
+    element: <OrderStatusList data={ORDER_STATUS} />,
+  },
+  {
+    title: 'Избранное',
+    labelTarget: 'перейти в избранное',
+    element: <FavouriteList data={PRODUCTS_DATA} />,
+  },
+  {
+    title: 'Личная информация',
+    labelTarget: 'Редактировать',
+    element: <PersonalInfo {...PERSONAL_INFO} />,
+  },
+  {
+    title: 'Адреса',
+    labelTarget: 'Редактировать',
+    element: <AddressList data={ADDRESS_LIST} />,
+  },
+];
+
 // type TAccountMainDataProps = { }
 function AccountMainData(/*{ }: TAccountMainDataProps*/): JSX.Element {
   return (
     <div className="account-main-data">
-      <StatCard
-        className="account-main-data__stat-card"
-        title="корзина"
-        hint="10 товаров"
-        labelTarget="перейти в корзину"
-      >
-        <ShoppngList data={SHOPPING_LIST} limitListCount={5} />
-      </StatCard>
-      <StatCard
-        className="account-main-data__stat-card"
-        title="заказы"
-        labelTarget="все заказы"
-      >
-        <OrderStatusList data={ORDER_STATUS} />
-      </StatCard>
-      <StatCard
-        className="account-main-data__stat-card"
-        title="Избранное"
-        labelTarget="перейти в избранное"
-      >
-        <FavouriteList data={PRODUCTS_DATA} />
-      </StatCard>
-      <StatCard
-        className="account-main-data__stat-card"
-        title="Личная информация"
-        labelTarget="Редактировать"
-      >
-        <PersonalInfo
-          fullName="Иванов Иван Иванович"
-          sex={1}
-          password="12345678"
-          dateBirth={new Date('1988-10-15')}
-          phone="+7 (950) 145 22 55"
-          email="ivanov@gmail.com"
-        />
-      </StatCard>
-      <StatCard
-        className="account-main-data__stat-card"
-        title="Адреса"
-        labelTarget="Редактировать"
-      >
-        <AddressList data={ADDRESS_LIST} />
-      </StatCard>
+      {STAT_CARD_LIST.map(({ title, hint, labelTarget, element }) => (
+        <StatCard
+          key={title}
+          className="account-main-data__stat-card"
+          title={title}
+          hint={hint}
+          labelTarget={labelTarget}
+        >
+          {element}
+        </StatCard>
+      ))}
     </div>
   );
 }
