@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import './AccountPage.scss';
 import { TabPanel } from '../../component-library/Tabs';
 import PageContent from '../../components/PageContent';
 import Title from '../../components/ui/Title';
-import './AccountPage.scss';
 import TabsBlock from '../../components/TabsBlock';
 import AccountMainData from '../../components/AccountMainData';
+import AccountOrderData from '../../components/AccountOrderData';
 
 const TABS = [
   'Главная',
@@ -53,7 +54,7 @@ function AccountPage({ className }: TAccountPageProps): JSX.Element {
             <AccountMainData />
           </TabPanel>
           <TabPanel index={1} value={currentTab}>
-            222
+            <AccountOrderData />
           </TabPanel>
           <TabPanel index={2} value={currentTab}>
             333
