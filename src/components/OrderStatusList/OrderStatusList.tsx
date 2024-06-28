@@ -22,7 +22,7 @@ function OrderStatusList({ className, data }: TOrderListProps): JSX.Element {
         <li key={item.code}>
           <OrderStatus
             {...item}
-            mode={width && width < 500 ? 'mobile' : undefined}
+            mode={width && width < 500 ? 'compact' : undefined}
           />
         </li>
       ))}

@@ -17,7 +17,7 @@ export type TOrderStatusData = {
 
 type TOrderStatusProps = {
   className?: string;
-  mode?: 'desktop' | 'mobile';
+  mode?: 'compact' | 'large' | 'normal';
 } & TOrderStatusData;
 function OrderStatus({
   className,
@@ -25,7 +25,7 @@ function OrderStatus({
   status,
   price,
   isPaid,
-  mode = 'desktop',
+  mode = 'normal',
 }: TOrderStatusProps): JSX.Element {
   const { formaterCurrency } = useFormaters();
   const colorIcon = status === 0 ? 'gray' : status === 1 ? 'black' : 'red';
@@ -34,7 +34,8 @@ function OrderStatus({
     <div
       className={[
         'order-status',
-        mode === 'mobile' && 'order-status_mobile',
+        mode === 'compact' && 'order-status_compact',
+        mode === 'large' && 'order-status_large',
         className,
       ]
         .filter(Boolean)
