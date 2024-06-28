@@ -12,8 +12,8 @@ export type TDetailsProps = Omit<
   DetailsHTMLAttributes<HTMLDetailsElement>,
   'children'
 > & {
-  summaryNode?: React.ReactNode;
-  contentNode?: React.ReactNode;
+  summaryNode?: React.ReactNode | ((open: boolean) => React.ReactNode);
+  contentNode?: React.ReactNode | ((open: boolean) => React.ReactNode);
   animationOptions?: {
     duration?: number;
     timingFunction?: string;
@@ -128,7 +128,9 @@ function Details({
       {(state) => (
         <details ref={detailsRef} {...props} open={state !== 'exited'}>
           <summary {...summaryProps} ref={summaryRef} onClick={onSummaryClick}>
-            {summaryNode}
+            {typeof summaryNode === 'function'
+              ? summaryNode(getIsOpen())
+              : summaryNode}
           </summary>
           {(state !== 'exited' || getIsOpen() || !unmountContentOnClose) && (
             <DetailsContent
@@ -137,7 +139,9 @@ function Details({
               onOutsideClick={onOutsideClick}
               closeOnOutsideClick={closeOnOutsideClick}
             >
-              {contentNode}
+              {typeof contentNode === 'function'
+                ? contentNode(getIsOpen())
+                : contentNode}
             </DetailsContent>
           )}
         </details>
