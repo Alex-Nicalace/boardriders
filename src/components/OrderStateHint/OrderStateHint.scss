@@ -1,0 +1,26 @@
+@import '/src/styles/global-scss.scss';
+
+.order-state-hint {
+  display: flex;
+  align-items: center;
+  column-gap: rem(10);
+  // color: var(--dark-gray); // по макету не понятно то серое, то черное. Больше черное.
+
+  // .order-state-hint__icon
+  &__icon {
+    flex: 0 0 var(--order-state-hint-icon-width, rem(11));
+    height: var(--order-state-hint-icon-height, rem(15));
+
+    &_red {
+      fill: var(--red);
+    }
+
+    &_gray {
+      fill: var(--dark-gray);
+    }
+
+    &_black {
+      fill: var(--black);
+    }
+  }
+}
