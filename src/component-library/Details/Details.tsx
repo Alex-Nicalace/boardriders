@@ -1,31 +1,9 @@
-import {
-  DetailsHTMLAttributes,
-  HTMLAttributes,
-  forwardRef,
-  useRef,
-  useState,
-} from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import Transition from '../Transition';
+import { TDetailsProps } from './Details.types';
+import { TDetailsContentProps } from './Details.types';
 
-export type TDetailsProps = Omit<
-  DetailsHTMLAttributes<HTMLDetailsElement>,
-  'children'
-> & {
-  summaryNode?: React.ReactNode | ((open: boolean) => React.ReactNode);
-  contentNode?: React.ReactNode | ((open: boolean) => React.ReactNode);
-  animationOptions?: {
-    duration?: number;
-    timingFunction?: string;
-  };
-  disabled?: boolean;
-  closeOnOutsideClick?: boolean;
-  unmountContentOnClose?: boolean;
-  summaryProps?: HTMLAttributes<HTMLElement>;
-  contentProps?: HTMLAttributes<HTMLDivElement>;
-  onChange?: (open: boolean) => void;
-  defaultOpen?: boolean;
-};
 function Details({
   animationOptions = {},
   summaryNode,
@@ -153,10 +131,6 @@ function Details({
 // ========================= DetailsContent =========================
 // выделил в отдельную компоненту из-за хука useOutsideClick т.е. чтобы прослушиватель клика
 // вне компонента активировался только при открытом состоянии. Чтобы типа даром не висел когда нет необходимости
-type TDetailsContentProps = HTMLAttributes<HTMLDivElement> & {
-  onOutsideClick: (e: MouseEvent) => void;
-  closeOnOutsideClick: boolean;
-};
 const DetailsContent = forwardRef<HTMLDivElement, TDetailsContentProps>(
   ({ children, onOutsideClick, closeOnOutsideClick, ...props }, ref) => {
     const contentRef: React.MutableRefObject<HTMLDivElement | null> =
