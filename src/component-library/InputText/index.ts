@@ -1,4 +1,4 @@
 import InputText from './InputText';
 
 export default InputText;
-export * from './InputText';
+export * from './InputText.types';
