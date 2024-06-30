@@ -1,16 +1,11 @@
 import { useFormaters } from '../../Context/useFormaters';
-import { LocationIcon } from '../ui/Icons';
+import { EOrderState } from '../../types';
+import OrderStateHint from '../OrderStateHint';
 import './OrderStatus.scss';
-
-enum ORDER_STATUS {
-  'Отменен',
-  'Возврат',
-  'Заказ передан в службу доставки',
-}
 
 export type TOrderStatusData = {
   code: string;
-  status: ORDER_STATUS;
+  status: EOrderState;
   price: number;
   isPaid: boolean;
 };
@@ -28,7 +23,6 @@ function OrderStatus({
   mode = 'normal',
 }: TOrderStatusProps): JSX.Element {
   const { formaterCurrency } = useFormaters();
-  const colorIcon = status === 0 ? 'gray' : status === 1 ? 'black' : 'red';
 
   return (
     <div
@@ -42,12 +36,12 @@ function OrderStatus({
         .join(' ')}
     >
       <span className="order-status__code">{code}</span>
-      <span className="order-status__status">
-        <LocationIcon
-          className={`order-status__icon order-status__icon_${colorIcon}`}
-        />{' '}
-        {ORDER_STATUS[status]}
-      </span>
+      <OrderStateHint
+        className="order-status__status"
+        state={status}
+        iconWidth={mode === 'large' ? 16 : undefined}
+        iconHeight={mode === 'large' ? 23 : undefined}
+      />
       <span className="order-status__price">{formaterCurrency(price)}</span>
       <span className="order-status__is-paid">
         {isPaid ? 'Оплачен' : 'Не оплачен'}

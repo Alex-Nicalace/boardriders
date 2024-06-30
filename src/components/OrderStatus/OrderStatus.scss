@@ -19,28 +19,8 @@
   // .order-status__status
   &__status {
     grid-area: s;
-    display: flex;
-    align-items: center;
-    column-gap: rem(10);
-    color: var(--dark-gray);
   }
-  // .order-status__icon
-  &__icon {
-    flex: 0 0 rem(11);
-    height: rem(15);
 
-    &_red {
-      fill: var(--red);
-    }
-
-    &_gray {
-      fill: var(--dark-gray);
-    }
-
-    &_black {
-      fill: var(--black);
-    }
-  }
   // .order-status__price
   &__price {
     grid-area: p;
@@ -64,11 +44,6 @@
 
     .order-status__price {
       font-size: rem(21);
-    }
-
-    .order-status__icon {
-      flex: 0 0 rem(16);
-      height: rem(23);
     }
   }
 
