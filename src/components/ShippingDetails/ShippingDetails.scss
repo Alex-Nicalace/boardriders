@@ -1,0 +1,43 @@
+@import '/src/styles/global-scss.scss';
+
+.shipping-details {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: rem(30);
+  row-gap: rem(15);
+  // .shipping-details__title
+  &__title {
+    @extend %caption;
+    text-transform: lowercase;
+    color: var(--dark-gray);
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+
+    &::after {
+      content: ':';
+    }
+  }
+  // .shipping-details__value
+  &__value {
+    @extend %body-2;
+  }
+
+  &_compact {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+
+    .shipping-details__title {
+      &:not(:last-child) {
+        margin-bottom: rem(5);
+      }
+    }
+
+    .shipping-details__value {
+      &:not(:last-child) {
+        margin-bottom: rem(20);
+      }
+    }
+  }
+}
