@@ -44,6 +44,8 @@
 
 [Tabs.tsx](./src/component-library/Tabs/Tabs.tsx) - компонент Табы
 
+[Pagination](./src/components/ui/Pagination/Pagination.tsx) - пагинация
+
 ## Кастомные хуки
 
 [useLockDocumentScroll.ts](./src/hooks/useLockDocumentScroll.ts) Пользовательский хук для блокировки прокрутки документа при вызове.

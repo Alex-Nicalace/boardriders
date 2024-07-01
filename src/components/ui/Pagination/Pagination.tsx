@@ -83,7 +83,10 @@ function Pagination({
     );
 
   return (
-    <nav className={`pagination ${className}`} aria-label="Page navigation">
+    <nav
+      className={['pagination', className].filter(Boolean).join(' ')}
+      aria-label="Page navigation"
+    >
       <ul className="pagination__list">
         {isShowNavigationButtons && (
           <li className="pagination__item">
