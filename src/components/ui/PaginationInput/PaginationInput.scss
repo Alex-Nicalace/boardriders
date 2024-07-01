@@ -1,0 +1,58 @@
+@import '/src/styles/global-scss.scss';
+
+.pagination-input {
+  @extend %body-2;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: rem(40);
+  row-gap: rem(15);
+  // .pagination-input__size-box
+  &__size-box {
+    display: flex;
+    column-gap: rem(10);
+  }
+  // .pagination-input__text
+  &__text {
+    padding: rem(8) 0;
+  }
+  // .pagination-input__input-box
+  &__input-box {
+    display: flex;
+    column-gap: rem(5);
+
+    .pagination-input__text {
+      flex-grow: 1;
+    }
+  }
+  // .pagination-input__input
+  &__input {
+    // width: rem(54);
+    flex: 0 0 rem(54);
+    width: rem(54);
+    border: rem(1) solid var(--gray);
+    line-height: inherit;
+    font-weight: inherit;
+    color: var(--red);
+    text-align: center;
+    // input {
+    //   width: 100%;
+    // }
+  }
+  // .pagination-input__page-box
+  &__page-box {
+    display: flex;
+    column-gap: rem(10);
+  }
+  // .pagination-input__page
+  &__page {
+    display: flex;
+    column-gap: rem(15);
+  }
+  // .pagination-input__btn
+  &__btn {
+    width: rem(40);
+    height: rem(40);
+    background-color: var(--black);
+    color: var(--white);
+  }
+}
