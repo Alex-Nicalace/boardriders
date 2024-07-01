@@ -8,6 +8,7 @@ type TInputNumberProps = {
   max?: number;
   step?: number;
   value?: number;
+  defaultValue?: number;
   onChange?: (value: number | '' | '-') => void;
 };
 function InputNumber({
@@ -16,6 +17,7 @@ function InputNumber({
   max,
   step = 1,
   value: valueProp,
+  defaultValue,
   onChange,
 }: TInputNumberProps): JSX.Element {
   const [value, setValue] = useState<number | '' | '-'>('');
@@ -58,7 +60,8 @@ function InputNumber({
         min={min}
         max={max}
         step={step}
-        value={value}
+        value={currentValue}
+        defaultValue={defaultValue}
         onChange={handleOnChange}
       />
       <button
