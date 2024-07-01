@@ -6,6 +6,15 @@
   }
   // .account-page__title
   &__title {
+    text-align: center;
+
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 50, 20);
+    }
+
+    @include mobile-d {
+      text-align: left;
+    }
   }
   // .account-page__tabs
   &__tabs {
