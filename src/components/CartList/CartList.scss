@@ -1,6 +1,24 @@
 @import '/src/styles/global-scss.scss';
 
 .cart-list {
+  &__header {
+    @extend %caption;
+    padding: rem(25) rem(20) rem(15);
+    // характеристики грида согласую с характеристиками грида в компоненте WareCardCart
+    // чтобы шапка совпадала с контентом в компоненте WareCardCart
+    display: grid;
+    grid-template-columns:
+      minmax(7.375rem, 14.3377885784%) minmax(auto, 40.5832320778%)
+      minmax(7.0625rem, 9.125rem) auto;
+    @include adaptiveValue('column-gap', 20, 10, $containerWidth, 992, 1);
+    background-color: var(--light-gray);
+    border-bottom: rem(1) solid var(--gray);
+    color: var(--dark-gray);
+
+    @include tablet-d {
+      column-gap: percent(20, 823);
+    }
+  }
   // .cart-list__list
   &__list {
     &:not(:last-child) {
@@ -42,6 +60,26 @@
 
     @include mobile-d {
       font-size: rem(21);
+    }
+  }
+  &_ordered {
+    .cart-list {
+      &__item {
+        &:not(:last-child) {
+          position: relative;
+          margin-bottom: 0;
+          // border-bottom: rem(1) solid var(--gray);
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: rem(20);
+            right: rem(20);
+            height: rem(1);
+            background-color: var(--gray);
+          }
+        }
+      }
     }
   }
 }
