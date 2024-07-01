@@ -1,1 +1,19 @@
 @import '/src/styles/global-scss.scss';
+
+.account-order-data {
+  // .account-order-data__pagination
+  &__pagination {
+    justify-content: flex-end;
+
+    &:not(:last-child) {
+      margin-bottom: rem(25);
+
+      @include mobile-d {
+        margin-bottom: rem(20);
+      }
+    }
+  }
+  // .account-order-data__orders
+  &__orders {
+  }
+}

@@ -1,4 +1,6 @@
+import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import OrderStatusAccordion from '../OrderStatusAccordion';
+import PaginationInput from '../ui/PaginationInput';
 import './AccountOrderData.scss';
 
 const ORDER_STATUS = [
@@ -13,11 +15,20 @@ type TAccountOrderDataProps = {
   className?: string;
 };
 function AccountOrderData({ className }: TAccountOrderDataProps): JSX.Element {
+  const { isLessMobile } = useScreenWidth();
+
   return (
     <div
       className={['account-order-data', className].filter(Boolean).join(' ')}
     >
-      <OrderStatusAccordion data={ORDER_STATUS} />
+      <PaginationInput
+        className="account-order-data__pagination"
+        hideSizeBox={isLessMobile}
+      />
+      <OrderStatusAccordion
+        className="account-order-data__orders"
+        data={ORDER_STATUS}
+      />
     </div>
   );
 }
