@@ -16,4 +16,9 @@
   // .account-order-data__orders
   &__orders {
   }
+  // .account-order-data__empty
+  &__empty {
+    padding-top: rem(40);
+    @include adaptiveValue('padding-bottom', 150, 15);
+  }
 }

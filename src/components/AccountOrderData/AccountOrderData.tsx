@@ -1,4 +1,5 @@
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
+import OrdersEmpty from '../OrdersEmpty';
 import OrderStatusAccordion from '../OrderStatusAccordion';
 import PaginationInput from '../ui/PaginationInput';
 import './AccountOrderData.scss';
@@ -21,18 +22,24 @@ function AccountOrderData({ className }: TAccountOrderDataProps): JSX.Element {
     <div
       className={['account-order-data', className].filter(Boolean).join(' ')}
     >
-      <PaginationInput
-        className="account-order-data__pagination"
-        totalItems={23}
-        itemsPerPage={20}
-        currentPage={1}
-        totalPages={2}
-        hideSizeBox={isLessMobile}
-      />
-      <OrderStatusAccordion
-        className="account-order-data__orders"
-        data={ORDER_STATUS}
-      />
+      {ORDER_STATUS.length === 0 ? (
+        <OrdersEmpty className="account-order-data__empty" />
+      ) : (
+        <>
+          <PaginationInput
+            className="account-order-data__pagination"
+            totalItems={23}
+            itemsPerPage={20}
+            currentPage={1}
+            totalPages={2}
+            hideSizeBox={isLessMobile}
+          />
+          <OrderStatusAccordion
+            className="account-order-data__orders"
+            data={ORDER_STATUS}
+          />
+        </>
+      )}
     </div>
   );
 }
