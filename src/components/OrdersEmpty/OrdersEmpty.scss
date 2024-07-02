@@ -1,0 +1,27 @@
+@import '/src/styles/global-scss.scss';
+
+.order-empty {
+  display: grid;
+  grid-template-columns: minmax(auto, rem(408));
+  justify-content: center;
+  justify-items: center;
+  row-gap: rem(40);
+
+  @include mobile-d {
+    grid-template-columns: minmax(auto, rem(308));
+  }
+  // .order-empty__icon
+  &__icon {
+    @include adaptiveValue('width', 86, 60);
+    height: auto;
+    order: 1;
+  }
+  // .order-empty__text
+  &__title {
+    order: 2;
+  }
+  // .order-empty__btn
+  &__btn {
+    order: 3;
+  }
+}
