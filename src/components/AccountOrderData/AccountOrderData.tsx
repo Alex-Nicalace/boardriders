@@ -23,6 +23,10 @@ function AccountOrderData({ className }: TAccountOrderDataProps): JSX.Element {
     >
       <PaginationInput
         className="account-order-data__pagination"
+        totalItems={23}
+        itemsPerPage={20}
+        currentPage={1}
+        totalPages={2}
         hideSizeBox={isLessMobile}
       />
       <OrderStatusAccordion
