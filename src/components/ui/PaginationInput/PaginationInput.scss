@@ -34,9 +34,11 @@
     font-weight: inherit;
     color: var(--red);
     text-align: center;
-    // input {
-    //   width: 100%;
-    // }
+    outline: none;
+
+    &:focus-visible {
+      border-color: var(--black);
+    }
   }
   // .pagination-input__page-box
   &__page-box {
@@ -54,5 +56,20 @@
     height: rem(40);
     background-color: var(--black);
     color: var(--white);
+
+    &:disabled {
+      cursor: no-drop;
+      svg {
+        fill: var(--dark-gray);
+      }
+    }
+    // .pagination-input__btn_prev
+    &_prev {
+      transform: rotate(90deg);
+    }
+    // .pagination-input__btn_next
+    &_next {
+      transform: rotate(-90deg);
+    }
   }
 }
