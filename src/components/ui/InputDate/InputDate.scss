@@ -1,0 +1,85 @@
+@import '/src/styles/global-scss.scss';
+
+.input-date {
+  --input-date-border-color: var(--gray);
+  width: rem(190);
+  outline: none;
+
+  &:focus-within {
+    --input-date-border-color: var(--black);
+  }
+
+  @media (pointer: fine) {
+    &:hover {
+      --input-date-border-color: var(--black);
+    }
+  }
+  // .input-date__box-label
+  &__box-label {
+    margin-bottom: rem(5);
+  }
+  // .input-date__label
+  &__label {
+    @extend %caption;
+    color: var(--dark-gray);
+  }
+  // .input-date__error
+  &__error {
+  }
+  // .input-date__value
+  &__value {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%); // новое, заменило clip
+    clip: rect(0 0 0 0); // устаревшее, новое clip-path
+    overflow: hidden;
+  }
+  // .input-date__box-inputs
+  &__box-inputs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: rem(1) solid var(--input-date-border-color);
+  }
+  // .input-date__input
+  &__input {
+    @extend %body-2;
+    width: 100%;
+    padding: rem(11.5) rem(19);
+    // text-align: center;
+    outline: none;
+
+    &:not(:last-child) {
+      border-right: rem(1) solid var(--input-date-border-color);
+    }
+
+    &::placeholder {
+      @extend %body-2-1;
+    }
+  }
+  // .input-date__hint
+  &__hint {
+  }
+  // .input-date__invalid
+  &_invalid {
+    --input-date-border-color: var(--red);
+    &:focus-within {
+      --input-date-border-color: var(--red);
+      .input-date__box-inputs {
+        outline: rem(1) solid var(--red);
+      }
+    }
+    @media (pointer: fine) {
+      &:hover {
+        --input-date-border-color: var(--red);
+        .input-date__box-inputs {
+          outline: rem(1) solid var(--red);
+        }
+      }
+    }
+  }
+}

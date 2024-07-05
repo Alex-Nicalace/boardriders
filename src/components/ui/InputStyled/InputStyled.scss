@@ -41,7 +41,7 @@
     width: 100%;
     @extend %body-2;
     padding: rem(11.5) rem(19);
-    border: 1px solid var(--gray);
+    border: rem(1) solid var(--gray);
     flex-grow: 1;
     outline: none;
     // transition: all 0.3s ease 0s;
