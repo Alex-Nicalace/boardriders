@@ -161,7 +161,7 @@ function Footer(): JSX.Element {
             )}
             <div className="footer__subscribe">
               <InputStyled
-                varint="second"
+                variant="second"
                 placeholder="Подпишись на рассылку и получи -10% скидку"
                 type="email"
                 adornmentContent={

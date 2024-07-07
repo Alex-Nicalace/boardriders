@@ -38,7 +38,7 @@ function JoinAndSubscrube({
             <>
               {!isLessMobileSmall ? (
                 <InputStyled
-                  varint="second"
+                  variant="second"
                   placeholder="E-mail"
                   type="email"
                   adornmentContent={
@@ -50,7 +50,7 @@ function JoinAndSubscrube({
                 />
               ) : (
                 <InputStyled
-                  varint="main"
+                  variant="main"
                   placeholder="E-mail"
                   type="email"
                   buttonContent={

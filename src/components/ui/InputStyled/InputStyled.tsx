@@ -5,45 +5,71 @@ import InputText, {
 import './InputStyled.scss';
 import { DiscountIcon, GiftIcon, QuestionInCircleIcon } from '../Icons';
 
-type TButtonProps = (
+type TInputStyledButtonProps = (
   | {
-      varint?: 'main';
+      variant?: 'main';
       adornmentContent?: never;
     }
   | {
-      varint: 'second';
+      variant: 'second';
       adornmentContent: React.ReactNode;
     }
 ) &
   (
     | { buttonProps?: never; buttonContent?: never }
     | {
-        buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+        buttonProps?: ButtonHTMLAttributes<HTMLButtonElement> & {
+          bgColor?: 'black' | 'transparent';
+          color?: 'white' | 'black' | 'gray';
+        };
         buttonContent: React.ReactNode;
       }
-  ) & {
-    isGrayLabel?: boolean;
-  };
-export type TInputStyledProps = TInputTextProps & TButtonProps;
+  );
+type TInputStyledcommonProps = {
+  isGrayLabel?: boolean;
+  placeBorder?: 'input' | 'wrap';
+};
+
+export type TInputStyledProps = TInputTextProps &
+  TInputStyledButtonProps &
+  TInputStyledcommonProps;
 function InputStyled({
-  varint = 'main',
+  variant = 'main',
   buttonProps,
   buttonContent,
   adornmentContent,
   isGrayLabel,
   className,
+  placeBorder = 'input',
   ...props
 }: TInputStyledProps): JSX.Element {
+  const bemBlockName = `input-${variant}`;
+  const { bgColor, color, ...propsButton } = buttonProps || {};
+
   return (
     <InputText
-      bemBlockName={`input-${varint}`}
-      className={[isGrayLabel && `input-${varint}_label_gray`, className]
+      bemBlockName={bemBlockName}
+      className={[
+        `${bemBlockName}_border_${placeBorder}`,
+        isGrayLabel && `${bemBlockName}_label_gray`,
+        className,
+      ]
         .filter(Boolean)
         .join(' ')}
       startAdornment={adornmentContent}
       endAdornment={
         Boolean(buttonContent) && (
-          <button className={`input-${varint}__button`} {...buttonProps}>
+          <button
+            className={[
+              `${bemBlockName}__button`,
+              bgColor && `${bemBlockName}__button_bgColor_${bgColor}`,
+              color && `${bemBlockName}__button_color_${color}`,
+            ]
+              .filter(Boolean)
+              .join(' ')}
+            type="button"
+            {...propsButton}
+          >
             {buttonContent}
           </button>
         )
