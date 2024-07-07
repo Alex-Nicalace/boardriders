@@ -251,7 +251,7 @@ function InputDate({
           <input
             key={index}
             className="input-date__input"
-            id={id}
+            id={index === 0 ? id : undefined}
             placeholder={placeholder}
             value={partsDate[index]}
             onChange={(e) => handleOnChange(e, index)}
