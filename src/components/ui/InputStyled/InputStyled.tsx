@@ -25,7 +25,7 @@ type TInputStyledButtonProps = (
         buttonContent: React.ReactNode;
       }
   );
-type TInputStyledcommonProps = {
+export type TInputStyledcommonProps = {
   isGrayLabel?: boolean;
   placeBorder?: 'input' | 'wrap';
 };
