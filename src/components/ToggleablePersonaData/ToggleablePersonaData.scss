@@ -1,0 +1,16 @@
+@import '/src/styles/global-scss.scss';
+
+.toggleable-persona-data {
+  // .toggleable-persona-data__form
+  &__form {
+  }
+  // .toggleable-persona-data__personal-info
+  &__personal-info {
+  }
+  // .toggleable-persona-data__btn
+  &__btn {
+    @extend %body-3;
+    margin-top: rem(25);
+    color: var(--dark-gray);
+  }
+}
