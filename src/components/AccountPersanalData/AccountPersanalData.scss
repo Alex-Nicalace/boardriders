@@ -1,10 +1,12 @@
 @import '/src/styles/global-scss.scss';
 
 .account-persanal-data {
-  max-width: rem(1100);
-  display: flex;
-  justify-content: space-between;
-  column-gap: rem(20);
+  &__sections {
+    max-width: rem(1100);
+    display: flex;
+    justify-content: space-between;
+    column-gap: rem(20);
+  }
   // .account-persanal-data__section
   &__section {
     flex: 0 1 rem(408);
@@ -14,5 +16,35 @@
     &:not(:last-child) {
       margin-bottom: rem(25);
     }
+  }
+  // .account-persanal-data__tabs
+  &__tabs {
+    &:not(:last-child) {
+      margin-bottom: rem(20);
+    }
+    &.tabs {
+      --tabs-padding-item-top: 0;
+      --tabs-padding-item-bottom: 0;
+      --tabs-item-active-bg: transparent;
+      --tabs-item-color: #{var(--dark-gray)};
+      --tabs-item-active-color: #{var(--black)};
+      --tabs-basis-item: auto;
+      --tabs-items-gap: #{rem(40)};
+      --tabs-font-size: #{rem(14)};
+      border: none;
+    }
+    .tabs {
+      &__item {
+        line-height: 2.5;
+        border-bottom: rem(4) solid transparent;
+
+        &_active {
+          border-color: var(--black);
+        }
+      }
+    }
+  }
+  // .account-persanal-data__tab
+  &__tab {
   }
 }

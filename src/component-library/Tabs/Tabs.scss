@@ -22,6 +22,7 @@
   // .tabs__list
   &__list {
     display: flex;
+    column-gap: var(--tabs-items-gap, 0);
   }
   &__item {
     padding-top: var(
