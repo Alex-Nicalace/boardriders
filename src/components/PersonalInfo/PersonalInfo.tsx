@@ -8,12 +8,12 @@ enum SEX {
 
 type TPersonalInfoProps = {
   className?: string;
-  fullName: string;
+  fullName?: string;
   sex?: SEX;
   dateBirth?: Date;
   phone?: string;
   email?: string;
-  password: string;
+  password?: string;
 };
 function PersonalInfo({
   className,
@@ -28,12 +28,12 @@ function PersonalInfo({
 
   return (
     <div className={['personal-info', className].filter(Boolean).join(' ')}>
-      <p>{fullName}</p>
+      {fullName && <p>{fullName}</p>}
       {sex && <p>{SEX[sex]}</p>}
       {dateBirth && <p>{formaterDateShort(dateBirth)}</p>}
       {phone && <p>{phone}</p>}
       {email && <p>{email}</p>}
-      <p>Пароль: {'*'.repeat(password.length)}</p>
+      {password && <p>Пароль: {'*'.repeat(password.length)}</p>}
     </div>
   );
 }

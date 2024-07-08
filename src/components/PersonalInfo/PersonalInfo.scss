@@ -1,13 +1,17 @@
 @import '/src/styles/global-scss.scss';
 
 .personal-info {
-  @include adaptiveValue('margin-top', 25, 20);
-  @extend %body-2;
-  max-height: rem(125);
+  max-height: rem(150);
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   column-gap: rem(10);
+  font-weight: 500;
+  font-size: rem(14);
+
+  p:not(:last-child) {
+    margin-bottom: rem(15);
+  }
 
   @include mdQuery(0, 400) {
     max-height: none;
