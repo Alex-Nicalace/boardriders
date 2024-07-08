@@ -96,7 +96,12 @@ const STAT_CARD_LIST = [
   {
     title: 'Личная информация',
     labelTarget: 'Редактировать',
-    element: <PersonalInfo {...PERSONAL_INFO} />,
+    element: (
+      <PersonalInfo
+        className="account-main-data__personal-info"
+        {...PERSONAL_INFO}
+      />
+    ),
   },
   {
     title: 'Адреса',

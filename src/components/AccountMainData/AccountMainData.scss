@@ -13,4 +13,8 @@
       flex: 0 1 100%;
     }
   }
+
+  &__personal-info {
+    @include adaptiveValue('margin-top', 25, 20);
+  }
 }
