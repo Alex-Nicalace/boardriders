@@ -20,7 +20,7 @@ type TInputStyledButtonProps = (
     | {
         buttonProps?: ButtonHTMLAttributes<HTMLButtonElement> & {
           bgColor?: 'black' | 'transparent';
-          color?: 'white' | 'black' | 'gray';
+          color?: 'white' | 'black' | 'dark-gray';
         };
         buttonContent: React.ReactNode;
       }
