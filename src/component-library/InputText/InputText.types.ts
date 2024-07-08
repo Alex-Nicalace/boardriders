@@ -1,6 +1,6 @@
 import { TextareaHTMLAttributes, InputHTMLAttributes } from 'react';
 
-interface ICustomProps {
+export type TInputTextCommonProps = {
   label?: React.ReactNode;
   error?: React.ReactNode;
   isError?: boolean;
@@ -9,7 +9,7 @@ interface ICustomProps {
   hint?: React.ReactNode;
   bemBlockName?: string;
   fullWidth?: boolean;
-}
+};
 type TextAreaOnlyKeys = Exclude<
   keyof TextareaHTMLAttributes<HTMLTextAreaElement>,
   keyof InputHTMLAttributes<HTMLInputElement>
@@ -29,4 +29,5 @@ type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   [k in InputOnlyKeys]?: never;
 };
 
-export type TInputTextProps = ICustomProps & (InputProps | TextareaProps);
+export type TInputTextProps = TInputTextCommonProps &
+  (InputProps | TextareaProps);
