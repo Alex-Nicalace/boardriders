@@ -8,14 +8,22 @@ import InputPasword from '../ui/InputPasword';
 type TFormPersanalDataProps = {
   className?: string;
   mode: 'personal-data' | 'change-password';
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 function FormPersanalData({
   className,
   mode,
+  onSubmit,
 }: TFormPersanalDataProps): JSX.Element {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    onSubmit?.(e);
+  }
+
   return (
     <form
       className={['form-persanal-data', className].filter(Boolean).join(' ')}
+      onSubmit={handleSubmit}
     >
       {mode === 'personal-data' && (
         <>
@@ -54,12 +62,17 @@ function FormPersanalData({
       {mode === 'change-password' && (
         <>
           <InputPasword
+            name="currentPassword"
             label="Текущий пароль"
             isGrayLabel
             defaultPasswordShow
           />
-          <InputPasword label="Новый пароль" isGrayLabel />
-          <InputPasword label="Повторить пароль" isGrayLabel />
+          <InputPasword name="newPassword" label="Новый пароль" isGrayLabel />
+          <InputPasword
+            name="repeatPassword"
+            label="Повторить пароль"
+            isGrayLabel
+          />
         </>
       )}
       <Button className="form-persanal-data__btn" fullWidth>
