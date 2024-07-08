@@ -1,0 +1,19 @@
+@import '/src/styles/global-scss.scss';
+
+.form-persanal-data {
+  & > div:not(:last-of-type) {
+    margin-bottom: rem(25);
+  }
+  // .form-persanal-data__row
+  &__row {
+    display: flex;
+    column-gap: rem(25);
+    & > *:first-child {
+      flex-grow: 1;
+    }
+  }
+  // .form-persanal-data__btn
+  &__btn {
+    margin-top: rem(40);
+  }
+}
