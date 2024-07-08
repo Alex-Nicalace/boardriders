@@ -1,20 +1,9 @@
 import { useState } from 'react';
 import Tabs, { TabPanel } from '../../component-library/Tabs';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
-import FormPersanalData from '../FormPersanalData';
 import Title from '../ui/Title';
 import './AccountPersanalData.scss';
-
-const TABS = [
-  {
-    label: 'Личные данные',
-    content: <FormPersanalData mode="personal-data" />,
-  },
-  {
-    label: 'Пароль',
-    content: <FormPersanalData mode="change-password" />,
-  },
-];
+import ToggleablePersonaData from '../ToggleablePersonaData';
 
 type TAccountPersanalDataProps = {
   className?: string;
@@ -23,14 +12,39 @@ function AccountPersanalData({
   className,
 }: TAccountPersanalDataProps): JSX.Element {
   const [activeTab, setActiveTab] = useState(0);
+  const [isEditPersonalData, setIsEditPersonalData] = useState(false);
+  const [isEditPassword, setIsEditPassword] = useState(false);
   const { isLessMobile } = useScreenWidth();
+  const tabs = [
+    {
+      label: 'Личные данные',
+      content: (
+        <ToggleablePersonaData
+          mode="personal-data"
+          isEdit={isEditPersonalData}
+          onToggle={setIsEditPersonalData}
+        />
+      ),
+    },
+    {
+      label: 'Пароль',
+      content: (
+        <ToggleablePersonaData
+          mode="change-password"
+          isEdit={isEditPassword}
+          onToggle={setIsEditPassword}
+        />
+      ),
+    },
+  ];
+
   return (
     <div
       className={['account-persanal-data', className].filter(Boolean).join(' ')}
     >
       {!isLessMobile && (
         <div className="account-persanal-data__sections">
-          {TABS.map(({ label, content }) => (
+          {tabs.map(({ label, content }) => (
             <section key={label} className="account-persanal-data__section">
               <Title
                 className="account-persanal-data__title"
@@ -51,7 +65,7 @@ function AccountPersanalData({
             value={activeTab}
             onChange={setActiveTab}
           >
-            {TABS.map(({ label }) => (
+            {tabs.map(({ label }) => (
               <Tabs.Tab
                 className="account-persanal-data__tab"
                 key={label}
@@ -59,7 +73,7 @@ function AccountPersanalData({
               />
             ))}
           </Tabs>
-          {TABS.map(({ content, label }, index) => (
+          {tabs.map(({ content, label }, index) => (
             <TabPanel key={label} index={index} value={activeTab}>
               {content}
             </TabPanel>
