@@ -6,11 +6,11 @@ import Title from '../../components/ui/Title';
 import TabsBlock from '../../components/TabsBlock';
 import AccountMainData from '../../components/AccountMainData';
 import AccountOrderData from '../../components/AccountOrderData';
+import AccountPersanalData from '../../components/AccountPersanalData';
 
 const TABS = [
   'Главная',
   'Мои заказы',
-  'Бонусный счет',
   'Личная информация',
   'Мои адреса',
   'Подписка на новости',
@@ -57,7 +57,7 @@ function AccountPage({ className }: TAccountPageProps): JSX.Element {
             <AccountOrderData />
           </TabPanel>
           <TabPanel index={2} value={currentTab}>
-            333
+            <AccountPersanalData />
           </TabPanel>
         </div>
       </div>
