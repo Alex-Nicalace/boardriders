@@ -7,27 +7,21 @@ import TabsBlock from '../../components/TabsBlock';
 import AccountMainData from '../../components/AccountMainData';
 import AccountOrderData from '../../components/AccountOrderData';
 import AccountPersanalData from '../../components/AccountPersanalData';
+import AccountAddressData from '../../components/AccountAddressData';
 
 const TABS = [
-  'Главная',
-  'Мои заказы',
-  'Личная информация',
-  'Мои адреса',
-  'Подписка на новости',
-
-  // 'Главная 2',
-  // 'Мои заказы 2',
-  // 'Бонусный счет 2',
-  // 'Личная информация 2',
-  // 'Мои адреса 2',
-  // 'Подписка на новости 2',
+  { label: 'Главная', content: <AccountMainData /> },
+  { label: 'Мои заказы', content: <AccountOrderData /> },
+  { label: 'Личная информация', content: <AccountPersanalData /> },
+  { label: 'Мои адреса', content: <AccountAddressData /> },
+  { label: 'Подписка на новости', content: <>не реализовано</> },
 ];
 
 type TAccountPageProps = {
   className?: string;
 };
 function AccountPage({ className }: TAccountPageProps): JSX.Element {
-  const [currentTab, setCurrentTab] = useState(0);
+  const [currentTab, setCurrentTab] = useState(3);
 
   return (
     <PageContent
@@ -44,21 +38,17 @@ function AccountPage({ className }: TAccountPageProps): JSX.Element {
         value={currentTab}
         onChange={setCurrentTab}
       >
-        {TABS.map((tab) => (
-          <TabsBlock.Tab key={tab} label={tab} />
+        {TABS.map(({ label }) => (
+          <TabsBlock.Tab key={label} label={label} />
         ))}
       </TabsBlock>
       <div className="account-page__container">
         <div className="account-page__tabs-panels">
-          <TabPanel index={0} value={currentTab}>
-            <AccountMainData />
-          </TabPanel>
-          <TabPanel index={1} value={currentTab}>
-            <AccountOrderData />
-          </TabPanel>
-          <TabPanel index={2} value={currentTab}>
-            <AccountPersanalData />
-          </TabPanel>
+          {TABS.map(({ label, content }, index) => (
+            <TabPanel key={label} index={index} value={currentTab}>
+              {content}
+            </TabPanel>
+          ))}
         </div>
       </div>
     </PageContent>
