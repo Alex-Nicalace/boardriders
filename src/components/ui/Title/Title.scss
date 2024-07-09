@@ -28,6 +28,12 @@
     letter-spacing: normal;
     @include adaptiveValue('font-size', 21, 16);
   }
+  &_h2-21-14 {
+    font-weight: 700;
+    line-height: 1.43;
+    letter-spacing: normal;
+    @include adaptiveValue('font-size', 21, 14);
+  }
 
   &_white {
     color: var(--white);
