@@ -1,0 +1,32 @@
+@import '/src/styles/global-scss.scss';
+
+.favourites-page {
+  // .favourites-page__container
+  &__container {
+    display: grid;
+    grid-template:
+      't s'
+      'p p' / 1fr rem(454);
+    row-gap: rem(25);
+
+    @include mobile-d {
+      grid-template:
+        't'
+        's'
+        'p' / 1fr;
+      row-gap: rem(20);
+    }
+  }
+  // .favourites-page__title
+  &__title {
+    grid-area: t;
+  }
+  // .favourites-page__select
+  &__select {
+    grid-area: s;
+  }
+  // .favourites-page__product-list
+  &__product-list {
+    grid-area: p;
+  }
+}
