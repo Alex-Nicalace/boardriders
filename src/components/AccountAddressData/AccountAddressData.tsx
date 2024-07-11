@@ -1,3 +1,6 @@
+import Popup from '../../component-library/Popup';
+import FormAddress from '../FormAddress';
+import ModalWrap from '../ModalWrap';
 import Title from '../ui/Title';
 import './AccountAddressData.scss';
 
@@ -28,22 +31,62 @@ function AccountAddressData({
             </Title>
             <p className="account-address-data__text">{address}</p>
             <div className="account-address-data__btns">
-              <button className="account-address-data__btn-edit">
-                Изменить
-              </button>
-              <button className="account-address-data__btn-edit">
-                Удалить
-              </button>
+              <Popup>
+                <Popup.Open
+                  windowName="address-edit"
+                  render={({ open }) => (
+                    <button
+                      className="account-address-data__btn-edit"
+                      onClick={open}
+                    >
+                      Изменить
+                    </button>
+                  )}
+                />
+                {/* // TODO: добавить модальное окно */}
+                <button className="account-address-data__btn-edit">
+                  Удалить
+                </button>
+                {/* // TODO: надо подумать что передавать в редактируемое окно */}
+                <Popup.Window
+                  windowName="address-edit"
+                  render={(close) => (
+                    <ModalWrap close={close}>
+                      <FormAddress addressToEdit={address} />
+                    </ModalWrap>
+                  )}
+                  transitionEffect={['fade']}
+                  mode="modal"
+                  onClickOutside={(close) => close()}
+                />
+              </Popup>
             </div>
           </li>
         ))}
       </ul>
       <div className="account-address-data__btn">
-        <button className="account-address-data__btn-add">
-          <span className="account-address-data__add-icon"></span>
-          Добавить адрес
-        </button>
+        <Popup.Open
+          windowName="address-add"
+          render={({ open }) => (
+            <button className="account-address-data__btn-add" onClick={open}>
+              <span className="account-address-data__add-icon"></span>
+              Добавить адрес
+            </button>
+          )}
+        />
       </div>
+      <dialog>render</dialog>
+      <Popup.Window
+        windowName="address-add"
+        render={(close) => (
+          <ModalWrap close={close}>
+            <FormAddress />
+          </ModalWrap>
+        )}
+        transitionEffect={['fade']}
+        mode="modal"
+        onClickOutside={(close) => close()}
+      />
     </div>
   );
 }
