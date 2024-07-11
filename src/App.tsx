@@ -8,6 +8,7 @@ import ProductPage from './pages/ProductPage';
 import CheckOutPage from './pages/CheckOutPage';
 import FormatersProvider from './Context/FormatersContext';
 import AccountPage from './pages/AccountPage';
+import FavouritesPage from './pages/FavouritesPage';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
             element: <CatalogPage />,
           },
           {
-            path: '/card-item',
+            path: '/product',
             element: <ProductPage />,
           },
           {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
           {
             path: '/account',
             element: <AccountPage />,
+          },
+          {
+            path: '/favourites',
+            element: <FavouritesPage />,
           },
           {
             path: '*',
