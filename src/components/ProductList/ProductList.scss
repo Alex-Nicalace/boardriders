@@ -1,0 +1,25 @@
+@import '/src/styles/global-scss.scss';
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--product-list-gap, percent(25, 1360));
+  row-gap: rem(50);
+
+  @include tablet-d {
+    justify-content: space-between;
+    column-gap: normal;
+  }
+  // .product-list__item
+  &__item {
+    flex-basis: var(--product-list-column-width, percent(321, 1360));
+
+    @include tablet-d {
+      --product-list-column-width: #{percent(181, 367)};
+    }
+  }
+  // .product-list__card
+  &__card {
+    max-width: none;
+  }
+}
