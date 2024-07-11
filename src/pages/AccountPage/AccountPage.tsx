@@ -21,7 +21,7 @@ type TAccountPageProps = {
   className?: string;
 };
 function AccountPage({ className }: TAccountPageProps): JSX.Element {
-  const [currentTab, setCurrentTab] = useState(3);
+  const [currentTab, setCurrentTab] = useState(0);
 
   return (
     <PageContent

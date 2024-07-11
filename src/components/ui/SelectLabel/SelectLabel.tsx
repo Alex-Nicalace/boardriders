@@ -6,15 +6,18 @@ import { SelectIcon } from '../Icons';
 type TSelectLabelProps = TSelectProps & {
   label?: React.ReactNode;
   isGrayLabel?: boolean;
+  labelPosition?: 'top' | 'left';
 };
 function SelectLabel({
   children,
   label,
   className,
   isGrayLabel,
+  labelPosition = 'top',
   ...props
 }: TSelectLabelProps): JSX.Element {
-  const id = 'select-' + useId();
+  const initId = 'select-' + useId();
+  const id = props.id || initId;
 
   return (
     <div
@@ -22,6 +25,7 @@ function SelectLabel({
         'select-label',
         props.fullWidth && 'select-label_full-width',
         isGrayLabel && 'select-label_label_gray',
+        `select-label_position-label_${labelPosition}`,
         className,
       ]
         .filter(Boolean)

@@ -2,8 +2,6 @@
 
 .select-label {
   display: inline-flex;
-  flex-direction: column;
-  row-gap: rem(5);
   // .select-label__label
   &__label {
     font-size: rem(12);
@@ -13,6 +11,7 @@
   &__select {
     @extend %body-2;
     --select-opened-outline: none;
+    flex-grow: 1;
   }
 
   // .select-label_full-width
@@ -23,6 +22,18 @@
   &_label_gray {
     .select-label__label {
       color: var(--dark-gray);
+    }
+  }
+
+  &_position-label {
+    &_top {
+      flex-direction: column;
+      row-gap: rem(5);
+    }
+    &_left {
+      flex-direction: row;
+      align-items: center;
+      column-gap: rem(15);
     }
   }
 }
