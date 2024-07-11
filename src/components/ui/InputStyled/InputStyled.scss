@@ -18,6 +18,7 @@
   // .input-main__label
   &__label {
     font-size: rem(12);
+    letter-spacing: -0.02em;
     line-height: 1.67;
   }
   // .input-main__error
@@ -145,7 +146,7 @@
 
 %label {
   font-weight: 500;
-  font-size: 12px;
+  font-size: rem(12);
   line-height: 208%;
   letter-spacing: -0.02em;
   color: var(--dark-gray);

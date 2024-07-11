@@ -19,6 +19,11 @@
   $result: math.div($px, $from) * 100vw;
   @return $result;
 }
+//* vh
+@function vh($px, $from) {
+  $result: math.div($px, $from) * 100vh;
+  @return $result;
+}
 //* fr
 @function fr($px, $from) {
   $result: math.div($px, $from) * 1fr;
