@@ -26,6 +26,7 @@ function Header(): JSX.Element {
             close();
           }}
           fullHeight
+          transitionEffect={['left']}
         />
       )}
     </header>

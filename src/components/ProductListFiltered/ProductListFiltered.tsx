@@ -597,6 +597,7 @@ function ProductListFiltered({
                   onClickOutside={(close) => close()}
                   fullHeight
                   fullWidth
+                  transitionEffect={['left']}
                 />
               )}
               <div className="product-list-filtered__products-wrapper">
