@@ -5,7 +5,6 @@ import Title from '../ui/Title';
 import ToggleButton from '../ToggleButton';
 import Select from '../../component-library/Select';
 import { SelectIcon } from '../ui/Icons';
-import WareCard from '../ui/WareCard';
 import Transition, { TTransition } from '../../component-library/Transition';
 import CollapsiblePanel from '../CollapsiblePanel';
 import ColorLabel from '../ColorLabel';
@@ -16,6 +15,7 @@ import Button from '../ui/Button';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import Popup from '../../component-library/Popup';
 import FiltersMobile from '../FiltersMobile';
+import ProductList from '../ProductList';
 
 const SORTS = [
   {
@@ -601,15 +601,10 @@ function ProductListFiltered({
                 />
               )}
               <div className="product-list-filtered__products-wrapper">
-                <div className="product-list-filtered__products">
-                  {PRODUCTS_DATA.map((product) => (
-                    <WareCard
-                      key={product.wareId}
-                      className="product-list-filtered__product"
-                      wareDate={product}
-                    />
-                  ))}
-                </div>
+                <ProductList
+                  className="product-list-filtered__products"
+                  data={PRODUCTS_DATA}
+                />
                 <Pagination
                   className="product-list-filtered__pagination"
                   currentPage={1}
