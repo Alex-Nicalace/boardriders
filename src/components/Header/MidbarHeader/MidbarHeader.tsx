@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom';
 import './MidbarHeader.scss';
 import logo from '../../../assets/icons/logo.png';
 import ListLinks from '../../../component-library/ListLinks';
-import BurgerButton from '../../ui/BurgerButton';
-import MediaQuery from '../../../component-library/MediaQuery';
-import Search from '../Search';
-import IconButton from '../../ui/IconButton';
-import { AvatarIcon, CartIcon, StarIcon } from '../../ui/Icons';
+import { useScreenWidth } from '../../../Context/useScreenWidthContext';
+import ToolbarHeader from './ToolbarHeader';
 
 const SWITCHABLE_MENU_DATA = [
   { to: 'man', title: 'Мужчинам' },
@@ -19,8 +16,9 @@ type TMidbarHeaderProps = {
   className?: string;
 };
 function MidbarHeader({ className = '' }: TMidbarHeaderProps): JSX.Element {
+  const { isLessTablet } = useScreenWidth();
   return (
-    <div className={`midbar-header ${className}`}>
+    <div className={['midbar-header', className].filter(Boolean).join(' ')}>
       <div className="midbar-header__container">
         <nav className="midbar-header__nav">
           <ListLinks
@@ -33,16 +31,7 @@ function MidbarHeader({ className = '' }: TMidbarHeaderProps): JSX.Element {
             linksData={SWITCHABLE_MENU_DATA}
           />
 
-          <MediaQuery maxWidth="tablet">
-            <ul className="toolbar-header">
-              <li className="toolbar-header__item">
-                <BurgerButton />
-              </li>
-              <li className="toolbar-header__item">
-                <Search className="midbar-header__search" />
-              </li>
-            </ul>
-          </MediaQuery>
+          {isLessTablet && <ToolbarHeader buttons={['burger', 'search']} />}
 
           <Link to="/" className="midbar-header__logo">
             <img
@@ -53,38 +42,18 @@ function MidbarHeader({ className = '' }: TMidbarHeaderProps): JSX.Element {
               height={50}
             />
           </Link>
-          <ul className="midbar-header__right-toolbar toolbar-header">
-            <MediaQuery minWidth="tablet">
-              <li className="toolbar-header__item">
-                <IconButton IconComponent={AvatarIcon} to="/">
-                  Войти
-                </IconButton>
-              </li>
-            </MediaQuery>
-            <li className="toolbar-header__item">
-              <IconButton
-                className="midbar-header__link"
-                IconComponent={StarIcon}
-                to="/"
-              >
-                Избранное
-              </IconButton>
-            </li>
-            <li className="toolbar-header__item">
-              <IconButton
-                className="midbar-header__link"
-                IconComponent={CartIcon}
-                to="/"
-              >
-                Корзина
-              </IconButton>
-            </li>
-            <MediaQuery minWidth="tablet">
-              <li className="toolbar-header__item">
-                <Search />
-              </li>
-            </MediaQuery>
-          </ul>
+
+          {!isLessTablet ? (
+            <ToolbarHeader
+              className="midbar-header__right-toolbar"
+              buttons={['login', 'favorites', 'cart', 'search']}
+            />
+          ) : (
+            <ToolbarHeader
+              className="midbar-header__right-toolbar"
+              buttons={['favorites', 'cart']}
+            />
+          )}
         </nav>
       </div>
     </div>
