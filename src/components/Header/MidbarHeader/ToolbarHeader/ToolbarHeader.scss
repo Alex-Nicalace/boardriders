@@ -1,0 +1,11 @@
+@import '/src/styles/global-scss.scss';
+
+.toolbar-header {
+  display: flex;
+  align-items: center;
+  gap: rem(25);
+  @include adaptiveValue('gap', 25, 15);
+  // .toolbar-header__item
+  &__item {
+  }
+}
