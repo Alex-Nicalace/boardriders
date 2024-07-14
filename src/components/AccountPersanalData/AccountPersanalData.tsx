@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import Tabs, { TabPanel } from '../../component-library/Tabs';
+import { TabPanel } from '../../component-library/Tabs';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import Title from '../ui/Title';
 import './AccountPersanalData.scss';
 import ToggleablePersonaData from '../ToggleablePersonaData';
+import TabsBlock from '../TabsBlock';
 
 type TAccountPersanalDataProps = {
   className?: string;
@@ -60,19 +61,16 @@ function AccountPersanalData({
       )}
       {isLessMobile && (
         <>
-          <Tabs
+          <TabsBlock
             className="account-persanal-data__tabs"
             value={activeTab}
             onChange={setActiveTab}
+            variant="second"
           >
             {tabs.map(({ label }) => (
-              <Tabs.Tab
-                className="account-persanal-data__tab"
-                key={label}
-                label={label}
-              />
+              <TabsBlock.Tab key={label} label={label} />
             ))}
-          </Tabs>
+          </TabsBlock>
           {tabs.map(({ content, label }, index) => (
             <TabPanel key={label} index={index} value={activeTab}>
               {content}
