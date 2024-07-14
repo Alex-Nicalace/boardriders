@@ -1,18 +1,44 @@
 @import '/src/styles/global-scss.scss';
 
-.tabs-block {
-  .tabs {
-    @include mobile-d {
-      border-bottom: none;
-      background-color: var(--light-gray);
-      // --tabs-item-bg: transparent;
+.tabs {
+  &-main {
+    .tabs {
+      @include mobile-d {
+        border-bottom: none;
+        background-color: var(--light-gray);
+        // --tabs-item-bg: transparent;
+        --tabs-item-active-bg: transparent;
+        --tabs-item-active-color: var(--black);
+        --tabs-item-color: var(--dark-gray);
+        --tabs-font-weight-active: 700;
+        --tabs-basis-item: auto;
+        --tabs-padding-item-inline: #{rem(20)};
+        // padding-left: var(--tabs-padding-item-left, var(--tabs-padding-item-inline, var(--tabs-padding-item, 0)));
+      }
+    }
+  }
+
+  &-second {
+    &.tabs {
+      --tabs-padding-item-top: 0;
+      --tabs-padding-item-bottom: 0;
       --tabs-item-active-bg: transparent;
-      --tabs-item-active-color: var(--black);
-      --tabs-item-color: var(--dark-gray);
-      --tabs-font-weight-active: 700;
+      --tabs-item-color: #{var(--dark-gray)};
+      --tabs-item-active-color: #{var(--black)};
       --tabs-basis-item: auto;
-      --tabs-padding-item-inline: #{rem(20)};
-      // padding-left: var(--tabs-padding-item-left, var(--tabs-padding-item-inline, var(--tabs-padding-item, 0)));
+      --tabs-items-gap: #{rem(40)};
+      --tabs-font-size: #{rem(14)};
+      border: none;
+    }
+    .tabs {
+      &__item {
+        line-height: 2.5;
+        border-bottom: rem(4) solid transparent;
+
+        &_active {
+          border-color: var(--black);
+        }
+      }
     }
   }
 }
