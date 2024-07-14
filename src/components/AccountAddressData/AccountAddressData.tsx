@@ -51,7 +51,7 @@ function AccountAddressData({
                 <Popup.Window
                   windowName="address-edit"
                   render={(close) => (
-                    <ModalWrap close={close}>
+                    <ModalWrap close={close} withDecorFrame>
                       <FormAddress addressToEdit={address} />
                     </ModalWrap>
                   )}
@@ -79,7 +79,7 @@ function AccountAddressData({
       <Popup.Window
         windowName="address-add"
         render={(close) => (
-          <ModalWrap close={close}>
+          <ModalWrap close={close} withDecorFrame>
             <FormAddress />
           </ModalWrap>
         )}
