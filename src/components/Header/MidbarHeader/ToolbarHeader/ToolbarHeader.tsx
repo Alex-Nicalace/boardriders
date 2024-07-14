@@ -1,3 +1,4 @@
+import Popup from '../../../../component-library/Popup';
 import BurgerButton from '../../../ui/BurgerButton';
 import IconButton from '../../../ui/IconButton';
 import { AvatarIcon, CartIcon, StarIcon } from '../../../ui/Icons';
@@ -15,7 +16,16 @@ const TOOLBAR_BTNS_DATA: TToolbarBtns = [
   { name: 'search', content: <Search /> },
   {
     name: 'login',
-    content: <IconButton IconComponent={AvatarIcon}>Войти</IconButton>,
+    content: (
+      <Popup.Open
+        windowName="login"
+        render={({ open }) => (
+          <IconButton onClick={open} IconComponent={AvatarIcon}>
+            Войти
+          </IconButton>
+        )}
+      />
+    ),
   },
   {
     name: 'favorites',
