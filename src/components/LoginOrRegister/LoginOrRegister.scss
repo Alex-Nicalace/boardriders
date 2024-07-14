@@ -1,0 +1,43 @@
+@import '/src/styles/global-scss.scss';
+
+.login-or-register {
+  // .login-or-register__forms
+  &__forms {
+    display: flex;
+  }
+  // .login-or-register__form
+  &__form {
+    width: rem(496);
+    padding: rem(40) var(--login-or-register-padding-x, rem(70));
+
+    @include pc-d {
+      --login-or-register-padding-x: #{rem(40)};
+      width: rem(400);
+    }
+
+    &:nth-child(2) {
+      background-color: var(--light-gray);
+    }
+  }
+
+  // .login-or-register__tabs-forms
+  &__tabs-forms {
+    padding: rem(20);
+    min-width: rem(440);
+
+    @include mobileSmall {
+      min-width: auto;
+    }
+  }
+  &__tabs-form {
+  }
+  // .login-or-register__tabs
+  &__tabs {
+    &:not(:last-child) {
+      margin-bottom: rem(20);
+    }
+    &.tabs {
+      --tabs-items-gap: #{rem(20)};
+    }
+  }
+}
