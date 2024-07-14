@@ -1,0 +1,35 @@
+@import '/src/styles/global-scss.scss';
+
+.form-login {
+  // .form-login__title
+  &__title {
+    @extend %subtitle-1;
+  }
+  // .form-login__input
+  &__input {
+    &:not(:first-child) {
+      margin-top: rem(25);
+    }
+  }
+  // .form-login__checkbox
+  &__checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:not(:first-child) {
+      margin-top: rem(15);
+    }
+  }
+  // .form-login__link
+  &__link {
+    @extend %body-2;
+    color: var(--dark-gray);
+  }
+  // .form-login__btn
+  &__btn {
+    &:not(:first-child) {
+      margin-top: rem(40);
+    }
+  }
+}
