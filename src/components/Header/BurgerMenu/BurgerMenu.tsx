@@ -8,6 +8,7 @@ import Button from '../../ui/Button';
 import DeliveryRegion from '../DeliveryRegion';
 import SecondaryLinks from '../SecondaryLinks';
 import ButtonMenu from '../../ui/ButtonMenu';
+import Popup from '../../../component-library/Popup';
 
 function BurgerMenu() {
   const [expandedMenu, setExpandedMenu] = useState('');
@@ -74,9 +75,15 @@ function BurgerMenu() {
       <footer className="burger-menu__footer">
         <div className="burger-menu__account account">
           <div className="account__title">Личный кабинет</div>
-          <Button className="account__btn" fullWidth>
-            Войти
-          </Button>
+          <Popup.Open
+            windowName="login"
+            render={({ open }) => (
+              <Button className="account__btn" fullWidth onClick={open}>
+                Войти
+              </Button>
+            )}
+          />
+
           <Button className="account__btn" variant="outlined" fullWidth>
             Зарегистрироваться
           </Button>
