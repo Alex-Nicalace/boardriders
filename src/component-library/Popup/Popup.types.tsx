@@ -21,7 +21,7 @@ export type TWindowProps = TCommonWindowProps & {
   render: (close: () => void) => JSX.Element;
   fullHeight?: boolean;
   fullWidth?: boolean;
-  transitionEffect: TTransitionEffect[];
+  transitionEffect?: TTransitionEffect[];
 };
 
 export type TWindowBodyProps = TCommonWindowProps & {

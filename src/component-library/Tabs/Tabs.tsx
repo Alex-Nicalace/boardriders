@@ -257,7 +257,12 @@ function Tabs({
             const isSelected = tabValue === currentValue;
 
             return cloneElement(child, {
-              className: `${isSelected ? 'tabs__item_active' : ''}`,
+              className: [
+                isSelected && 'tabs__item_active',
+                child.props.className, // классы, которые были установлены в JSX
+              ]
+                .filter(Boolean)
+                .join(' '),
               onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
                 child.props.onClick?.(e); // соббытие, которое явно было установлено в JSX
                 handleTabClick(e, tabValue);
