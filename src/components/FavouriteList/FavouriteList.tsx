@@ -1,8 +1,8 @@
 import { Tuple } from '../../utils/types';
-import WareCard, { IWareData } from '../ui/WareCard';
+import WareCard, { TWareData } from '../ui/WareCard';
 import './FavouriteList.scss';
 
-export type TupleIWareData3 = Tuple<IWareData, 3>;
+export type TupleIWareData3 = Tuple<TWareData, 3>;
 
 type TFavouriteListProps = {
   className?: string;
@@ -12,8 +12,8 @@ function FavouriteList({ className, data }: TFavouriteListProps): JSX.Element {
   return (
     <ul className={['favourite-list', className].filter(Boolean).join(' ')}>
       {data.map((product) => (
-        <li className="favourite-list__item" key={product.wareId}>
-          <WareCard wareDate={product} bgColorImage="white" />
+        <li className="favourite-list__item" key={product.id}>
+          <WareCard data={product} bgColorImage="white" />
         </li>
       ))}
     </ul>

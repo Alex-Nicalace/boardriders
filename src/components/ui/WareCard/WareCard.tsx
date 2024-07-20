@@ -1,39 +1,27 @@
 import { Link } from 'react-router-dom';
 import './WareCard.scss';
 import Favorite from '../Favorite';
-export interface IWareData {
-  wareId: string;
-  imgMain: string;
-  imgSecond?: string;
-  title: string;
-  descr: string;
-  price: number;
-  newPrice?: number;
-  discount?: number;
-  isFavorite?: boolean;
-  to: string;
-}
-interface IWareCardProps {
-  wareDate: IWareData;
-  className?: string;
-  bgColorImage?: 'light-gray' | 'white';
-}
+import { useFormaters } from '../../../Context/useFormaters';
+import { IWareCardProps } from './WareCard.types';
+
 function WareCard({
-  wareDate,
+  data,
   className,
   bgColorImage = 'light-gray',
 }: IWareCardProps): JSX.Element {
   const {
-    imgMain,
-    imgSecond,
-    title,
-    descr,
+    imgMainUrl,
+    imgSecondUrl,
+    name,
+    description,
     price,
-    newPrice,
+    oldPrice,
     discount,
     isFavorite = false,
-    to,
-  } = wareDate;
+  } = data;
+  const { formaterCurrency } = useFormaters();
+  const to = `/product/${data.id}`;
+
   return (
     <article className={['ware-card', className].filter(Boolean).join(' ')}>
       <div className="ware-card__top">
@@ -43,21 +31,23 @@ function WareCard({
         >
           <span className="ware-card__img-wrap">
             <img
-              src={imgMain}
+              src={imgMainUrl || undefined}
               className="ware-card__img"
               loading="lazy"
               alt="изображение продукта"
             />
-            {imgSecond && (
+            {imgSecondUrl && (
               <img
-                src={imgSecond}
+                src={imgSecondUrl}
                 className="ware-card__img"
                 loading="lazy"
                 alt="изображение продукта"
               />
             )}
           </span>
-          {discount && <span className="ware-card__discount">{discount}%</span>}
+          {!!discount && (
+            <span className="ware-card__discount">{discount}%</span>
+          )}
         </Link>
         <Favorite
           className="ware-card__favorite"
@@ -68,22 +58,22 @@ function WareCard({
       </div>
       <footer className="ware-card__footer">
         <Link className="ware-card__title" to={to}>
-          <h3>{title}</h3>
+          <h3>{name}</h3>
         </Link>
-        <p className="ware-card__descr">{descr}</p>
+        <p className="ware-card__descr">{description}</p>
         <div className="ware-card__price">
-          <span
-            className={`ware-card__price ${
-              newPrice ? 'ware-card__price_old' : ''
-            }`}
-          >
-            {price} ₽
-          </span>
-          {newPrice && (
-            <span className="ware-card__price ware-card__price_new">
-              {newPrice} ₽
+          {oldPrice && (
+            <span className="ware-card__price ware-card__price_old">
+              {formaterCurrency(oldPrice)}
             </span>
           )}
+          <span
+            className={['ware-card__price', oldPrice && 'ware-card__price_new']
+              .filter(Boolean)
+              .join(' ')}
+          >
+            {formaterCurrency(price)}
+          </span>
         </div>
       </footer>
     </article>

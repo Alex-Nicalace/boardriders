@@ -32,65 +32,65 @@ const BREADCRUMBS: TBreadcrumbsData = [
 const PATH_POPULAR = '/src/assets/img/popular-collection/';
 const POPULAR_PRODUCTS_DATA = [
   {
-    wareId: '1',
-    imgMain: PATH_POPULAR + '01.png',
-    imgSecond: PATH_POPULAR + '01-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
-    price: 34392,
-    newPrice: 17392,
+    id: 1,
+    imgMainUrl: PATH_POPULAR + '01.png',
+    imgSecondUrl: PATH_POPULAR + '01-hover.png',
+    name: 'LIB TECH',
+    description: 'Мужской Сноуборд',
+    price: 17392,
+    oldPrice: 34392,
     discount: -50,
-    to: '#',
   },
   {
-    wareId: '2',
-    imgMain: PATH_POPULAR + '02.png',
-    imgSecond: PATH_POPULAR + '02-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
-    price: 34392,
-    newPrice: 17392,
+    id: 2,
+    imgMainUrl: PATH_POPULAR + '02.png',
+    imgSecondUrl: PATH_POPULAR + '02-hover.png',
+    name: 'LIB TECH',
+    description: 'Мужской Сноуборд',
+    price: 17392,
+    oldPrice: 34392,
     discount: -50,
-    to: '#',
   },
   {
-    wareId: '3',
-    imgMain: PATH_POPULAR + '03.png',
-    imgSecond: PATH_POPULAR + '03-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
+    id: 3,
+    imgMainUrl: PATH_POPULAR + '03.png',
+    imgSecondUrl: PATH_POPULAR + '03-hover.png',
+    name: 'LIB TECH',
+    description: 'Мужской Сноуборд',
     price: 34392,
-    to: '#',
+    oldPrice: null,
+    discount: null,
   },
   {
-    wareId: '4',
-    imgMain: PATH_POPULAR + '04.png',
-    imgSecond: PATH_POPULAR + '04-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
+    id: 4,
+    imgMainUrl: PATH_POPULAR + '04.png',
+    imgSecondUrl: PATH_POPULAR + '04-hover.png',
+    name: 'LIB TECH',
+    description: 'Мужской Сноуборд',
     price: 34392,
-    to: '#',
+    oldPrice: null,
+    discount: null,
   },
   // -----------
   {
-    wareId: '5',
-    imgMain: PATH_POPULAR + '01.png',
-    imgSecond: PATH_POPULAR + '01-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
+    id: 5,
+    imgMainUrl: PATH_POPULAR + '01.png',
+    imgSecondUrl: PATH_POPULAR + '01-hover.png',
+    name: 'LIB TECH',
+    description: 'Мужской Сноуборд',
     price: 34392,
-    to: '#',
+    oldPrice: null,
+    discount: null,
   },
   {
-    wareId: '6',
-    imgMain: PATH_POPULAR + '02.png',
-    imgSecond: PATH_POPULAR + '02-hover.png',
-    title: 'LIB TECH',
-    descr: 'Мужской Сноуборд',
-    price: 34392,
-    newPrice: 17392,
+    id: 6,
+    imgMainUrl: PATH_POPULAR + '02.png',
+    imgSecondUrl: PATH_POPULAR + '02-hover.png',
+    name: 'LIB TECH',
+    description: 'Мужской Сноуборд',
+    price: 17392,
+    oldPrice: 34392,
     discount: -50,
-    to: '#',
   },
 ];
 
@@ -121,7 +121,7 @@ function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
         </h2>
         <SliderWareCards
           className="product-page__slider-ware"
-          wareData={POPULAR_PRODUCTS_DATA}
+          data={POPULAR_PRODUCTS_DATA}
         />
       </section>
       <section className="product-page__box-slider-ware">
@@ -130,7 +130,7 @@ function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
         </h2>
         <SliderWareCards
           className="product-page__slider-ware"
-          wareData={POPULAR_PRODUCTS_DATA}
+          data={POPULAR_PRODUCTS_DATA}
         />
       </section>
       <CustomerReviews className="product-page__customer-reviews" />
