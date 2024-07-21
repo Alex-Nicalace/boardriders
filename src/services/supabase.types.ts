@@ -94,6 +94,13 @@ export type Database = {
             referencedColumns: ['id'];
           },
           {
+            foreignKeyName: 'favorites_productid_fkey';
+            columns: ['productId'];
+            isOneToOne: false;
+            referencedRelation: 'topSellingProducts';
+            referencedColumns: ['id'];
+          },
+          {
             foreignKeyName: 'favorites_userid_fkey';
             columns: ['userId'];
             isOneToOne: false;
@@ -127,9 +134,9 @@ export type Database = {
           description?: string | null;
           detailedDescription?: string | null;
           discount?: number | null;
-          hoverImageUrl?: string | null;
           id?: number;
-          imageUrl?: string | null;
+          imgMainUrl?: string | null;
+          imgSecondUrl?: string | null;
           insertedAt?: string;
           manufacturerSKU?: string | null;
           name: string;
@@ -145,9 +152,9 @@ export type Database = {
           description?: string | null;
           detailedDescription?: string | null;
           discount?: number | null;
-          hoverImageUrl?: string | null;
           id?: number;
-          imageUrl?: string | null;
+          imgMainUrl?: string | null;
+          imgSecondUrl?: string | null;
           insertedAt?: string;
           manufacturerSKU?: string | null;
           name?: string;
@@ -170,6 +177,49 @@ export type Database = {
             columns: ['categoryId'];
             isOneToOne: false;
             referencedRelation: 'categories';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      productSales: {
+        Row: {
+          id: number;
+          insertedAt: string;
+          productId: number;
+          userId: string | null;
+        };
+        Insert: {
+          id?: number;
+          insertedAt?: string;
+          productId: number;
+          userId?: string | null;
+        };
+        Update: {
+          id?: number;
+          insertedAt?: string;
+          productId?: number;
+          userId?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'productSales_productId_fkey';
+            columns: ['productId'];
+            isOneToOne: false;
+            referencedRelation: 'products';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'productSales_productId_fkey';
+            columns: ['productId'];
+            isOneToOne: false;
+            referencedRelation: 'topSellingProducts';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'productSales_userId_fkey';
+            columns: ['userId'];
+            isOneToOne: false;
+            referencedRelation: 'users';
             referencedColumns: ['id'];
           }
         ];
@@ -212,6 +262,13 @@ export type Database = {
             referencedColumns: ['id'];
           },
           {
+            foreignKeyName: 'productvariants_productid_fkey';
+            columns: ['productId'];
+            isOneToOne: false;
+            referencedRelation: 'topSellingProducts';
+            referencedColumns: ['id'];
+          },
+          {
             foreignKeyName: 'productvariants_sizeid_fkey';
             columns: ['sizeId'];
             isOneToOne: false;
@@ -248,10 +305,24 @@ export type Database = {
             referencedColumns: ['id'];
           },
           {
+            foreignKeyName: 'relatedproducts_productid_fkey';
+            columns: ['productId'];
+            isOneToOne: false;
+            referencedRelation: 'topSellingProducts';
+            referencedColumns: ['id'];
+          },
+          {
             foreignKeyName: 'relatedproducts_relatedproductid_fkey';
             columns: ['relatedProductId'];
             isOneToOne: false;
             referencedRelation: 'products';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'relatedproducts_relatedproductid_fkey';
+            columns: ['relatedProductId'];
+            isOneToOne: false;
+            referencedRelation: 'topSellingProducts';
             referencedColumns: ['id'];
           }
         ];
@@ -290,6 +361,13 @@ export type Database = {
             referencedColumns: ['id'];
           },
           {
+            foreignKeyName: 'reviews_productid_fkey';
+            columns: ['productId'];
+            isOneToOne: false;
+            referencedRelation: 'topSellingProducts';
+            referencedColumns: ['id'];
+          },
+          {
             foreignKeyName: 'reviews_userid_fkey';
             columns: ['userId'];
             isOneToOne: false;
@@ -318,10 +396,69 @@ export type Database = {
       };
     };
     Views: {
-      [_ in never]: never;
+      topSellingProducts: {
+        Row: {
+          brandId: number | null;
+          categoryId: number | null;
+          description: string | null;
+          detailedDescription: string | null;
+          discount: number | null;
+          id: number;
+          imgMainUrl: string | null;
+          imgSecondUrl: string | null;
+          insertedAt: string;
+          manufacturerSKU: string | null;
+          name: string;
+          oldPrice: number | null;
+          price: number;
+          rating: number | null;
+          reviewCount: number | null;
+          stock: number;
+          saleCount: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'products_brandid_fkey';
+            columns: ['brandId'];
+            isOneToOne: false;
+            referencedRelation: 'brands';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'products_categoryid_fkey';
+            columns: ['categoryId'];
+            isOneToOne: false;
+            referencedRelation: 'categories';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
     };
     Functions: {
-      [_ in never]: never;
+      getTopSellingProducts: {
+        Args: {
+          limitValue?: number;
+        };
+        Returns: {
+          id: number;
+          insertedAt: string;
+          name: string;
+          description: string;
+          price: number;
+          oldPrice: number;
+          imgMainUrl: string;
+          imgSecondUrl: string;
+          categoryId: number;
+          brandId: number;
+          stock: number;
+          rating: number;
+          reviewCount: number;
+          discount: number;
+          detailedDescription: string;
+          manufacturerSKU: string;
+          saleCount: number;
+        }[];
+      };
     };
     Enums: {
       [_ in never]: never;
