@@ -3,18 +3,18 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/scss';
 
 import './SliderWareCards.scss';
-import WareCard, { IWareData } from '../WareCard';
+import WareCard, { TWareData } from '../WareCard';
 import { ArrowLeftIcon, ArrowRightIcon } from '../Icons';
 import useMatchMedia from '../../../hooks/useMatchMedia';
 
 const MEDIAQUERY = ['(max-width: 573px)'];
 
 type TSliderWareCardsProps = {
-  wareData: IWareData[];
+  data: TWareData[];
   className?: string;
 };
 function SliderWareCards({
-  wareData,
+  data,
   className = '',
 }: TSliderWareCardsProps): JSX.Element {
   const [isSmall] = useMatchMedia(MEDIAQUERY);
@@ -58,12 +58,9 @@ function SliderWareCards({
               },
             }}
           >
-            {wareData.map((data) => (
-              <SwiperSlide
-                className="slider-ware-cards__slide"
-                key={data.wareId}
-              >
-                <WareCard wareDate={data} />
+            {data.map((data) => (
+              <SwiperSlide className="slider-ware-cards__slide" key={data.id}>
+                <WareCard data={data} />
               </SwiperSlide>
             ))}
           </Swiper>
