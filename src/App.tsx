@@ -9,6 +9,11 @@ import CheckOutPage from './pages/CheckOutPage';
 import FormatersProvider from './Context/FormatersContext';
 import AccountPage from './pages/AccountPage';
 import FavouritesPage from './pages/FavouritesPage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+// Создание клиента
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -54,13 +59,17 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ScreenWidthProvider>
-      <FormatersProvider>
-        <Popup>
-          <RouterProvider router={router} />
-        </Popup>
-      </FormatersProvider>
-    </ScreenWidthProvider>
+    // Поставщик данных для приложения
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <ScreenWidthProvider>
+        <FormatersProvider>
+          <Popup>
+            <RouterProvider router={router} />
+          </Popup>
+        </FormatersProvider>
+      </ScreenWidthProvider>
+    </QueryClientProvider>
   );
 }
 
