@@ -1,0 +1,19 @@
+@import '/src/styles/global-scss.scss';
+
+.spinner {
+  width: rem(50);
+  aspect-ratio: 1/1;
+  margin: rem(70) auto;
+  border-radius: 50%;
+  border: rem(4) solid var(--gray);
+  border-top-color: var(--black);
+  animation: spinner 1s linear infinite;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
