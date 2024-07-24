@@ -3,6 +3,7 @@ import './WareCard.scss';
 import Favorite from '../Favorite';
 import { useFormaters } from '../../../Context/useFormaters';
 import { IWareCardProps } from './WareCard.types';
+import { ImageSizes } from '../../../utils/types';
 
 function WareCard({
   data,
@@ -10,17 +11,19 @@ function WareCard({
   bgColorImage = 'light-gray',
 }: IWareCardProps): JSX.Element {
   const {
-    imgMainUrl,
-    imgSecondUrl,
     name,
     description,
     price,
     oldPrice,
     discount,
     isFavorite = false,
+    images,
   } = data;
   const { formaterCurrency } = useFormaters();
   const to = `/product/${data.id}`;
+  const [imgMainUrl, imgSecondUrl] = (images || []).map(
+    (url) => url + ImageSizes.Card
+  );
 
   return (
     <article className={['ware-card', className].filter(Boolean).join(' ')}>
@@ -51,7 +54,7 @@ function WareCard({
         </Link>
         <Favorite
           className="ware-card__favorite"
-          checked={isFavorite}
+          checked={isFavorite === null ? undefined : isFavorite}
           bgColor={bgColorImage === 'white' ? 'light-gray' : 'white'}
           adaptiveSize="container"
         />

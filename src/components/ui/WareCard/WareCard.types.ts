@@ -1,17 +1,12 @@
-import { Tables } from '../../../services/supabase.types';
-
-export type TWareData = Pick<
-  Tables<'products'>,
-  | 'id'
-  | 'imgMainUrl'
-  | 'imgSecondUrl'
-  | 'name'
-  | 'description'
-  | 'price'
-  | 'oldPrice'
-  | 'discount'
-> & {
-  isFavorite?: boolean;
+export type TWareData = {
+  id: number;
+  images: string[];
+  name: string;
+  description?: string | null;
+  price: number;
+  oldPrice?: number | null;
+  discount?: number | null;
+  isFavorite?: boolean | null;
 };
 
 export interface IWareCardProps {
