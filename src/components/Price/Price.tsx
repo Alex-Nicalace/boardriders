@@ -5,8 +5,8 @@ import { useFormaters } from '../../Context/useFormaters';
 type TPriceProps = {
   className?: string;
   price: number;
-  oldPrice?: number;
-  discount?: number;
+  oldPrice?: number | null;
+  discount?: number | null;
   cheaper?: boolean;
 };
 function Price({
@@ -19,13 +19,12 @@ function Price({
   const { formaterCurrency, formaterPercent } = useFormaters();
 
   const priceFormated = formaterCurrency(price);
-  const oldPriceFormated = oldPrice !== undefined && formaterCurrency(oldPrice);
-  const discountFormated =
-    discount !== undefined && formaterPercent(discount / 100);
+  const oldPriceFormated = oldPrice && formaterCurrency(oldPrice);
+  const discountFormated = discount && formaterPercent(discount);
 
   return (
     <div className={`price ${className}`}>
-      {discountFormated && (
+      {!!discountFormated && (
         <span className="price__discount">{discountFormated}</span>
       )}
       {oldPriceFormated ? (
