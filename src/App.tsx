@@ -15,16 +15,21 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // Создание клиента
 const queryClient = new QueryClient();
 
+/**
+ * * рекомендуемый маршрутизатор для всех веб-проектов React Router
+ * ! сдедует создавать вне компонентов
+ */
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <AppLayout />,
+    element: <AppLayout />, // * равносильно Component: AppLayout
+    errorElement: <>error</>, // ! создан беспутный маршрут чтобы для всех дочерних страниц был один и тот же компонент ОШИБКИ
     children: [
       {
-        errorElement: <>error</>,
+        errorElement: <>error</>, // ! создан беспутный маршрут чтобы для всех дочерних страниц был один и тот же компонент ОШИБКИ. т.е. сделана некая обертка для общего поведения маршрутов
         children: [
           {
-            index: true,
+            index: true, // * указывает маршрутизатору сопоставлять и отображать этот маршрут, когда путь соответсвует родительскому маршруту
             element: <MainPage />,
           },
           {
@@ -32,7 +37,7 @@ const router = createBrowserRouter([
             element: <CatalogPage />,
           },
           {
-            path: '/product',
+            path: '/product/:productId',
             element: <ProductPage />,
           },
           {
@@ -47,10 +52,10 @@ const router = createBrowserRouter([
             path: '/favourites',
             element: <FavouritesPage />,
           },
-          {
-            path: '*',
-            element: <MainPage />,
-          },
+          // {
+          //   path: '*',
+          //   element: <MainPage />,
+          // },
         ],
       },
     ],
