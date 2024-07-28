@@ -19,11 +19,11 @@ function WareCard({
     isFavorite = false,
     images,
   } = data;
-  const { formaterCurrency } = useFormaters();
+  const { formaterCurrency, formaterPercent } = useFormaters();
   const to = `/product/${data.id}`;
-  const [imgMainUrl, imgSecondUrl] = (images || []).map(
-    (url) => url + ImageSizes.Card
-  );
+  const [imgMainUrl, imgSecondUrl] = (images || [])
+    .filter((url) => url !== null)
+    .map((url) => url + ImageSizes.Card);
 
   return (
     <article className={['ware-card', className].filter(Boolean).join(' ')}>
@@ -49,7 +49,9 @@ function WareCard({
             )}
           </span>
           {!!discount && (
-            <span className="ware-card__discount">{discount}%</span>
+            <span className="ware-card__discount">
+              {formaterPercent(discount)}
+            </span>
           )}
         </Link>
         <Favorite

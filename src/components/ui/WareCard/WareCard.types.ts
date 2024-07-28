@@ -1,6 +1,6 @@
 export type TWareData = {
   id: number;
-  images: string[];
+  images: (string | null)[];
   name: string;
   description?: string | null;
   price: number;
