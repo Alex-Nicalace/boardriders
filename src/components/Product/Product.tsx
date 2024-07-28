@@ -14,6 +14,7 @@ import ColorChoise from '../ColorChoise';
 import SizeChoise from '../SizeChoise';
 import Button from '../ui/Button';
 import ListIconInfo from '../ListIconInfo';
+import { TProductProps } from './Product.types';
 
 const PATH_PARAMS_IMG = './src/assets/img/product-params/';
 const PARAMS_IMG = ['01.png', '02.png'].map((name) => PATH_PARAMS_IMG + name);
@@ -60,59 +61,6 @@ const PRODUCT_PARAMS = [
     description: '8',
   },
 ];
-
-const BRAND_IMG = './src/assets/icons/brands/03.png';
-
-const COLORS = {
-  name: 'color',
-  items: [
-    {
-      color: '#000000',
-      value: 'black',
-    },
-    {
-      color: 'green',
-      value: 'green',
-    },
-    {
-      color: '#FF0000',
-      value: 'red',
-    },
-    {
-      color: 'blue',
-      value: 'blue',
-    },
-  ],
-};
-
-const SIZES = {
-  name: 'size',
-  items: [
-    {
-      size: 32,
-    },
-    {
-      size: 32.5,
-      isEnded: true,
-    },
-    {
-      size: 33,
-    },
-    {
-      size: 33.5,
-    },
-    {
-      size: 34,
-      isEnded: true,
-    },
-    {
-      size: 34.5,
-    },
-    {
-      size: 35,
-    },
-  ],
-};
 
 const DELIVERY_OPTIONS = [
   {
@@ -161,20 +109,46 @@ const DELIVERY_OPTIONS = [
   },
 ];
 
-type TProductProps = { className?: string };
-function Product({ className }: TProductProps): JSX.Element {
+function Product({
+  className,
+  data,
+  selectedColor,
+  selectedSize,
+  onColorChange,
+  onSizeChange,
+}: TProductProps): JSX.Element {
+  const {
+    description,
+    detailedDescription,
+    price,
+    oldPrice,
+    discount,
+    manufacturerSKU,
+    iconBrandUrl,
+    rating,
+    reviewCount,
+    colorList,
+    sizeList,
+  } = data || {};
+
   return (
-    <section className={`product ${className}`}>
+    <section className={['product', className].filter(Boolean).join(' ')}>
       <div className="product__container">
         <div className="product__box">
-          <div className="product__article">Артикул производителя: 19SN003</div>
+          <div className="product__article">
+            Артикул производителя: {manufacturerSKU}
+          </div>
           <div className="product__info">
             <div className="product__brand-logo">
-              <img src={BRAND_IMG} loading="lazy" alt="Логотип производителя" />
+              <img
+                src={iconBrandUrl}
+                loading="lazy"
+                alt="Логотип производителя"
+              />
             </div>
             <Rating
               className="product__rating"
-              rating={4}
+              rating={rating || 0}
               iconActiveElement={<StarIcon fill="#EB5757" stroke="#EB5757" />}
               iconUnactiveElement={
                 <StarIcon fill="transparent" stroke="#000" />
@@ -185,22 +159,36 @@ function Product({ className }: TProductProps): JSX.Element {
               disabled
             />
             <Link className="product__reviews" to="#">
-              24 отзыва
+              {reviewCount} отзыва
             </Link>
             <Favorite className="product__favorite" isFramed />
           </div>
-          <h1 className="product__title">
-            Сноуборд GNU Asym Carbon Credit Btx Multicolor
-          </h1>
+          <h1 className="product__title">{description}</h1>
           <Price
             className="product__price"
-            price={59395}
-            oldPrice={134392}
-            discount={-50}
+            price={price}
+            oldPrice={oldPrice}
+            discount={discount}
           />
           <div className="product__options">
-            <ColorChoise className="product__color" {...COLORS} />
-            <SizeChoise className="product__size" {...SIZES} />
+            {colorList && (
+              <ColorChoise
+                className="product__color"
+                name="color"
+                items={colorList}
+                value={selectedColor}
+                onChange={onColorChange}
+              />
+            )}
+            {sizeList && (
+              <SizeChoise
+                className="product__size"
+                name="size"
+                items={sizeList}
+                value={selectedSize}
+                onChange={onSizeChange}
+              />
+            )}
             <div className="product__buttons">
               <Button
                 className="product__btn-add-card"
@@ -232,15 +220,7 @@ function Product({ className }: TProductProps): JSX.Element {
         <GalleryPreview className="product__gallery" />
         <div className="product__parameters product-params">
           <h2 className="product-params__title">Характеристики</h2>
-          <p className="product-params__text">
-            The Old Skool has never been lacking in attitude. It brought the
-            dawn of the classic Vans side stripe that has developed into a
-            status symbol of tradition and skate stature. Aside from all that
-            personality, they have lasted as long as they have because of their
-            ability to perform on a skateboard, and to last, and last. Though
-            they now share the ranks with many new Vans styles with their own
-            innovations, the Old Skools aren't going anywhere.
-          </p>
+          <p className="product-params__text">{detailedDescription}</p>
           <ul className="product-params__list-img">
             {PARAMS_IMG.map((img) => (
               <li className="product-params__item-img" key={img}>
