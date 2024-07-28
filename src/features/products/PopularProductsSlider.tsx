@@ -9,7 +9,7 @@ type TNewProductsSliderProps = {
 function PopularProductsSlider({
   className,
 }: TNewProductsSliderProps): JSX.Element {
-  const { popularProducts, isLoading } = usePopularProducts();
+  const { popularProducts, isLoading } = usePopularProducts(15);
 
   if (isLoading) return <Spinner />;
 
