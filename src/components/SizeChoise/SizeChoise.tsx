@@ -1,24 +1,28 @@
 import './SizeChoise.scss';
 import Checkbox from '../ui/Checkbox';
 import { Link } from 'react-router-dom';
-import { useFormaters } from '../../Context/useFormaters';
 
 type TSizeChoiseProps = {
   name: string;
-  items: { size: number; isEnded?: boolean }[];
+  items: {
+    size: string;
+    isEmpty?: boolean;
+    value: string;
+    disabled?: boolean;
+  }[];
   className?: string;
-  type?: 'checkbox' | 'radio';
+  value?: string | null;
+  onChange?: (value: string) => void;
 };
 function SizeChoise({
   name,
   items,
-  className = '',
-  type = 'radio',
+  className,
+  value,
+  onChange = () => {},
 }: TSizeChoiseProps): JSX.Element {
-  const { formaterDecimal } = useFormaters();
-
   return (
-    <div className={`size-choise ${className}`}>
+    <div className={['size-choise', className].filter(Boolean).join(' ')}>
       <div className="size-choise__link">
         <Link to="/catalog/man/sizes">Таблица размеров</Link>
       </div>
@@ -28,10 +32,14 @@ function SizeChoise({
             <Checkbox
               className="size-choise__checkbox"
               variant="btn-toggle"
-              label={formaterDecimal(item.size)}
+              label={item.size}
               name={name}
-              type={type}
-              disabled={item.isEnded}
+              type="radio"
+              disabled={item.disabled}
+              styleDisabled={item.isEmpty}
+              value={item.value}
+              checked={value !== undefined ? item.value === value : undefined}
+              onChange={() => onChange(item.value)}
             />
           </li>
         ))}
