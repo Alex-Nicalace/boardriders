@@ -42,6 +42,7 @@ export type TCheckboxProps = (
   type?: 'checkbox' | 'radio';
   disabled?: boolean;
   styleDisabled?: boolean;
+  title?: string;
 };
 function Checkbox({
   name,
@@ -54,6 +55,7 @@ function Checkbox({
   type = 'checkbox',
   disabled,
   styleDisabled = false,
+  title,
   ...props
 }: TCheckboxProps): JSX.Element {
   let innerHtml: React.ReactNode;
@@ -129,6 +131,7 @@ function Checkbox({
       className={[classes, className, styleDisabled && `${nameBlock}_disabled`]
         .filter(Boolean)
         .join(' ')}
+      title={title}
     >
       <input
         className={`${nameBlock}__input sr-only`}
