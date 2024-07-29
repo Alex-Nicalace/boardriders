@@ -18,8 +18,8 @@ function ColorChoise({
   return (
     <div className={['color-choise', className].filter(Boolean).join(' ')}>
       <div className="color-choise__color">
-        <span className="color-choise__title">Цвет:</span>
-        <span className="color-choise__text">зеленый</span>
+        <span className="color-choise__title">Цвет: </span>
+        <span className="color-choise__text">{value}</span>
       </div>
       <ul className="color-choise__list">
         {items.map(({ isEmpty, ...rest }) => (
