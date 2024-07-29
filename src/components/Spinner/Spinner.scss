@@ -2,12 +2,16 @@
 
 .spinner {
   width: rem(50);
-  aspect-ratio: 1/1;
   margin: rem(70) auto;
+  aspect-ratio: 1/1;
   border-radius: 50%;
   border: rem(4) solid var(--gray);
   border-top-color: var(--black);
   animation: spinner 1s linear infinite;
+
+  &_vertical_center {
+    margin: auto;
+  }
 }
 @keyframes spinner {
   0% {

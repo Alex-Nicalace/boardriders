@@ -4,12 +4,24 @@ import './Spinner.scss';
 type TSpinnerProps = DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
-> & {};
-function Spinner({ className, ...props }: TSpinnerProps): JSX.Element {
+> & {
+  isVerticalCenter?: boolean;
+};
+function Spinner({
+  className,
+  isVerticalCenter,
+  ...props
+}: TSpinnerProps): JSX.Element {
   return (
     <div
       {...props}
-      className={['spinner', className].filter(Boolean).join(' ')}
+      className={[
+        'spinner',
+        isVerticalCenter && 'spinner_vertical_center',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
     ></div>
   );
 }
