@@ -5,12 +5,16 @@ import Spinner from '../../components/Spinner';
 import { useProduct } from './useProduct';
 import { omit } from '../../utils/omit';
 import { useEffect } from 'react';
+import { useProductImages } from './useProductImages';
 
 type TProductContainerProps = {
   className?: string;
 };
 function ProductContainer({ className }: TProductContainerProps): JSX.Element {
-  const { product, isLoading } = useProduct();
+  const { product, isLoading: isLoadingProduct } = useProduct();
+  const { productImages, isLoading: isLoadingProductImages } =
+    useProductImages();
+
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedColor = searchParams.get('color');
   const selectedSize = searchParams.get('size');
@@ -55,7 +59,7 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
     [product, selectedColorId, selectedSizeId, searchParams, setSearchParams]
   );
 
-  if (isLoading) return <Spinner />;
+  if (isLoadingProduct) return <Spinner />;
 
   if (!product) return <Empty resource="Продукт" />;
 
@@ -87,6 +91,10 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
     ...omit(product, 'productVariants'),
     colorList,
     sizeList,
+    galleryPreview: {
+      isLoading: isLoadingProductImages,
+      images: (productImages || []).map(({ imageUrl }) => imageUrl),
+    },
   };
 
   const handleChange = (name: 'color' | 'size', value: string) => {
