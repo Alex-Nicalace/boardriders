@@ -37,6 +37,7 @@ function SizeChoise({
               type="radio"
               disabled={item.disabled}
               styleDisabled={item.isEmpty}
+              title={item.isEmpty ? 'Нет в наличии' : undefined}
               value={item.value}
               checked={value !== undefined ? item.value === value : undefined}
               onChange={() => onChange(item.value)}
