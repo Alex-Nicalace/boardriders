@@ -4,6 +4,7 @@ import Product from '../../components/Product';
 import Spinner from '../../components/Spinner';
 import { useProduct } from './useProduct';
 import { omit } from '../../utils/omit';
+import { useEffect } from 'react';
 
 type TProductContainerProps = {
   className?: string;
@@ -13,20 +14,52 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedColor = searchParams.get('color');
   const selectedSize = searchParams.get('size');
+  const selectedColorId = product?.productVariants.find(
+    ({ color }) => color?.name === selectedColor
+  )?.color?.colorId;
+
+  const selectedSizeId = product?.productVariants.find(
+    ({ size }) => size?.name === selectedSize
+  )?.size?.sizeId;
+
+  useEffect(
+    function setValidPram() {
+      if (!product || (selectedColorId && selectedSizeId)) return;
+
+      if (selectedColorId) {
+        const sizeByColorId = product.productVariants.find(
+          ({ color }) => color?.colorId === selectedColorId
+        )?.size?.name;
+
+        if (sizeByColorId) searchParams.set('size', sizeByColorId);
+      }
+
+      if (selectedSizeId) {
+        const colorBySizeId = product.productVariants.find(
+          ({ size }) => size?.sizeId === selectedSizeId
+        )?.color?.name;
+
+        if (colorBySizeId) searchParams.set('color', colorBySizeId);
+      }
+
+      if (!selectedColorId && !selectedSizeId) {
+        const color = product.productVariants[0].color?.name;
+        const size = product.productVariants[0].size?.name;
+
+        if (color) searchParams.set('color', color);
+        if (size) searchParams.set('size', size);
+      }
+
+      setSearchParams(searchParams);
+    },
+    [product, selectedColorId, selectedSizeId, searchParams, setSearchParams]
+  );
 
   if (isLoading) return <Spinner />;
 
   if (!product) return <Empty resource="Продукт" />;
 
   const productVariants = product.productVariants;
-
-  const selectedColorId = productVariants.find(
-    ({ color }) => color?.name === selectedColor
-  )?.color?.colorId;
-
-  const selectedSizeId = productVariants.find(
-    ({ size }) => size?.name === selectedSize
-  )?.size?.sizeId;
 
   const colorList = product.colorList.map(({ hexValue, name, colorId }) => ({
     color: hexValue,
