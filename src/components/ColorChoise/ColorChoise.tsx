@@ -35,6 +35,7 @@ function ColorChoise({
                 onChange={() => onChange(rest.value)}
                 checked={value !== undefined ? rest.value === value : undefined}
                 styleDisabled={isEmpty}
+                title={isEmpty ? 'Нет в наличии' : undefined}
               />
             )}
           </li>
