@@ -11,7 +11,7 @@ export function useProduct() {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['topSaleProducts', productId],
+    queryKey: ['product', productId],
     queryFn: () => getProduct(productId),
   });
 
