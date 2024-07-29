@@ -113,6 +113,13 @@
     @include adaptiveValue('margin-bottom', 50, 40);
     grid-area: g;
   }
+  &__empty {
+    margin: auto;
+  }
+  &__spinner {
+    margin: auto;
+    width: 10%;
+  }
   // .product__parameters
   &__parameters {
     grid-area: p;

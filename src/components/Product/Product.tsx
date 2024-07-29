@@ -15,6 +15,8 @@ import SizeChoise from '../SizeChoise';
 import Button from '../ui/Button';
 import ListIconInfo from '../ListIconInfo';
 import { TProductProps } from './Product.types';
+import Spinner from '../Spinner';
+import Empty from '../Empty';
 
 const PATH_PARAMS_IMG = './src/assets/img/product-params/';
 const PARAMS_IMG = ['01.png', '02.png'].map((name) => PATH_PARAMS_IMG + name);
@@ -129,7 +131,8 @@ function Product({
     reviewCount,
     colorList,
     sizeList,
-  } = data || {};
+    galleryPreview,
+  } = data;
 
   return (
     <section className={['product', className].filter(Boolean).join(' ')}>
@@ -217,7 +220,21 @@ function Product({
             items={DELIVERY_OPTIONS}
           />
         </div>
-        <GalleryPreview className="product__gallery" />
+        {galleryPreview.isLoading && (
+          <Spinner className="product__gallery product__spinner" />
+        )}
+        {!galleryPreview.isLoading && galleryPreview.images.length === 0 && (
+          <Empty
+            className="product__gallery product__empty"
+            resource="данных для Галереи"
+          />
+        )}
+        {!galleryPreview.isLoading && galleryPreview.images.length > 0 && (
+          <GalleryPreview
+            className="product__gallery"
+            data={galleryPreview.images}
+          />
+        )}
         <div className="product__parameters product-params">
           <h2 className="product-params__title">Характеристики</h2>
           <p className="product-params__text">{detailedDescription}</p>

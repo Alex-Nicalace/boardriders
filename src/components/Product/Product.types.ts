@@ -24,6 +24,10 @@ export type TProductProps = {
           isEmpty: boolean;
         }[]
       | null;
+    galleryPreview: {
+      isLoading: boolean;
+      images: string[];
+    };
   };
   selectedColor?: string | null;
   selectedSize?: string | null;
