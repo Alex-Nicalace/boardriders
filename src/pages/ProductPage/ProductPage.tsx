@@ -6,6 +6,7 @@ import CustomerReviews from '../../components/CustomerReviews';
 import PageContent from '../../components/PageContent';
 import PopularProductsSlider from '../../features/products/PopularProductsSlider';
 import ProductContainer from '../../features/products/ProductContainer';
+import NewProductsSlider from '../../features/products/NewProductsSlider';
 
 const BREADCRUMBS: TBreadcrumbsData = [
   {
@@ -52,14 +53,14 @@ function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
       </main>
       <section className="product-page__box-slider-ware">
         <h2 className="product-page__title-slider product-page__container">
-          C этим товаром смотрят
+          Новинки
         </h2>
         {/* //! для соответствия макету добавил популярные продукты, а не "C этим товаром смотрят" т.к. в БД нет функционала*/}
-        <PopularProductsSlider className="product-page__slider-ware" />
+        <NewProductsSlider className="product-page__slider-ware" />
       </section>
       <section className="product-page__box-slider-ware">
         <h2 className="product-page__title-slider product-page__container">
-          C этим товаром рекомендуем
+          Топ продаж
         </h2>
         {/* //! для соответствия макету добавил популярные продукты, а не "C этим товаром рекомендуем" т.к. в БД нет функционала*/}
         <PopularProductsSlider className="product-page__slider-ware" />

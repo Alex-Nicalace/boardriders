@@ -176,12 +176,9 @@
       }
     }
     &_disabled {
-      // opacity: 0.2;
       .checkbox-color {
         &__wrap {
           position: relative;
-          // border-color: var(--gray);
-          // border-style: dashed;
           &::before {
             content: '';
             position: absolute;
@@ -191,7 +188,6 @@
             width: rem(0);
             border-right: rem(20) solid var(--gray);
             border-bottom: rem(20) solid transparent;
-            // background-color: black;
           }
         }
       }

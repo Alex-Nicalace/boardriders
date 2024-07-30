@@ -105,6 +105,70 @@ export type Database = {
           }
         ];
       };
+      productAttributes: {
+        Row: {
+          id: number;
+          insertedAt: string;
+          name: string;
+          productId: number;
+          value: string;
+        };
+        Insert: {
+          id?: number;
+          insertedAt?: string;
+          name: string;
+          productId: number;
+          value: string;
+        };
+        Update: {
+          id?: number;
+          insertedAt?: string;
+          name?: string;
+          productId?: number;
+          value?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'productAttributes_productId_fkey';
+            columns: ['productId'];
+            isOneToOne: false;
+            referencedRelation: 'products';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      productDescriptionImages: {
+        Row: {
+          description: string | null;
+          id: number;
+          imageUrl: string;
+          insertedAt: string;
+          productId: number;
+        };
+        Insert: {
+          description?: string | null;
+          id?: number;
+          imageUrl: string;
+          insertedAt?: string;
+          productId: number;
+        };
+        Update: {
+          description?: string | null;
+          id?: number;
+          imageUrl?: string;
+          insertedAt?: string;
+          productId?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'productDescriptionImages_productId_fkey';
+            columns: ['productId'];
+            isOneToOne: false;
+            referencedRelation: 'products';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
       productImages: {
         Row: {
           colorId: number;

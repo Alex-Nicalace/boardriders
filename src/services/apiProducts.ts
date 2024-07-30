@@ -74,7 +74,9 @@ export async function getProduct(productId: number) {
       rating,
       brands(iconUrl),
       reviews(id.count(),rating.avg()),
-      productVariants(productVariantId:id, color:colors(colorId:id, name, hexValue), size:sizes(sizeId:id, name))
+      productVariants(productVariantId:id, color:colors(colorId:id, name, hexValue), size:sizes(sizeId:id, name)),
+      productAttributes(attributeId:id, name, value),
+      productDescriptionImages(imageUrl)
       `
     )
     .eq('id', productId)
