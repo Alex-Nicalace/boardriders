@@ -18,52 +18,6 @@ import { TProductProps } from './Product.types';
 import Spinner from '../Spinner';
 import Empty from '../Empty';
 
-const PATH_PARAMS_IMG = './src/assets/img/product-params/';
-const PARAMS_IMG = ['01.png', '02.png'].map((name) => PATH_PARAMS_IMG + name);
-
-const PRODUCT_PARAMS = [
-  {
-    title: 'Вес',
-    description: '540 грамм',
-  },
-  {
-    title: 'Стиль катания',
-    description: 'Touring',
-  },
-  {
-    title: 'Stiffness',
-    description: '8',
-  },
-  {
-    title: 'Base',
-    description: '540 грамм',
-  },
-  {
-    title: 'Вес1',
-    description: '540 грамм',
-  },
-  {
-    title: 'Стиль катания1',
-    description: 'Touring',
-  },
-  {
-    title: 'Stiffness1',
-    description: '8',
-  },
-  {
-    title: 'Base1',
-    description: '540 грамм',
-  },
-  {
-    title: 'Стиль катания2',
-    description: 'Touring',
-  },
-  {
-    title: 'Stiffness2',
-    description: '8',
-  },
-];
-
 const DELIVERY_OPTIONS = [
   {
     iconElement: <DeliveryIcon />,
@@ -132,6 +86,8 @@ function Product({
     colorList,
     sizeList,
     galleryPreview,
+    productAttributes,
+    productDescriptionImages,
   } = data;
 
   return (
@@ -238,25 +194,29 @@ function Product({
         <div className="product__parameters product-params">
           <h2 className="product-params__title">Характеристики</h2>
           <p className="product-params__text">{detailedDescription}</p>
-          <ul className="product-params__list-img">
-            {PARAMS_IMG.map((img) => (
-              <li className="product-params__item-img" key={img}>
-                <img src={img} alt="" />
-              </li>
-            ))}
-          </ul>
-          <div className="product-params__wrap-list">
-            <dl className="product-params__list">
-              {PRODUCT_PARAMS.map((param) => (
-                <div className="product-params__item" key={param.title}>
-                  <dt className="product-params__term">{param.title}</dt>
-                  <dd className="product-params__description">
-                    {param.description}
-                  </dd>
-                </div>
+          {productDescriptionImages?.length && (
+            <ul className="product-params__list-img">
+              {productDescriptionImages.map(({ imageUrl }) => (
+                <li className="product-params__item-img" key={imageUrl}>
+                  <img src={imageUrl} alt="Пояснительное фото товара" />
+                </li>
               ))}
-            </dl>
-          </div>
+            </ul>
+          )}
+          {productAttributes?.length && (
+            <div className="product-params__wrap-list">
+              <dl className="product-params__list">
+                {productAttributes.map((param) => (
+                  <div className="product-params__item" key={param.attributeId}>
+                    <dt className="product-params__term">{param.name}</dt>
+                    <dd className="product-params__description">
+                      {param.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
         </div>
       </div>
     </section>

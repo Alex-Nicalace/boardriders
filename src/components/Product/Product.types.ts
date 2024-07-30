@@ -28,6 +28,12 @@ export type TProductProps = {
       isLoading: boolean;
       images: string[];
     };
+    productAttributes: {
+      attributeId: number;
+      name: string;
+      value: string;
+    }[];
+    productDescriptionImages: { imageUrl: string }[];
   };
   selectedColor?: string | null;
   selectedSize?: string | null;
