@@ -1,5 +1,5 @@
-import { omit } from '../utils/omit';
 import supabase from './supabase';
+import { omit } from '../utils/omit';
 
 export async function getNewProducts(limit: number) {
   const { data, error } = await supabase
@@ -116,20 +116,4 @@ export async function getProduct(productId: number) {
   };
 
   return result;
-}
-
-export async function getProductImages(productId: number, colorId: number) {
-  const { data, error } = await supabase
-    .from('productImages')
-    .select('id, imageUrl')
-    .eq('productId', productId)
-    .eq('colorId', colorId)
-    .order('order');
-
-  if (error) {
-    console.error(error);
-    throw new Error('Product images could not be loaded');
-  }
-
-  return data;
 }

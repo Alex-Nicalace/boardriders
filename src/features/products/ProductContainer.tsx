@@ -5,7 +5,7 @@ import Spinner from '../../components/Spinner';
 import { useProduct } from './useProduct';
 import { omit } from '../../utils/omit';
 import { useEffect } from 'react';
-import { useProductImages } from './useProductImages';
+import { useProductImages } from '../productImages/useProductImages';
 
 type TProductContainerProps = {
   className?: string;
