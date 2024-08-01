@@ -2,11 +2,11 @@ import './ProductPage.scss';
 import Breadcrumbs, { TBreadcrumbsData } from '../../components/ui/Breadcrumbs';
 import Steps from '../../components/ui/Steps';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
-import CustomerReviews from '../../components/CustomerReviews';
 import PageContent from '../../components/PageContent';
 import PopularProductsSlider from '../../features/products/PopularProductsSlider';
 import ProductContainer from '../../features/products/ProductContainer';
 import NewProductsSlider from '../../features/products/NewProductsSlider';
+import CustomerReviewsContainer from '../../features/reviews/CustomerReviewsContainer';
 
 const BREADCRUMBS: TBreadcrumbsData = [
   {
@@ -65,7 +65,7 @@ function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
         {/* //! для соответствия макету добавил популярные продукты, а не "C этим товаром рекомендуем" т.к. в БД нет функционала*/}
         <PopularProductsSlider className="product-page__slider-ware" />
       </section>
-      <CustomerReviews className="product-page__customer-reviews" />
+      <CustomerReviewsContainer className="product-page__customer-reviews" />
     </PageContent>
   );
 }
