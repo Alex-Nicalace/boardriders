@@ -102,6 +102,13 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'users';
             referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'favorites_userid_fkey';
+            columns: ['userId'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
           }
         ];
       };
@@ -316,6 +323,13 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'users';
             referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'productSales_userId_fkey';
+            columns: ['userId'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
           }
         ];
       };
@@ -414,7 +428,7 @@ export type Database = {
           insertedAt: string;
           productId: number;
           rating: number;
-          userId: string | null;
+          userId: string;
         };
         Insert: {
           comment?: string | null;
@@ -422,7 +436,7 @@ export type Database = {
           insertedAt?: string;
           productId: number;
           rating: number;
-          userId?: string | null;
+          userId: string;
         };
         Update: {
           comment?: string | null;
@@ -430,7 +444,7 @@ export type Database = {
           insertedAt?: string;
           productId?: number;
           rating?: number;
-          userId?: string | null;
+          userId?: string;
         };
         Relationships: [
           {
@@ -438,6 +452,13 @@ export type Database = {
             columns: ['productId'];
             isOneToOne: false;
             referencedRelation: 'products';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'reviews_userid_fkey';
+            columns: ['userId'];
+            isOneToOne: false;
+            referencedRelation: 'users';
             referencedColumns: ['id'];
           },
           {
@@ -509,6 +530,21 @@ export type Database = {
             referencedColumns: ['id'];
           }
         ];
+      };
+      users: {
+        Row: {
+          fullname: string | null;
+          id: string | null;
+        };
+        Insert: {
+          fullname?: never;
+          id?: string | null;
+        };
+        Update: {
+          fullname?: never;
+          id?: string | null;
+        };
+        Relationships: [];
       };
     };
     Functions: {
