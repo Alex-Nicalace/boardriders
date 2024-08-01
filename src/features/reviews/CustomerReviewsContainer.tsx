@@ -14,18 +14,18 @@ function CustomerReviewsContainer({
     count,
     isLoading: isLoadingReviews,
     totalPage,
+    pageNum,
   } = useReviews();
   const { reviewsStatistics, isLoading: isLoadingStatistics } =
     useReviewsStatistics();
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = Number(searchParams.get('pageReviews') || 1);
 
   const data = {
     reviews: {
       list: reviews,
       total: count,
       pages: totalPage,
-      page: page,
+      page: pageNum,
       isLoading: isLoadingReviews,
     },
     // если кокой-то оцеки нет, то оценка будет 0

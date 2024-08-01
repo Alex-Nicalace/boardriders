@@ -28,9 +28,7 @@ export async function getReviews({
     throw new Error('Reviews could not be loaded');
   }
 
-  const totalPage = Math.ceil((count ?? 0) / PAGE_SIZE_COMMENTS);
-
-  return { reviews: data, count, totalPage };
+  return { reviews: data, count };
 }
 
 export async function getReviewsStatistics(productId: number) {
