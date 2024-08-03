@@ -1,22 +1,41 @@
 import supabase from './supabase';
 import { omit } from '../utils/omit';
 
-export async function getNewProducts(limit: number) {
-  const { data, error } = await supabase
+export async function getNewProducts({
+  limit,
+  categoryName,
+}: {
+  limit: number;
+  categoryName?: string;
+}) {
+  const query = supabase
     .from('products')
     .select(
-      'id, description, price, oldPrice, productImagesPrimary(imageUrl), brands(name)'
+      `
+      id, 
+      description, 
+      price, 
+      oldPrice, 
+      productImagesPrimary(imageUrl), 
+      brands(name),
+      categories!inner()
+    `
     )
     .order('order', { referencedTable: 'productImagesPrimary' })
     .limit(2, { referencedTable: 'productImagesPrimary' })
     .order('insertedAt', { ascending: false })
     .limit(limit);
 
+  if (categoryName) {
+    query.eq('categories.name', categoryName);
+  }
+
+  const { data, error } = await query;
+
   if (error) {
     console.error(error);
     throw new Error('Products could not be loaded');
   }
-
   const result = data.map((item) => ({
     ...omit(item, ['brands', 'productImagesPrimary']),
     images: item.productImagesPrimary.map(({ imageUrl }) => imageUrl),
@@ -27,16 +46,36 @@ export async function getNewProducts(limit: number) {
   return result;
 }
 
-export async function getPopularProducts(limit: number) {
-  const { data, error } = await supabase
+export async function getPopularProducts({
+  limit,
+  categoryName,
+}: {
+  limit: number;
+  categoryName?: string;
+}) {
+  const query = supabase
     .from('productSalesCount')
     .select(
-      '*, products(id, description, price, oldPrice, productImagesPrimary(imageUrl), brands(name))'
+      `*, 
+      products(
+        id, 
+        description, 
+        price, 
+        oldPrice, 
+        productImagesPrimary(imageUrl), brands(name),
+        categories!inner()
+      )`
     )
     .order('order', { referencedTable: 'products.productImagesPrimary' })
     .limit(2, { referencedTable: 'products.productImagesPrimary' })
     .order('saleCount', { ascending: false })
     .limit(limit);
+
+  if (categoryName) {
+    query.eq('products.categories.name', categoryName);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error(error);
@@ -71,7 +110,6 @@ export async function getProduct(productId: number) {
       price, 
       oldPrice, 
       manufacturerSKU, 
-      rating,
       brands(iconUrl),
       reviews(id.count(),rating.avg()),
       productVariants(productVariantId:id, color:colors(colorId:id, name, hexValue), size:sizes(sizeId:id, name)),
