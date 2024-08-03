@@ -4,12 +4,23 @@ import Header from '../Header';
 import Popup from '../../component-library/Popup';
 import ModalWrap from '../ModalWrap';
 import LoginOrRegister from '../LoginOrRegister';
+import { useGenderCategories } from '../../features/categories/useCategories';
+import Spinner from '../Spinner';
 
 // type TAppLayoutProps = {};
 function AppLayout(): JSX.Element {
+  const { genderCategories, isLoading } = useGenderCategories();
+
+  if (isLoading) return <Spinner />;
+
+  const genderCategoryData = (genderCategories || []).map((item) => ({
+    to: item.name,
+    title: item.displayName,
+  }));
+
   return (
     <>
-      <Header />
+      <Header data={{ genderCategoryData }} />
       <Outlet />
       <Footer />
       <Popup.Window
