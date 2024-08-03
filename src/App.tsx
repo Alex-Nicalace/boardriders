@@ -11,9 +11,16 @@ import AccountPage from './pages/AccountPage';
 import FavouritesPage from './pages/FavouritesPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import RootRedirect from './components/RootRedirect';
 
 // Создание клиента
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // staleTime: 1000 * 60, // время жизни кеша
+    },
+  },
+});
 
 /**
  * * рекомендуемый маршрутизатор для всех веб-проектов React Router
@@ -29,33 +36,34 @@ const router = createBrowserRouter([
         errorElement: <>error</>, // ! создан беспутный маршрут чтобы для всех дочерних страниц был один и тот же компонент ОШИБКИ. т.е. сделана некая обертка для общего поведения маршрутов
         children: [
           {
-            index: true, // * указывает маршрутизатору сопоставлять и отображать этот маршрут, когда путь соответсвует родительскому маршруту
+            index: true,
+            element: <RootRedirect />,
+          },
+          {
+            path: ':categoryGender',
             element: <MainPage />,
           },
           {
-            path: '/catalog',
+            path: ':categoryGender/catalog/:category',
             element: <CatalogPage />,
           },
+
           {
-            path: '/product/:productId',
+            path: 'product/:productId',
             element: <ProductPage />,
           },
           {
-            path: '/check-out',
+            path: 'check-out',
             element: <CheckOutPage />,
           },
           {
-            path: '/account',
+            path: 'account',
             element: <AccountPage />,
           },
           {
-            path: '/favourites',
+            path: 'favourites',
             element: <FavouritesPage />,
           },
-          // {
-          //   path: '*',
-          //   element: <MainPage />,
-          // },
         ],
       },
     ],
