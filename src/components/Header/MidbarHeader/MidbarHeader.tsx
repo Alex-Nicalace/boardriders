@@ -2,33 +2,27 @@ import { Link } from 'react-router-dom';
 
 import './MidbarHeader.scss';
 import logo from '../../../assets/icons/logo.png';
-import ListLinks from '../../../component-library/ListLinks';
 import { useScreenWidth } from '../../../Context/useScreenWidthContext';
 import ToolbarHeader from './ToolbarHeader';
-
-const SWITCHABLE_MENU_DATA = [
-  { to: 'man', title: 'Мужчинам' },
-  { to: 'woman', title: 'Женщинам' },
-  { to: 'children', title: 'Детям' },
-];
+import GenderCategoryNav, { TGenderCategoryData } from './GenderCategoryNav';
 
 type TMidbarHeaderProps = {
   className?: string;
+  data: {
+    genderCategoryData: TGenderCategoryData;
+  };
 };
-function MidbarHeader({ className = '' }: TMidbarHeaderProps): JSX.Element {
+function MidbarHeader({ className, data }: TMidbarHeaderProps): JSX.Element {
   const { isLessTablet } = useScreenWidth();
+  const { genderCategoryData } = data;
+
   return (
     <div className={['midbar-header', className].filter(Boolean).join(' ')}>
       <div className="midbar-header__container">
         <nav className="midbar-header__nav">
-          <ListLinks
-            linkAs="NavLink"
-            listProps={{
-              className: 'midbar-header__categories switchable-menu',
-            }}
-            itemProps={{ className: 'switchable-menu__item' }}
-            linkProps={{ className: 'switchable-menu__link' }}
-            linksData={SWITCHABLE_MENU_DATA}
+          <GenderCategoryNav
+            className="midbar-header__categories"
+            data={genderCategoryData}
           />
 
           {isLessTablet && <ToolbarHeader buttons={['burger', 'search']} />}
@@ -42,7 +36,6 @@ function MidbarHeader({ className = '' }: TMidbarHeaderProps): JSX.Element {
               height={50}
             />
           </Link>
-
           {!isLessTablet ? (
             <ToolbarHeader
               className="midbar-header__right-toolbar"

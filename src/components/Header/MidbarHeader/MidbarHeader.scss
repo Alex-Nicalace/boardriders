@@ -1,45 +1,5 @@
 @import '/src/styles/global-scss.scss';
 
-.switchable-menu {
-  display: flex;
-  gap: rem(25);
-  // .switchable-menu__item
-  &__item {
-  }
-  // .switchable-menu__link
-  &__link {
-    position: relative;
-    display: inline-block;
-    font-size: rem(14);
-    line-height: normal;
-
-    &::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: rem(2);
-      left: 0;
-      bottom: rem(-10);
-      transition: all 0.3s ease 0s;
-    }
-
-    &.active {
-      color: var(--black);
-      &::after {
-        background-color: currentColor;
-      }
-    }
-    @media (pointer: fine) {
-      &:hover {
-        color: var(--black);
-        &::after {
-          background-color: currentColor;
-        }
-      }
-    }
-  }
-}
-
 .midbar-header {
   background-color: var(--white);
   // .midbar-header__container
@@ -59,8 +19,10 @@
   }
   // .midbar-header__categories
   &__categories {
-    @media (max-width: $tablet) {
-      display: none;
+    @include tablet-d {
+      &.gender-category-nav {
+        display: none;
+      }
 
       .menu-open & {
         display: flex;
