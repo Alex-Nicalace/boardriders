@@ -1,0 +1,41 @@
+@import '/src/styles/global-scss.scss';
+
+.gender-category-nav {
+  display: flex;
+  gap: rem(25);
+  // .gender-category-nav__item
+  &__item {
+  }
+  // .gender-category-nav__link
+  &__link {
+    position: relative;
+    display: inline-block;
+    font-size: rem(14);
+    line-height: normal;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: rem(2);
+      left: 0;
+      bottom: rem(-10);
+      transition: all 0.3s ease 0s;
+    }
+
+    &.active {
+      color: var(--black);
+      &::after {
+        background-color: currentColor;
+      }
+    }
+    @media (pointer: fine) {
+      &:hover {
+        color: var(--black);
+        &::after {
+          background-color: currentColor;
+        }
+      }
+    }
+  }
+}
