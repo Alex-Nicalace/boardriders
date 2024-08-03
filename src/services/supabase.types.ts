@@ -32,6 +32,41 @@ export type Database = {
       };
       categories: {
         Row: {
+          categoryTypeId: number | null;
+          displayName: string;
+          id: number;
+          insertedAt: string;
+          name: string;
+          order: number | null;
+        };
+        Insert: {
+          categoryTypeId?: number | null;
+          displayName: string;
+          id?: number;
+          insertedAt?: string;
+          name: string;
+          order?: number | null;
+        };
+        Update: {
+          categoryTypeId?: number | null;
+          displayName?: string;
+          id?: number;
+          insertedAt?: string;
+          name?: string;
+          order?: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'categories_categoryTypeId_fkey';
+            columns: ['categoryTypeId'];
+            isOneToOne: false;
+            referencedRelation: 'categoryTypes';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      categoryTypes: {
+        Row: {
           id: number;
           insertedAt: string;
           name: string;
@@ -221,12 +256,6 @@ export type Database = {
       products: {
         Row: {
           brandId: number;
-          categoryId: number;
-          del1: string | null;
-          del2: string | null;
-          del3: number | null;
-          del4_discount: number | null;
-          del4_stock: number;
           description: string | null;
           detailedDescription: string | null;
           id: number;
@@ -235,16 +264,9 @@ export type Database = {
           name: string;
           oldPrice: number | null;
           price: number;
-          rating: number | null;
         };
         Insert: {
           brandId: number;
-          categoryId: number;
-          del1?: string | null;
-          del2?: string | null;
-          del3?: number | null;
-          del4_discount?: number | null;
-          del4_stock: number;
           description?: string | null;
           detailedDescription?: string | null;
           id?: number;
@@ -253,16 +275,9 @@ export type Database = {
           name: string;
           oldPrice?: number | null;
           price: number;
-          rating?: number | null;
         };
         Update: {
           brandId?: number;
-          categoryId?: number;
-          del1?: string | null;
-          del2?: string | null;
-          del3?: number | null;
-          del4_discount?: number | null;
-          del4_stock?: number;
           description?: string | null;
           detailedDescription?: string | null;
           id?: number;
@@ -271,7 +286,6 @@ export type Database = {
           name?: string;
           oldPrice?: number | null;
           price?: number;
-          rating?: number | null;
         };
         Relationships: [
           {
@@ -279,13 +293,6 @@ export type Database = {
             columns: ['brandId'];
             isOneToOne: false;
             referencedRelation: 'brands';
-            referencedColumns: ['id'];
-          },
-          {
-            foreignKeyName: 'products_categoryid_fkey';
-            columns: ['categoryId'];
-            isOneToOne: false;
-            referencedRelation: 'categories';
             referencedColumns: ['id'];
           }
         ];
@@ -329,6 +336,42 @@ export type Database = {
             columns: ['userId'];
             isOneToOne: false;
             referencedRelation: 'users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      productsCategories: {
+        Row: {
+          categoryId: number;
+          id: number;
+          insertedAt: string;
+          productId: number;
+        };
+        Insert: {
+          categoryId: number;
+          id?: number;
+          insertedAt?: string;
+          productId: number;
+        };
+        Update: {
+          categoryId?: number;
+          id?: number;
+          insertedAt?: string;
+          productId?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'productsCategories_categoryId_fkey';
+            columns: ['categoryId'];
+            isOneToOne: false;
+            referencedRelation: 'categories';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'productsCategories_productId_fkey';
+            columns: ['productId'];
+            isOneToOne: false;
+            referencedRelation: 'products';
             referencedColumns: ['id'];
           }
         ];
