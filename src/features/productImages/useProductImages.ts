@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { getProductImages } from '../../services/apiProductImages';
-import { TGetProductReturnType } from '../../services/apiProducts.types';
+import { TGetProductReturnType } from '../../services/apiProducts';
 
 export function useProductImages() {
   const params = useParams();
