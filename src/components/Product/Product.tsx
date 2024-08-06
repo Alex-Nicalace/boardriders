@@ -176,25 +176,27 @@ function Product({
             items={DELIVERY_OPTIONS}
           />
         </div>
-        {galleryPreview.isLoading && (
-          <Spinner className="product__gallery product__spinner" />
-        )}
-        {!galleryPreview.isLoading && galleryPreview.images.length === 0 && (
-          <Empty
-            className="product__gallery product__empty"
-            resource="данных для Галереи"
-          />
-        )}
-        {!galleryPreview.isLoading && galleryPreview.images.length > 0 && (
-          <GalleryPreview
-            className="product__gallery"
-            data={galleryPreview.images}
-          />
-        )}
+        <>
+          {galleryPreview.isLoading && (
+            <Spinner className="product__gallery product__spinner" />
+          )}
+          {!galleryPreview.isLoading && galleryPreview.images.length === 0 && (
+            <Empty
+              className="product__gallery product__empty"
+              resource="данных для Галереи"
+            />
+          )}
+          {!galleryPreview.isLoading && galleryPreview.images.length > 0 && (
+            <GalleryPreview
+              className="product__gallery"
+              data={galleryPreview.images}
+            />
+          )}
+        </>
         <div className="product__parameters product-params">
           <h2 className="product-params__title">Характеристики</h2>
           <p className="product-params__text">{detailedDescription}</p>
-          {productDescriptionImages?.length && (
+          {!!productDescriptionImages?.length && (
             <ul className="product-params__list-img">
               {productDescriptionImages.map(({ imageUrl }) => (
                 <li className="product-params__item-img" key={imageUrl}>

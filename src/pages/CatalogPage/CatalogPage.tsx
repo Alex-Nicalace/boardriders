@@ -1,9 +1,9 @@
 import './CatalogPage.scss';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import ProductCategoriesSlider from '../../components/ProductCategoriesSlider';
-import ProductListFiltered from '../../components/ProductListFiltered';
 import PromoSlider from '../../components/PromoSlider';
 import PageContent from '../../components/PageContent';
+import ProductListFilteredContainer from '../../features/products/ProductListFilteredContainer';
 
 // type TCatalogProps = {};
 function CatalogPage(): JSX.Element {
@@ -22,7 +22,7 @@ function CatalogPage(): JSX.Element {
       {isOverLarge && (
         <ProductCategoriesSlider className="catalog-page__product-categories-slider" />
       )}
-      <ProductListFiltered className="catalog-page__product-category-filter-cards" />
+      <ProductListFilteredContainer className="catalog-page__product-category-filter-cards" />
     </PageContent>
   );
 }

@@ -62,6 +62,8 @@
 
 [useScreenWidthContext](./src/Context/useScreenWidthContext.ts) - данные о ширине экрана
 
+[useLocalStorageState.ts](./src/hooks/useLocalStorageState.ts) - Хук создает состояние, которое сохраняется в локальное хранилище браузера
+
 ## Хуки
 
 [useId](https://react.dev/reference/react/useId) - генерации уникальных идентификаторов
@@ -99,3 +101,7 @@
 ### Intl.DateTimeFormat
 
 - [FormatersContext.tsx](./src/Context/FormatersContext.tsx)
+
+## react-query
+
+`queryClient.prefetchQuery` - предварительная подгрузка страницы. [useReviews](./src/features/reviews/useReviews.ts)
