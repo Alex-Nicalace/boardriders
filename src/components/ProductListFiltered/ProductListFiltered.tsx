@@ -16,6 +16,9 @@ import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import Popup from '../../component-library/Popup';
 import FiltersMobile from '../FiltersMobile';
 import ProductList from '../ProductList';
+import Spinner from '../Spinner';
+import Empty from '../Empty';
+import { TProductListFilteredProps } from './ProductListFiltered.types';
 
 const SORTS = [
   {
@@ -38,290 +41,6 @@ const SORTS = [
     value: 'warm',
     text: 'Утеплению',
   },
-];
-
-const PATH = '/src/assets/img/products-new/';
-
-const PRODUCTS_DATA = [
-  {
-    id: 1,
-    imgMainUrl: PATH + '01.png',
-    imgSecondUrl: PATH + '01-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 2,
-    imgMainUrl: PATH + '02.png',
-    imgSecondUrl: PATH + '02-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: 17392,
-    discount: -50,
-  },
-  {
-    id: 3,
-    imgMainUrl: PATH + '03.png',
-    imgSecondUrl: PATH + '03-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 4,
-    imgMainUrl: PATH + '04.png',
-    imgSecondUrl: PATH + '04-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 5,
-    imgMainUrl: PATH + '02.png',
-    imgSecondUrl: PATH + '02-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: 17392,
-    discount: -50,
-  },
-  {
-    id: 6,
-    imgMainUrl: PATH + '03.png',
-    imgSecondUrl: PATH + '03-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 7,
-    imgMainUrl: PATH + '04.png',
-    imgSecondUrl: PATH + '04-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 8,
-    imgMainUrl: PATH + '02.png',
-    imgSecondUrl: PATH + '02-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: 17392,
-    discount: -50,
-  },
-  {
-    id: 9,
-    imgMainUrl: PATH + '03.png',
-    imgSecondUrl: PATH + '03-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 10,
-    imgMainUrl: PATH + '04.png',
-    imgSecondUrl: PATH + '04-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 11,
-    imgMainUrl: PATH + '02.png',
-    imgSecondUrl: PATH + '02-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: 17392,
-    discount: -50,
-  },
-  {
-    id: 12,
-    imgMainUrl: PATH + '03.png',
-    imgSecondUrl: PATH + '03-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 13,
-    imgMainUrl: PATH + '04.png',
-    imgSecondUrl: PATH + '04-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 14,
-    imgMainUrl: PATH + '02.png',
-    imgSecondUrl: PATH + '02-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: 17392,
-    discount: -50,
-  },
-  {
-    id: 15,
-    imgMainUrl: PATH + '03.png',
-    imgSecondUrl: PATH + '03-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 16,
-    imgMainUrl: PATH + '04.png',
-    imgSecondUrl: PATH + '04-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 17,
-    imgMainUrl: PATH + '02.png',
-    imgSecondUrl: PATH + '02-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: 17392,
-    discount: -50,
-  },
-  {
-    id: 18,
-    imgMainUrl: PATH + '03.png',
-    imgSecondUrl: PATH + '03-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 19,
-    imgMainUrl: PATH + '04.png',
-    imgSecondUrl: PATH + '04-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 20,
-    imgMainUrl: PATH + '02.png',
-    imgSecondUrl: PATH + '02-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: 17392,
-    discount: -50,
-  },
-  {
-    id: 21,
-    imgMainUrl: PATH + '03.png',
-    imgSecondUrl: PATH + '03-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 22,
-    imgMainUrl: PATH + '04.png',
-    imgSecondUrl: PATH + '04-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 23,
-    imgMainUrl: PATH + '02.png',
-    imgSecondUrl: PATH + '02-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: 17392,
-    discount: -50,
-  },
-  {
-    id: 24,
-    imgMainUrl: PATH + '03.png',
-    imgSecondUrl: PATH + '03-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 25,
-    imgMainUrl: PATH + '04.png',
-    imgSecondUrl: PATH + '04-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 26,
-    imgMainUrl: PATH + '02.png',
-    imgSecondUrl: PATH + '02-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: 17392,
-    discount: -50,
-  },
-  {
-    id: 27,
-    imgMainUrl: PATH + '03.png',
-    imgSecondUrl: PATH + '03-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  // {
-  //   id: '28',
-  //   imgMainUrl: PATH + '04.png',
-  //   imgSecondUrl: PATH + '04-hover.png',
-  //   name: 'LIB TECH',
-  //   description: 'Мужской Сноуборд',
-  //   price: 34392,
-  //
-  // },
 ];
 
 const TRANSITION_STYLES: Record<TTransition, string> = {
@@ -484,10 +203,12 @@ const FILTERS_DATA: TFiltersData[] = [
   },
 ];
 
-type TProductListFilteredProps = { className?: string };
 function ProductListFiltered({
-  className = '',
+  className,
+  data,
+  onPageChange,
 }: TProductListFilteredProps): JSX.Element {
+  const { products } = data;
   const [isShowFilters, setIsShowFilters] = useState(true);
   const id = useId();
   const selectId = id + '-select';
@@ -501,7 +222,13 @@ function ProductListFiltered({
     <Transition unmountOnExit={false} enter={isShowFilters} timeout={300}>
       {(state) => (
         <section
-          className={`product-list-filtered ${TRANSITION_STYLES[state]} ${className}`}
+          className={[
+            'product-list-filtered',
+            TRANSITION_STYLES[state],
+            className,
+          ]
+            .filter(Boolean)
+            .join(' ')}
         >
           <div className="product-list-filtered__container">
             <Title
@@ -610,16 +337,23 @@ function ProductListFiltered({
                 />
               )}
               <div className="product-list-filtered__products-wrapper">
-                <ProductList
-                  className="product-list-filtered__products"
-                  data={PRODUCTS_DATA}
-                />
+                {products.isLoading && <Spinner />}
+                {!products.isLoading && !products.list?.length && (
+                  <Empty resource="товары" />
+                )}
+                {!products.isLoading && !!products.list?.length && (
+                  <ProductList
+                    className="product-list-filtered__products"
+                    data={products.list}
+                  />
+                )}
                 <Pagination
                   className="product-list-filtered__pagination"
-                  currentPage={1}
-                  totalPages={659}
+                  currentPage={products.currentPage}
+                  totalPages={products.totalPages}
                   visiblePageNumbers={4}
                   isShowNavigationButtons={!isLessMobileSmall}
+                  onPageChange={onPageChange}
                 />
                 <div className="product-list-filtered__wrap-button-more">
                   <Button className="product-list-filtered__button-more">
