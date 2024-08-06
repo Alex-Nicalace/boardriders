@@ -6,20 +6,16 @@ import ModalWrap from '../ModalWrap';
 import LoginOrRegister from '../LoginOrRegister';
 import { useGenderCategories } from '../../features/categories/useCategories';
 import Spinner from '../Spinner';
+import ScrollToTop from '../ScrollToTop';
 
-// type TAppLayoutProps = {};
 function AppLayout(): JSX.Element {
   const { isLoading } = useGenderCategories();
 
   if (isLoading) return <Spinner />;
 
-  const genderCategoryData = (genderCategories || []).map((item) => ({
-    to: item.name,
-    title: item.displayName,
-  }));
-
   return (
     <>
+      <ScrollToTop />
       <Header />
       <Outlet />
       <Footer />
