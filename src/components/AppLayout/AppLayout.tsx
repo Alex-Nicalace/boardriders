@@ -9,7 +9,7 @@ import Spinner from '../Spinner';
 
 // type TAppLayoutProps = {};
 function AppLayout(): JSX.Element {
-  const { genderCategories, isLoading } = useGenderCategories();
+  const { isLoading } = useGenderCategories();
 
   if (isLoading) return <Spinner />;
 
@@ -20,7 +20,7 @@ function AppLayout(): JSX.Element {
 
   return (
     <>
-      <Header data={{ genderCategoryData }} />
+      <Header />
       <Outlet />
       <Footer />
       <Popup.Window

@@ -5,21 +5,14 @@ import MidbarHeader from './MidbarHeader';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import Popup from '../../component-library/Popup';
 import BurgerMenu from './BurgerMenu';
-import { TGenderCategoryData } from './MidbarHeader/GenderCategoryNav';
 
-type THeaderProps = {
-  data: {
-    genderCategoryData: TGenderCategoryData;
-  };
-};
-function Header({ data }: THeaderProps): JSX.Element {
+function Header(): JSX.Element {
   const { isLessTablet } = useScreenWidth();
-  const { genderCategoryData } = data;
 
   return (
     <header className="header">
       {!isLessTablet && <TopbarHeader className="header__topbar" />}
-      <MidbarHeader className="header__midbar" data={{ genderCategoryData }} />
+      <MidbarHeader className="header__midbar" />
       {!isLessTablet && <MainMenu className="header__main-menu" />}
       {isLessTablet && (
         <Popup.Window

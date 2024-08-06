@@ -6,6 +6,7 @@ import { TGenderCategoryNavProps } from './GenderCategoryNav.types';
 function GenderCategoryNav({
   className,
   data,
+  activeCategoryGender,
 }: TGenderCategoryNavProps): JSX.Element {
   function handleClick(to: string) {
     localStorage.setItem('categoryGender', JSON.stringify(to));
@@ -20,7 +21,12 @@ function GenderCategoryNav({
       linksData={data}
       renderToItem={({ to, title }) => (
         <NavLink
-          className="gender-category-nav__link"
+          className={[
+            'gender-category-nav__link',
+            to === activeCategoryGender && 'active',
+          ]
+            .filter(Boolean)
+            .join(' ')}
           to={to}
           onClick={() => handleClick(to)}
         >

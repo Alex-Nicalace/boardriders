@@ -6,4 +6,5 @@ export type TGenderCategoryData = {
 export type TGenderCategoryNavProps = {
   className?: string;
   data: TGenderCategoryData;
+  activeCategoryGender?: string;
 };
