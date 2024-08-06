@@ -18,7 +18,10 @@ import FiltersMobile from '../FiltersMobile';
 import ProductList from '../ProductList';
 import Spinner from '../Spinner';
 import Empty from '../Empty';
-import { TProductListFilteredProps } from './ProductListFiltered.types';
+import {
+  TFiltersData,
+  TProductListFilteredProps,
+} from './ProductListFiltered.types';
 
 const SORTS = [
   {
@@ -48,31 +51,6 @@ const TRANSITION_STYLES: Record<TTransition, string> = {
   entered: '',
   exiting: 'product-list-filtered_filters-hide',
   exited: 'product-list-filtered_filters-hide',
-};
-
-export type TFiltersData = (
-  | {
-      items: {
-        value: string;
-        title?: React.ReactNode;
-        count?: number;
-        hint?: string;
-      }[];
-      type?: 'checkbox' | 'radio';
-      isSearchable?: boolean;
-      min?: never;
-      max?: never;
-    }
-  | {
-      items?: never;
-      min: number;
-      max: number;
-      isSearchable?: never;
-    }
-) & {
-  title: string;
-  name: string;
-  defaultOpen?: boolean;
 };
 
 const FILTERS_DATA: TFiltersData[] = [
