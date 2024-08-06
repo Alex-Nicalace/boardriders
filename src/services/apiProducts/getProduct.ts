@@ -1,5 +1,5 @@
-import { omit } from '../../utils/omit';
 import supabase from '../supabase';
+import { omit } from '../../utils/omit';
 
 export async function getProduct(productId: number) {
   const { data, error } = await supabase
@@ -15,10 +15,12 @@ export async function getProduct(productId: number) {
       reviews(id.count(),rating.avg()),
       productVariants(productVariantId:id, color:colors(colorId:id, name, hexValue), size:sizes(sizeId:id, name)),
       productAttributes(attributeId:id, name, value),
-      productDescriptionImages(imageUrl)
+      productDescriptionImages(imageUrl),
+      categoryGenders:categories(name)
       `
     )
     .eq('id', productId)
+    .eq('categories.categoryTypeId', 1)
     .single();
 
   if (error) {
