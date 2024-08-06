@@ -52,7 +52,9 @@ function CustomerReviews({
     }),
     { totalRating: 0, countVotes: 0 }
   );
-  const averageRating = parseFloat((totalRating / countVotes).toFixed(1));
+  const averageRating = countVotes
+    ? parseFloat((totalRating / countVotes).toFixed(1))
+    : 0;
 
   return (
     <section
