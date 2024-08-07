@@ -1,10 +1,11 @@
 import './Header.scss';
-import MainMenu from './MainMenu';
 import TopbarHeader from './TopBarHeader';
 import MidbarHeader from './MidbarHeader';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import Popup from '../../component-library/Popup';
 import BurgerMenu from './BurgerMenu';
+import MainMenuContainer from '../../features/categories/MainMenuContainer';
+import MainMenu from './MainMenu';
 
 function Header(): JSX.Element {
   const { isLessTablet } = useScreenWidth();
@@ -13,11 +14,19 @@ function Header(): JSX.Element {
     <header className="header">
       {!isLessTablet && <TopbarHeader className="header__topbar" />}
       <MidbarHeader className="header__midbar" />
-      {!isLessTablet && <MainMenu className="header__main-menu" />}
+      {!isLessTablet && (
+        <MainMenuContainer>
+          {(data) => <MainMenu className="header__main-menu" data={data} />}
+        </MainMenuContainer>
+      )}
       {isLessTablet && (
         <Popup.Window
           windowName="burger"
-          render={() => <BurgerMenu />}
+          render={() => (
+            <MainMenuContainer>
+              {(data) => <BurgerMenu data={data} />}
+            </MainMenuContainer>
+          )}
           onClickOutside={(close, e) => {
             const el = e.target;
             if (!(el instanceof HTMLElement)) return;
