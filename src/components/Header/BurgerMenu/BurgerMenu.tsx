@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import './BurgerMenu.scss';
-import { MENU_DATA } from '../../../data/menuData';
 import ListLinks from '../../../component-library/ListLinks';
 import Submenu from '../MainMenu/Submenu';
 import { ArrowLeftIcon } from '../../ui/Icons';
@@ -9,12 +8,14 @@ import DeliveryRegion from '../DeliveryRegion';
 import SecondaryLinks from '../SecondaryLinks';
 import ButtonMenu from '../../ui/ButtonMenu';
 import Popup from '../../../component-library/Popup';
+import { IMenuData } from '../MainMenu';
 
-function BurgerMenu() {
+type TBurgerMenuProps = {
+  data: IMenuData[];
+};
+function BurgerMenu({ data }: TBurgerMenuProps) {
   const [expandedMenu, setExpandedMenu] = useState('');
-  const expandedMenuData = MENU_DATA.find(
-    (item) => item.title === expandedMenu
-  );
+  const expandedMenuData = data.find((item) => item.title === expandedMenu);
 
   useEffect(function addClassToDocument() {
     document.documentElement.classList.add('menu-open');
@@ -30,7 +31,7 @@ function BurgerMenu() {
         }`}
       >
         <ListLinks
-          linksData={MENU_DATA}
+          linksData={data}
           listProps={{ className: 'burger-menu__menu' }}
           itemProps={{ className: 'burger-menu__item' }}
           renderToItem={(value) => {
