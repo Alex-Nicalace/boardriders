@@ -1,19 +1,14 @@
 import { useState } from 'react';
-
-import './MainMenu.scss';
-import { MENU_DATA } from '../../../data/menuData';
+import { TMainMenuProps } from './MainMenu.types';
 import ListLinks from '../../../component-library/ListLinks';
 import Submenu from './Submenu';
+import './MainMenu.scss';
 
-type TMainMenuProps = {
-  className?: string;
-};
-
-function MainMenu({ className = '' }: TMainMenuProps): JSX.Element {
+function MainMenu({ className, data }: TMainMenuProps): JSX.Element {
   const [itemMenuHover, setItemMenuHover] = useState('');
 
   return (
-    <div className={`main-menu ${className}`}>
+    <div className={['main-menu', className].filter(Boolean).join(' ')}>
       <div className="main-menu__container">
         <nav className="main-menu__nav">
           <ListLinks
@@ -23,7 +18,7 @@ function MainMenu({ className = '' }: TMainMenuProps): JSX.Element {
             linkProps={{
               className: 'main-menu__link',
             }}
-            linksData={MENU_DATA}
+            linksData={data}
             onMouseEnterItem={(data) => {
               setItemMenuHover(data.title);
             }}
