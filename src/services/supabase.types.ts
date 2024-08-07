@@ -38,6 +38,7 @@ export type Database = {
           insertedAt: string;
           name: string;
           order: number | null;
+          parentId: number | null;
         };
         Insert: {
           categoryTypeId?: number | null;
@@ -46,6 +47,7 @@ export type Database = {
           insertedAt?: string;
           name: string;
           order?: number | null;
+          parentId?: number | null;
         };
         Update: {
           categoryTypeId?: number | null;
@@ -54,6 +56,7 @@ export type Database = {
           insertedAt?: string;
           name?: string;
           order?: number | null;
+          parentId?: number | null;
         };
         Relationships: [
           {
@@ -61,6 +64,13 @@ export type Database = {
             columns: ['categoryTypeId'];
             isOneToOne: false;
             referencedRelation: 'categoryTypes';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'categories_parentId_fkey';
+            columns: ['parentId'];
+            isOneToOne: false;
+            referencedRelation: 'categories';
             referencedColumns: ['id'];
           }
         ];
@@ -591,7 +601,24 @@ export type Database = {
       };
     };
     Functions: {
-      [_ in never]: never;
+      getMainMenu: {
+        Args: {
+          categoryGender: string;
+        };
+        Returns: {
+          id: number;
+          name: string;
+          displayName: string;
+          subMenu:
+            | {
+                id: number;
+                name: string;
+                displayName: string;
+              }[]
+            | null;
+          brands: { id: number; name: string }[] | null;
+        }[];
+      };
     };
     Enums: {
       [_ in never]: never;
