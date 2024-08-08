@@ -27,7 +27,7 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
   )?.size?.sizeId;
 
   useEffect(
-    function setValidPram() {
+    function setValidParam() {
       if (!product || (selectedColorId && selectedSizeId)) return;
 
       if (selectedColorId) {
@@ -54,7 +54,7 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
         if (size) searchParams.set('size', size);
       }
 
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
     },
     [product, selectedColorId, selectedSizeId, searchParams, setSearchParams]
   );
