@@ -24,14 +24,20 @@ type TPromoBlockProps = {
 function PromoBlock({
   children,
   backgroundImage,
-  className = '',
+  className,
 }: TPromoBlockProps): JSX.Element {
   const style: React.CSSProperties = {
-    ...(backgroundImage && { backgroundImage, backgroundSize: 'cover' }),
+    ...(backgroundImage && {
+      backgroundImage: `url(${backgroundImage})`,
+      backgroundSize: 'cover',
+    }),
   };
 
   return (
-    <div className={`promo-block ${className}`} style={style}>
+    <div
+      className={['promo-block', className].filter(Boolean).join(' ')}
+      style={style}
+    >
       <div className="promo-block__container">
         <Breadcrumbs
           className="promo-block__breadcrumbs"
