@@ -4,56 +4,16 @@ import { Link } from 'react-router-dom';
 import 'swiper/scss';
 import './LinksBrands.scss';
 
-const PATH = '/src/assets/icons/brands/';
-const DATA_SLIDES = [
-  {
-    img: '01.png',
-    to: '#',
-  },
-  {
-    img: '02.png',
-    to: '#',
-  },
-  {
-    img: '03.png',
-    to: '#',
-  },
-  {
-    img: '04.png',
-    to: '#',
-  },
-  {
-    img: '05.png',
-    to: '#',
-  },
-  {
-    img: '06.png',
-    to: '#',
-  },
-  {
-    img: '07.png',
-    to: '#',
-  },
-  {
-    img: '08.png',
-    to: '#',
-  },
-  {
-    img: '09.png',
-    to: '#',
-  },
-  {
-    img: '10.png',
-    to: '#',
-  },
-];
-
 interface ILinksBrandsProps {
   className?: string;
+  data: {
+    iconUrl: string;
+    to: string;
+  }[];
 }
-function LinksBrands({ className = '' }: ILinksBrandsProps): JSX.Element {
+function LinksBrands({ className, data }: ILinksBrandsProps): JSX.Element {
   return (
-    <div className={`${className} links-brands`}>
+    <div className={['links-brands', className].filter(Boolean).join(' ')}>
       <div className="links-brands__container">
         <Swiper
           className="links-brands__slider"
@@ -66,12 +26,12 @@ function LinksBrands({ className = '' }: ILinksBrandsProps): JSX.Element {
             },
           }}
         >
-          {DATA_SLIDES.map(({ img, to }) => (
-            <SwiperSlide key={img} className="links-brands__slide">
+          {data.map(({ iconUrl, to }) => (
+            <SwiperSlide key={iconUrl} className="links-brands__slide">
               <Link className="links-brands__link" to={to}>
                 <img
                   className="links-brands__img"
-                  src={PATH + img}
+                  src={iconUrl}
                   alt="логотип бренда"
                 />
               </Link>
