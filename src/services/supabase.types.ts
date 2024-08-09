@@ -11,22 +11,28 @@ export type Database = {
     Tables: {
       brands: {
         Row: {
+          bgImgForDescrUrl: string | null;
           iconUrl: string | null;
           id: number;
           insertedAt: string;
           name: string;
+          shortDescription: string | null;
         };
         Insert: {
+          bgImgForDescrUrl?: string | null;
           iconUrl?: string | null;
           id?: number;
           insertedAt?: string;
           name: string;
+          shortDescription?: string | null;
         };
         Update: {
+          bgImgForDescrUrl?: string | null;
           iconUrl?: string | null;
           id?: number;
           insertedAt?: string;
           name?: string;
+          shortDescription?: string | null;
         };
         Relationships: [];
       };
