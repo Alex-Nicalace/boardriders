@@ -1,6 +1,5 @@
 import './MainPage.scss';
 import DualBanners from '../../components/DualBaners';
-import LinksBrands from '../../components/LinksBrands';
 import MainSlider from '../../components/MainSlider';
 import Promotion from '../../components/Promotion';
 import BlogsSlider from '../../components/BlogsSlider';
@@ -10,13 +9,14 @@ import Button from '../../components/ui/Button';
 import PageContent from '../../components/PageContent';
 import NewProductsSlider from '../../features/products/NewProductsSlider';
 import PopularProductsSlider from '../../features/products/PopularProductsSlider';
+import LinksBrandsContainer from '../../features/brands/LinksBrandsContainer';
 
 // interface IMainPageProps {}
 function MainPage(): JSX.Element {
   return (
     <PageContent className="main-page" as="main">
       <MainSlider className="main-page__main-slider" />
-      <LinksBrands className="main-page__links-brands" />
+      <LinksBrandsContainer className="main-page__links-brands" />
       <DualBanners className="main-page__dual-baners" />
       <div className="main-page__box-slider-ware">
         <Title
