@@ -34,7 +34,7 @@ function MainMenuProvider({ children }: TMainMenuProviderProps): JSX.Element {
           title: 'Бренды',
           links: (item.brands || []).map((brand) => ({
             title: brand.name,
-            to: `${categoryGender}/catalog/${item.name}/brand/${brand.name}`,
+            to: `${categoryGender}/brand/${brand.name}/catalog/${item.name}`,
           })),
         },
       ],

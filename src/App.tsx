@@ -48,7 +48,7 @@ const router = createBrowserRouter([
             element: <CatalogPage />,
           },
           {
-            path: ':categoryGender/catalog/:category/brand/:brand',
+            path: ':categoryGender/brand/:brand/catalog/:category?',
             element: <CatalogPage isCatalogBrand />,
           },
 
