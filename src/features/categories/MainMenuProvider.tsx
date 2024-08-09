@@ -2,15 +2,14 @@ import Spinner from '../../components/Spinner';
 import { IMenuData } from '../../data/menuData';
 import { useMainMenu } from './useMainMenu';
 
-type TMainMenuContainerProps = { children: (data: IMenuData[]) => JSX.Element };
-function MainMenuContainer({ children }: TMainMenuContainerProps): JSX.Element {
+type TMainMenuProviderProps = { children: (data: IMenuData[]) => JSX.Element };
+function MainMenuProvider({ children }: TMainMenuProviderProps): JSX.Element {
   const { mainMenu, isLoading, categoryGender } = useMainMenu();
 
   if (isLoading) {
     return <Spinner />;
   }
 
-  // ':categoryGender/catalog/:categoryMenu?/:categorySubmenu?'
   const data: IMenuData[] = (mainMenu || []).map((item) => ({
     title: item.displayName,
     to: `${categoryGender}/catalog/${item.name}`,
@@ -45,4 +44,4 @@ function MainMenuContainer({ children }: TMainMenuContainerProps): JSX.Element {
   return <>{children(data)}</>;
 }
 
-export default MainMenuContainer;
+export default MainMenuProvider;
