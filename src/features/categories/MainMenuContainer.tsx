@@ -19,10 +19,17 @@ function MainMenuContainer({ children }: TMainMenuContainerProps): JSX.Element {
         {
           title: item.displayName,
           isWideSection: true,
-          links: (item.subMenu || []).map((subItem) => ({
-            title: subItem.displayName,
-            to: `${categoryGender}/catalog/${item.name}/${subItem.name}`,
-          })),
+          links: [
+            ...(item.subMenu || []).map((subItem) => ({
+              title: subItem.displayName,
+              to: `${categoryGender}/catalog/${subItem.name}`,
+            })),
+            {
+              title: 'Все категории',
+              to: `${categoryGender}/catalog/${item.name}`,
+              isAccented: true,
+            },
+          ],
         },
         {
           title: 'Бренды',
