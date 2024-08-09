@@ -8,8 +8,8 @@ export function useProducts() {
   const [searchParams] = useSearchParams();
   const queryClient = useQueryClient();
 
-  const { categoryGender, categoryMenu, categorySubmenu } = params;
-  const categories = [categoryGender, categoryMenu, categorySubmenu].filter(
+  const { categoryGender, category, brand } = params;
+  const categories = [categoryGender, category].filter(
     (item) => item !== undefined
   );
   const page = Number(searchParams.get('page'));
@@ -20,11 +20,12 @@ export function useProducts() {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['products', ...categories, pageNum],
+    queryKey: ['products', ...categories, pageNum, brand],
     queryFn: () =>
       getProducts({
         categories,
         page: pageNum,
+        brand,
       }),
   });
 
@@ -33,7 +34,7 @@ export function useProducts() {
   // предварительная подгрузка следующей страницы
   if (pageNum < totalPages) {
     queryClient.prefetchQuery({
-      queryKey: ['products', ...categories, pageNum + 1],
+      queryKey: ['products', ...categories, pageNum + 1, brand],
       queryFn: () =>
         getProducts({
           categories,
@@ -44,7 +45,7 @@ export function useProducts() {
   // предварительная подгрузка предыдущей страницы
   if (pageNum > 1) {
     queryClient.prefetchQuery({
-      queryKey: ['products', ...categories, pageNum - 1],
+      queryKey: ['products', ...categories, pageNum - 1, brand],
       queryFn: () =>
         getProducts({
           categories,
