@@ -8,8 +8,8 @@
     }
   }
 
-  // .catalog-page__promo-slider
-  &__promo-slider {
+  // .catalog-page__top
+  &__top {
     &:not(:last-child) {
       @include adaptiveValue('margin-bottom', 50, 35);
     }
