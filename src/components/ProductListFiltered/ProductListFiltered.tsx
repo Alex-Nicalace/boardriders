@@ -325,14 +325,16 @@ function ProductListFiltered({
                     data={products.list}
                   />
                 )}
-                <Pagination
-                  className="product-list-filtered__pagination"
-                  currentPage={products.currentPage}
-                  totalPages={products.totalPages}
-                  visiblePageNumbers={4}
-                  isShowNavigationButtons={!isLessMobileSmall}
-                  onPageChange={onPageChange}
-                />
+                {products.totalPages > 1 && (
+                  <Pagination
+                    className="product-list-filtered__pagination"
+                    currentPage={products.currentPage}
+                    totalPages={products.totalPages}
+                    visiblePageNumbers={4}
+                    isShowNavigationButtons={!isLessMobileSmall}
+                    onPageChange={onPageChange}
+                  />
+                )}
                 <div className="product-list-filtered__wrap-button-more">
                   <Button className="product-list-filtered__button-more">
                     Показать больше
