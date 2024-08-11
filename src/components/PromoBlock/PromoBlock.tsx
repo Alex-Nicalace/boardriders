@@ -26,18 +26,15 @@ function PromoBlock({
   backgroundImage,
   className,
 }: TPromoBlockProps): JSX.Element {
-  const style: React.CSSProperties = {
-    ...(backgroundImage && {
-      backgroundImage: `url(${backgroundImage})`,
-      backgroundSize: 'cover',
-    }),
-  };
-
   return (
-    <div
-      className={['promo-block', className].filter(Boolean).join(' ')}
-      style={style}
-    >
+    <div className={['promo-block', className].filter(Boolean).join(' ')}>
+      {!!backgroundImage && (
+        <img
+          className="promo-block__background"
+          src={backgroundImage}
+          alt="фоновое изображение"
+        />
+      )}
       <div className="promo-block__container">
         <Breadcrumbs
           className="promo-block__breadcrumbs"
