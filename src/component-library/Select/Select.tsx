@@ -1,73 +1,14 @@
-import {
-  Children,
-  ReactElement,
-  isValidElement,
-  useCallback,
-  useRef,
-  useState,
-} from 'react';
+import { Children, isValidElement, useCallback, useRef, useState } from 'react';
 import './Select.scss';
 import ListOptions from './ListOptions';
-import Option, { OptionProps } from './Option';
+import Option from './Option';
 import { SelectContext } from './SelectContext';
 import Transition, { TTransition } from '../Transition';
-
-interface ICustomCSSProperties extends React.CSSProperties {
-  '--select-transition-duration'?: string;
-}
-
-type TSingleSelectProps = {
-  isMulti?: false;
-  initValue?: never;
-  value: string;
-  onChange: (value: string) => void;
-  iconItemRemove?: never;
-  isCloseDropdownWhenClicked?: never;
-};
-type TSingleSelectUncontrolledProps = {
-  isMulti?: false;
-  initValue?: string;
-  value?: never;
-  onChange?: never;
-  iconItemRemove?: never;
-  isCloseDropdownWhenClicked?: never;
-};
-
-type TMultiSelectProps = {
-  isMulti: true;
-  initValue?: never;
-  value: string[];
-  onChange: (value: string[]) => void;
-  iconItemRemove?: React.ReactNode;
-  isCloseDropdownWhenClicked?: boolean;
-};
-type TMultiSelectUncontrolledProps = {
-  isMulti: true;
-  initValue?: string[];
-  value?: never;
-  onChange?: never;
-  iconItemRemove?: React.ReactNode;
-  isCloseDropdownWhenClicked?: boolean;
-};
-
-type TCommonSelectProps = {
-  children: ReactElement<OptionProps>[] | ReactElement<OptionProps>;
-  name?: string;
-  id?: string;
-  className?: string;
-  listOptions?: {
-    className?: string;
-  };
-  iconSelect?: React.ReactNode;
-  isLockScroll?: boolean;
-  placreholder?: React.ReactNode;
-  isSearchable?: boolean;
-  tabIndex?: number;
-  animationOptions?: {
-    duration?: number;
-  };
-  fullWidth?: boolean;
-};
+import {
+  ICustomCSSProperties,
+  OptionProps,
+  TSelectProps,
+} from './Select.types';
 
 const TRANSITION_STYLES: Record<TTransition, string> = {
   entering: 'options_opened',
@@ -76,19 +17,12 @@ const TRANSITION_STYLES: Record<TTransition, string> = {
   exited: '',
 };
 
-export type TSelectProps = (
-  | TSingleSelectProps
-  | TMultiSelectProps
-  | TSingleSelectUncontrolledProps
-  | TMultiSelectUncontrolledProps
-) &
-  TCommonSelectProps;
 function Select(props: TSelectProps): JSX.Element {
   const {
     children,
     name,
     id,
-    className = '',
+    className,
     iconSelect = '▼',
     isLockScroll = true,
     listOptions = {},
@@ -121,25 +55,25 @@ function Select(props: TSelectProps): JSX.Element {
 
   function setSelected(value: string) {
     if (props.isMulti) {
+      let newValue: string[] = [];
       if (props.value) {
         const selectedValues = props.value;
-        const newValue = selectedValues.includes(value)
+        newValue = selectedValues.includes(value)
           ? removeSelectedValue(value)
           : [...selectedValues, value];
-        props.onChange(newValue);
       } else if (Array.isArray(valueInner)) {
         const selectedValues = valueInner;
-        const newValue = selectedValues.includes(value)
+        newValue = selectedValues.includes(value)
           ? removeSelectedValue(value)
           : [...selectedValues, value];
         setValueInner(newValue);
       }
+      props.onChange?.(newValue);
     } else {
-      if (props.value) {
-        props.onChange(value);
-      } else {
+      if (props.value === undefined) {
         setValueInner(value);
       }
+      props.onChange?.(value);
     }
   }
 

@@ -1,4 +1,5 @@
 import { useSelectContext } from './useSelectContext';
+import { OptionProps } from './Select.types';
 import './Option.scss';
 
 const KEY_MAP = {
@@ -6,11 +7,6 @@ const KEY_MAP = {
   ArrowUp: -1,
 };
 
-export type OptionProps = {
-  children: React.ReactNode;
-  value: string;
-  className?: string;
-};
 function Option({ children, value, className = '' }: OptionProps): JSX.Element {
   const { clickItem, selected, getMapItems } = useSelectContext();
   const isSelected = Array.isArray(selected)
