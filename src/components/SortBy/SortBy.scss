@@ -1,0 +1,35 @@
+@import '/src/styles/global-scss.scss';
+
+.sort-by {
+  display: flex;
+  align-items: center;
+  // .sort-by__label
+  &__label {
+    margin: 0 rem(30);
+    flex: 1 1 auto;
+    text-align: right;
+    @extend %body-2-1;
+    color: var(--dark-gray);
+  }
+  // .sort-by__select
+  &__select {
+    @extend %body-4-capital;
+    background-color: var(--light-gray);
+
+    &_full-width {
+      flex-grow: 1;
+    }
+
+    .select__wrapper {
+      padding: rem(14) rem(15);
+      border-color: var(--light-gray);
+    }
+
+    .select__selected {
+      text-wrap: nowrap;
+      @include tablet-d {
+        text-align: center;
+      }
+    }
+  }
+}
