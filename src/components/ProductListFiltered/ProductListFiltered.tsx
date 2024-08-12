@@ -1,10 +1,8 @@
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import './ProductListFiltered.scss';
 import Steps from '../ui/Steps';
 import Title from '../ui/Title';
 import ToggleButton from '../ToggleButton';
-import Select from '../../component-library/Select';
-import { SelectIcon } from '../ui/Icons';
 import Transition, { TTransition } from '../../component-library/Transition';
 import CollapsiblePanel from '../CollapsiblePanel';
 import ColorLabel from '../ColorLabel';
@@ -22,8 +20,9 @@ import {
   TFiltersData,
   TProductListFilteredProps,
 } from './ProductListFiltered.types';
+import SortBy from '../SortBy';
 
-const SORTS = [
+const SORT_OPTIONS = [
   {
     value: 'popular',
     text: 'Популярное',
@@ -41,8 +40,8 @@ const SORTS = [
     text: 'По скидке',
   },
   {
-    value: 'warm',
-    text: 'Утеплению',
+    value: 'new',
+    text: 'По новинкам',
   },
 ];
 
@@ -188,8 +187,6 @@ function ProductListFiltered({
 }: TProductListFilteredProps): JSX.Element {
   const { products } = data;
   const [isShowFilters, setIsShowFilters] = useState(true);
-  const id = useId();
-  const selectId = id + '-select';
   const { isLessTablet, isLessMobileSmall } = useScreenWidth();
 
   function toggleShowFilter() {
@@ -221,59 +218,33 @@ function ProductListFiltered({
               <Steps className="product-list-filtered__steps" />
             )}
             <div className="product-list-filtered__toolbar">
-              {!isLessTablet ? (
-                <>
-                  <ToggleButton
-                    className="product-list-filtered__toolbar-toggle"
-                    labelActive="Скрыть фильтры"
-                    labelNotActive="Показать фильтры"
-                    isActive={isShowFilters}
-                    onClick={toggleShowFilter}
-                  />
-                  <div className="product-list-filtered__sort">
-                    <span className="product-list-filtered__sort-label">
-                      <label htmlFor={selectId}>Сортировать по:</label>
-                    </span>
-                    <Select
-                      className="product-list-filtered__sort-select"
-                      iconSelect={<SelectIcon />}
-                      id={selectId}
-                    >
-                      {SORTS.map((sort) => (
-                        <Select.Option key={sort.value} value={sort.value}>
-                          {sort.text}
-                        </Select.Option>
-                      ))}
-                    </Select>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <Select
-                    className="product-list-filtered__sort-select"
-                    iconSelect={<SelectIcon />}
-                    id={selectId}
-                    placreholder="Сортировать"
-                  >
-                    {SORTS.map((sort) => (
-                      <Select.Option key={sort.value} value={sort.value}>
-                        {sort.text}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                  <Popup.Open
-                    windowName="filters"
-                    render={({ open }) => (
-                      <ToggleButton
-                        className="product-list-filtered__toolbar-toggle"
-                        isNotShowIcon
-                        labelActive="Фильтры"
-                        isActive={isShowFilters}
-                        onClick={open}
-                      />
-                    )}
-                  />
-                </>
+              {!isLessTablet && (
+                <ToggleButton
+                  className="product-list-filtered__toolbar-toggle"
+                  labelActive="Скрыть фильтры"
+                  labelNotActive="Показать фильтры"
+                  isActive={isShowFilters}
+                  onClick={toggleShowFilter}
+                />
+              )}
+              <SortBy
+                className="product-list-filtered__sort"
+                label={!isLessTablet && 'Сортировать по'}
+                options={SORT_OPTIONS}
+              />
+              {isLessTablet && (
+                <Popup.Open
+                  windowName="filters"
+                  render={({ open }) => (
+                    <ToggleButton
+                      className="product-list-filtered__toolbar-toggle"
+                      isNotShowIcon
+                      labelActive="Фильтры"
+                      isActive={isShowFilters}
+                      onClick={open}
+                    />
+                  )}
+                />
               )}
             </div>
             <div className="product-list-filtered__body">

@@ -56,42 +56,21 @@
   // .product-list-filtered__sort
   &__sort {
     flex-grow: 1;
-    display: flex;
-    align-items: center;
-  }
-
-  // .product-list-filtered__sort-label
-  &__sort-label {
-    margin: 0 rem(30);
-    flex: 1 1 auto;
-    text-align: right;
-    @extend %body-2-1;
-    color: var(--dark-gray);
-  }
-  // .product-list-filtered__sort-select
-  &__sort-select {
-    flex: 0 0 percent(321, 1014);
-    @extend %body-4-capital;
-    background-color: var(--light-gray);
-
-    .select__wrapper {
-      padding: rem(14) rem(15);
-      border-color: var(--light-gray);
-    }
-
-    .select__selected {
-      text-wrap: nowrap;
-      @include tablet-d {
-        text-align: center;
-      }
-    }
 
     @include tablet-d {
       flex: 0 0 50%;
-      font-size: rem(16);
-      text-transform: none;
+    }
+
+    .sort-by__select {
+      flex: 0 0 percent(321, 1014);
+      @include tablet-d {
+        flex: 0 0 100%;
+        font-size: rem(16);
+        text-transform: none;
+      }
     }
   }
+
   // .product-list-filtered__body
   &__body {
     display: flex;
