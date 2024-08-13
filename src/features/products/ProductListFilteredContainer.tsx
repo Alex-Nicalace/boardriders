@@ -7,7 +7,15 @@ function ProductListFilteredContainer({
   className,
 }: TProductListFilteredContainerProps): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { products, isLoading, error, pageNum, totalPages } = useProducts();
+  const {
+    products,
+    isLoading,
+    error,
+    pageNum,
+    totalPages,
+    count,
+    categoryDisplay,
+  } = useProducts();
 
   function handlePageChange(page: number) {
     searchParams.set('page', String(page));
@@ -21,6 +29,8 @@ function ProductListFilteredContainer({
       error,
       currentPage: pageNum,
       totalPages,
+      count: count ?? 0,
+      title: categoryDisplay,
     },
   };
   return (

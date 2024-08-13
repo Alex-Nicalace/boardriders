@@ -34,6 +34,8 @@ export type TProductListFilteredProps = {
       error: Error | null;
       currentPage: number;
       totalPages: number;
+      count: number;
+      title: string | undefined;
     };
   };
 

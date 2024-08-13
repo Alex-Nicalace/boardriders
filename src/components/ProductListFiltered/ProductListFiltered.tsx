@@ -214,9 +214,9 @@ function ProductListFiltered({
               className="product-list-filtered__title"
               as="h2"
               kind="h1-32-h2-21"
-              supNode="358"
+              supNode={products.count}
             >
-              Сноуборд
+              {products.title}
             </Title>
             {!isLessTablet && (
               <Steps className="product-list-filtered__steps" />
