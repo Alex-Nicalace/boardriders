@@ -274,6 +274,7 @@ export type Database = {
           brandId: number;
           description: string | null;
           detailedDescription: string | null;
+          discount: number | null;
           id: number;
           insertedAt: string;
           manufacturerSKU: string | null;
@@ -285,6 +286,7 @@ export type Database = {
           brandId: number;
           description?: string | null;
           detailedDescription?: string | null;
+          discount?: number | null;
           id?: number;
           insertedAt?: string;
           manufacturerSKU?: string | null;
@@ -296,6 +298,7 @@ export type Database = {
           brandId?: number;
           description?: string | null;
           detailedDescription?: string | null;
+          discount?: number | null;
           id?: number;
           insertedAt?: string;
           manufacturerSKU?: string | null;

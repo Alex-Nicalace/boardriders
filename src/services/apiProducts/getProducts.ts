@@ -5,11 +5,13 @@ import { PAGE_SIZE_PRODUCTS } from '../constants';
 
 export async function getProducts({
   categories = [],
-  brand,
+  filters,
+  sortBy,
   page,
 }: {
   categories: string[];
-  brand?: string;
+  filters?: { field: string; value: string }[];
+  sortBy?: { field: string; value: string };
   page?: number;
 }) {
   const query = supabase
@@ -19,19 +21,27 @@ export async function getProducts({
       id, 
       description, 
       price, 
-      oldPrice, 
+      oldPrice,
       productImagesPrimary(imageUrl), 
       brands!inner(name),
+      insertedAt,
       ${categories.map((_, i) => `cat_${i}:categories!inner()`).join(', ')}
     `,
       { count: 'exact' }
     )
     .order('order', { referencedTable: 'productImagesPrimary' })
-    .limit(2, { referencedTable: 'productImagesPrimary' })
-    .order('insertedAt', { ascending: false });
+    .limit(2, { referencedTable: 'productImagesPrimary' });
 
-  if (brand) {
-    query.eq('brands.name', brand);
+  // FILTERS
+  if (filters) {
+    filters.forEach(({ field, value }) => {
+      query.eq(field, value);
+    });
+  }
+
+  // SORT
+  if (sortBy) {
+    query.order(sortBy.field, { ascending: sortBy.value === 'asc' });
   }
 
   categories.forEach((category, i) => {
