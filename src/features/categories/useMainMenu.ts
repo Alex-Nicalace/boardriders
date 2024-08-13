@@ -9,7 +9,7 @@ export function useMainMenu() {
   const categoryGender = params.categoryGender || genderCategoryProduct || '';
 
   const {
-    data: mainMenu,
+    data: { mainMenu, mainMenuFlattened } = {},
     isLoading,
     error,
   } = useQuery({
@@ -18,5 +18,5 @@ export function useMainMenu() {
     staleTime: Infinity,
   });
 
-  return { mainMenu, isLoading, error, categoryGender };
+  return { mainMenu, mainMenuFlattened, isLoading, error, categoryGender };
 }

@@ -8,5 +8,16 @@ export async function getMainMenu(categoryGender: string) {
     throw new Error('Main menu could not be loaded');
   }
 
-  return data;
+  const mainMenuFlattened = data.flatMap(
+    ({ id, name, displayName, subMenu }) => [
+      { id, name, displayName },
+      ...(subMenu ?? []).map(({ id, name, displayName }) => ({
+        id,
+        name,
+        displayName,
+      })),
+    ]
+  );
+
+  return { mainMenu: data, mainMenuFlattened };
 }
