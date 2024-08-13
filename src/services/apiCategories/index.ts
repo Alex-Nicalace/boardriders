@@ -1,2 +1,2 @@
-export * from './getCategories';
+export * from './getGenderCategories';
 export * from './getMainMenu';
