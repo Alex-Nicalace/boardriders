@@ -2,11 +2,15 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { getProducts } from '../../services/apiProducts';
 import { PAGE_SIZE_PRODUCTS } from '../../services/constants';
+import { useMainMenu } from '../categories/useMainMenu';
+import { useGenderCategories } from '../categories/useCategories';
 
 export function useProducts() {
   const params = useParams();
   const [searchParams] = useSearchParams();
   const queryClient = useQueryClient();
+  const { mainMenuFlattened } = useMainMenu();
+  const { genderCategories } = useGenderCategories();
 
   const { categoryGender, category, brand } = params;
   const categories = [categoryGender, category].filter(
@@ -71,5 +75,27 @@ export function useProducts() {
     });
   }
 
-  return { products, isLoading, error, count, totalPages, pageNum };
+  const getCategoryDisplay = () => {
+    const categoryDisplay =
+      (mainMenuFlattened ?? []).find((item) => item.name === category)
+        ?.displayName || '';
+
+    const categoryGenderDisplay =
+      (genderCategories ?? []).find((item) => item.name === categoryGender)
+        ?.displayName || '';
+
+    return [categoryDisplay, brand, categoryGenderDisplay.toLowerCase()]
+      .filter(Boolean)
+      .join(' ');
+  };
+
+  return {
+    products,
+    isLoading,
+    error,
+    count,
+    totalPages,
+    pageNum,
+    categoryDisplay: getCategoryDisplay(),
+  };
 }
