@@ -4,23 +4,17 @@ import Steps from '../ui/Steps';
 import Title from '../ui/Title';
 import ToggleButton from '../ToggleButton';
 import Transition, { TTransition } from '../../component-library/Transition';
-import CollapsiblePanel from '../CollapsiblePanel';
 import ColorLabel from '../ColorLabel';
-import CheckboxGroup from '../CheckboxGroup';
-import RangeSelector from '../RangeSelector';
 import Pagination from '../ui/Pagination';
 import Button from '../ui/Button';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import Popup from '../../component-library/Popup';
-import FiltersMobile from '../FiltersMobile';
 import ProductList from '../ProductList';
 import Spinner from '../Spinner';
 import Empty from '../Empty';
-import {
-  TFiltersData,
-  TProductListFilteredProps,
-} from './ProductListFiltered.types';
+import { TProductListFilteredProps } from './ProductListFiltered.types';
 import SortBy from '../SortBy';
+import { Filters, FiltersMobile, TFiltersData } from '../Filters';
 
 const SORT_OPTIONS = [
   // {
@@ -253,29 +247,10 @@ function ProductListFiltered({
             </div>
             <div className="product-list-filtered__body">
               {!isLessTablet && (state !== 'exited' || isShowFilters) && (
-                <div className="product-list-filtered__filters">
-                  {FILTERS_DATA.map((filter) => (
-                    <CollapsiblePanel
-                      key={filter.name}
-                      defaultOpen={true}
-                      className="product-list-filtered__filter"
-                      sammary={filter.title}
-                    >
-                      {filter.items && (
-                        <CheckboxGroup
-                          className="product-list-filtered__params"
-                          items={filter.items}
-                          name={filter.name}
-                          isSearchable={filter.isSearchable}
-                          type={filter.type}
-                        />
-                      )}
-                      {filter.min !== undefined && filter.max !== undefined && (
-                        <RangeSelector min={filter.min} max={filter.max} />
-                      )}
-                    </CollapsiblePanel>
-                  ))}
-                </div>
+                <Filters
+                  className="product-list-filtered__filters"
+                  data={FILTERS_DATA}
+                />
               )}
               {isLessTablet && (
                 <Popup.Window

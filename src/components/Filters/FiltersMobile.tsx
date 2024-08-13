@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import './FiltersMobile.scss';
 import ListLinks from '../../component-library/ListLinks';
-import { TFiltersData } from '../ProductListFiltered';
 import ButtonMenu from '../ui/ButtonMenu';
 import IconButton from '../ui/IconButton';
 import { ArrowLeftClassic } from '../ui/Icons';
@@ -9,11 +8,8 @@ import CheckboxGroup from '../CheckboxGroup';
 import RangeSelector from '../RangeSelector';
 import Button from '../ui/Button';
 import Transition from '../../component-library/Transition';
+import { TFiltersMobileProps } from './Filters.types';
 
-type TFiltersMobileProps = {
-  data: TFiltersData[];
-  close?: () => void;
-};
 function FiltersMobile({
   data,
   close = () => {},
