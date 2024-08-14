@@ -4,12 +4,12 @@ import { TProducts } from './apiProducts.types';
 import { PAGE_SIZE_PRODUCTS } from '../constants';
 
 export async function getProducts({
-  categories = [],
+  categoryFilters = [],
   filters,
   sortBy,
   page,
 }: {
-  categories: string[];
+  categoryFilters: string[];
   filters?: { field: string; value: string }[];
   sortBy?: { field: string; value: string };
   page?: number;
@@ -25,12 +25,16 @@ export async function getProducts({
       productImagesPrimary(imageUrl), 
       brands!inner(name),
       insertedAt,
-      ${categories.map((_, i) => `cat_${i}:categories!inner()`).join(', ')}
+      ${categoryFilters.map((_, i) => `cat_${i}:categories!inner()`).join(', ')}
     `,
       { count: 'exact' }
     )
     .order('order', { referencedTable: 'productImagesPrimary' })
     .limit(2, { referencedTable: 'productImagesPrimary' });
+
+  categoryFilters.forEach((category, i) => {
+    query.eq(`cat_${i}.name`, category);
+  });
 
   // FILTERS
   if (filters) {
@@ -43,10 +47,6 @@ export async function getProducts({
   if (sortBy) {
     query.order(sortBy.field, { ascending: sortBy.value === 'asc' });
   }
-
-  categories.forEach((category, i) => {
-    query.eq(`cat_${i}.name`, category);
-  });
 
   // RANGE
   if (page) {

@@ -13,7 +13,7 @@ export function useProducts() {
   const { genderCategories } = useGenderCategories();
 
   const { categoryGender, category, brand } = params;
-  const categories = [categoryGender, category].filter(
+  const categoryFilters = [categoryGender, category].filter(
     (item) => item !== undefined
   );
   const page = Number(searchParams.get('page'));
@@ -40,10 +40,10 @@ export function useProducts() {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['products', ...categories, filters, sortBy, pageNum],
+    queryKey: ['products', ...categoryFilters, filters, sortBy, pageNum],
     queryFn: () =>
       getProducts({
-        categories,
+        categoryFilters,
         page: pageNum,
         filters,
         sortBy,
@@ -55,10 +55,10 @@ export function useProducts() {
   // предварительная подгрузка следующей страницы
   if (pageNum < totalPages) {
     queryClient.prefetchQuery({
-      queryKey: ['products', ...categories, pageNum + 1, brand],
+      queryKey: ['products', ...categoryFilters, pageNum + 1, brand],
       queryFn: () =>
         getProducts({
-          categories,
+          categoryFilters,
           page: pageNum + 1,
         }),
     });
@@ -66,10 +66,10 @@ export function useProducts() {
   // предварительная подгрузка предыдущей страницы
   if (pageNum > 1) {
     queryClient.prefetchQuery({
-      queryKey: ['products', ...categories, pageNum - 1, brand],
+      queryKey: ['products', ...categoryFilters, pageNum - 1, brand],
       queryFn: () =>
         getProducts({
-          categories,
+          categoryFilters,
           page: pageNum - 1,
         }),
     });
