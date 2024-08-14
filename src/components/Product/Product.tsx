@@ -196,7 +196,7 @@ function Product({
         <div className="product__parameters product-params">
           <h2 className="product-params__title">Характеристики</h2>
           <p className="product-params__text">{detailedDescription}</p>
-          {!!productDescriptionImages?.length && (
+          {productDescriptionImages.length > 0 && (
             <ul className="product-params__list-img">
               {productDescriptionImages.map(({ imageUrl }) => (
                 <li className="product-params__item-img" key={imageUrl}>
@@ -205,7 +205,7 @@ function Product({
               ))}
             </ul>
           )}
-          {productAttributes?.length && (
+          {productAttributes.length > 0 && (
             <div className="product-params__wrap-list">
               <dl className="product-params__list">
                 {productAttributes.map((param) => (
