@@ -610,6 +610,38 @@ export type Database = {
       };
     };
     Functions: {
+      getAvailableCategories: {
+        Args: {
+          categoriesList: string[];
+        };
+        Returns: {
+          id: number;
+          name: string;
+          displayName: string;
+          countProduct: number;
+        }[];
+      };
+      getAvailableColors: {
+        Args: {
+          categoriesList: string[];
+        };
+        Returns: {
+          id: number;
+          name: string;
+          hexValue: string;
+          countProduct: number;
+        }[];
+      };
+      getAvailableSizes: {
+        Args: {
+          categoriesList: string[];
+        };
+        Returns: {
+          id: number;
+          name: string;
+          countProduct: number;
+        }[];
+      };
       getMainMenu: {
         Args: {
           categoryGender: string;
