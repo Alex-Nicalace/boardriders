@@ -1,3 +1,4 @@
+import { TFiltersData } from '../Filters';
 import { TWareData } from '../ui/WareCard';
 
 export type TProductListFilteredProps = {
@@ -12,6 +13,8 @@ export type TProductListFilteredProps = {
       count: number;
       title: string | undefined;
     };
+    sortOptions: { value: string; text: string }[];
+    filters: TFiltersData[];
   };
 
   onPageChange?: (page: number) => void;
