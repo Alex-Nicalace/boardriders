@@ -9,6 +9,8 @@ import RangeSelector from '../RangeSelector';
 import Button from '../ui/Button';
 import Transition from '../../component-library/Transition';
 import { TFiltersMobileProps } from './Filters.types';
+import DataProvider from '../../features/DataProvider';
+import ColorLabel from '../ColorLabel';
 
 function FiltersMobile({
   data,
@@ -70,6 +72,39 @@ function FiltersMobile({
         />
         <Transition enter={isShowFilter} timeout={300}>
           <div className="filters-mobile__filter">
+            {expandedFilterData?.useCallbackData && (
+              <DataProvider
+                useCallbackData={expandedFilterData.useCallbackData}
+              >
+                {/* если данные надо тянуть с сервера */}
+                {(data) => (
+                  <>
+                    {!!data?.length && (
+                      <CheckboxGroup
+                        className="filters-mobile__params"
+                        items={
+                          expandedFilterData.name === 'color'
+                            ? data.map((item) => ({
+                                ...item,
+                                title: (
+                                  <ColorLabel
+                                    color={item.value}
+                                    label={item.title ?? item.value}
+                                  />
+                                ),
+                              }))
+                            : data
+                        }
+                        name={expandedFilterData.name}
+                        isSearchable={expandedFilterData.isSearchable}
+                        type={expandedFilterData.type}
+                      />
+                    )}
+                  </>
+                )}
+              </DataProvider>
+            )}
+            {/* если данные статичные  */}
             {expandedFilterData?.items && (
               <CheckboxGroup
                 className="filters-mobile__params"
