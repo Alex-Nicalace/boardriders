@@ -5,6 +5,7 @@ import { TFiltersData } from '../../components/Filters';
 import { useAvailableCategories } from '../categories/useAvailableCategories';
 import { useAvailableSizes } from '../sizes/useAvailableSizes';
 import { useAvailableColors } from '../colors/useAvailableColors';
+import { useAvailableBrands } from '../brands/useAvailableBrands';
 
 const SORT_OPTIONS = [
   // {
@@ -39,17 +40,6 @@ const FILTERS_DATA: TFiltersData[] = [
     name: 'category',
     defaultOpen: true,
     useCallbackData: useAvailableCategories,
-    // items: [
-    //   { value: 'cnowboards', title: 'Сноуборды', count: 24 },
-    //   { value: 'fasteners', title: 'Крепления', count: 48 },
-    //   { value: 'shoes', title: 'Обувь', count: 60 },
-    //   { value: 'sets', title: 'Наборы', count: 13 },
-    //   { value: 'jackets', title: 'Куртки', count: 81 },
-    //   { value: 'pants', title: 'Штаны', count: 55 },
-    //   { value: 'helmets', title: 'Шлемы', count: 13 },
-    //   { value: 'watches', title: 'Очки', count: 81 },
-    //   { value: 'gloves', title: 'Перчатки', count: 55 },
-    // ],
   },
   {
     title: 'Смотреть',
@@ -66,34 +56,13 @@ const FILTERS_DATA: TFiltersData[] = [
     name: 'brand',
     defaultOpen: true,
     isSearchable: true,
-    items: [
-      { value: 'DC Shoes', count: 24 },
-      { value: 'Quicksilver', count: 48 },
-      { value: 'BoardRiders', count: 60 },
-      { value: 'Billabong', count: 13 },
-      { value: 'Adidas', count: 81 },
-      { value: 'The Tree', count: 55 },
-      { value: 'DC_Shoes', count: 24 },
-      { value: 'Quic_ksilver', count: 48 },
-      { value: 'Board_Riders', count: 60 },
-      { value: 'Bill_abong', count: 13 },
-      { value: 'Adidas_', count: 81 },
-      { value: 'The_Tree', count: 55 },
-    ],
+    useCallbackData: useAvailableBrands,
   },
   {
     title: 'Размер',
     name: 'size',
     defaultOpen: true,
     useCallbackData: useAvailableSizes,
-    // items: [
-    //   { value: 'XS', count: 24 },
-    //   { value: 'S', count: 48 },
-    //   { value: 'S/M', count: 60 },
-    //   { value: 'M', count: 13 },
-    //   { value: 'M/L', count: 81 },
-    //   { value: 'L', count: 55 },
-    // ],
   },
   {
     title: 'Цена, ₽',
@@ -119,17 +88,6 @@ const FILTERS_DATA: TFiltersData[] = [
     title: 'Цвет',
     name: 'color',
     useCallbackData: useAvailableColors,
-    // items: [
-    //   { value: '#000', title: 'Черный', count: 24 },
-    //   { value: '#fff', title: 'Белый', count: 48 },
-    //   { value: '#eb5757', title: 'Красный', count: 60 },
-    //   { value: '#2d9cdb', title: 'Синий', count: 13 },
-    //   { value: '#f2c94c', title: 'Желтый', count: 81 },
-    //   { value: '#f2994a', title: 'Оранжевый', count: 55 },
-    // ].map((item) => ({
-    //   ...item,
-    //   title: <ColorLabel color={item.value} label={item.title} />,
-    // })),
   },
   {
     title: 'Забрать сейчас: Москва',
