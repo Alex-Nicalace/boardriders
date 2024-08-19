@@ -610,6 +610,16 @@ export type Database = {
       };
     };
     Functions: {
+      getAvailableBrands: {
+        Args: {
+          categoriesList: string[];
+        };
+        Returns: {
+          id: number;
+          name: string;
+          countProduct: number;
+        }[];
+      };
       getAvailableCategories: {
         Args: {
           categoriesList: string[];
