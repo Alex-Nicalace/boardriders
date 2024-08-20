@@ -3,25 +3,17 @@ import './CheckboxGroup.scss';
 import InputStyled from '../ui/InputStyled';
 import extractTextFromReactNode from '../../utils/extractTextFromReactNode';
 import Checkbox from '../ui/Checkbox';
+import { TCheckboxGroupProps } from './CheckboxGroup.types';
 
-type TCheckboxGroupProps = {
-  name: string;
-  isSearchable?: boolean;
-  items: {
-    value: string;
-    title?: React.ReactNode;
-    count?: number;
-    hint?: React.ReactNode;
-  }[];
-  className?: string;
-  type?: 'checkbox' | 'radio';
-};
 function CheckboxGroup({
   isSearchable,
   items,
+  checkedValues,
   name,
-  className = '',
+  className,
   type,
+
+  onChange,
 }: TCheckboxGroupProps): JSX.Element {
   const [serachValue, setSerachValue] = useState('');
 
@@ -36,7 +28,7 @@ function CheckboxGroup({
   }, [items, serachValue]);
 
   return (
-    <div className={`checkbox-group ${className}`}>
+    <div className={['checkbox-group', className].filter(Boolean).join(' ')}>
       {isSearchable && (
         <InputStyled
           className="checkbox-group__search"
@@ -54,6 +46,7 @@ function CheckboxGroup({
             key={item.value}
             name={name}
             value={item.value}
+            checked={checkedValues?.includes(item.value)}
             label={
               item.count ? (
                 <Checkbox.LabelAmount
@@ -65,6 +58,7 @@ function CheckboxGroup({
               )
             }
             hint={item.hint}
+            onChange={() => onChange?.(item.value)}
           />
         ))}
       </div>
