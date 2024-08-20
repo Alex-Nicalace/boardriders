@@ -20,7 +20,7 @@ export function useAvailableColors() {
   });
 
   const data = rowData?.map((item) => ({
-    value: item.hexValue,
+    value: `${item.id}|${item.hexValue}`,
     title: item.name,
     count: item.countProduct,
   }));

@@ -138,15 +138,19 @@ function FiltersMobile({
                         className="filters-mobile__params"
                         items={
                           expandedFilterData.name === 'color'
-                            ? providerData.map((item) => ({
-                                ...item,
-                                title: (
-                                  <ColorLabel
-                                    color={item.value}
-                                    label={item.title ?? item.value}
-                                  />
-                                ),
-                              }))
+                            ? providerData.map((item) => {
+                                const [id, hexValue] = item.value.split('|');
+                                return {
+                                  ...item,
+                                  id,
+                                  title: (
+                                    <ColorLabel
+                                      color={hexValue}
+                                      label={item.title ?? hexValue}
+                                    />
+                                  ),
+                                };
+                              })
                             : providerData
                         }
                         name={expandedFilterData.name}
@@ -177,7 +181,23 @@ function FiltersMobile({
             {expandedFilterData?.items && (
               <CheckboxGroup
                 className="filters-mobile__params"
-                items={expandedFilterData.items}
+                items={
+                  expandedFilterData.name === 'color'
+                    ? expandedFilterData.items.map((item) => {
+                        const [id, hexValue] = item.value.split('|');
+                        return {
+                          ...item,
+                          id,
+                          title: (
+                            <ColorLabel
+                              color={hexValue}
+                              label={item.title ?? hexValue}
+                            />
+                          ),
+                        };
+                      })
+                    : expandedFilterData.items
+                }
                 name={expandedFilterData.name}
                 isSearchable={expandedFilterData.isSearchable}
                 type={expandedFilterData.type}

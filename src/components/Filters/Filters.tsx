@@ -31,15 +31,19 @@ function Filters({
                         className="filters__params"
                         items={
                           filter.name === 'color'
-                            ? providerData.map((item) => ({
-                                ...item,
-                                title: (
-                                  <ColorLabel
-                                    color={item.value}
-                                    label={item.title ?? item.value}
-                                  />
-                                ),
-                              }))
+                            ? providerData.map((item) => {
+                                const [id, hexValue] = item.value.split('|');
+                                return {
+                                  ...item,
+                                  id,
+                                  title: (
+                                    <ColorLabel
+                                      color={hexValue}
+                                      label={item.title ?? hexValue}
+                                    />
+                                  ),
+                                };
+                              })
                             : providerData
                         }
                         name={filter.name}
@@ -84,15 +88,19 @@ function Filters({
                 className="filters__params"
                 items={
                   filter.name === 'color'
-                    ? filter.items.map((item) => ({
-                        ...item,
-                        title: (
-                          <ColorLabel
-                            color={item.value}
-                            label={item.title ?? item.value}
-                          />
-                        ),
-                      }))
+                    ? filter.items.map((item) => {
+                        const [id, hexValue] = item.value.split('|');
+                        return {
+                          ...item,
+                          id,
+                          title: (
+                            <ColorLabel
+                              color={hexValue}
+                              label={item.title ?? hexValue}
+                            />
+                          ),
+                        };
+                      })
                     : filter.items
                 }
                 name={filter.name}
