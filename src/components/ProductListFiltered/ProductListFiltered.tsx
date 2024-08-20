@@ -94,13 +94,18 @@ function ProductListFiltered({
                 <Filters
                   className="product-list-filtered__filters"
                   data={filters}
+                  isUseOnlyRemoteData
                 />
               )}
               {isLessTablet && (
                 <Popup.Window
                   windowName="filters"
                   render={(close) => (
-                    <FiltersMobile data={filters} close={close} />
+                    <FiltersMobile
+                      data={filters}
+                      close={close}
+                      isUseOnlyRemoteData
+                    />
                   )}
                   onClickOutside={(close) => close()}
                   fullHeight

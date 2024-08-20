@@ -5,34 +5,50 @@ type TItem = {
   hint?: string;
 };
 
-type TData =
-  | {
-      items: TItem[];
-      useCallbackData?: never;
-    }
-  | {
-      items?: never;
-      useCallbackData: () => {
-        data: TItem[] | undefined;
-        isLoading: boolean;
-        error: Error | null;
-      };
-    };
-
 export type TFiltersData = (
-  | (TData & {
+  | ((
+      | {
+          items: TItem[];
+          useCallbackData?: never;
+        }
+      | {
+          items?: never;
+          useCallbackData: () => {
+            data: TItem[] | undefined;
+            isLoading: boolean;
+            error: Error | null;
+          };
+        }
+    ) & {
       type?: 'checkbox' | 'radio';
       isSearchable?: boolean;
       min?: never;
       max?: never;
+      useGetData?: never;
     })
-  | {
+  | ({
       items?: never;
-      min: number;
-      max: number;
+      type?: never;
       isSearchable?: never;
       useCallbackData?: never;
-    }
+    } & (
+      | { min: number; max: number; useGetData?: never }
+      | {
+          min?: never;
+          max?: never;
+          useGetData: () => {
+            data:
+              | {
+                  min: number;
+                  max: number;
+                }
+              | undefined
+              | null;
+            isLoading: boolean;
+            error: Error | null;
+          };
+        }
+    ))
 ) & {
   title: string;
   name: string;
@@ -42,9 +58,11 @@ export type TFiltersData = (
 export type TFiltersProps = {
   data: TFiltersData[];
   className?: string;
+  isUseOnlyRemoteData?: boolean;
 };
 
 export type TFiltersMobileProps = {
   data: TFiltersData[];
   close?: () => void;
+  isUseOnlyRemoteData?: boolean;
 };

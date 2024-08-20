@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import './FiltersMobile.scss';
-import ListLinks from '../../component-library/ListLinks';
 import ButtonMenu from '../ui/ButtonMenu';
 import IconButton from '../ui/IconButton';
 import { ArrowLeftClassic } from '../ui/Icons';
@@ -15,14 +14,12 @@ import ColorLabel from '../ColorLabel';
 function FiltersMobile({
   data,
   close = () => {},
+  isUseOnlyRemoteData = false,
 }: TFiltersMobileProps): JSX.Element {
   const [isShowFilter, setIsShowFilter] = useState(false);
   const [expandedFilter, setExpandedFilter] = useState('');
 
   const expandedFilterData = data.find((item) => item.title === expandedFilter);
-  const dataForListLinks = data.map(({ title }) => ({
-    title,
-  }));
 
   useEffect(function scrollToTop() {
     // скролл к верху. По макету панель фильтров должна быть под хедером. Но если есть прокрутка,
@@ -56,35 +53,92 @@ function FiltersMobile({
         </button>
       </header>
       <div
-        className={`filters-mobile__content ${
-          isShowFilter ? 'filters-mobile__content_shifted' : ''
-        }`}
+        className={[
+          'filters-mobile__content',
+          isShowFilter && 'filters-mobile__content_shifted',
+        ]
+          .filter(Boolean)
+          .join(' ')}
       >
-        <ListLinks
-          linksData={dataForListLinks}
-          listProps={{ className: 'filters-mobile__list' }}
-          itemProps={{ className: 'filters-mobile__item' }}
-          renderToItem={({ title }) => (
-            <ButtonMenu withArrow onClick={() => handleShowFilter(title)}>
-              {title}
-            </ButtonMenu>
-          )}
-        />
+        <ul className="filters-mobile__list">
+          {data.map((filter) => (
+            <Fragment key={filter.title}>
+              {/* если данные надо тянуть с сервера */}
+              {filter.useCallbackData && (
+                <DataProvider useCallbackData={filter.useCallbackData}>
+                  {(providerData) => (
+                    <>
+                      {!!providerData?.length && (
+                        <li className="filters-mobile__item">
+                          <ButtonMenu
+                            withArrow
+                            onClick={() => handleShowFilter(filter.title)}
+                          >
+                            {filter.title}
+                          </ButtonMenu>
+                        </li>
+                      )}
+                    </>
+                  )}
+                </DataProvider>
+              )}
+              {filter.useGetData && (
+                <DataProvider useCallbackData={filter.useGetData}>
+                  {(providerData) => (
+                    <>
+                      {!!providerData && (
+                        <li className="filters-mobile__item">
+                          <ButtonMenu
+                            withArrow
+                            onClick={() => handleShowFilter(filter.title)}
+                          >
+                            {filter.title}
+                          </ButtonMenu>
+                        </li>
+                      )}
+                    </>
+                  )}
+                </DataProvider>
+              )}
+              {/* если данные статичные  */}
+              {!isUseOnlyRemoteData && filter.items && (
+                <li className="filters-mobile__item">
+                  <ButtonMenu
+                    withArrow
+                    onClick={() => handleShowFilter(filter.title)}
+                  >
+                    {filter.title}
+                  </ButtonMenu>
+                </li>
+              )}
+              {!isUseOnlyRemoteData && filter.min && filter.max && (
+                <li className="filters-mobile__item">
+                  <ButtonMenu
+                    withArrow
+                    onClick={() => handleShowFilter(filter.title)}
+                  >
+                    {filter.title}
+                  </ButtonMenu>
+                </li>
+              )}
+            </Fragment>
+          ))}
+        </ul>
         <Transition enter={isShowFilter} timeout={300}>
           <div className="filters-mobile__filter">
+            {/* если данные надо тянуть с сервера */}
             {expandedFilterData?.useCallbackData && (
               <DataProvider
                 useCallbackData={expandedFilterData.useCallbackData}
               >
-                {/* если данные надо тянуть с сервера */}
-                {(data) => (
+                {(providerData) => (
                   <>
-                    {!!data?.length && (
+                    {!!providerData?.length && (
                       <CheckboxGroup
                         className="filters-mobile__params"
                         items={
                           expandedFilterData.name === 'color'
-                            ? data.map((item) => ({
+                            ? providerData.map((item) => ({
                                 ...item,
                                 title: (
                                   <ColorLabel
@@ -93,11 +147,26 @@ function FiltersMobile({
                                   />
                                 ),
                               }))
-                            : data
+                            : providerData
                         }
                         name={expandedFilterData.name}
                         isSearchable={expandedFilterData.isSearchable}
                         type={expandedFilterData.type}
+                      />
+                    )}
+                  </>
+                )}
+              </DataProvider>
+            )}
+            {expandedFilterData?.useGetData && (
+              <DataProvider useCallbackData={expandedFilterData.useGetData}>
+                {(providerData) => (
+                  <>
+                    {!!providerData && (
+                      <RangeSelector
+                        className="filters-mobile__params"
+                        min={providerData.min}
+                        max={providerData.max}
                       />
                     )}
                   </>
@@ -114,14 +183,13 @@ function FiltersMobile({
                 type={expandedFilterData.type}
               />
             )}
-            {expandedFilterData?.min !== undefined &&
-              expandedFilterData?.max !== undefined && (
-                <RangeSelector
-                  className="filters-mobile__params"
-                  min={expandedFilterData.min}
-                  max={expandedFilterData.max}
-                />
-              )}
+            {expandedFilterData?.min && expandedFilterData.max && (
+              <RangeSelector
+                className="filters-mobile__params"
+                min={expandedFilterData.min}
+                max={expandedFilterData.max}
+              />
+            )}
             <div className="filters-mobile__btn-apply">
               <Button fullWidth>Применить</Button>
             </div>

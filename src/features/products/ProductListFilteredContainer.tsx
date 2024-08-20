@@ -6,6 +6,7 @@ import { useAvailableCategories } from '../categories/useAvailableCategories';
 import { useAvailableSizes } from '../sizes/useAvailableSizes';
 import { useAvailableColors } from '../colors/useAvailableColors';
 import { useAvailableBrands } from '../brands/useAvailableBrands';
+import { useAvailableRangePrices } from './useAvailableRangePrices';
 
 const SORT_OPTIONS = [
   // {
@@ -68,8 +69,9 @@ const FILTERS_DATA: TFiltersData[] = [
     title: 'Цена, ₽',
     name: 'price',
     defaultOpen: true,
-    min: 0,
-    max: 200,
+    useGetData: useAvailableRangePrices,
+    // min: 0,
+    // max: 200,
   },
   {
     title: 'Технологии',
