@@ -1,11 +1,10 @@
 import { Fragment } from 'react';
 import { TFiltersProps } from './Filters.types';
 import CollapsiblePanel from '../CollapsiblePanel';
-import CheckboxGroup from '../CheckboxGroup';
+import { CheckboxGroupContainer } from '../CheckboxGroup';
 import RangeSelector from '../RangeSelector';
 import './Filters.scss';
 import DataProvider from '../../features/DataProvider';
-import ColorLabel from '../ColorLabel';
 
 function Filters({
   data,
@@ -27,25 +26,9 @@ function Filters({
                       className="filters__filter"
                       sammary={filter.title}
                     >
-                      <CheckboxGroup
+                      <CheckboxGroupContainer
                         className="filters__params"
-                        items={
-                          filter.name === 'color'
-                            ? providerData.map((item) => {
-                                const [id, hexValue] = item.value.split('|');
-                                return {
-                                  ...item,
-                                  id,
-                                  title: (
-                                    <ColorLabel
-                                      color={hexValue}
-                                      label={item.title ?? hexValue}
-                                    />
-                                  ),
-                                };
-                              })
-                            : providerData
-                        }
+                        items={providerData}
                         name={filter.name}
                         isSearchable={filter.isSearchable}
                         type={filter.type}
@@ -84,25 +67,9 @@ function Filters({
               className="filters__filter"
               sammary={filter.title}
             >
-              <CheckboxGroup
+              <CheckboxGroupContainer
                 className="filters__params"
-                items={
-                  filter.name === 'color'
-                    ? filter.items.map((item) => {
-                        const [id, hexValue] = item.value.split('|');
-                        return {
-                          ...item,
-                          id,
-                          title: (
-                            <ColorLabel
-                              color={hexValue}
-                              label={item.title ?? hexValue}
-                            />
-                          ),
-                        };
-                      })
-                    : filter.items
-                }
+                items={filter.items}
                 name={filter.name}
                 isSearchable={filter.isSearchable}
                 type={filter.type}

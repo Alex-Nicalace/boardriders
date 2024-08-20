@@ -1,4 +1,4 @@
-type TItem = {
+export type TFilterItem = {
   value: string;
   title?: string;
   count?: number;
@@ -8,13 +8,13 @@ type TItem = {
 export type TFiltersData = (
   | ((
       | {
-          items: TItem[];
+          items: TFilterItem[];
           useCallbackData?: never;
         }
       | {
           items?: never;
           useCallbackData: () => {
-            data: TItem[] | undefined;
+            data: TFilterItem[] | undefined;
             isLoading: boolean;
             error: Error | null;
           };

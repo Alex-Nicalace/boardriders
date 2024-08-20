@@ -3,7 +3,7 @@ import './FiltersMobile.scss';
 import ButtonMenu from '../ui/ButtonMenu';
 import IconButton from '../ui/IconButton';
 import { ArrowLeftClassic } from '../ui/Icons';
-import CheckboxGroup from '../CheckboxGroup';
+import CheckboxGroup, { CheckboxGroupContainer } from '../CheckboxGroup';
 import RangeSelector from '../RangeSelector';
 import Button from '../ui/Button';
 import Transition from '../../component-library/Transition';
@@ -134,25 +134,9 @@ function FiltersMobile({
                 {(providerData) => (
                   <>
                     {!!providerData?.length && (
-                      <CheckboxGroup
+                      <CheckboxGroupContainer
                         className="filters-mobile__params"
-                        items={
-                          expandedFilterData.name === 'color'
-                            ? providerData.map((item) => {
-                                const [id, hexValue] = item.value.split('|');
-                                return {
-                                  ...item,
-                                  id,
-                                  title: (
-                                    <ColorLabel
-                                      color={hexValue}
-                                      label={item.title ?? hexValue}
-                                    />
-                                  ),
-                                };
-                              })
-                            : providerData
-                        }
+                        items={providerData}
                         name={expandedFilterData.name}
                         isSearchable={expandedFilterData.isSearchable}
                         type={expandedFilterData.type}
