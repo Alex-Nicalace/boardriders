@@ -642,6 +642,15 @@ export type Database = {
           countProduct: number;
         }[];
       };
+      getAvailableRangePrices: {
+        Args: {
+          categoriesList: string[];
+        };
+        Returns: {
+          min: number;
+          max: number;
+        }[];
+      };
       getAvailableSizes: {
         Args: {
           categoriesList: string[];
