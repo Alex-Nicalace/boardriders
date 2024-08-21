@@ -1,4 +1,6 @@
 import RangeSelector from './RangeSelector';
+import RangeSelectorContainer from './RangeSelectorContainer';
 
-export * from './RangeSelector';
 export default RangeSelector;
+export * from './RangeSelector.types';
+export { RangeSelectorContainer };

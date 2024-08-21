@@ -3,20 +3,18 @@ import './RangeSelector.scss';
 import RangeSlider from '../../component-library/RangeSlider';
 import Button from '../ui/Button';
 import InputStyled from '../ui/InputStyled';
+import { TRangeSelectorProps } from './RangeSelector.types';
 
-type TRangeSelectorProps = {
-  min: number;
-  max: number;
-  step?: number;
-  className?: string;
-};
 function RangeSelector({
+  name,
   min,
   max,
   step = 1,
-  className = '',
+  className,
+  initValue = [min, max],
+  onThumbDragEnd,
 }: TRangeSelectorProps): JSX.Element {
-  const [rangeValue, setRangeValue] = useState([min, max]);
+  const [rangeValue, setRangeValue] = useState(initValue);
   const [from, to] = rangeValue;
 
   function handleChangeRangeValue(
@@ -30,7 +28,7 @@ function RangeSelector({
   }
 
   return (
-    <div className={`range-selector ${className}`}>
+    <div className={['range-selector', className].filter(Boolean).join(' ')}>
       <div className="range-selector__inputs">
         <InputStyled
           className="range-selector__from"
@@ -50,9 +48,11 @@ function RangeSelector({
         className="range-selector__slider"
         min={min}
         max={max}
+        name={name}
         step={step}
         value={rangeValue}
         onChange={setRangeValue}
+        onThumbDragEnd={onThumbDragEnd}
       />
     </div>
   );
