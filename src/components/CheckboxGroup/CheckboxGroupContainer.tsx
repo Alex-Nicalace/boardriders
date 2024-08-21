@@ -19,7 +19,6 @@ function CheckboxGroupContainer({
 }: TCheckboxGroupContainerProps): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
   const checkedValues = searchParams.get(name)?.split(',') ?? [];
-  console.log(searchParams);
 
   function handleChange(value: string) {
     const newValues = checkedValues.includes(value)

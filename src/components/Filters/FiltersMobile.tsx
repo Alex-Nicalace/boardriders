@@ -4,7 +4,7 @@ import ButtonMenu from '../ui/ButtonMenu';
 import IconButton from '../ui/IconButton';
 import { ArrowLeftClassic } from '../ui/Icons';
 import CheckboxGroup, { CheckboxGroupContainer } from '../CheckboxGroup';
-import RangeSelector from '../RangeSelector';
+import { RangeSelectorContainer } from '../RangeSelector';
 import Button from '../ui/Button';
 import Transition from '../../component-library/Transition';
 import { TFiltersMobileProps } from './Filters.types';
@@ -151,7 +151,7 @@ function FiltersMobile({
                 {(providerData) => (
                   <>
                     {!!providerData && (
-                      <RangeSelector
+                      <RangeSelectorContainer
                         className="filters-mobile__params"
                         min={providerData.min}
                         max={providerData.max}
@@ -188,7 +188,7 @@ function FiltersMobile({
               />
             )}
             {expandedFilterData?.min && expandedFilterData.max && (
-              <RangeSelector
+              <RangeSelectorContainer
                 className="filters-mobile__params"
                 min={expandedFilterData.min}
                 max={expandedFilterData.max}

@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { TFiltersProps } from './Filters.types';
 import CollapsiblePanel from '../CollapsiblePanel';
 import { CheckboxGroupContainer } from '../CheckboxGroup';
-import RangeSelector from '../RangeSelector';
+import { RangeSelectorContainer } from '../RangeSelector';
 import './Filters.scss';
 import DataProvider from '../../features/DataProvider';
 
@@ -49,7 +49,7 @@ function Filters({
                       className="filters__filter"
                       sammary={filter.title}
                     >
-                      <RangeSelector
+                      <RangeSelectorContainer
                         min={providerData.min}
                         max={providerData.max}
                       />
@@ -82,7 +82,7 @@ function Filters({
               className="filters__filter"
               sammary={filter.title}
             >
-              <RangeSelector min={filter.min} max={filter.max} />
+              <RangeSelectorContainer min={filter.min} max={filter.max} />
             </CollapsiblePanel>
           )}
         </Fragment>
