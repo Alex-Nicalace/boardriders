@@ -1,32 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import './RangeSlider.scss';
-
-type TRangeSliderProps<T> = (
-  | {
-      value: T;
-      defaultValue?: never;
-    }
-  | {
-      value?: never;
-      defaultValue: T;
-    }
-) & {
-  className?: string;
-  min: number;
-  max: number;
-  step?: number;
-  name?: string;
-  onChange?: (
-    value: T,
-    activeThumb?: number,
-    e?: PointerEvent | React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => void;
-};
-
-type TValue = number | number[];
+import { TRangeSliderProps, TValue } from './RangeSlider.types';
 
 function RangeSlider<T extends TValue>({
-  className = '',
+  className,
   min,
   max,
   step = 1,
@@ -34,10 +11,9 @@ function RangeSlider<T extends TValue>({
   defaultValue,
   value,
   onChange,
+  onThumbDragEnd,
 }: TRangeSliderProps<T>): JSX.Element {
-  const [valueState, setValueState] = useState<number | number[]>(
-    defaultValue ?? 0
-  );
+  const [valueState, setValueState] = useState<TValue>(defaultValue ?? 0);
   const sliderRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<Map<number, HTMLDivElement>>();
@@ -48,7 +24,7 @@ function RangeSlider<T extends TValue>({
 
   const getValue = useCallback(
     function getValue() {
-      const result = (value as TValue) ?? valueState;
+      const result = value ?? valueState;
       // результат отсортировать и ограничить максимальным и минимальным значением
       return (Array.isArray(result) ? [...result] : [result])
         .sort((a, b) => a - b)
@@ -63,12 +39,12 @@ function RangeSlider<T extends TValue>({
     e?: PointerEvent | React.MouseEvent<HTMLDivElement, MouseEvent>
   ) {
     const newValue = (isNumberState ? valueArr[0] : valueArr) as T;
-    if (onChange) {
-      onChange(newValue, activeThumb, e);
-    }
+
     if (isInnerState) {
       setValueState(newValue);
     }
+
+    onChange?.(newValue, activeThumb, e);
   }
 
   const getMapThumbs = useCallback(function getMapItems() {
@@ -205,6 +181,12 @@ function RangeSlider<T extends TValue>({
     }
   }
 
+  function handleMouseUpThumb(
+    e: React.PointerEvent<HTMLDivElement>,
+    initIndex: number
+  ) {
+    onThumbDragEnd?.(getValue() as T, initIndex, e);
+  }
   /**
    * передвинуть ползунок под координаты курсора при клике по шкале
    */
@@ -229,16 +211,15 @@ function RangeSlider<T extends TValue>({
           : prevIndex,
       0
     );
-    setValue(
-      getValue().map((v, i) => (i === indexUpdate ? value : v)),
-      indexUpdate,
-      e
-    );
+    const newValue = getValue().map((v, i) => (i === indexUpdate ? value : v));
+    setValue(newValue, indexUpdate, e);
+
+    onThumbDragEnd?.(newValue as T, indexUpdate, e);
   }
 
   return (
     <div
-      className={`range-slider ${className}`}
+      className={['range-slider', className].filter(Boolean).join(' ')}
       ref={sliderRef}
       onClick={handleOnClickSlider}
     >
@@ -259,11 +240,12 @@ function RangeSlider<T extends TValue>({
           data-index={index}
           data-value={value}
           onPointerDown={(e) => handleMouseDownThumb(e, index)}
+          onPointerUp={(e) => handleMouseUpThumb(e, index)}
           // onMouseDownCapture={handleMouseDownThumb}
         >
           <input
             type="range"
-            name={name}
+            name={name && `${name}[${index}]`}
             min={min}
             max={max}
             step={step}

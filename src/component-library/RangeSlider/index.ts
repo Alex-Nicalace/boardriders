@@ -1,4 +1,4 @@
 import RangeSlider from './RangeSlider';
 
 export default RangeSlider;
-export * from './RangeSlider';
+export * from './RangeSlider.types';
