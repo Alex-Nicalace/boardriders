@@ -5,6 +5,17 @@ export type TFilterItem = {
   hint?: string;
 };
 
+export type TFilterName =
+  | 'brand'
+  | 'category'
+  | 'color'
+  | 'minPrice'
+  | 'maxPrice'
+  | 'size'
+  | 'show'
+  | 'technology'
+  | 'shop';
+
 export type TFiltersData = (
   | ((
       | {
