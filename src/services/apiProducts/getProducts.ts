@@ -1,6 +1,6 @@
 import supabase from '../supabase';
 import { omit } from '../../utils/omit';
-import { TProducts } from './apiProducts.types';
+import { TFilters, TProducts } from './apiProducts.types';
 import { PAGE_SIZE_PRODUCTS } from '../constants';
 
 export async function getProducts({
@@ -10,7 +10,7 @@ export async function getProducts({
   page,
 }: {
   categoryFilters: string[];
-  filters?: { field: string; value: string }[];
+  filters?: TFilters[];
   sortBy?: { field: string; value: string };
   page?: number;
 }) {
@@ -25,7 +25,11 @@ export async function getProducts({
       productImagesPrimary(imageUrl), 
       brands!inner(name),
       insertedAt,
-      ${categoryFilters.map((_, i) => `cat_${i}:categories!inner()`).join(', ')}
+      ${categoryFilters
+        .map((_, i) => `cat_${i}:categories!inner()`)
+        .join(', ')},
+      category:categories!inner(),
+      productVariants!inner()
     `,
       { count: 'exact' }
     )
@@ -38,8 +42,21 @@ export async function getProducts({
 
   // FILTERS
   if (filters) {
-    filters.forEach(({ field, value }) => {
-      query.eq(field, value);
+    filters.forEach(({ field, value, method }) => {
+      switch (method) {
+        case 'eq':
+          query.eq(field, value);
+          break;
+        case 'gte':
+          query.gte(field, value);
+          break;
+        case 'lte':
+          query.lte(field, value);
+          break;
+        case 'in':
+          query.in(field, value);
+          break;
+      }
     });
   }
 

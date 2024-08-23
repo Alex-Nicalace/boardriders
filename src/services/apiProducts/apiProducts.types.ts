@@ -16,3 +16,10 @@ export type TProducts =
       } | null;
     }[]
   | null;
+
+export type TFilters = {
+  field: string;
+} & (
+  | { method: 'eq' | 'gte' | 'lte'; value: string }
+  | { method: 'in'; value: string[] }
+);
