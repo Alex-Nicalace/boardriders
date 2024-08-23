@@ -70,8 +70,6 @@ const FILTERS_DATA: TFiltersData[] = [
     name: 'price',
     defaultOpen: true,
     useGetData: useAvailableRangePrices,
-    // min: 0,
-    // max: 200,
   },
   {
     title: 'Технологии',

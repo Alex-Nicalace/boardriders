@@ -1,9 +1,47 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { getProducts } from '../../services/apiProducts';
+import { getProducts, TFilters } from '../../services/apiProducts';
 import { PAGE_SIZE_PRODUCTS } from '../../services/constants';
 import { useMainMenu } from '../categories/useMainMenu';
 import { useGenderCategories } from '../categories/useCategories';
+import { TFilterName } from '../../components/Filters';
+
+const FILTER_MAPPINGS: {
+  filterName: TFilterName;
+  fieldName: string;
+  method: 'eq' | 'in' | 'gte' | 'lte';
+}[] = [
+  {
+    method: 'in',
+    filterName: 'category',
+    fieldName: 'category.name',
+  },
+  {
+    method: 'in',
+    filterName: 'brand',
+    fieldName: 'brands.id',
+  },
+  {
+    method: 'in',
+    filterName: 'size',
+    fieldName: 'productVariants.sizeId',
+  },
+  {
+    method: 'in',
+    filterName: 'color',
+    fieldName: 'productVariants.colorId',
+  },
+  {
+    method: 'gte',
+    filterName: 'minPrice',
+    fieldName: 'price',
+  },
+  {
+    method: 'lte',
+    filterName: 'maxPrice',
+    fieldName: 'price',
+  },
+];
 
 export function useProducts() {
   const params = useParams();
@@ -20,13 +58,43 @@ export function useProducts() {
   const pageNum = isNaN(page) || page < 1 ? 1 : page;
 
   // FILTERS
-  const filters: { field: string; value: string }[] = [];
+  const filters: TFilters[] = [];
   if (brand) {
     filters.push({
+      method: 'eq',
       field: 'brands.name',
       value: brand,
     });
   }
+
+  const updateFilters = () => {
+    FILTER_MAPPINGS.forEach(({ filterName, fieldName, method }) => {
+      const valueParam = searchParams.get(filterName);
+      if (!valueParam) return;
+
+      switch (method) {
+        case 'in':
+          {
+            const values = valueParam.split(',').filter(Boolean);
+            if (values.length > 0) {
+              filters.push({
+                method: 'in',
+                field: fieldName,
+                value: values,
+              });
+            }
+          }
+          break;
+        default:
+          filters.push({
+            method,
+            field: fieldName,
+            value: valueParam,
+          });
+      }
+    });
+  };
+  updateFilters();
 
   // SORT
   const sortByString = searchParams.get('sortBy');
