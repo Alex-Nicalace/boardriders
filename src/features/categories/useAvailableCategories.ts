@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getAvailableCategories } from '../../services/apiCategories';
+import { useSearchParamsObject } from '../../hooks/useSearchParamsObject';
 
 export function useAvailableCategories() {
   const params = useParams();
@@ -9,13 +10,22 @@ export function useAvailableCategories() {
     (item) => item !== undefined
   );
 
+  const searchParamsObject = useSearchParamsObject([
+    'color',
+    'size',
+    'brand',
+    'minPrice',
+    'maxPrice',
+  ]);
+
   const {
     data: rowData,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['availableCategories', categoriesList],
-    queryFn: () => getAvailableCategories(categoriesList),
+    queryKey: ['availableCategories', categoriesList, searchParamsObject],
+    queryFn: () =>
+      getAvailableCategories({ categoriesList, ...searchParamsObject }),
     staleTime: Infinity,
   });
 
