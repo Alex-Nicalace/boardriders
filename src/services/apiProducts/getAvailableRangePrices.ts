@@ -1,9 +1,15 @@
 import supabase from '../supabase';
 
-export async function getAvailableRangePrices(categoriesList: string[]) {
+export async function getAvailableRangePrices(params: {
+  categoriesList: string[];
+  colorIds: number[];
+  sizeIds: number[];
+  categories: string[];
+  brandIds: number[];
+}) {
   const { data, error } = await supabase
     .rpc('getAvailableRangePrices', {
-      categoriesList,
+      ...params,
     })
     .maybeSingle();
 

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { getAvailableColors } from '../../services/apiColors';
+import { useSearchParamsObject } from '../../hooks/useSearchParamsObject';
 
 export function useAvailableColors() {
   const params = useParams();
@@ -9,13 +10,22 @@ export function useAvailableColors() {
     (item) => item !== undefined
   );
 
+  const searchParamsObject = useSearchParamsObject([
+    'brand',
+    'size',
+    'category',
+    'minPrice',
+    'maxPrice',
+  ]);
+
   const {
     data: rowData,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['availableColors', categoriesList],
-    queryFn: () => getAvailableColors(categoriesList),
+    queryKey: ['availableColors', categoriesList, searchParamsObject],
+    queryFn: () =>
+      getAvailableColors({ categoriesList, ...searchParamsObject }),
     staleTime: Infinity,
   });
 

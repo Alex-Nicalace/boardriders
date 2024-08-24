@@ -613,6 +613,11 @@ export type Database = {
       getAvailableBrands: {
         Args: {
           categoriesList: string[];
+          colorIds: number[];
+          sizeIds: number[];
+          categories: string[];
+          minPrice: number;
+          maxPrice: number;
         };
         Returns: {
           id: number;
@@ -639,6 +644,11 @@ export type Database = {
       getAvailableColors: {
         Args: {
           categoriesList: string[];
+          brandIds: number[];
+          sizeIds: number[];
+          categories: string[];
+          minPrice: number;
+          maxPrice: number;
         };
         Returns: {
           id: number;
@@ -650,6 +660,10 @@ export type Database = {
       getAvailableRangePrices: {
         Args: {
           categoriesList: string[];
+          colorIds: number[];
+          sizeIds: number[];
+          brandIds: number[];
+          categories: string[];
         };
         Returns: {
           min: number;
@@ -659,6 +673,11 @@ export type Database = {
       getAvailableSizes: {
         Args: {
           categoriesList: string[];
+          colorIds: number[];
+          brandIds: number[];
+          categories: string[];
+          minPrice: number;
+          maxPrice: number;
         };
         Returns: {
           id: number;

@@ -46,7 +46,13 @@
 
 [Pagination](./src/components/ui/Pagination/Pagination.tsx) - пагинация
 
-## Кастомные хуки
+## Хуки
+
+### Стандартные хуки
+
+[useId](https://react.dev/reference/react/useId) - генерации уникальных идентификаторов
+
+### Кастомные хуки
 
 [useLockDocumentScroll.ts](./src/hooks/useLockDocumentScroll.ts) Пользовательский хук для блокировки прокрутки документа при вызове.
 
@@ -64,9 +70,7 @@
 
 [useLocalStorageState.ts](./src/hooks/useLocalStorageState.ts) - Хук создает состояние, которое сохраняется в локальное хранилище браузера
 
-## Хуки
-
-[useId](https://react.dev/reference/react/useId) - генерации уникальных идентификаторов
+[useSearchParamsObject.ts](./src/hooks/useSearchParamsObject.ts) - Хук примичателен использванием TS - Mapped Types получает массив строк, и выводит результат таким образом, что получается объект ключи которого являюся элементами массива и эти ключи по условию модифицируются.
 
 ## CSS
 
