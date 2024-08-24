@@ -623,6 +623,11 @@ export type Database = {
       getAvailableCategories: {
         Args: {
           categoriesList: string[];
+          colorIds: number[];
+          sizeIds: number[];
+          brandIds: number[];
+          minPrice: number;
+          maxPrice: number;
         };
         Returns: {
           id: number;

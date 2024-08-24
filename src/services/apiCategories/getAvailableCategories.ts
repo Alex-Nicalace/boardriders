@@ -1,8 +1,15 @@
 import supabase from '../supabase';
 
-export async function getAvailableCategories(categoriesList: string[]) {
+export async function getAvailableCategories(params: {
+  categoriesList: string[];
+  colorIds: number[];
+  sizeIds: number[];
+  brandIds: number[];
+  minPrice: number;
+  maxPrice: number;
+}) {
   const { data, error } = await supabase.rpc('getAvailableCategories', {
-    categoriesList,
+    ...params,
   });
 
   if (error) {
