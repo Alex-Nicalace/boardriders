@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { getAvailableBrands } from '../../services/apiBrands';
 import { useSearchParamsObject } from '../../hooks/useSearchParamsObject';
+import { useConsistencySearchParams } from '../../hooks/useConsistencySearchParams';
 
 export function useAvailableBrands() {
   const params = useParams();
@@ -34,6 +35,8 @@ export function useAvailableBrands() {
     title: item.name,
     count: item.countProduct,
   }));
+
+  useConsistencySearchParams({ filterName: 'brand', data });
 
   return { data, isLoading, error };
 }

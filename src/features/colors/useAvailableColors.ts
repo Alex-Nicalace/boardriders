@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { getAvailableColors } from '../../services/apiColors';
 import { useSearchParamsObject } from '../../hooks/useSearchParamsObject';
+import { useConsistencySearchParams } from '../../hooks/useConsistencySearchParams';
 
 export function useAvailableColors() {
   const params = useParams();
@@ -34,6 +35,8 @@ export function useAvailableColors() {
     title: item.name,
     count: item.countProduct,
   }));
+
+  useConsistencySearchParams({ filterName: 'color', data });
 
   return { data, isLoading, error };
 }

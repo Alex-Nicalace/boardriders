@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { getAvailableSizes } from '../../services/apiSizes';
 import { useSearchParamsObject } from '../../hooks/useSearchParamsObject';
+import { useConsistencySearchParams } from '../../hooks/useConsistencySearchParams';
 
 export function useAvailableSizes() {
   const params = useParams();
@@ -33,6 +34,8 @@ export function useAvailableSizes() {
     title: item.name,
     count: item.countProduct,
   }));
+
+  useConsistencySearchParams({ filterName: 'size', data });
 
   return { data, isLoading, error };
 }

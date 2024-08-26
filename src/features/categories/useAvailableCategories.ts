@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getAvailableCategories } from '../../services/apiCategories';
 import { useSearchParamsObject } from '../../hooks/useSearchParamsObject';
+import { useConsistencySearchParams } from '../../hooks/useConsistencySearchParams';
 
 export function useAvailableCategories() {
   const params = useParams();
@@ -34,6 +35,8 @@ export function useAvailableCategories() {
     title: item.displayName,
     count: item.countProduct,
   }));
+
+  useConsistencySearchParams({ filterName: 'category', data });
 
   return { data, isLoading, error };
 }
