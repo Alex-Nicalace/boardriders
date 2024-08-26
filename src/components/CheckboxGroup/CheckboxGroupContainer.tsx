@@ -31,6 +31,8 @@ function CheckboxGroupContainer({
       searchParams.set(name, newValues.join(','));
     }
 
+    searchParams.delete('page');
+
     setSearchParams(searchParams);
   }
 

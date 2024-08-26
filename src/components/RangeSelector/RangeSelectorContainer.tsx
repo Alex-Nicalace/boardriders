@@ -24,6 +24,7 @@ function RangeSelectorContainer({
     const [newMinPrice, newMaxPrice] = value;
     searchParams.set('minPrice', newMinPrice.toString());
     searchParams.set('maxPrice', newMaxPrice.toString());
+    searchParams.delete('page');
     setSearchParams(searchParams);
   }
 
