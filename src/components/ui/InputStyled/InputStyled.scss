@@ -90,16 +90,6 @@
     }
   }
 
-  // .input-main__error
-  &_error {
-    .input-main__input {
-      border-color: var(--red);
-      &:focus {
-        outline: rem(1) solid var(--red);
-      }
-    }
-  }
-
   &_label_gray {
     .input-main__label {
       color: var(--dark-gray);
@@ -139,6 +129,17 @@
             border-color: var(--black);
           }
         }
+      }
+    }
+  }
+
+  // .input-main__error
+  &_error {
+    .input-main__input {
+      border-color: var(--red);
+      &:focus {
+        outline: rem(1) solid var(--red);
+        border-color: var(--red);
       }
     }
   }
