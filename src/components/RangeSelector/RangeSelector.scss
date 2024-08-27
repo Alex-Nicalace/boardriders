@@ -4,7 +4,7 @@
   // .range-selector__inputs
   &__inputs {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     column-gap: rem(10);
 
     &:not(:last-child) {
@@ -12,6 +12,7 @@
     }
 
     &::before {
+      margin-bottom: rem(15);
       content: '';
       height: rem(1);
       width: rem(12);

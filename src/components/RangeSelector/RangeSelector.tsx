@@ -14,6 +14,7 @@ function RangeSelector({
   initValue = [min, max],
   onThumbDragEnd,
 }: TRangeSelectorProps): JSX.Element {
+  const [isDirty, setIsDirty] = useState(false);
   const [rangeValue, setRangeValue] = useState(initValue);
   const [from, to] = rangeValue;
 
@@ -21,10 +22,29 @@ function RangeSelector({
     e: React.ChangeEvent<HTMLInputElement>,
     i: 0 | 1
   ) {
-    const value = Number(e.target.value.replace(/\D/g, ''));
+    const value = Number(e.target.value.replace(/\D|^0+(?=\d+)/g, ''));
     const newRangeValue = [...rangeValue];
     newRangeValue[i] = value;
     setRangeValue(newRangeValue);
+    setIsDirty(true);
+  }
+
+  function handleClickOk() {
+    if (min > Math.min(from, to) || max < Math.max(from, to)) return;
+
+    if (to < from) {
+      setRangeValue([to, from]);
+      onThumbDragEnd?.([to, from]);
+    } else {
+      onThumbDragEnd?.([from, to]);
+    }
+
+    setIsDirty(false);
+  }
+
+  function handleChangeValue(value: number[]) {
+    setRangeValue(value);
+    setIsDirty(false);
   }
 
   return (
@@ -33,16 +53,24 @@ function RangeSelector({
         <InputStyled
           className="range-selector__from"
           value={from}
+          // type="number" почемуто в этой настройкоа не ожидаемо рабоатет Number(e.target.value.replace(/\D|^0+(?=\d+)/g, ''));
+          error={(from < min || from > max) && `min: ${min}, max: ${max}`}
           onChange={(e) => handleChangeRangeValue(e, 0)}
-          type="number"
         />
         <InputStyled
           className="range-selector__to"
           value={to}
+          // type="number"
+          error={(to < min || to > max) && `min: ${min}, max: ${max}`}
           onChange={(e) => handleChangeRangeValue(e, 1)}
-          type="number"
         />
-        <Button className="range-selector__ok">OK</Button>
+        <Button
+          className="range-selector__ok"
+          disabled={!isDirty}
+          onClick={handleClickOk}
+        >
+          OK
+        </Button>
       </div>
       <RangeSlider
         className="range-selector__slider"
@@ -51,7 +79,7 @@ function RangeSelector({
         name={name}
         step={step}
         value={rangeValue}
-        onChange={setRangeValue}
+        onChange={handleChangeValue}
         onThumbDragEnd={onThumbDragEnd}
       />
     </div>
