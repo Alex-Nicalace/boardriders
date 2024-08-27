@@ -1,4 +1,4 @@
 import InputStyled from './InputStyled';
 
-export * from './InputStyled';
+export type * from './InputStyled.types';
 export default InputStyled;

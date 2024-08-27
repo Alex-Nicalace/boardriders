@@ -10,7 +10,7 @@ function InputText({
   startAdornment,
   endAdornment,
   hint,
-  className = '',
+  className,
   bemBlockName = 'input-text',
   fullWidth = false,
   ...props

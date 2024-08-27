@@ -1,38 +1,8 @@
-import { ButtonHTMLAttributes } from 'react';
-import InputText, {
-  TInputTextProps,
-} from '../../../component-library/InputText';
+import InputText from '../../../component-library/InputText';
 import './InputStyled.scss';
 import { DiscountIcon, GiftIcon, QuestionInCircleIcon } from '../Icons';
+import { TInputStyledProps } from './InputStyled.types';
 
-type TInputStyledButtonProps = (
-  | {
-      variant?: 'main';
-      adornmentContent?: never;
-    }
-  | {
-      variant: 'second';
-      adornmentContent: React.ReactNode;
-    }
-) &
-  (
-    | { buttonProps?: never; buttonContent?: never }
-    | {
-        buttonProps?: ButtonHTMLAttributes<HTMLButtonElement> & {
-          bgColor?: 'black' | 'transparent';
-          color?: 'white' | 'black' | 'dark-gray';
-        };
-        buttonContent: React.ReactNode;
-      }
-  );
-export type TInputStyledcommonProps = {
-  isGrayLabel?: boolean;
-  placeBorder?: 'input' | 'wrap';
-};
-
-export type TInputStyledProps = TInputTextProps &
-  TInputStyledButtonProps &
-  TInputStyledcommonProps;
 function InputStyled({
   variant = 'main',
   buttonProps,
