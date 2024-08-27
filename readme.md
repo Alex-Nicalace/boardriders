@@ -46,6 +46,10 @@
 
 [Pagination](./src/components/ui/Pagination/Pagination.tsx) - пагинация
 
+[ScrollToTop.tsx](./src/component-library/Scroll/ScrollToTop.tsx) - Компонент, который при каждом изменении пути в URL прокручивает страницу вверх.
+
+[ScrollToAnchor.tsx](./src/component-library/Scroll/ScrollToAnchor.tsx) - Компонент, который прокручивает страницу к элементу, указанному в URL по хешу
+
 ## Хуки
 
 ### Стандартные хуки

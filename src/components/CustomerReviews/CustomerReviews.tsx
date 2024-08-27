@@ -58,6 +58,7 @@ function CustomerReviews({
 
   return (
     <section
+      id="customer-reviews"
       className={['customer-reviews', className].filter(Boolean).join(' ')}
     >
       <div className="customer-reviews__container">

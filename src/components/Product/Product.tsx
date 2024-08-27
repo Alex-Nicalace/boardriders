@@ -7,7 +7,7 @@ import {
   ShopIcon,
   StarIcon,
 } from '../ui/Icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Favorite from '../ui/Favorite';
 import Price from '../Price';
 import ColorChoise from '../ColorChoise';
@@ -89,6 +89,8 @@ function Product({
     productAttributes,
     productDescriptionImages,
   } = data;
+  const { pathname, search } = useLocation();
+  const reviewsLinkAnchor = `${pathname}${search}#customer-reviews`;
 
   return (
     <section className={['product', className].filter(Boolean).join(' ')}>
@@ -117,7 +119,7 @@ function Product({
               isShowValue={false}
               disabled
             />
-            <Link className="product__reviews" to="#">
+            <Link className="product__reviews" to={reviewsLinkAnchor}>
               {reviewCount} отзыва
             </Link>
             <Favorite className="product__favorite" isFramed />
