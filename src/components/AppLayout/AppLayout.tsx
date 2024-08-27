@@ -6,7 +6,7 @@ import ModalWrap from '../ModalWrap';
 import LoginOrRegister from '../LoginOrRegister';
 import { useGenderCategories } from '../../features/categories/useCategories';
 import Spinner from '../Spinner';
-import ScrollToTop from '../ScrollToTop';
+import { ScrollToAnchor, ScrollToTop } from '../../component-library/Scroll';
 
 function AppLayout(): JSX.Element {
   const { isLoading } = useGenderCategories();
@@ -16,6 +16,7 @@ function AppLayout(): JSX.Element {
   return (
     <>
       <ScrollToTop />
+      <ScrollToAnchor />
       <Header />
       <Outlet />
       <Footer />
