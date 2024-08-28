@@ -1,26 +1,22 @@
-import { Link } from 'react-router-dom';
+import { ButtonHTMLAttributes } from 'react';
+import { Link, LinkProps } from 'react-router-dom';
 import { ArrowRightIcon } from '../Icons';
 import './ButtonMenu.scss';
 
-type ButtonMenuProps = {
-  children?: React.ReactNode;
+type ButtonMenuProps = (LinkProps | ButtonHTMLAttributes<HTMLButtonElement>) & {
   active?: boolean;
-  onClick?: () => void;
-  to?: string;
   withArrow?: boolean;
-  className?: string;
 };
 function ButtonMenu({
-  children,
   active,
-  onClick,
-  to,
   withArrow,
-  className = '',
+  className,
+  children,
+  ...props
 }: ButtonMenuProps) {
-  const classes = `button-menu ${
-    active ? 'button-menu_active' : ''
-  } ${className}`;
+  const classes = ['button-menu', active && 'button-menu_active', className]
+    .filter(Boolean)
+    .join(' ');
 
   const content = (
     <>
@@ -29,15 +25,15 @@ function ButtonMenu({
     </>
   );
 
-  if (to)
+  if ('to' in props)
     return (
-      <Link className={classes} to={to} onClick={onClick}>
+      <Link className={classes} {...props}>
         {content}
       </Link>
     );
 
   return (
-    <button className={classes} onClick={onClick}>
+    <button className={classes} {...props}>
       {content}
     </button>
   );
