@@ -5,7 +5,6 @@ import Title from '../ui/Title';
 import ToggleButton from '../ToggleButton';
 import Transition, { TTransition } from '../../component-library/Transition';
 import Pagination from '../ui/Pagination';
-import Button from '../ui/Button';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import Popup from '../../component-library/Popup';
 import ProductList from '../ProductList';
@@ -134,11 +133,12 @@ function ProductListFiltered({
                     onPageChange={onPageChange}
                   />
                 )}
+                {/* // TODO:
                 <div className="product-list-filtered__wrap-button-more">
                   <Button className="product-list-filtered__button-more">
                     Показать больше
                   </Button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
