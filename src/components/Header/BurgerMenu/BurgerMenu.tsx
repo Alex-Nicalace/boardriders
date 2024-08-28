@@ -12,8 +12,9 @@ import { IMenuData } from '../MainMenu';
 
 type TBurgerMenuProps = {
   data: IMenuData[];
+  close?: () => void;
 };
-function BurgerMenu({ data }: TBurgerMenuProps) {
+function BurgerMenu({ data, close }: TBurgerMenuProps) {
   const [expandedMenu, setExpandedMenu] = useState('');
   const expandedMenuData = data.find((item) => item.title === expandedMenu);
 
@@ -69,6 +70,7 @@ function BurgerMenu({ data }: TBurgerMenuProps) {
               mode="mobile"
               isUsingContainer={false}
               isRenderImgLink={false}
+              close={close}
             />
           </div>
         )}

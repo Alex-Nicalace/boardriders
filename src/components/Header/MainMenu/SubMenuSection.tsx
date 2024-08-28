@@ -5,10 +5,12 @@ import ButtonMenu from '../../ui/ButtonMenu';
 type TSubMenuSectionProps = {
   section: ISubmenuProps['sections'][number];
   mode?: 'desktop' | 'mobile';
+  onClickLink?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 };
 export function SubMenuSection({
   section,
   mode = 'desktop',
+  onClickLink,
 }: TSubMenuSectionProps): JSX.Element {
   const { title, isWideSection, links } = section;
   const bemBlockName = mode === 'desktop' ? 'submenu' : 'burger-submenu';
@@ -28,6 +30,7 @@ export function SubMenuSection({
           itemProps={{ className: `${bemBlockName}__item` }}
           linkProps={{
             className: `${bemBlockName}__link`,
+            onClick: onClickLink,
           }}
           getClassNameLink={(value) => {
             return value.isAccented ? `${bemBlockName}__link_red` : '';
@@ -45,6 +48,7 @@ export function SubMenuSection({
                 value.isAccented ? `${bemBlockName}__link_red` : ''
               }`}
               to={value.to}
+              onClick={onClickLink}
             >
               {value.title}
             </ButtonMenu>

@@ -9,6 +9,7 @@ export interface ISubmenuProps {
   isUsingContainer?: boolean;
   mode?: 'desktop' | 'mobile';
   isRenderImgLink?: boolean;
+  close?: () => void;
 }
 function Submenu({
   sections,
@@ -16,12 +17,18 @@ function Submenu({
   mode = 'desktop',
   isUsingContainer = true,
   isRenderImgLink = true,
+  close,
 }: ISubmenuProps): JSX.Element {
   const bemBlockName = mode === 'desktop' ? 'submenu' : 'burger-submenu';
   const content = (
     <>
       {sections.map((section) => (
-        <SubMenuSection key={section.title} section={section} mode={mode} />
+        <SubMenuSection
+          key={section.title}
+          section={section}
+          mode={mode}
+          onClickLink={close}
+        />
       ))}
       {imgLinkData && isRenderImgLink && (
         <SubMenuImgLink imgLinkData={imgLinkData} bemBlockName={bemBlockName} />

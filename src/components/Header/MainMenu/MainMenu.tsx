@@ -17,6 +17,7 @@ function MainMenu({ className, data }: TMainMenuProps): JSX.Element {
             itemProps={{ className: 'main-menu__item' }}
             linkProps={{
               className: 'main-menu__link',
+              onClick: () => setItemMenuHover(''),
             }}
             linksData={data}
             onMouseEnterItem={(data) => {
@@ -31,6 +32,7 @@ function MainMenu({ className, data }: TMainMenuProps): JSX.Element {
                     <Submenu
                       sections={value.submenu.sections}
                       imgLinkData={value.submenu.imgLinkData}
+                      close={() => setItemMenuHover('')}
                     />
                   )}
                 </>

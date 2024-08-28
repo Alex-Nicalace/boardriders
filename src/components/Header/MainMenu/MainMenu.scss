@@ -17,6 +17,15 @@
   // .main-menu__item
   &__item {
     @include adaptiveValue('padding-right', 25, 15, $containerWidth, 992, 1);
+
+    @media (pointer: fine) {
+      &:hover {
+        .main-menu__link {
+          color: var(--black);
+          border-color: currentColor;
+        }
+      }
+    }
   }
   // .main-menu__link
   &__link {
@@ -26,12 +35,6 @@
     padding: rem(17) 0 rem(15);
     border-bottom: rem(2) solid transparent;
     @include adaptiveValue('font-size', 14, 12, $containerWidth, 992, 1);
-    @media (pointer: fine) {
-      &:hover {
-        color: var(--black);
-        border-color: currentColor;
-      }
-    }
     // .main-menu__link_red
     &_red {
       color: var(--red);

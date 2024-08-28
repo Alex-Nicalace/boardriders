@@ -22,9 +22,9 @@ function Header(): JSX.Element {
       {isLessTablet && (
         <Popup.Window
           windowName="burger"
-          render={() => (
+          render={(close) => (
             <MainMenuProvider>
-              {(data) => <BurgerMenu data={data} />}
+              {(data) => <BurgerMenu data={data} close={close} />}
             </MainMenuProvider>
           )}
           onClickOutside={(close, e) => {
