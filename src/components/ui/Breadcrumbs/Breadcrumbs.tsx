@@ -1,38 +1,29 @@
 import { Link } from 'react-router-dom';
 import './Breadcrumbs.scss';
 import ListLinks from '../../../component-library/ListLinks';
+import { TBreadcrumbsProps } from './Breadcrumbs.types';
 
-interface ITst {
-  to?: string;
-  title: string;
-}
-export type TBreadcrumbsData = [...Required<ITst>[], ITst];
-
-type TBreadcrumbsProps = {
-  data: TBreadcrumbsData;
-  color?: 'black' | 'white';
-  className?: string;
-  modificator?: 'independent';
-};
 function Breadcrumbs({
   data,
   color,
-  className = '',
+  className,
   modificator,
 }: TBreadcrumbsProps): JSX.Element {
-  const classes = [
-    color === 'white' && 'breadcrumbs_white',
-    modificator === 'independent' && 'breadcrumbs_independent',
-  ]
-    .filter((v) => v)
-    .join(' ');
-
   return (
-    <nav className={`breadcrumbs ${classes} ${className}`}>
+    <nav
+      className={[
+        'breadcrumbs',
+        color === 'white' && 'breadcrumbs_white',
+        modificator === 'independent' && 'breadcrumbs_independent',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
       <div
-        className={
-          modificator === 'independent' ? 'breadcrumbs__container' : undefined
-        }
+        className={[modificator === 'independent' && 'breadcrumbs__container']
+          .filter(Boolean)
+          .join(' ')}
       >
         <ListLinks
           linksData={data}
