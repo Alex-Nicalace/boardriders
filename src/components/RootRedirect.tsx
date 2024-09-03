@@ -8,7 +8,7 @@ function RootRedirect() {
   const [redirectPath] = useLocalStorageState(categoryGender, 'categoryGender');
 
   if (redirectPath) {
-    return <Navigate to={`/${redirectPath}`} />;
+    return <Navigate to={`/${redirectPath}`} replace />;
   }
 
   return null;
