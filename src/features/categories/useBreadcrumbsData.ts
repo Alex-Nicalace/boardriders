@@ -3,6 +3,7 @@ import { useGenderCategories } from './useCategories';
 import { useMainMenu } from './useMainMenu';
 import { TBreadcrumbsData } from '../../components/ui/Breadcrumbs';
 import { useBrand } from '../brands/useBrand';
+import { useProduct } from '../products/useProduct';
 
 export function useBreadcrumbsData() {
   const breadcrumbsData: { to: string; title: string }[] = [];
@@ -10,11 +11,16 @@ export function useBreadcrumbsData() {
     useGenderCategories();
   const { mainMenuFlattened, isLoading: isLoadingMainMenu } = useMainMenu();
   const { brands, isLoading: isLoadingBrand } = useBrand();
-  const isLoading = isLoadingBrand || isLoadingMainMenu || isLoadingGender;
+  const { product, isLoading: isLoadingProduct } = useProduct({
+    isGetFromCache: true,
+  });
+  const isLoading =
+    isLoadingBrand || isLoadingMainMenu || isLoadingGender || isLoadingProduct;
   const matchCatalog = useMatch(':categoryGender/catalog/:category');
   const matchCatalogBrand = useMatch(
     ':categoryGender/brand/:brand/catalog/:category?'
   );
+  const matchProduct = useMatch('/product/:productId');
 
   if (isLoading) {
     return [{ title: 'Главная' }] as TBreadcrumbsData;
@@ -76,10 +82,28 @@ export function useBreadcrumbsData() {
     }
   }
 
+  if (matchProduct) {
+    const { categoryHierar = [], categoryGenders } = product ?? {};
+    const categoryGender = categoryGenders && categoryGenders[0].name;
+    const categoryGenderDisplay =
+      categoryGender && getCategoryGenderDisplay(categoryGender);
+    categoryHierar.forEach((category) => {
+      breadcrumbsData.push({
+        to: `/${categoryGender}/catalog/${category.name}`,
+        title: category.displayName || 'Неизвестный маршрут',
+      });
+    });
+
+    if (categoryGenderDisplay && breadcrumbsData.length > 0) {
+      breadcrumbsData[0].title += ` ${categoryGenderDisplay.toLocaleLowerCase()}`;
+    }
+  }
+
   breadcrumbsData.unshift({ to: '/', title: 'Главная' });
 
   const breadcrumbsDataResult = breadcrumbsData as TBreadcrumbsData;
 
+  // удаляем у последнего элемента ссылку
   delete breadcrumbsDataResult.at(-1)?.to;
 
   return breadcrumbsDataResult;
