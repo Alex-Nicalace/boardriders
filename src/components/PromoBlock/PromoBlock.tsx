@@ -1,20 +1,5 @@
-import Breadcrumbs, { TBreadcrumbsData } from '../ui/Breadcrumbs';
+import BreadcrumbsContainer from '../../features/categories/BreadcrumbsContainer';
 import './PromoBlock.scss';
-
-const BREADCRUMBS: TBreadcrumbsData = [
-  {
-    to: '/',
-    title: 'Главная',
-  },
-  {
-    to: '/catalog/man',
-    title: 'Мужчинам',
-  },
-  {
-    // to: '/catalog/man/snowboard',
-    title: 'Сноуборд',
-  },
-];
 
 type TPromoBlockProps = {
   children: React.ReactNode;
@@ -36,9 +21,8 @@ function PromoBlock({
         />
       )}
       <div className="promo-block__container">
-        <Breadcrumbs
+        <BreadcrumbsContainer
           className="promo-block__breadcrumbs"
-          data={BREADCRUMBS}
           color="white"
         />
         {children}
