@@ -3,10 +3,15 @@ import { useQuery } from '@tanstack/react-query';
 import { getAvailableCategories } from '../../services/apiCategories';
 import { useSearchParamsObject } from '../../hooks/useSearchParamsObject';
 import { useConsistencySearchParams } from '../../hooks/useConsistencySearchParams';
+import { useBrand } from '../brands/useBrand';
 
+/**
+ * Хук для получения данных о доступных категориях.
+ * Используется на странице каталога товаров для согласованности фильтров.
+ */
 export function useAvailableCategories() {
   const params = useParams();
-  const { categoryGender, category } = params;
+  const { categoryGender, category, brand } = params;
   const categoriesList = [categoryGender, category].filter(
     (item) => item !== undefined
   );
@@ -18,6 +23,13 @@ export function useAvailableCategories() {
     'minPrice',
     'maxPrice',
   ]);
+
+  // добвить ИД бренда из параметров. Надо из названия получить ИД
+  const { brands } = useBrand(!!brand);
+  const { id: brandId } = brands || {};
+  if (brandId) {
+    searchParamsObject.brandIds.push(brandId);
+  }
 
   const {
     data: rowData,
