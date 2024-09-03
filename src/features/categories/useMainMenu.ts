@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getMainMenu } from '../../services/apiCategories';
 import { useGenderCategoryProduct } from '../products/useGenderCategoryProduct';
 
-export function useMainMenu() {
+export function useMainMenu(enabled = true) {
   const params = useParams();
   const genderCategoryProduct = useGenderCategoryProduct();
   const categoryGender = params.categoryGender || genderCategoryProduct || '';
@@ -16,6 +16,7 @@ export function useMainMenu() {
     queryKey: ['mainMenu', categoryGender],
     queryFn: () => getMainMenu(categoryGender),
     staleTime: Infinity,
+    enabled,
   });
 
   return { mainMenu, mainMenuFlattened, isLoading, error, categoryGender };

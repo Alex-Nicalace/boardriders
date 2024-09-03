@@ -8,15 +8,17 @@
   gap: rem(10);
   // .product-category-link__img
   &__img {
-    padding: rem(10);
+    // padding: rem(10);
     flex: 0 0 var(--width);
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+    overflow: hidden;
     background-color: var(--light-gray);
     img {
       object-fit: cover;
+      width: 100%;
     }
   }
   // .product-category-link__title

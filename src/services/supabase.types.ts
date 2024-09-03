@@ -41,6 +41,7 @@ export type Database = {
           categoryTypeId: number | null;
           displayName: string;
           id: number;
+          imageUrl: string | null;
           insertedAt: string;
           name: string;
           order: number | null;
@@ -50,6 +51,7 @@ export type Database = {
           categoryTypeId?: number | null;
           displayName: string;
           id?: number;
+          imageUrl?: string | null;
           insertedAt?: string;
           name: string;
           order?: number | null;
@@ -59,6 +61,7 @@ export type Database = {
           categoryTypeId?: number | null;
           displayName?: string;
           id?: number;
+          imageUrl?: string | null;
           insertedAt?: string;
           name?: string;
           order?: number | null;
@@ -698,6 +701,7 @@ export type Database = {
                 id: number;
                 name: string;
                 displayName: string;
+                imageUrl: string | null;
               }[]
             | null;
           brands: { id: number; name: string }[] | null;

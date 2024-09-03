@@ -1,75 +1,20 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-
+import './ProductCategoriesSlider.scss';
 import ProductCategoryLink from '../ProductCategoryLink';
 import { ArrowLeftThinIcon, ArrowRightThinIcon } from '../ui/Icons';
+import { TProductCategoriesSliderProps } from './ProductCategoriesSlider.types';
 
-import snowboardImg from '../../assets/img/product-categories-slider/snowboard.png';
-import fastenersImg from '../../assets/img/product-categories-slider/fasteners.png';
-import shoesImg from '../../assets/img/product-categories-slider/shoes.png';
-import setsImg from '../../assets/img/product-categories-slider/sets.png';
-import jacketsImg from '../../assets/img/product-categories-slider/jackets.png';
-import pantsImg from '../../assets/img/product-categories-slider/pants.png';
-import helmetsImg from '../../assets/img/product-categories-slider/helmets.png';
-import glassesImg from '../../assets/img/product-categories-slider/glasses.png';
-import glovesImg from '../../assets/img/product-categories-slider/gloves.png';
-
-import './ProductCategoriesSlider.scss';
-
-const SLIDE_DATA = [
-  {
-    img: snowboardImg,
-    title: 'Сноуборды',
-    to: '#',
-  },
-  {
-    img: fastenersImg,
-    title: 'Крепеж',
-    to: '#',
-  },
-  {
-    img: shoesImg,
-    title: 'Обувь',
-    to: '#',
-  },
-  {
-    img: setsImg,
-    title: 'Наборы',
-    to: '#',
-  },
-  {
-    img: jacketsImg,
-    title: 'Куртки',
-    to: '#',
-  },
-  {
-    img: pantsImg,
-    title: 'Штаны',
-    to: '#',
-  },
-  {
-    img: helmetsImg,
-    title: 'Шлемы',
-    to: '#',
-  },
-  {
-    img: glassesImg,
-    title: 'Очки',
-    to: '#',
-  },
-  {
-    img: glovesImg,
-    title: 'Перчатки',
-    to: '#',
-  },
-];
-
-type TProductCategoriesSliderProps = { className?: string };
 function ProductCategoriesSlider({
-  className: cllassName = '',
+  className,
+  data,
 }: TProductCategoriesSliderProps): JSX.Element {
   return (
-    <div className={`product-categories-slider ${cllassName}`}>
+    <div
+      className={['product-categories-slider', className]
+        .filter(Boolean)
+        .join(' ')}
+    >
       <div className="product-categories-slider__container">
         <Swiper
           className="product-categories-slider__slider"
@@ -82,9 +27,9 @@ function ProductCategoriesSlider({
             nextEl: '.product-categories-slider__slider-btn_right',
           }}
         >
-          {SLIDE_DATA.map(({ img, title, to }) => (
-            <SwiperSlide className="product-categories-slider__slide" key={img}>
-              <ProductCategoryLink img={img} title={title} to={to} />
+          {data.map(({ imageUrl, title, to }) => (
+            <SwiperSlide className="product-categories-slider__slide" key={to}>
+              <ProductCategoryLink img={imageUrl} title={title} to={to} />
             </SwiperSlide>
           ))}
         </Swiper>
