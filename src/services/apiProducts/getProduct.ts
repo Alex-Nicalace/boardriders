@@ -1,5 +1,6 @@
 import supabase from '../supabase';
 import { omit } from '../../utils/omit';
+import { createHierarchicalList } from '../../utils/createHierarchicalList';
 
 export async function getProduct(productId: number) {
   const { data, error } = await supabase
@@ -16,11 +17,10 @@ export async function getProduct(productId: number) {
       productVariants(productVariantId:id, color:colors(colorId:id, name, hexValue), size:sizes(sizeId:id, name)),
       productAttributes(attributeId:id, name, value),
       productDescriptionImages(imageUrl),
-      categoryGenders:categories(name)
+      categories(id, parentId, name, displayName, categoryTypeId)
       `
     )
     .eq('id', productId)
-    .eq('categories.categoryTypeId', 1)
     .single();
 
   if (error) {
@@ -28,8 +28,18 @@ export async function getProduct(productId: number) {
     throw new Error('Product could not be loaded');
   }
 
+  const categoryGenders = data.categories.filter(
+    (item) => item.categoryTypeId === 1
+  );
+
+  const categoryWithoutGender = data.categories.filter(
+    (item) => item.categoryTypeId !== 1
+  );
+
+  const categoryHierar = createHierarchicalList(categoryWithoutGender);
+
   const result = {
-    ...omit(data, ['brands', 'reviews']),
+    ...omit(data, ['brands', 'reviews', 'categories']),
     discount: data.oldPrice ? 1 - data.price / data.oldPrice : null,
     iconBrandUrl: data.brands?.iconUrl ?? '',
     // @ts-ignore // ! https://github.com/supabase/postgrest-js/issues/523
@@ -54,6 +64,8 @@ export async function getProduct(productId: number) {
         return acc;
       }, [])
       .sort((a, b) => a.name.localeCompare(b.name)),
+    categoryHierar,
+    categoryGenders,
   };
 
   return result;
