@@ -1,5 +1,4 @@
 import './ProductPage.scss';
-import Breadcrumbs, { TBreadcrumbsData } from '../../components/ui/Breadcrumbs';
 import Steps from '../../components/ui/Steps';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import PageContent from '../../components/PageContent';
@@ -7,28 +6,7 @@ import PopularProductsSlider from '../../features/products/PopularProductsSlider
 import ProductContainer from '../../features/products/ProductContainer';
 import NewProductsSlider from '../../features/products/NewProductsSlider';
 import CustomerReviewsContainer from '../../features/reviews/CustomerReviewsContainer';
-
-const BREADCRUMBS: TBreadcrumbsData = [
-  {
-    to: '/',
-    title: 'Главная',
-  },
-  {
-    to: '/catalog/man',
-    title: 'Мужчинам',
-  },
-  {
-    to: '/catalog/man/snowboard',
-    title: 'Сноуборд',
-  },
-  {
-    to: '/catalog/man/snowboards',
-    title: 'Сноуборды',
-  },
-  {
-    title: 'Сноуборд GNU Asym Carbon Credit Btx Multicolor',
-  },
-];
+import BreadcrumbsContainer from '../../features/categories/BreadcrumbsContainer';
 
 // type TProductPageProps = { }
 function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
@@ -37,9 +15,8 @@ function ProductPage(/*{ }: TProductPageProps*/): JSX.Element {
   return (
     <PageContent className="product-page">
       {!isLessTablet && (
-        <Breadcrumbs
+        <BreadcrumbsContainer
           className="product-page__breadcrumbs"
-          data={BREADCRUMBS}
           modificator="independent"
         />
       )}
