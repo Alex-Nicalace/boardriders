@@ -1,4 +1,5 @@
 import supabase from '../supabase';
+import { TMainMenuFlattened } from './apiCategories.types';
 
 export async function getMainMenu(categoryGender: string) {
   const { data, error } = await supabase.rpc('getMainMenu', { categoryGender });
@@ -8,13 +9,14 @@ export async function getMainMenu(categoryGender: string) {
     throw new Error('Main menu could not be loaded');
   }
 
-  const mainMenuFlattened = data.flatMap(
+  const mainMenuFlattened: TMainMenuFlattened[] = data.flatMap(
     ({ id, name, displayName, subMenu }) => [
-      { id, name, displayName },
-      ...(subMenu ?? []).map(({ id, name, displayName }) => ({
-        id,
+      { id, name, displayName, parentId: null },
+      ...(subMenu ?? []).map(({ id: childId, name, displayName }) => ({
+        id: childId,
         name,
         displayName,
+        parentId: id,
       })),
     ]
   );
