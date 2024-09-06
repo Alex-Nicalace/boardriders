@@ -1,6 +1,7 @@
 @import '/src/styles/global-scss.scss';
 
 .icon-button {
+  position: relative;
   display: inline-grid;
   justify-items: center;
   gap: rem(5);
@@ -11,5 +12,27 @@
   // .link-icon__text
   &__text {
     @extend %caption-capital;
+  }
+  &[data-counter]::before {
+    content: attr(data-counter);
+    padding: rem(0) rem(3);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: rem(14);
+    min-width: rem(14);
+    aspect-ratio: 1/1;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    background-color: var(--red);
+    transform: translate(-30%, -70%);
+
+    font-weight: 600;
+    font-size: rem(10);
+    letter-spacing: -0.02em;
+    color: var(--white);
+    line-height: normal;
   }
 }

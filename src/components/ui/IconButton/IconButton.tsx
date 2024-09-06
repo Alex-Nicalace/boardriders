@@ -3,7 +3,7 @@ import './IconButton.scss';
 import MediaQuery from '../../../component-library/MediaQuery';
 import { ButtonHTMLAttributes } from 'react';
 
-type TLinkIconProps = (
+type TIconButtonProps = (
   | (ButtonHTMLAttributes<HTMLButtonElement> & { to?: never })
   | LinkProps
 ) & {
@@ -12,14 +12,16 @@ type TLinkIconProps = (
       title?: string | undefined;
     }
   >;
+  badgeCounter?: number;
 };
 
 function IconButton({
   children,
   className = '',
   IconComponent,
+  badgeCounter,
   ...props
-}: TLinkIconProps): JSX.Element {
+}: TIconButtonProps): JSX.Element {
   const inner = (
     <>
       <IconComponent className="icon-button__icon" />
@@ -28,18 +30,23 @@ function IconButton({
       </MediaQuery>
     </>
   );
-  const classes = `icon-button ${className}`;
+  const classes = ['icon-button', className].filter(Boolean).join(' ');
 
   if (props.to === undefined) {
     return (
-      <button {...props} className={`${classes}`} type="button">
+      <button
+        {...props}
+        className={classes}
+        type="button"
+        data-counter={badgeCounter}
+      >
         {inner}
       </button>
     );
   }
 
   return (
-    <Link {...props} className={`${classes} icon-button`}>
+    <Link {...props} className={classes} data-counter={badgeCounter}>
       {inner}
     </Link>
   );
