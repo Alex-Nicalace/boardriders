@@ -53,14 +53,14 @@ function RangeSelector({
         <InputStyled
           className="range-selector__from"
           value={from}
-          // type="number" почемуто в этой настройкоа не ожидаемо рабоатет Number(e.target.value.replace(/\D|^0+(?=\d+)/g, ''));
+          inputMode="numeric"
           error={(from < min || from > max) && `min: ${min}, max: ${max}`}
           onChange={(e) => handleChangeRangeValue(e, 0)}
         />
         <InputStyled
           className="range-selector__to"
           value={to}
-          // type="number"
+          inputMode="numeric"
           error={(to < min || to > max) && `min: ${min}, max: ${max}`}
           onChange={(e) => handleChangeRangeValue(e, 1)}
         />
