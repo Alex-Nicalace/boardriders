@@ -8,7 +8,6 @@ import {
   StarIcon,
 } from '../ui/Icons';
 import { Link, useLocation } from 'react-router-dom';
-import Favorite from '../ui/Favorite';
 import Price from '../Price';
 import ColorChoise from '../ColorChoise';
 import SizeChoise from '../SizeChoise';
@@ -17,6 +16,7 @@ import ListIconInfo from '../ListIconInfo';
 import { TProductProps } from './Product.types';
 import Spinner from '../Spinner';
 import Empty from '../Empty';
+import ButtonWishList from '../../features/wishList/ButtonWishList';
 
 const DELIVERY_OPTIONS = [
   {
@@ -74,6 +74,7 @@ function Product({
   onSizeChange,
 }: TProductProps): JSX.Element {
   const {
+    id: productId,
     description,
     detailedDescription,
     price,
@@ -122,7 +123,11 @@ function Product({
             <Link className="product__reviews" to={reviewsLinkAnchor}>
               {reviewCount} отзыва
             </Link>
-            <Favorite className="product__favorite" isFramed />
+            <ButtonWishList
+              className="product__favorite"
+              isFramed
+              productId={productId}
+            />
           </div>
           <h1 className="product__title">{description}</h1>
           <Price

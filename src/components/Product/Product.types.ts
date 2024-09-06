@@ -1,6 +1,7 @@
 export type TProductProps = {
   className?: string;
   data: {
+    id: number;
     description?: string | null;
     detailedDescription?: string | null;
     price: number;
