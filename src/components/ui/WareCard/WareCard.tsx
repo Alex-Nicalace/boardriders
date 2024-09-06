@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import './WareCard.scss';
-import Favorite from '../Favorite';
 import { useFormaters } from '../../../Context/useFormaters';
 import { IWareCardProps } from './WareCard.types';
 import { ImageSizes } from '../../../utils/types';
+import ButtonWishList from '../../../features/wishList/ButtonWishList';
 
 function WareCard({
   data,
@@ -16,11 +16,11 @@ function WareCard({
     price,
     oldPrice,
     discount,
-    isFavorite = false,
     images,
+    id: wareId,
   } = data;
   const { formaterCurrency, formaterPercent } = useFormaters();
-  const to = `/product/${data.id}`;
+  const to = `/product/${wareId}`;
   const [imgMainUrl, imgSecondUrl] = (images || [])
     .filter((url) => url !== null)
     .map((url) => url + ImageSizes.Card);
@@ -54,11 +54,11 @@ function WareCard({
             </span>
           )}
         </Link>
-        <Favorite
+        <ButtonWishList
           className="ware-card__favorite"
-          checked={isFavorite === null ? undefined : isFavorite}
           bgColor={bgColorImage === 'white' ? 'light-gray' : 'white'}
           adaptiveSize="container"
+          productId={wareId}
         />
       </div>
       <footer className="ware-card__footer">

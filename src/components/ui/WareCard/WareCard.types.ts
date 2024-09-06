@@ -6,7 +6,6 @@ export type TWareData = {
   price: number;
   oldPrice?: number | null;
   discount?: number | null;
-  isFavorite?: boolean | null;
 };
 
 export interface IWareCardProps {
