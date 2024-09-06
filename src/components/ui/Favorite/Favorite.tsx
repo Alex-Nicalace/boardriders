@@ -1,25 +1,17 @@
 import { useId, useState } from 'react';
 import './Favorite.scss';
 import { StarIcon } from '../Icons';
+import { TFavoriteProps } from './Favorite.types';
 
-interface IFavoriteProps {
-  className?: string;
-  checked?: boolean;
-  defaultChecked?: boolean;
-  onChange?: (value: boolean) => void;
-  isFramed?: boolean;
-  bgColor?: 'light-gray' | 'white';
-  adaptiveSize?: 'window' | 'container';
-}
 function Favorite({
   checked,
-  className = '',
-  onChange,
+  className,
   defaultChecked = false,
   isFramed = false,
   bgColor = 'white',
   adaptiveSize = 'window',
-}: IFavoriteProps): JSX.Element {
+  onChange,
+}: TFavoriteProps): JSX.Element {
   const [isFavorite, setIsFavorite] = useState(defaultChecked);
   const isChecked = checked ?? isFavorite;
   const id = `${useId()}-favorite`;
