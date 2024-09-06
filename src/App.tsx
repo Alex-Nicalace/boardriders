@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import MainPage from './pages/MainPage';
 import AppLayout from './components/AppLayout';
 import CatalogPage from './pages/CatalogPage';
@@ -12,6 +13,7 @@ import FavouritesPage from './pages/FavouritesPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import RootRedirect from './components/RootRedirect';
+import store from './store';
 
 // Создание клиента
 const queryClient = new QueryClient({
@@ -77,16 +79,18 @@ const router = createBrowserRouter([
 function App() {
   return (
     // Поставщик данных для приложения
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <ScreenWidthProvider>
-        <FormatersProvider>
-          <Popup>
-            <RouterProvider router={router} />
-          </Popup>
-        </FormatersProvider>
-      </ScreenWidthProvider>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <ScreenWidthProvider>
+          <FormatersProvider>
+            <Popup>
+              <RouterProvider router={router} />
+            </Popup>
+          </FormatersProvider>
+        </ScreenWidthProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 }
 
