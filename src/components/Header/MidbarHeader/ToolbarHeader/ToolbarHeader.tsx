@@ -1,7 +1,8 @@
 import Popup from '../../../../component-library/Popup';
+import ButtonToWishListPage from '../../../../features/wishList/ButtonToWishListPage';
 import BurgerButton from '../../../ui/BurgerButton';
 import IconButton from '../../../ui/IconButton';
-import { AvatarIcon, CartIcon, StarIcon } from '../../../ui/Icons';
+import { AvatarIcon, CartIcon } from '../../../ui/Icons';
 import Search from '../../Search';
 import './ToolbarHeader.scss';
 
@@ -29,15 +30,7 @@ const TOOLBAR_BTNS_DATA: TToolbarBtns = [
   },
   {
     name: 'favorites',
-    content: (
-      <IconButton
-        className="midbar-header__link"
-        IconComponent={StarIcon}
-        to="/"
-      >
-        Избранное
-      </IconButton>
-    ),
+    content: <ButtonToWishListPage className="midbar-header__link" />,
   },
   {
     name: 'cart',
