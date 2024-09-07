@@ -14,7 +14,7 @@ function ButtonToWishListPage({
     <IconButton
       className={className}
       IconComponent={StarIcon}
-      to="/"
+      to="/wishlist"
       badgeCounter={count || undefined}
     >
       Избранное

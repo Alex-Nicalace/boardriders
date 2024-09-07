@@ -42,15 +42,15 @@ const router = createBrowserRouter([
             element: <RootRedirect />,
           },
           {
-            path: ':categoryGender',
+            path: '/:categoryGender',
             element: <MainPage />,
           },
           {
-            path: ':categoryGender/catalog/:category',
+            path: '/:categoryGender/catalog/:category',
             element: <CatalogPage />,
           },
           {
-            path: ':categoryGender/brand/:brand/catalog/:category?',
+            path: '/:categoryGender/brand/:brand/catalog/:category?',
             element: <CatalogPage isCatalogBrand />,
           },
 
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
             element: <AccountPage />,
           },
           {
-            path: 'favourites',
+            path: '/wishlist',
             element: <FavouritesPage />,
           },
         ],
