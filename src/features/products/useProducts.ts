@@ -103,19 +103,21 @@ export function useProducts() {
     ? undefined
     : { field: sortByValue[0], value: sortByValue[1] };
 
+  const queryKeys = ['products', ...categoryFilters, filters, sortBy];
+  const args = {
+    categoryFilters,
+    page: pageNum,
+    filters,
+    sortBy,
+  };
+
   const {
     data: { products, count } = {},
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['products', ...categoryFilters, filters, sortBy, pageNum],
-    queryFn: () =>
-      getProducts({
-        categoryFilters,
-        page: pageNum,
-        filters,
-        sortBy,
-      }),
+    queryKey: [...queryKeys, pageNum],
+    queryFn: () => getProducts(args),
   });
 
   const totalPages = Math.ceil((count ?? 0) / PAGE_SIZE_PRODUCTS);
@@ -123,10 +125,10 @@ export function useProducts() {
   // предварительная подгрузка следующей страницы
   if (pageNum < totalPages) {
     queryClient.prefetchQuery({
-      queryKey: ['products', ...categoryFilters, pageNum + 1, brand],
+      queryKey: [...queryKeys, pageNum + 1],
       queryFn: () =>
         getProducts({
-          categoryFilters,
+          ...args,
           page: pageNum + 1,
         }),
     });
@@ -134,10 +136,10 @@ export function useProducts() {
   // предварительная подгрузка предыдущей страницы
   if (pageNum > 1) {
     queryClient.prefetchQuery({
-      queryKey: ['products', ...categoryFilters, pageNum - 1, brand],
+      queryKey: [...queryKeys, pageNum - 1],
       queryFn: () =>
         getProducts({
-          categoryFilters,
+          ...args,
           page: pageNum - 1,
         }),
     });
