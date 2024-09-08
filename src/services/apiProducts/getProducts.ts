@@ -9,7 +9,7 @@ export async function getProducts({
   sortBy,
   page,
 }: {
-  categoryFilters: string[];
+  categoryFilters?: string[];
   filters?: TFilters[];
   sortBy?: { field: string; value: string };
   page?: number;
@@ -24,10 +24,12 @@ export async function getProducts({
       oldPrice,
       productImagesPrimary(imageUrl), 
       brands!inner(name),
-      insertedAt,
-      ${categoryFilters
-        .map((_, i) => `cat_${i}:categories!inner()`)
-        .join(', ')},
+      ${
+        categoryFilters.length > 0 &&
+        categoryFilters
+          .map((_, i) => `cat_${i}:categories!inner()`)
+          .join(', ') + ','
+      }
       category:categories!inner(),
       productVariants!inner()
     `,
