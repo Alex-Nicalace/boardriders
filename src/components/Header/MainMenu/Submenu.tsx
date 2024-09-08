@@ -1,6 +1,6 @@
 import { SubMenuSection } from './SubMenuSection';
 import { SubMenuImgLink } from './SubMenuImgLink';
-import { IMenuData } from '../../../data/menuData';
+import { IMenuData } from '../../../types';
 import './Submenu.scss';
 
 export interface ISubmenuProps {

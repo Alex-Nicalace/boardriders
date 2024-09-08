@@ -1,2 +1,2 @@
-export * from './orderState';
+export * from './types';
 export type * from './store';

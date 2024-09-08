@@ -1,5 +1,5 @@
 import Spinner from '../../components/Spinner';
-import { IMenuData } from '../../data/menuData';
+import { IMenuData } from '../../types';
 import { useMainMenu } from './useMainMenu';
 
 type TMainMenuProviderProps = { children: (data: IMenuData[]) => JSX.Element };
