@@ -1,13 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TRootState, TWishListState } from '../../types';
-
-function loadWishListFromLocalStorage<T>(initialState: T, key: string) {
-  const storedValue = localStorage.getItem(key);
-  return storedValue ? (JSON.parse(storedValue) as T) : initialState;
-}
+import { loadFromLocalStorage } from '../../utils/loadFromLocalStorage';
 
 const initialState: TWishListState = {
-  wishList: loadWishListFromLocalStorage<number[]>([], 'wishList'),
+  wishList: loadFromLocalStorage('wishList') ?? ([] as number[]),
 };
 
 const wishListSlice = createSlice({
