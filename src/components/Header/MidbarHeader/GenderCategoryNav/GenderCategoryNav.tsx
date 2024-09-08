@@ -2,14 +2,18 @@ import { NavLink } from 'react-router-dom';
 import ListLinks from '../../../../component-library/ListLinks';
 import './GenderCategoryNav.scss';
 import { TGenderCategoryNavProps } from './GenderCategoryNav.types';
+import { useAppDispatch } from '../../../../hooks/reduxHooks';
+import { updateGender } from '../../../../features/gender/genderSlice';
 
 function GenderCategoryNav({
   className,
   data,
   activeCategoryGender,
 }: TGenderCategoryNavProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   function handleClick(to: string) {
-    localStorage.setItem('categoryGender', JSON.stringify(to));
+    dispatch(updateGender(to));
   }
 
   return (
