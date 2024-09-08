@@ -1,85 +1,62 @@
+import { useSearchParams } from 'react-router-dom';
 import PageContent from '../../components/PageContent';
+import SortBy, { SORT_OPTIONS } from '../../components/SortBy';
+import Pagination from '../../components/ui/Pagination';
 import ProductList from '../../components/ProductList';
-import SelectLabel from '../../components/ui/SelectLabel';
 import Title from '../../components/ui/Title';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
+import { useWishList } from '../../features/wishList/useWishList';
 import './FavouritesPage.scss';
-
-const PATH = '/src/assets/img/products-new/';
-const PRODUCTS_DATA = [
-  {
-    id: 1,
-    imgMainUrl: PATH + '01.png',
-    imgSecondUrl: PATH + '01-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 2,
-    imgMainUrl: PATH + '02.png',
-    imgSecondUrl: PATH + '02-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 17392,
-    oldPrice: 34392,
-    discount: -50,
-  },
-  {
-    id: 3,
-    imgMainUrl: PATH + '03.png',
-    imgSecondUrl: PATH + '03-hover.png',
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-];
-
-const SORT_OPTIONS = [
-  { name: 'По новизне', value: 'new' },
-  {
-    name: 'По популярности',
-    value: 'popular',
-  },
-  {
-    name: 'По цене',
-    value: 'price',
-  },
-  {
-    name: 'По рейтингу',
-    value: 'rating',
-  },
-];
+import Spinner from '../../components/Spinner';
+import Empty from '../../components/Empty';
 
 // type TFavouritesPageProps = { }
 function FavouritesPage(/*{ }: TFavouritesPageProps*/): JSX.Element {
+  const [searchParams, setSearchParams] = useSearchParams();
   const { isLessMobileSmall } = useScreenWidth();
+  const { products, isLoading, totalPages, pageNum } = useWishList();
+
+  function handlePageChange(page: number) {
+    searchParams.set('page', String(page));
+    setSearchParams(searchParams);
+  }
+
   return (
     <PageContent className="favourites-page" as="main" paddingTop="50-15">
       <div className="favourites-page__container">
         <Title className="favourites-page__title" as="h2" kind="h2-21-16">
           {isLessMobileSmall ? 'Избранные товары' : 'Избранное'}
         </Title>
-        <SelectLabel
-          className="favourites-page__select"
-          label={!isLessMobileSmall && 'Сортировать по:'}
-          labelPosition="left"
-          isGrayLabel
-        >
-          {SORT_OPTIONS.map(({ name, value }) => (
-            <SelectLabel.Option key={value} value={value}>
-              {name}
-            </SelectLabel.Option>
-          ))}
-        </SelectLabel>
-        <ProductList
-          className="favourites-page__product-list"
-          data={PRODUCTS_DATA}
+        <SortBy
+          className="favourites-page__sort"
+          label={!isLessMobileSmall && 'Сортировать по'}
+          options={SORT_OPTIONS}
         />
+        {isLoading && <Spinner className="favourites-page__product-list" />}
+        {!isLoading && !products?.length && (
+          <Empty
+            className="favourites-page__product-list"
+            resource="избранные товары"
+          />
+        )}
+        {!isLoading && products?.length && (
+          <>
+            <ProductList
+              className="favourites-page__product-list"
+              data={products}
+            />
+            {totalPages > 1 && (
+              <Pagination
+                className="favourites-page__pagination"
+                currentPage={pageNum}
+                totalPages={totalPages}
+                visiblePageNumbers={4}
+                isShowNavigationButtons={!isLessMobileSmall}
+                onPageChange={handlePageChange}
+              />
+            )}
+          </>
+        )}
       </div>
     </PageContent>
   );

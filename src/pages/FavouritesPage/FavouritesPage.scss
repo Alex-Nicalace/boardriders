@@ -3,30 +3,45 @@
 .favourites-page {
   // .favourites-page__container
   &__container {
-    display: grid;
-    grid-template:
-      't s'
-      'p p' / 1fr rem(454);
+    display: flex;
+    flex-wrap: wrap;
     row-gap: rem(25);
 
     @include mobile-d {
-      grid-template:
-        't'
-        's'
-        'p' / 1fr;
       row-gap: rem(20);
     }
   }
   // .favourites-page__title
   &__title {
-    grid-area: t;
+    text-align: center;
+
+    @include mobile-d {
+      flex: 0 0 100%;
+    }
   }
   // .favourites-page__select
-  &__select {
-    grid-area: s;
+  &__sort {
+    flex: 1 1 auto;
+    --sort-by-label-flex: 1 1 auto;
+    --sort-by-select-flex: 0 0 #{percent(321, 1234.6)};
+
+    @include tablet-d {
+      --sort-by-select-flex: 0 0 #{percent(465, 830)};
+      --sort-by-gap: #{rem(10)};
+    }
+
+    @include mobile-d {
+      --sort-by-select-flex: 0 0 50%;
+    }
   }
   // .favourites-page__product-list
   &__product-list {
-    grid-area: p;
+    flex: 0 0 100%;
+  }
+
+  &__pagination {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
   }
 }
