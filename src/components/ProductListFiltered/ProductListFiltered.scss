@@ -56,15 +56,15 @@
   // .product-list-filtered__sort
   &__sort {
     flex-grow: 1;
+    --sort-by-label-flex: 1 1 auto;
+    --sort-by-select-flex: 0 0 #{percent(321, 1014)};
 
     @include tablet-d {
       flex: 0 0 50%;
     }
 
     .sort-by__select {
-      flex: 0 0 percent(321, 1014);
       @include tablet-d {
-        flex: 0 0 100%;
         font-size: rem(16);
         text-transform: none;
       }
