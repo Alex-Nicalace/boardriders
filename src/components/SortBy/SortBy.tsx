@@ -1,14 +1,10 @@
-import React, { useId } from 'react';
+import { useId } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SelectIcon } from '../ui/Icons';
 import './SortBy.scss';
 import Select from '../../component-library/Select';
+import { TSortByProps } from './SortBy.types';
 
-type TSortByProps = {
-  className?: string;
-  options: { value: string; text: string }[];
-  label?: React.ReactNode;
-};
 function SortBy({ className, options, label }: TSortByProps): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
   const sortBy = searchParams.get('sortBy') || '';

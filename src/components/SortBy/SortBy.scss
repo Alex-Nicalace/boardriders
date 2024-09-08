@@ -3,10 +3,12 @@
 .sort-by {
   display: flex;
   align-items: center;
+  gap: var(--sort-by-gap, #{rem(30)});
+  --select-border: rem(1) solid var(--light-gray);
+  --select-padding: #{rem(14)} #{rem(15)};
   // .sort-by__label
   &__label {
-    margin: 0 rem(30);
-    flex: 1 1 auto;
+    flex: var(--sort-by-label-flex, 0 1 auto);
     text-align: right;
     @extend %body-2-1;
     color: var(--dark-gray);
@@ -14,15 +16,11 @@
   // .sort-by__select
   &__select {
     @extend %body-4-capital;
-    background-color: var(--light-gray);
+    flex: var(--sort-by-select-flex, 0 1 auto);
+    background-color: var(--sort-by-select-color, var(--light-gray));
 
     &_full-width {
       flex-grow: 1;
-    }
-
-    .select__wrapper {
-      padding: rem(14) rem(15);
-      border-color: var(--light-gray);
     }
 
     .select__selected {

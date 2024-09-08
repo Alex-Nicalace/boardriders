@@ -7,33 +7,7 @@ import { useAvailableSizes } from '../sizes/useAvailableSizes';
 import { useAvailableColors } from '../colors/useAvailableColors';
 import { useAvailableBrands } from '../brands/useAvailableBrands';
 import { useAvailableRangePrices } from './useAvailableRangePrices';
-
-const SORT_OPTIONS = [
-  // {
-  //   value: 'popular',
-  //   text: 'Популярное',
-  // },
-  {
-    value: 'price-asc',
-    text: 'По цене от меньшей к большей',
-  },
-  {
-    value: 'price-desc',
-    text: 'По цене от большей к меньшей',
-  },
-  {
-    value: 'discount-desc',
-    text: 'По скидке',
-  },
-  {
-    value: 'insertedAt-desc',
-    text: 'По дате, сначала новые',
-  },
-  {
-    value: 'insertedAt-asc',
-    text: 'По дате, сначала старые',
-  },
-];
+import { SORT_OPTIONS } from '../../components/SortBy';
 
 const FILTERS_DATA: TFiltersData[] = [
   {
