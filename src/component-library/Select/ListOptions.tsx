@@ -4,25 +4,15 @@ import { useLockDocumentScroll } from '../../hooks/useLockDocumentScroll';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import extractTextFromReactNode from '../../utils/extractTextFromReactNode';
 import { useSelectContext } from './useSelectContext';
+import {
+  IListOptionsCustomCSSProperties,
+  ListOptionsProps,
+} from './Select.types';
 
-interface ICustomCSSProperties extends React.CSSProperties {
-  '--select-options-transition-duration'?: string;
-}
-
-type ListOptionsProps = {
-  children: React.ReactNode;
-  selectRef: React.RefObject<HTMLDivElement>;
-  className?: string;
-  isLockScroll: boolean;
-  isSearchable: boolean;
-  close: () => void;
-  shouldFocus?: boolean;
-  transitionDuration?: number;
-};
 function ListOptions({
   children,
   selectRef,
-  className = '',
+  className,
   isLockScroll,
   isSearchable,
   close,
@@ -63,7 +53,6 @@ function ListOptions({
     const cssText = listEl.style.cssText; // запоминаем стили, чтобы потом вернуть их
 
     if (isLockScroll) {
-      listEl.style.position = 'fixed';
       listEl.style[horizontalPosition] =
         horizontalPosition === 'left'
           ? selectRect.left + 'px'
@@ -140,15 +129,15 @@ function ListOptions({
     }
   }
 
-  const classes = ['options', className].filter(Boolean).join(' ');
-  const style: ICustomCSSProperties = {
+  const style: IListOptionsCustomCSSProperties = {
     '--select-options-transition-duration': transitionDuration + 'ms',
+    ...(isLockScroll && { position: 'fixed' }),
   };
 
   const listOptionsElement = (
     <div
       ref={listElRef}
-      className={classes}
+      className={['options', className].filter(Boolean).join(' ')}
       tabIndex={-1}
       onKeyDown={handleOptionsKeyDown}
       style={style}

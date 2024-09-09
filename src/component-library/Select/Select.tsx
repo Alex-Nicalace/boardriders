@@ -5,7 +5,7 @@ import Option from './Option';
 import { SelectContext } from './SelectContext';
 import Transition, { TTransition } from '../Transition';
 import {
-  ICustomCSSProperties,
+  ISelectCustomCSSProperties,
   OptionProps,
   TSelectProps,
 } from './Select.types';
@@ -168,7 +168,7 @@ function Select(props: TSelectProps): JSX.Element {
     .filter(Boolean)
     .join(' ');
 
-  const style: ICustomCSSProperties = {
+  const style: ISelectCustomCSSProperties = {
     '--select-transition-duration': duration + 'ms',
   };
 
@@ -213,9 +213,9 @@ function Select(props: TSelectProps): JSX.Element {
                 selectRef={selectRef}
                 isLockScroll={isLockScroll}
                 isSearchable={isSearchable}
-                className={`${TRANSITION_STYLES[state]} ${
-                  listOptions.className ?? ''
-                }`}
+                className={[TRANSITION_STYLES[state], listOptions.className]
+                  .filter(Boolean)
+                  .join(' ')}
                 close={close}
                 shouldFocus={state === 'entered' && isOpen}
                 transitionDuration={duration}

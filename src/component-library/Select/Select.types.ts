@@ -1,7 +1,11 @@
 import { ReactElement } from 'react';
 
-export interface ICustomCSSProperties extends React.CSSProperties {
+export interface ISelectCustomCSSProperties extends React.CSSProperties {
   '--select-transition-duration'?: string;
+}
+
+export interface IListOptionsCustomCSSProperties extends React.CSSProperties {
+  '--select-options-transition-duration'?: string;
 }
 
 export type TSingleSelectProps = {
@@ -69,4 +73,15 @@ export type OptionProps = {
   children: React.ReactNode;
   value: string;
   className?: string;
+};
+
+export type ListOptionsProps = {
+  children: React.ReactNode;
+  selectRef: React.RefObject<HTMLDivElement>;
+  className?: string;
+  isLockScroll: boolean;
+  isSearchable: boolean;
+  close: () => void;
+  shouldFocus?: boolean;
+  transitionDuration?: number;
 };
