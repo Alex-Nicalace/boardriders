@@ -32,7 +32,11 @@ function FavouritesPage(/*{ }: TFavouritesPageProps*/): JSX.Element {
           label={!isLessMobileSmall && 'Сортировать по'}
           options={SORT_OPTIONS}
         />
-        {isLoading && <Spinner className="favourites-page__product-list" />}
+        {isLoading && (
+          <div className="favourites-page__product-list">
+            <Spinner  />
+          </div>
+        )}
         {!isLoading && !products?.length && (
           <Empty
             className="favourites-page__product-list"
