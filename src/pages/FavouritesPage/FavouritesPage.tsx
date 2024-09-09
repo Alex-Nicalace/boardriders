@@ -34,7 +34,7 @@ function FavouritesPage(/*{ }: TFavouritesPageProps*/): JSX.Element {
         />
         {isLoading && (
           <div className="favourites-page__product-list">
-            <Spinner  />
+            <Spinner />
           </div>
         )}
         {!isLoading && !products?.length && (
@@ -43,7 +43,7 @@ function FavouritesPage(/*{ }: TFavouritesPageProps*/): JSX.Element {
             resource="избранные товары"
           />
         )}
-        {!isLoading && products?.length && (
+        {!isLoading && !!products?.length && (
           <>
             <ProductList
               className="favourites-page__product-list"
