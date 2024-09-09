@@ -38,7 +38,7 @@ const TOOLBAR_BTNS_DATA: TToolbarBtns = [
       <IconButton
         className="midbar-header__link"
         IconComponent={CartIcon}
-        to="/"
+        to="/cart"
       >
         Корзина
       </IconButton>
