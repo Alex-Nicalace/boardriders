@@ -1,4 +1,4 @@
-import { TInputTextProps } from '../../../component-library/InputText';
+import InputText from '../../../component-library/InputText';
 
 type TInputStyledButtonProps = (
   | {
@@ -25,6 +25,6 @@ export type TInputStyledcommonProps = {
   placeBorder?: 'input' | 'wrap';
 };
 
-export type TInputStyledProps = TInputTextProps &
+export type TInputStyledProps = React.ComponentProps<typeof InputText> &
   TInputStyledButtonProps &
   TInputStyledcommonProps;
