@@ -14,7 +14,7 @@ type TInputStyledButtonProps = (
     | { buttonProps?: never; buttonContent?: never }
     | {
         buttonProps?: React.ButtonHTMLAttributes<HTMLButtonElement> & {
-          bgColor?: 'black' | 'transparent';
+          bgColor?: 'black' | 'transparent' | 'white';
           color?: 'white' | 'black' | 'dark-gray';
         };
         buttonContent: React.ReactNode;

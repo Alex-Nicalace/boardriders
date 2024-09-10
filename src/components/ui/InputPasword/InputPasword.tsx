@@ -21,7 +21,7 @@ function InputPasword({
       type={showPassword ? 'text' : 'password'}
       buttonContent={showPassword ? <VisibleIcon /> : <NotVisibleIcon />}
       buttonProps={{
-        bgColor: 'transparent',
+        bgColor: 'white',
         color: 'dark-gray',
         onClick: () => setShowPassword(!showPassword),
       }}

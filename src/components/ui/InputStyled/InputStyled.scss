@@ -75,6 +75,9 @@
       &_transparent {
         background-color: transparent;
       }
+      &_white {
+        background-color: var(--white);
+      }
     }
 
     &_color {

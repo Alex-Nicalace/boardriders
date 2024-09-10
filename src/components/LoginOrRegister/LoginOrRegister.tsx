@@ -1,11 +1,20 @@
 import { useState } from 'react';
-import { useScreenWidth } from '../../Context/useScreenWidthContext';
-import FormAuth from '../FormAuth';
-import TabsBlock from '../TabsBlock';
 import './LoginOrRegister.scss';
+import { useScreenWidth } from '../../Context/useScreenWidthContext';
+import TabsBlock from '../TabsBlock';
 import { TabPanel } from '../../component-library/Tabs';
+import { FormLogin, FormRegistration } from '../FormAuth';
 
-const TABS = ['Вход', 'Регистрация'];
+const TABS = [
+  {
+    title: 'Вход',
+    Component: FormLogin,
+  },
+  {
+    title: 'Регистрация',
+    Component: FormRegistration,
+  },
+];
 
 type TLoginOrRegisterProps = {
   className?: string;
@@ -18,11 +27,10 @@ function LoginOrRegister({ className }: TLoginOrRegisterProps): JSX.Element {
     <div className={['login-or-register', className].filter(Boolean).join(' ')}>
       {!isLessMobile && (
         <div className="login-or-register__forms">
-          {TABS.map((title) => (
-            <FormAuth
+          {TABS.map(({ Component, title }) => (
+            <Component
               key={title}
               className="login-or-register__form"
-              mode={title === 'Вход' ? 'login' : 'registration'}
               withTitle
             />
           ))}
@@ -36,17 +44,13 @@ function LoginOrRegister({ className }: TLoginOrRegisterProps): JSX.Element {
             onChange={setActiveTab}
             variant="second"
           >
-            {TABS.map((title) => (
+            {TABS.map(({ title }) => (
               <TabsBlock.Tab key={title} label={title} />
             ))}
           </TabsBlock>
-          {TABS.map((title, index) => (
+          {TABS.map(({ title, Component }, index) => (
             <TabPanel key={title} index={index} value={activeTab}>
-              <FormAuth
-                key={title}
-                className="login-or-register__tabs-form"
-                mode={title === 'Вход' ? 'login' : 'registration'}
-              />
+              <Component key={title} className="login-or-register__tabs-form" />
             </TabPanel>
           ))}
         </div>

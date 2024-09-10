@@ -1,3 +1,4 @@
-import FormAuth from './FormAuth';
+import FormRegistration from './FormRegistration';
+import FormLogin from './FormLogin';
 
-export default FormAuth;
+export { FormRegistration, FormLogin };
