@@ -10,24 +10,18 @@ export type TInputTextCommonProps = {
   bemBlockName?: string;
   fullWidth?: boolean;
 };
-type TextAreaOnlyKeys = Exclude<
-  keyof TextareaHTMLAttributes<HTMLTextAreaElement>,
-  keyof InputHTMLAttributes<HTMLInputElement>
+
+type TInputProps = React.DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
 >;
-type InputOnlyKeys = Exclude<
-  keyof InputHTMLAttributes<HTMLInputElement>,
-  keyof TextareaHTMLAttributes<HTMLTextAreaElement>
+type TTextareaProps = React.DetailedHTMLProps<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  HTMLTextAreaElement
 >;
-type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-  isTextarea?: false;
-} & {
-  [k in TextAreaOnlyKeys]?: never;
-};
-type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
-  isTextarea: true;
-} & {
-  [k in InputOnlyKeys]?: never;
-};
 
 export type TInputTextProps = TInputTextCommonProps &
-  (InputProps | TextareaProps);
+  (
+    | (TInputProps & { isTextarea?: false })
+    | (TTextareaProps & { isTextarea: true })
+  );
