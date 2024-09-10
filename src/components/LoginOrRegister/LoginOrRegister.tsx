@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
-import FormLogin from '../FormLogin/FormLogin';
+import FormAuth from '../FormAuth';
 import TabsBlock from '../TabsBlock';
 import './LoginOrRegister.scss';
 import { TabPanel } from '../../component-library/Tabs';
@@ -19,7 +19,7 @@ function LoginOrRegister({ className }: TLoginOrRegisterProps): JSX.Element {
       {!isLessMobile && (
         <div className="login-or-register__forms">
           {TABS.map((title) => (
-            <FormLogin
+            <FormAuth
               key={title}
               className="login-or-register__form"
               mode={title === 'Вход' ? 'login' : 'registration'}
@@ -42,7 +42,7 @@ function LoginOrRegister({ className }: TLoginOrRegisterProps): JSX.Element {
           </TabsBlock>
           {TABS.map((title, index) => (
             <TabPanel key={title} index={index} value={activeTab}>
-              <FormLogin
+              <FormAuth
                 key={title}
                 className="login-or-register__tabs-form"
                 mode={title === 'Вход' ? 'login' : 'registration'}

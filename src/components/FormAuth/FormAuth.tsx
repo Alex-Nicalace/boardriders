@@ -1,27 +1,27 @@
 import { Link } from 'react-router-dom';
+import './FormAuth.scss';
 import Checkbox from '../ui/Checkbox';
 import InputPasword from '../ui/InputPasword';
 import InputStyled from '../ui/InputStyled';
-import './FormLogin.scss';
 import Button from '../ui/Button';
 
-type TFormLoginProps = {
+type TFormAuthProps = {
   className?: string;
   mode?: 'login' | 'registration';
   withTitle?: boolean;
 };
-function FormLogin({
+function FormAuth({
   className,
   mode = 'login',
   withTitle,
-}: TFormLoginProps): JSX.Element {
+}: TFormAuthProps): JSX.Element {
   return (
     <form
-      className={['form-login', className].filter(Boolean).join(' ')}
+      className={['form-auth', className].filter(Boolean).join(' ')}
       name={mode}
     >
       {withTitle && (
-        <h1 className="form-login__title">
+        <h1 className="form-auth__title">
           {mode === 'login' ? 'Вход' : 'Регистрация'}
         </h1>
       )}
@@ -29,22 +29,22 @@ function FormLogin({
       {mode === 'login' && (
         <>
           <InputStyled
-            className="form-login__input"
+            className="form-auth__input"
             name="email"
             label="Номер телефона или email"
             isGrayLabel
             fullWidth
           />
           <InputPasword
-            className="form-login__input"
+            className="form-auth__input"
             name="password"
             label="Пароль"
             isGrayLabel
             fullWidth
           />
-          <div className="form-login__checkbox">
+          <div className="form-auth__checkbox">
             <Checkbox variantIcon="square" label="Запомнить меня" />
-            <Link className="form-login__link" to="#">
+            <Link className="form-auth__link" to="#">
               Забыли пароль?
             </Link>
           </div>
@@ -54,7 +54,7 @@ function FormLogin({
       {mode === 'registration' && (
         <>
           <InputStyled
-            className="form-login__input"
+            className="form-auth__input"
             name="name"
             label="Имя*"
             isGrayLabel
@@ -62,7 +62,7 @@ function FormLogin({
             required
           />
           <InputStyled
-            className="form-login__input"
+            className="form-auth__input"
             name="email"
             label="Email*"
             isGrayLabel
@@ -71,14 +71,14 @@ function FormLogin({
             required
           />
           <InputStyled
-            className="form-login__input"
+            className="form-auth__input"
             name="phone"
             label="Номер телефона*"
             isGrayLabel
             fullWidth
             required
           />
-          <div className="form-login__checkbox">
+          <div className="form-auth__checkbox">
             <Checkbox
               variantIcon="square"
               label="Вы соглашаетесь с правилами"
@@ -87,7 +87,7 @@ function FormLogin({
         </>
       )}
 
-      <div className="form-login__btn">
+      <div className="form-auth__btn">
         <Button variant={mode === 'login' ? 'contained' : 'outlined'} fullWidth>
           {mode === 'login' ? 'Войти' : 'Зарегистрироваться'}
         </Button>
@@ -96,4 +96,4 @@ function FormLogin({
   );
 }
 
-export default FormLogin;
+export default FormAuth;
