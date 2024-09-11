@@ -21,6 +21,7 @@ const Checkbox = forwardRef<HTMLInputElement, TCheckboxProps>(
       disabled,
       styleDisabled = false,
       title,
+      isError,
       ...props
     },
     ref
@@ -99,6 +100,7 @@ const Checkbox = forwardRef<HTMLInputElement, TCheckboxProps>(
           classes,
           className,
           styleDisabled && `${nameBlock}_disabled`,
+          isError && `${nameBlock}_error`,
         ]
           .filter(Boolean)
           .join(' ')}
