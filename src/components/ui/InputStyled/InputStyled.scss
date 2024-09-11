@@ -138,11 +138,38 @@
 
   // .input-main__error
   &_error {
-    .input-main__input {
-      border-color: var(--red);
-      &:focus {
-        outline: rem(1) solid var(--red);
+    &:not(.input-main_border_wrap) {
+      .input-main__input {
         border-color: var(--red);
+        &:focus {
+          outline: rem(1) solid var(--red);
+          border-color: var(--red);
+        }
+      }
+      @media (pointer: fine) {
+        &:hover {
+          .input-main__input {
+            outline: rem(1) solid var(--red);
+            border-color: var(--red);
+          }
+        }
+      }
+    }
+    &:not(.input-main_border_imput) {
+      .input-main__wrap {
+        border-color: var(--red);
+        &:focus-within {
+          outline: rem(1) solid var(--red);
+          border-color: var(--red);
+        }
+      }
+      @media (pointer: fine) {
+        &:hover {
+          .input-main__wrap {
+            outline: rem(1) solid var(--red);
+            border-color: var(--red);
+          }
+        }
       }
     }
   }
