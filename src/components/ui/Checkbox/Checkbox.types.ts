@@ -41,6 +41,7 @@ export type TCheckboxProps = (
   disabled?: boolean;
   styleDisabled?: boolean;
   title?: string;
+  isError?: boolean;
 };
 export interface ICheckboxComponent
   extends React.ForwardRefExoticComponent<

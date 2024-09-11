@@ -193,6 +193,12 @@
       }
     }
   }
+
+  &_error {
+    .checkbox__hint {
+      color: var(--red);
+    }
+  }
 }
 
 .btn-toggle {
