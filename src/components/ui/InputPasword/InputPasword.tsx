@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useState } from 'react';
+import { forwardRef, InputHTMLAttributes, useState } from 'react';
 import { NotVisibleIcon, VisibleIcon } from '../Icons';
 import InputStyled, { TInputStyledcommonProps } from '../InputStyled';
 import './InputPasword.scss';
@@ -9,26 +9,26 @@ type TInputPaswordProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> &
   TInputStyledcommonProps & {
     defaultPasswordShow?: boolean;
   };
-function InputPasword({
-  defaultPasswordShow = false,
-  ...props
-}: TInputPaswordProps): JSX.Element {
-  const [showPassword, setShowPassword] = useState(defaultPasswordShow);
+const InputPasword = forwardRef<HTMLInputElement, TInputPaswordProps>(
+  ({ defaultPasswordShow = false, ...props }, ref) => {
+    const [showPassword, setShowPassword] = useState(defaultPasswordShow);
 
-  return (
-    <InputStyled
-      {...props}
-      type={showPassword ? 'text' : 'password'}
-      buttonContent={showPassword ? <VisibleIcon /> : <NotVisibleIcon />}
-      buttonProps={{
-        bgColor: 'white',
-        color: 'dark-gray',
-        onClick: () => setShowPassword(!showPassword),
-      }}
-      placeBorder="wrap"
-      isTextarea={false}
-    />
-  );
-}
+    return (
+      <InputStyled
+        {...props}
+        ref={ref}
+        type={showPassword ? 'text' : 'password'}
+        buttonContent={showPassword ? <VisibleIcon /> : <NotVisibleIcon />}
+        buttonProps={{
+          bgColor: 'white',
+          color: 'dark-gray',
+          onClick: () => setShowPassword(!showPassword),
+        }}
+        placeBorder="wrap"
+        isTextarea={false}
+      />
+    );
+  }
+);
 
 export default InputPasword;
