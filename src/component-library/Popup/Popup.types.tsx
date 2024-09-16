@@ -27,4 +27,5 @@ export type TWindowProps = TCommonWindowProps & {
 export type TWindowBodyProps = TCommonWindowProps & {
   children: React.ReactNode;
   open?: boolean;
+  closeWindow: () => void;
 };

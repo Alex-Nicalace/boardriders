@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Popup.scss';
 import Transition, { TTransition } from '../Transition';
 import { useLockDocumentScroll } from '../../hooks/useLockDocumentScroll';
@@ -79,7 +80,7 @@ function Open({ render, windowName }: TOpenProps): JSX.Element {
  * Рендерит компонент окна с указанными свойствами.
  *
  * @param {object} props - Объект props, содержащий следующие свойства:
- *   - windowName: Имя окна
+ *   - windowName: Имя окна, если в начале есть символ #, то окно открывается при нажатии на ссылку
  *   - render: Функция рендеринга для окна
  *   - className: CSS-класс для стилизации
  *   - onClickOutside: Функция для обработки клика вне окна
@@ -101,8 +102,31 @@ function Window({
   transitionEffect,
   mode = 'popup',
 }: TWindowProps): JSX.Element {
-  const { close, openName } = useContext(PopupContext);
+  const { close, openName, open } = useContext(PopupContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const modalNameFromHash = location.hash.slice(1);
+  const isOpenFromHash = modalNameFromHash === windowName;
   const isOpen = openName === windowName;
+
+  useEffect(
+    function openModalFromHash() {
+      if (isOpenFromHash) {
+        open(windowName);
+      }
+    },
+    [isOpenFromHash, open, windowName]
+  );
+
+  function closeWindow() {
+    if (isOpenFromHash) {
+      navigate({
+        ...location,
+        hash: '',
+      });
+    }
+    close();
+  }
 
   return (
     <Transition enter={isOpen} timeout={transitionDuration}>
@@ -123,11 +147,12 @@ function Window({
               .filter(Boolean)
               .join(' ')}
             open={state !== 'exited' || isOpen}
-            onClickOutside={onClickOutside}
             transitionDuration={transitionDuration}
             mode={mode}
+            onClickOutside={onClickOutside}
+            closeWindow={closeWindow}
           >
-            {render(close)}
+            {render(closeWindow)}
           </WindowBody>,
           document.body
         )
@@ -148,11 +173,11 @@ function WindowBody({
   onClickOutside = () => {},
   transitionDuration,
   mode,
+  closeWindow,
 }: TWindowBodyProps): JSX.Element {
-  const { close } = useContext(PopupContext);
   useLockDocumentScroll();
   const contentRef = useOutsideClick<HTMLDivElement>((e) =>
-    onClickOutside(close, e)
+    onClickOutside(closeWindow, e)
   );
   const dialogEl = useRef<HTMLDialogElement>(null);
   const style: ICustomCSSProperties = {
