@@ -1,0 +1,21 @@
+@import '/src/styles/global-scss.scss';
+
+.account-button {
+  display: inline-grid;
+  justify-items: center;
+  gap: rem(5);
+  @extend %caption-capital;
+  // .account-button__name
+  &__name {
+    width: rem(26);
+    height: rem(26);
+    border-radius: 50%;
+    background-color: var(--black);
+    color: var(--white);
+    line-height: rem(26);
+    text-align: center;
+  }
+  // .account-button__text
+  &__text {
+  }
+}
