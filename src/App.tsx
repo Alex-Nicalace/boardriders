@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
 import MainPage from './pages/MainPage';
 import AppLayout from './components/AppLayout';
 import CatalogPage from './pages/CatalogPage';
@@ -94,6 +95,8 @@ function App() {
           </FormatersProvider>
         </ScreenWidthProvider>
       </QueryClientProvider>
+
+      <Toaster />
     </Provider>
   );
 }
