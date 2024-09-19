@@ -1,0 +1,21 @@
+@import '/src/styles/global-scss.scss';
+
+.error-message {
+  display: grid;
+  grid-template-columns: minmax(auto, rem(408));
+  align-content: center;
+  justify-content: center;
+  gap: rem(40);
+  // .error-message__status
+  &__status {
+    @include adaptiveValue('font-size', 27, 10);
+  }
+  // .error-message__btn
+  &__btn {
+  }
+  // .error-message_height-screen
+  &_height-screen {
+    height: 100vh;
+    padding: rem(20);
+  }
+}
