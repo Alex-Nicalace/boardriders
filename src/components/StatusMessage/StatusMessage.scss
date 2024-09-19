@@ -1,0 +1,124 @@
+@import '/src/styles/global-scss.scss';
+
+.status-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--status-message-color);
+  // .status-message__box
+  &__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: rem(20);
+  }
+  // .status-message__emoji
+  &__emoji {
+    // height: rem(218);
+    display: flex;
+    gap: rem(16);
+  }
+  // .status-message__body
+  &__body {
+    @include adaptiveValue('width', 104, 76);
+
+    align-self: flex-end;
+  }
+  // .status-message__icon
+  &__icon {
+    width: 100%;
+    height: auto;
+  }
+  // .status-message__box-bubble
+  &__box-bubble {
+    // padding-bottom: percent(90, 264);
+    @include adaptiveValue('height', 218, 121);
+  }
+  // .status-message__bubble
+  &__bubble {
+    position: relative;
+    @include adaptiveValue('width', 144, 51);
+    aspect-ratio: 144 / 116;
+    // width: rem(144);
+    // height: rem(115);
+    overflow: hidden;
+  }
+  // .status-message__fairing
+  &__fairing {
+    width: 50%;
+    height: 100%;
+    &:nth-child(1) {
+      float: left;
+      shape-outside: polygon(
+        100% 0px,
+        0px 0px,
+        0px 100%,
+        100% 100%,
+        70.89% 86.96%,
+        27.11% 71.3%,
+        6.94% 46.09%,
+        24.3% 25.23%,
+        56.26% 12.17%
+      );
+    }
+    &:nth-child(2) {
+      float: right;
+      shape-outside: polygon(
+        0px 0px,
+        100% 0px,
+        100% 100%,
+        0px 100%,
+        51.44% 84.35%,
+        82.66% 68.69%,
+        101.39% 50.44%,
+        77.07% 24.36%,
+        50.7% 10.43%
+      );
+    }
+
+    & + .status-message__message {
+      height: auto;
+      display: block;
+    }
+  }
+  // .status-message__message
+  &__message {
+    // @include adaptiveValue('font-size', 32, 14);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: normal;
+    text-align: justify;
+    font-size: var(--status-message__message-font-size, rem(16));
+    font-weight: 700;
+    // hyphens: auto; // перенос слов
+  }
+  // .status-message__icon-message
+  &__icon-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // inset: 0;
+  }
+  // .status-message__description
+  &__description {
+    @include adaptiveValue(--default-font-size, 21, 16);
+    font-size: var(
+      --status-message__description-font-size,
+      var(--default-font-size, 21)
+    );
+    font-weight: 700;
+    letter-spacing: normal;
+  }
+  // .status-message_black
+  &_black {
+    --status-message-color: var(--black);
+  }
+  // .status-message_red
+  &_red {
+    --status-message-color: var(--red);
+  }
+}
