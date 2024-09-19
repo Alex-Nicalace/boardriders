@@ -2,8 +2,9 @@
 
 .modal-wrap {
   background-color: var(--white);
-  max-width: rem(992);
-  max-height: rem(655);
+  // ? вроде не нужный эти 2 параметра
+  // max-width: rem(992);
+  // max-height: rem(655);
 
   &__content {
     position: relative;

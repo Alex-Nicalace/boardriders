@@ -25,12 +25,14 @@ export type TFormLoginProps = {
   className?: string;
   withTitle?: boolean;
   disabled?: boolean;
+  error?: string;
   onSubmit?: (data: TInputsLogin) => void;
 };
 export type TFormRegistrationProps = {
   className?: string;
   withTitle?: boolean;
   disabled?: boolean;
+  error?: string;
   onSubmit?: (
     data: TInputsRegistartion,
     options?: { reset?: () => void }

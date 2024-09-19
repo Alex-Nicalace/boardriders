@@ -12,6 +12,7 @@ function FormLogin({
   className,
   withTitle,
   disabled,
+  error,
   onSubmit = () => {},
 }: TFormLoginProps): JSX.Element {
   const {
@@ -62,7 +63,7 @@ function FormLogin({
           hint={errors.rememberMe?.message}
           isError={!!errors.rememberMe}
           disabled={disabled}
-          {...register('rememberMe', { required: MSG_REQUIRED })}
+          {...register('rememberMe')}
         />
         <Link className="form-auth__link" to="#">
           Забыли пароль?
@@ -74,6 +75,10 @@ function FormLogin({
           Войти
         </Button>
       </div>
+
+      {error && (
+        <p className="form-auth__error">{`Во время входа произошла ошибка! ${error}`}</p>
+      )}
     </form>
   );
 }

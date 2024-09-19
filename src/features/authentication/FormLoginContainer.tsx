@@ -15,13 +15,20 @@ function FormLoginContainer({
   onSuccessLogin,
   ...props
 }: TFormLoginContainerProps): JSX.Element {
-  const { login, isLogging } = useLogin();
+  const { login, isLogging, error } = useLogin();
 
   function onSubmit({ email, password }: TInputsLogin) {
     login({ email, password }, { onSuccess: onSuccessLogin });
   }
 
-  return <FormLogin {...props} onSubmit={onSubmit} disabled={isLogging} />;
+  return (
+    <FormLogin
+      {...props}
+      onSubmit={onSubmit}
+      disabled={isLogging}
+      error={error?.message}
+    />
+  );
 }
 
 export default FormLoginContainer;

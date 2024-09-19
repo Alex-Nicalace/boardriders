@@ -13,7 +13,7 @@ function FormRegistrationContainer({
   onSuccessRegister,
   ...props
 }: TFormRegistrationContainerProps): JSX.Element {
-  const { signup, isSigning } = useSignup();
+  const { signup, isSigning, error } = useSignup();
 
   // Обработчик события отправки формы
   function onSubmit({
@@ -32,7 +32,12 @@ function FormRegistrationContainer({
   }
 
   return (
-    <FormRegistration {...props} disabled={isSigning} onSubmit={onSubmit} />
+    <FormRegistration
+      {...props}
+      disabled={isSigning}
+      onSubmit={onSubmit}
+      error={error?.message}
+    />
   );
 }
 

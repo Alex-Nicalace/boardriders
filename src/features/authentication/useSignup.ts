@@ -3,7 +3,11 @@ import { signup as signupApi } from '../../services/apiAuth';
 import toast from 'react-hot-toast';
 
 export function useSignup() {
-  const { mutate: signup, isPending: isSigning } = useMutation({
+  const {
+    mutate: signup,
+    isPending: isSigning,
+    error,
+  } = useMutation({
     mutationFn: signupApi,
     onSuccess: () => {
       console.log('Пользователь успешно создан!');
@@ -11,9 +15,9 @@ export function useSignup() {
     },
     onError: (err) => {
       console.error(err);
-      toast.error(`Во время регистрации произошла ошибка! ${err.message}`);
+      // toast.error(`Во время регистрации произошла ошибка! ${err.message}`);
     },
   });
 
-  return { signup, isSigning };
+  return { signup, isSigning, error };
 }

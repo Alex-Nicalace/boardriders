@@ -1,10 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
 import { login as loginApi, TLoginParams } from '../../services/apiAuth';
 
 export function useLogin() {
   const queryClient = useQueryClient();
-  const { mutate: login, isPending: isLogging } = useMutation({
+  const {
+    mutate: login,
+    isPending: isLogging,
+    error,
+  } = useMutation({
     mutationFn: ({ email, password }: TLoginParams) => {
       return loginApi({ email, password });
     },
@@ -17,9 +20,8 @@ export function useLogin() {
     },
     onError: (err) => {
       console.error(err);
-      toast.error(`Во время входа произошла ошибка! ${err.message}`);
     },
   });
 
-  return { login, isLogging };
+  return { login, isLogging, error };
 }

@@ -11,6 +11,7 @@ function FormRegistration({
   className,
   withTitle,
   disabled,
+  error,
   onSubmit = () => {},
 }: TFormRegistrationProps): JSX.Element {
   const {
@@ -110,6 +111,10 @@ function FormRegistration({
           Зарегистрироваться
         </Button>
       </div>
+
+      {error && (
+        <p className="form-auth__error">{`Во время регистрации произошла ошибка! ${error}`}</p>
+      )}
     </form>
   );
 }

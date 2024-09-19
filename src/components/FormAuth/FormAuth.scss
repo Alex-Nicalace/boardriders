@@ -32,4 +32,12 @@
       margin-top: rem(40);
     }
   }
+  &__error {
+    color: var(--red);
+    @extend %body-2;
+
+    &:not(:first-child) {
+      margin-top: rem(10);
+    }
+  }
 }
