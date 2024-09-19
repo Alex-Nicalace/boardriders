@@ -6,9 +6,7 @@ import { useBrands } from './useBrands';
 type TLinksBrandsContainerProps = {
   className?: string;
 };
-function LinksBrandsContainer({
-  className,
-}: TLinksBrandsContainerProps): JSX.Element {
+function LinksBrandsContainer({ className }: TLinksBrandsContainerProps) {
   const params = useParams();
   const { categoryGender } = params;
   const { brands, isLoading } = useBrands();
@@ -17,7 +15,9 @@ function LinksBrandsContainer({
     return <Spinner />;
   }
 
-  const data = (brands || []).map((item) => ({
+  if (!brands?.length) return;
+
+  const data = brands.map((item) => ({
     iconUrl: item.iconUrl || '',
     to: `/${categoryGender}/brand/${item.name}/catalog`,
   }));
