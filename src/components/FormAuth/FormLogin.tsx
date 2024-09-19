@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import './FormAuth.scss';
 import Checkbox from '../ui/Checkbox';
@@ -6,27 +6,19 @@ import InputPasword from '../ui/InputPasword';
 import InputStyled from '../ui/InputStyled';
 import Button from '../ui/Button';
 import { MSG_REQUIRED } from './constants';
+import { TFormLoginProps, TInputsLogin } from './FormAuth.types';
 
-// Задаем типы входных данных для формы
-type TInputsLogin = {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-};
-
-type TFormLoginProps = {
-  className?: string;
-  withTitle?: boolean;
-};
-function FormLogin({ className, withTitle }: TFormLoginProps): JSX.Element {
+function FormLogin({
+  className,
+  withTitle,
+  disabled,
+  onSubmit = () => {},
+}: TFormLoginProps): JSX.Element {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TInputsLogin>();
-
-  // Обработчик события отправки формы
-  const onSubmit: SubmitHandler<TInputsLogin> = (data) => console.log(data);
 
   return (
     <form
@@ -38,11 +30,12 @@ function FormLogin({ className, withTitle }: TFormLoginProps): JSX.Element {
 
       <InputStyled
         className="form-auth__input"
-        label="Номер телефона или email"
+        label="Email"
         isGrayLabel
         fullWidth
         type="email"
         error={errors.email?.message}
+        disabled={disabled}
         {...register('email', {
           required: MSG_REQUIRED,
           pattern: {
@@ -57,6 +50,7 @@ function FormLogin({ className, withTitle }: TFormLoginProps): JSX.Element {
         isGrayLabel
         fullWidth
         error={errors.password?.message}
+        disabled={disabled}
         {...register('password', {
           required: MSG_REQUIRED,
         })}
@@ -67,6 +61,7 @@ function FormLogin({ className, withTitle }: TFormLoginProps): JSX.Element {
           label="Запомнить меня"
           hint={errors.rememberMe?.message}
           isError={!!errors.rememberMe}
+          disabled={disabled}
           {...register('rememberMe', { required: MSG_REQUIRED })}
         />
         <Link className="form-auth__link" to="#">
@@ -75,7 +70,7 @@ function FormLogin({ className, withTitle }: TFormLoginProps): JSX.Element {
       </div>
 
       <div className="form-auth__btn">
-        <Button variant="contained" fullWidth>
+        <Button variant="contained" fullWidth disabled={disabled}>
           Войти
         </Button>
       </div>

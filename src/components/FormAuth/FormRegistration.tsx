@@ -1,43 +1,30 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import './FormAuth.scss';
 import Checkbox from '../ui/Checkbox';
 import InputPasword from '../ui/InputPasword';
 import InputStyled from '../ui/InputStyled';
 import Button from '../ui/Button';
 import { MSG_REQUIRED, PASSWORD_MIN_LENGTH } from './constants';
+import { TFormRegistrationProps, TInputsRegistartion } from './FormAuth.types';
 
-// Задаем типы входных данных для формы
-type TInputsRegistartion = {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
-  rulesAgreement: boolean;
-};
-
-type TFormRegistrationProps = {
-  className?: string;
-  withTitle?: boolean;
-};
 function FormRegistration({
   className,
   withTitle,
+  disabled,
+  onSubmit = () => {},
 }: TFormRegistrationProps): JSX.Element {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<TInputsRegistartion>();
-
-  // Обработчик события отправки формы
-  const onSubmit: SubmitHandler<TInputsRegistartion> = (data) =>
-    console.log(data);
 
   return (
     <form
       className={['form-auth', className].filter(Boolean).join(' ')}
       name="registration"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit((prop) => onSubmit({ ...prop }, { reset }))}
     >
       {withTitle && <h1 className="form-auth__title">Регистрация</h1>}
       <InputStyled
@@ -46,6 +33,7 @@ function FormRegistration({
         isGrayLabel
         fullWidth
         error={errors.name?.message}
+        disabled={disabled}
         {...register('name', {
           required: MSG_REQUIRED,
           minLength: {
@@ -61,6 +49,7 @@ function FormRegistration({
         fullWidth
         type="email"
         error={errors.email?.message}
+        disabled={disabled}
         {...register('email', {
           required: MSG_REQUIRED,
           pattern: {
@@ -83,6 +72,7 @@ function FormRegistration({
         isGrayLabel
         fullWidth
         error={errors.password?.message}
+        disabled={disabled}
         {...register('password', {
           required: MSG_REQUIRED,
           minLength: {
@@ -97,6 +87,7 @@ function FormRegistration({
         isGrayLabel
         fullWidth
         error={errors.passwordConfirm?.message}
+        disabled={disabled}
         {...register('passwordConfirm', {
           required: MSG_REQUIRED,
           validate: (value, formValues) =>
@@ -109,12 +100,13 @@ function FormRegistration({
           label="Вы соглашаетесь с правилами"
           hint={errors.rulesAgreement?.message}
           isError={!!errors.rulesAgreement}
+          disabled={disabled}
           {...register('rulesAgreement', { required: MSG_REQUIRED })}
         />
       </div>
 
       <div className="form-auth__btn">
-        <Button variant="outlined" fullWidth>
+        <Button variant="outlined" fullWidth disabled={disabled}>
           Зарегистрироваться
         </Button>
       </div>
