@@ -16,7 +16,8 @@ export function useBreadcrumbsData() {
   });
   const isLoading =
     isLoadingBrand || isLoadingMainMenu || isLoadingGender || isLoadingProduct;
-  const matchCatalog = useMatch(':categoryGender/catalog/:category');
+  const matchCatalogCategory = useMatch(':categoryGender/catalog/:category');
+  const matchCatalog = useMatch(':categoryGender/catalog');
   const matchCatalogBrand = useMatch(
     ':categoryGender/brand/:brand/catalog/:category?'
   );
@@ -57,8 +58,8 @@ export function useBreadcrumbsData() {
     });
   }
 
-  if (matchCatalog) {
-    const { categoryGender, category } = matchCatalog.params;
+  if (matchCatalogCategory) {
+    const { categoryGender, category } = matchCatalogCategory.params;
     const categoryGenderDisplay =
       categoryGender && getCategoryGenderDisplay(categoryGender);
 
@@ -97,6 +98,18 @@ export function useBreadcrumbsData() {
     if (categoryGenderDisplay && breadcrumbsData.length > 0) {
       breadcrumbsData[0].title += ` ${categoryGenderDisplay.toLocaleLowerCase()}`;
     }
+  }
+
+  if (matchCatalog) {
+    const { categoryGender } = matchCatalog.params;
+    const categoryGenderDisplay =
+      categoryGender && getCategoryGenderDisplay(categoryGender);
+    breadcrumbsData.push({
+      title: `Каталог${
+        categoryGenderDisplay ? ' ' + categoryGenderDisplay?.toLowerCase() : ''
+      }`,
+      to: '',
+    });
   }
 
   breadcrumbsData.unshift({ to: '/', title: 'Главная' });
