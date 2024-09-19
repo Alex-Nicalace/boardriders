@@ -1,16 +1,22 @@
 import Button from '../ui/Button';
 import './CartEmpty.scss';
-import imgOops from '../../assets/img/cart-empty/oops.png';
+import Empty from '../Empty';
+import { useAppSelector } from '../../hooks/reduxHooks';
+import { getGender } from '../../features/gender/genderSlice';
 
 type TCartEmptyProps = {
   className?: string;
 };
 function CartEmpty({ className }: TCartEmptyProps): JSX.Element {
+  const gender = useAppSelector(getGender);
   return (
     <div className={['cart-empty', className].filter(Boolean).join(' ')}>
-      <img className="cart-empty__img" src={imgOops} alt="Пустая корзина" />
-      <p className="cart-empty__text">Ваша корзина пока пуста</p>
-      <Button className="cart-empty__btn" color="secondary">
+      <Empty description="Ваша корзина пока пуста" />
+      <Button
+        className="cart-empty__btn"
+        color="secondary"
+        to={`/${gender}/catalog`}
+      >
         Перейти к покупкам
       </Button>
     </div>

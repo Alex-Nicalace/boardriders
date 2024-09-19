@@ -5,25 +5,6 @@
   grid-template-columns: minmax(auto, rem(408));
   row-gap: rem(40);
   justify-content: center;
-  &__img {
-    justify-self: end;
-    @include adaptiveValue('width', 264, 135);
-
-    &:not(:last-child) {
-      @include adaptiveValue('margin-bottom', 15, 0);
-    }
-
-    @include tablet-d {
-      justify-self: center;
-    }
-  }
-  // .cart-empty__text
-  &__text {
-    font-weight: 700;
-    @include adaptiveValue('font-size', 21, 16);
-    line-height: 1.43;
-    text-align: center;
-  }
   // .cart-empty__btn
   &__btn {
   }
