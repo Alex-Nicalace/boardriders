@@ -36,6 +36,8 @@ import AlertIcon from './../../assets/icons/alert.svg?react';
 import BagIcon from './../../assets/icons/bag.svg?react';
 import VisibleIcon from './../../assets/icons/visible.svg?react';
 import NotVisibleIcon from './../../assets/icons/not-visible.svg?react';
+import FourEyesIcon from './../../assets/icons/four-eyes.svg?react';
+import MessageIcon from './../../assets/icons/message.svg?react';
 
 function TrackIcon(
   props: Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>
@@ -102,4 +104,6 @@ export {
   BagIcon,
   VisibleIcon,
   NotVisibleIcon,
+  FourEyesIcon,
+  MessageIcon,
 };
