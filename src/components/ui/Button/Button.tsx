@@ -1,30 +1,9 @@
-import { ButtonHTMLAttributes } from 'react';
-import { Link, LinkProps } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Button.scss';
-
-type TCustomProps = (
-  | {
-      color?: 'primary';
-
-      nameColor?: never;
-    }
-  | {
-      color: 'secondary';
-      nameColor?: 'green';
-    }
-) & {
-  variant?: 'contained' | 'outlined' | 'reverse';
-  fullWidth?: boolean;
-};
-
-interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-  to?: never;
-}
-type TButtonOrLink = IButton | LinkProps;
-
-type TButtonProps = TButtonOrLink & TCustomProps;
+import { TButtonProps } from './Button.types';
 
 function Button(props: TButtonProps): JSX.Element {
+  const navigate = useNavigate();
   const {
     variant = 'contained',
     color = 'primary',
@@ -52,7 +31,14 @@ function Button(props: TButtonProps): JSX.Element {
   }
 
   return (
-    <button {...rest} className={classes}>
+    <button
+      {...rest}
+      className={classes}
+      onClick={(e) => {
+        if (rest.navigateDelta) navigate(rest.navigateDelta);
+        rest.onClick?.(e);
+      }}
+    >
       {rest.children}
     </button>
   );
