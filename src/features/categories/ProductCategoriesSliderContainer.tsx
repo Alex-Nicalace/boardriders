@@ -17,12 +17,12 @@ function ProductCategoriesSliderContainer(
   const { category } = params; // взять категорию из URL :categoryGender/catalog/:category
 
   if (isLoading) return <Spinner />;
-  if (!mainMenu || !category) return <Spinner />;
+  if (!mainMenu || !category) return null; // категории может и не быть по пути из URL :categoryGender/catalog/
 
   const subMenu = mainMenu.find((item) => item.name === category)?.subMenu;
 
-  // если нет подменю, то вернем undefined
-  if (!subMenu) return;
+  // если нет подменю, то вернем null
+  if (!subMenu) return null;
 
   const data = subMenu.map((item) => ({
     title: item.displayName,
