@@ -1,8 +1,8 @@
-import Popup from '../../../../component-library/Popup';
+import AccountButton from '../../../../features/authentication/AccountButton';
 import ButtonToWishListPage from '../../../../features/wishList/ButtonToWishListPage';
 import BurgerButton from '../../../ui/BurgerButton';
 import IconButton from '../../../ui/IconButton';
-import { AvatarIcon, CartIcon } from '../../../ui/Icons';
+import { CartIcon } from '../../../ui/Icons';
 import Search from '../../Search';
 import './ToolbarHeader.scss';
 
@@ -17,16 +17,7 @@ const TOOLBAR_BTNS_DATA: TToolbarBtns = [
   { name: 'search', content: <Search /> },
   {
     name: 'login',
-    content: (
-      <Popup.Open
-        windowName="login"
-        render={({ open }) => (
-          <IconButton onClick={open} IconComponent={AvatarIcon}>
-            Войти
-          </IconButton>
-        )}
-      />
-    ),
+    content: <AccountButton />,
   },
   {
     name: 'favorites',
