@@ -1,14 +1,26 @@
+import StatusMessage from '../StatusMessage';
 import './Empty.scss';
 
 type TEmptyProps = {
   className?: string;
-  resource: string;
-};
-function Empty({ className, resource }: TEmptyProps): JSX.Element {
+} & (
+  | {
+      resource: string;
+      description?: never;
+    }
+  | {
+      resource?: never;
+      description: string;
+    }
+);
+function Empty({ className, resource, description }: TEmptyProps): JSX.Element {
   return (
-    <p className={['empty', className].filter(Boolean).join(' ')}>
-      Не удалось найти <span className="empty__resource">{resource}</span>.
-    </p>
+    <StatusMessage
+      className={className}
+      messageBubble="Пусто"
+      messageFontSize="clamp(0.87rem, 0.53rem + 1.68vw, 2rem)"
+      description={resource ? `Не удалось найти — "${resource}"` : description}
+    />
   );
 }
 
