@@ -14,7 +14,7 @@ function AppLayout(): JSX.Element {
   if (isLoading) return <Spinner />;
 
   return (
-    <>
+    <Popup>
       <ScrollToTop />
       <ScrollToAnchor />
       <Header />
@@ -26,12 +26,12 @@ function AppLayout(): JSX.Element {
         windowName="login"
         render={(close) => (
           <ModalWrap close={close}>
-            <LoginOrRegister />
+            <LoginOrRegister onSuccess={close} />
           </ModalWrap>
         )}
         onClickOutside={(close) => close()}
       />
-    </>
+    </Popup>
   );
 }
 
