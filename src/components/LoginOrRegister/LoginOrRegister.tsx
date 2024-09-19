@@ -3,23 +3,28 @@ import './LoginOrRegister.scss';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import TabsBlock from '../TabsBlock';
 import { TabPanel } from '../../component-library/Tabs';
-import { FormLogin, FormRegistration } from '../FormAuth';
+import FormLoginContainer from '../../features/authentication/FormLoginContainer';
+import FormRegistrationContainer from '../../features/authentication/FormRegistrationContainer';
 
 const TABS = [
   {
     title: 'Вход',
-    Component: FormLogin,
+    Component: FormLoginContainer,
   },
   {
     title: 'Регистрация',
-    Component: FormRegistration,
+    Component: FormRegistrationContainer,
   },
 ];
 
 type TLoginOrRegisterProps = {
   className?: string;
+  onSuccess?: () => void;
 };
-function LoginOrRegister({ className }: TLoginOrRegisterProps): JSX.Element {
+function LoginOrRegister({
+  className,
+  onSuccess,
+}: TLoginOrRegisterProps): JSX.Element {
   const { isLessMobile } = useScreenWidth();
   const [activeTab, setActiveTab] = useState(0);
 
@@ -32,6 +37,8 @@ function LoginOrRegister({ className }: TLoginOrRegisterProps): JSX.Element {
               key={title}
               className="login-or-register__form"
               withTitle
+              onSuccessLogin={onSuccess}
+              onSuccessRegister={onSuccess}
             />
           ))}
         </div>
