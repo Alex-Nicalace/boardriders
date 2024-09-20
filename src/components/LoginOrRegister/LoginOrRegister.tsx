@@ -25,12 +25,12 @@ function LoginOrRegister({
   className,
   onSuccess,
 }: TLoginOrRegisterProps): JSX.Element {
-  const { isLessMobile } = useScreenWidth();
+  const { isLessTablet } = useScreenWidth();
   const [activeTab, setActiveTab] = useState(0);
 
   return (
     <div className={['login-or-register', className].filter(Boolean).join(' ')}>
-      {!isLessMobile && (
+      {!isLessTablet && (
         <div className="login-or-register__forms">
           {TABS.map(({ Component, title }) => (
             <Component
@@ -43,7 +43,7 @@ function LoginOrRegister({
           ))}
         </div>
       )}
-      {isLessMobile && (
+      {isLessTablet && (
         <div className="login-or-register__tabs-forms">
           <TabsBlock
             className="login-or-register__tabs"
