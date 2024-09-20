@@ -20,6 +20,7 @@ function AppLayout(): JSX.Element {
       <Header />
       <Outlet />
       <Footer />
+
       <Popup.Window
         mode="modal"
         transitionEffect={['fade']}
@@ -27,6 +28,18 @@ function AppLayout(): JSX.Element {
         render={(close) => (
           <ModalWrap close={close}>
             <LoginOrRegister onSuccess={close} />
+          </ModalWrap>
+        )}
+        onClickOutside={(close) => close()}
+      />
+
+      <Popup.Window
+        mode="modal"
+        transitionEffect={['fade']}
+        windowName="register"
+        render={(close) => (
+          <ModalWrap close={close}>
+            <LoginOrRegister onSuccess={close} initialTab={1} />
           </ModalWrap>
         )}
         onClickOutside={(close) => close()}

@@ -20,13 +20,15 @@ const TABS = [
 type TLoginOrRegisterProps = {
   className?: string;
   onSuccess?: () => void;
+  initialTab?: 0 | 1;
 };
 function LoginOrRegister({
   className,
   onSuccess,
+  initialTab = 0,
 }: TLoginOrRegisterProps): JSX.Element {
   const { isLessTablet } = useScreenWidth();
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(initialTab);
 
   return (
     <div className={['login-or-register', className].filter(Boolean).join(' ')}>

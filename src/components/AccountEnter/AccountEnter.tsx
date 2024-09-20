@@ -20,7 +20,7 @@ function AccountEnter({
             className="account-enter__btn"
             variant="outlined"
             fullWidth
-            to="#login"
+            to="#register"
           >
             Зарегистрироваться
           </Button>
