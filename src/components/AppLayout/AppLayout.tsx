@@ -4,7 +4,7 @@ import Header from '../Header';
 import Popup from '../../component-library/Popup';
 import ModalWrap from '../ModalWrap';
 import LoginOrRegister from '../LoginOrRegister';
-import { useGenderCategories } from '../../features/categories/useCategories';
+import { useGenderCategories } from '../../features/categories/useGenderCategories';
 import Spinner from '../Spinner';
 import { ScrollToAnchor, ScrollToTop } from '../../component-library/Scroll';
 

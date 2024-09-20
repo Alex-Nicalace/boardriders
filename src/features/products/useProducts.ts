@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { getProducts, TFilters } from '../../services/apiProducts';
 import { PAGE_SIZE_PRODUCTS } from '../../services/constants';
 import { useMainMenu } from '../categories/useMainMenu';
-import { useGenderCategories } from '../categories/useCategories';
+import { useGenderCategories } from '../categories/useGenderCategories';
 import { TFilterName } from '../../components/Filters';
 
 const FILTER_MAPPINGS: {

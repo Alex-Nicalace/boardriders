@@ -1,5 +1,5 @@
 import { useMatch } from 'react-router-dom';
-import { useGenderCategories } from './useCategories';
+import { useGenderCategories } from './useGenderCategories';
 import { useMainMenu } from './useMainMenu';
 import { TBreadcrumbsData } from '../../components/ui/Breadcrumbs';
 import { useBrand } from '../brands/useBrand';

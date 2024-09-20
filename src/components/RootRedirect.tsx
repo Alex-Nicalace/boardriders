@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useGenderCategories } from '../features/categories/useCategories';
+import { useGenderCategories } from '../features/categories/useGenderCategories';
 import { useAppSelector } from '../hooks/reduxHooks';
 import { getGender } from '../features/gender/genderSlice';
 

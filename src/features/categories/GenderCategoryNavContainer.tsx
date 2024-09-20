@@ -1,6 +1,6 @@
 import GenderCategoryNav from '../../components/Header/MidbarHeader/GenderCategoryNav';
 import Spinner from '../../components/Spinner';
-import { useGenderCategories } from './useCategories';
+import { useGenderCategories } from './useGenderCategories';
 import { useGenderCategoryProduct } from '../products/useGenderCategoryProduct';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { getGender, updateGender } from '../gender/genderSlice';
