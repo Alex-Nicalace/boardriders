@@ -3,12 +3,11 @@ import './BurgerMenu.scss';
 import ListLinks from '../../../component-library/ListLinks';
 import Submenu from '../MainMenu/Submenu';
 import { ArrowLeftIcon } from '../../ui/Icons';
-import Button from '../../ui/Button';
 import DeliveryRegion from '../DeliveryRegion';
 import SecondaryLinks from '../SecondaryLinks';
 import ButtonMenu from '../../ui/ButtonMenu';
-import Popup from '../../../component-library/Popup';
 import { IMenuData } from '../MainMenu';
+import AccountEnterContainer from '../../../features/authentication/AccountEnterContainer';
 
 type TBurgerMenuProps = {
   data: IMenuData[];
@@ -76,21 +75,7 @@ function BurgerMenu({ data, close }: TBurgerMenuProps) {
         )}
       </nav>
       <footer className="burger-menu__footer">
-        <div className="burger-menu__account account">
-          <div className="account__title">Личный кабинет</div>
-          <Popup.Open
-            windowName="login"
-            render={({ open }) => (
-              <Button className="account__btn" fullWidth onClick={open}>
-                Войти
-              </Button>
-            )}
-          />
-
-          <Button className="account__btn" variant="outlined" fullWidth>
-            Зарегистрироваться
-          </Button>
-        </div>
+        <AccountEnterContainer className="burger-menu__account" />
         <DeliveryRegion className="burger-menu__delivery-region" />
         <SecondaryLinks className="burger-menu__secondary-links" />
       </footer>

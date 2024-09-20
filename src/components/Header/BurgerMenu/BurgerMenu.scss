@@ -93,21 +93,3 @@
   &__figcaption {
   }
 }
-
-.account {
-  padding-bottom: rem(20);
-  // .account__title
-  &__title {
-    @extend %caption;
-    text-align: center;
-    &:not(:last-child) {
-      margin-bottom: em(15, 12);
-    }
-  }
-  // .account__btn
-  &__btn {
-    &:not(:last-child) {
-      margin-bottom: em(10, 16);
-    }
-  }
-}
