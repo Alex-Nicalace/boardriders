@@ -16,6 +16,7 @@ import RootRedirect from './components/RootRedirect';
 import store from './store';
 import ProtectedRoute from './components/ProtectedRoute';
 import ErrorMessage from './components/ErrorMessage';
+import GenderInitializer from './features/gender/GenderInitializer';
 
 // Создание клиента
 const queryClient = new QueryClient({
@@ -89,6 +90,7 @@ function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
+        <GenderInitializer />
         <ScreenWidthProvider>
           <FormatersProvider>
             <RouterProvider router={router} />
