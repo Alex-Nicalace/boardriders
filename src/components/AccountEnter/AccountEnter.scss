@@ -1,0 +1,35 @@
+@import '/src/styles/global-scss.scss';
+
+.account-enter {
+  padding-bottom: rem(20);
+  // .account__title
+  &__title {
+    @extend %caption;
+    text-align: center;
+    &:not(:last-child) {
+      margin-bottom: em(15, 12);
+    }
+  }
+  // .account__btn
+  &__btn {
+    &:not(:last-child) {
+      margin-bottom: em(10, 16);
+    }
+  }
+
+  // .account-enter__info
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: 12px;
+  }
+  // .account-enter__greeting
+  &__greeting {
+  }
+  // .account-enter__btn-exit
+  &__btn-exit {
+    color: var(--green);
+  }
+}
