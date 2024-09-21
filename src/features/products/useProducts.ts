@@ -1,6 +1,10 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { getProducts, TFilters } from '../../services/apiProducts';
+import {
+  getProducts,
+  TFilters,
+  TGetProductsArgs,
+} from '../../services/apiProducts';
 import { PAGE_SIZE_PRODUCTS } from '../../services/constants';
 import { useMainMenu } from '../categories/useMainMenu';
 import { useGenderCategories } from '../categories/useGenderCategories';
@@ -104,7 +108,7 @@ export function useProducts() {
     : { field: sortByValue[0], value: sortByValue[1] };
 
   const queryKeys = ['products', ...categoryFilters, filters, sortBy];
-  const args = {
+  const args: TGetProductsArgs = {
     categoryFilters,
     page: pageNum,
     filters,
