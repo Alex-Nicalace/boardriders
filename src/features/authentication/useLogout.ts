@@ -11,8 +11,14 @@ export function useLogout() {
   } = useMutation({
     mutationFn: logoutApi,
     onSuccess: () => {
-      // удаляем все запросы в кэше
-      queryClient.removeQueries();
+      console.log('Пользователь вышел из аккаунта!');
+      toast.success('Вы вышли из аккаунта!');
+
+      // * отметить как недействительные данные что приведет к перезагрузке запроса
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+
+      // todo: надо удалить только то, что касается аунтифицироанныйх данных
+      queryClient.removeQueries({ queryKey: ['wishList', true] });
     },
     onError: (err) => {
       console.error(err);
