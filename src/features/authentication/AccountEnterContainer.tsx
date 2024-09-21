@@ -7,11 +7,9 @@ function AccountEnterContainer({
   className,
 }: TAccountEnterContainerProps): JSX.Element {
   const { logout } = useLogout();
-  const { isAuthenticated, user } = useUser();
-  const name =
-    isAuthenticated && user
-      ? user.user_metadata.fullName?.split(' ')?.[0]
-      : null;
+  const { user } = useUser();
+
+  const name = user?.user_metadata.fullName?.split(' ')?.[0];
 
   return <AccountEnter className={className} name={name} onExit={logout} />;
 }
