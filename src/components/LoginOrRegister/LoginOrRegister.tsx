@@ -6,17 +6,6 @@ import { TabPanel } from '../../component-library/Tabs';
 import FormLoginContainer from '../../features/authentication/FormLoginContainer';
 import FormRegistrationContainer from '../../features/authentication/FormRegistrationContainer';
 
-const TABS = [
-  {
-    title: 'Вход',
-    Component: FormLoginContainer,
-  },
-  {
-    title: 'Регистрация',
-    Component: FormRegistrationContainer,
-  },
-];
-
 type TLoginOrRegisterProps = {
   className?: string;
   onSuccess?: () => void;
@@ -30,19 +19,49 @@ function LoginOrRegister({
   const { isLessTablet } = useScreenWidth();
   const [activeTab, setActiveTab] = useState(initialTab);
 
+  const panels = [
+    <FormLoginContainer
+      key={0}
+      className="login-or-register__form"
+      withTitle
+      onSuccessLogin={onSuccess}
+    />,
+    <FormRegistrationContainer
+      key={1}
+      className="login-or-register__form"
+      withTitle
+      onSuccessRegister={onSuccess}
+    />,
+  ];
+
+  const tabs = [
+    {
+      title: 'Вход',
+      element: (
+        <FormLoginContainer
+          key={0}
+          className="login-or-register__form"
+          onSuccessLogin={onSuccess}
+        />
+      ),
+    },
+    {
+      title: 'Регистрация',
+      element: (
+        <FormRegistrationContainer
+          key={1}
+          className="login-or-register__form"
+          onSuccessRegister={onSuccess}
+        />
+      ),
+    },
+  ];
+
   return (
     <div className={['login-or-register', className].filter(Boolean).join(' ')}>
       {!isLessTablet && (
         <div className="login-or-register__forms">
-          {TABS.map(({ Component, title }) => (
-            <Component
-              key={title}
-              className="login-or-register__form"
-              withTitle
-              onSuccessLogin={onSuccess}
-              onSuccessRegister={onSuccess}
-            />
-          ))}
+          {panels.map((element) => element)}
         </div>
       )}
       {isLessTablet && (
@@ -53,13 +72,13 @@ function LoginOrRegister({
             onChange={setActiveTab}
             variant="second"
           >
-            {TABS.map(({ title }) => (
+            {tabs.map(({ title }) => (
               <TabsBlock.Tab key={title} label={title} />
             ))}
           </TabsBlock>
-          {TABS.map(({ title, Component }, index) => (
+          {tabs.map(({ element, title }, index) => (
             <TabPanel key={title} index={index} value={activeTab}>
-              <Component key={title} className="login-or-register__tabs-form" />
+              {element}
             </TabPanel>
           ))}
         </div>
