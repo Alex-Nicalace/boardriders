@@ -19,6 +19,7 @@ export function useLogout() {
 
       // todo: надо удалить только то, что касается аунтифицироанныйх данных
       queryClient.removeQueries({ queryKey: ['wishList', true] });
+      queryClient.removeQueries({ queryKey: ['favorites'] });
     },
     onError: (err) => {
       console.error(err);
