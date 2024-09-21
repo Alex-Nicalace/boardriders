@@ -23,3 +23,11 @@ export type TFilters = {
   | { method: 'eq' | 'gte' | 'lte'; value: string }
   | { method: 'in'; value: string[] | number[] }
 );
+
+export type TGetProductsArgs = {
+  categoryFilters?: string[];
+  filters?: TFilters[];
+  isFavorite?: boolean;
+  sortBy?: { field: string; value: string };
+  page?: number;
+};

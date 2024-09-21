@@ -1,19 +1,15 @@
 import supabase from '../supabase';
 import { omit } from '../../utils/omit';
-import { TFilters, TProducts } from './apiProducts.types';
+import { TGetProductsArgs, TProducts } from './apiProducts.types';
 import { PAGE_SIZE_PRODUCTS } from '../constants';
 
 export async function getProducts({
   categoryFilters = [],
   filters,
+  isFavorite = false,
   sortBy,
   page,
-}: {
-  categoryFilters?: string[];
-  filters?: TFilters[];
-  sortBy?: { field: string; value: string };
-  page?: number;
-}) {
+}: TGetProductsArgs) {
   const query = supabase
     .from('products')
     .select(
@@ -25,11 +21,13 @@ export async function getProducts({
       productImagesPrimary(imageUrl), 
       brands!inner(name),
       ${
-        categoryFilters.length > 0 &&
-        categoryFilters
-          .map((_, i) => `cat_${i}:categories!inner()`)
-          .join(', ') + ','
+        categoryFilters.length > 0
+          ? categoryFilters
+              .map((_, i) => `cat_${i}:categories!inner()`)
+              .join(', ') + ','
+          : ''
       }
+      ${isFavorite ? 'favorites!inner()' : ''}
       category:categories!inner(),
       productVariants!inner()
     `,
