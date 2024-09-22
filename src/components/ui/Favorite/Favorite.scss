@@ -8,6 +8,18 @@
         stroke: var(--white);
       }
     }
+    &:disabled {
+      & + .favorite__label {
+        background-color: var(--dark-gray);
+      }
+    }
+  }
+  &:disabled:not(:checked) {
+    & + .favorite__label {
+      svg {
+        stroke: var(--dark-gray);
+      }
+    }
   }
   // .favorite__label
   &__label {

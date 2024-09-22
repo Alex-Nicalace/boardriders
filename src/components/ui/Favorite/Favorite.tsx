@@ -10,6 +10,7 @@ function Favorite({
   isFramed = false,
   bgColor = 'white',
   adaptiveSize = 'window',
+  disabled,
   onChange,
 }: TFavoriteProps): JSX.Element {
   const [isFavorite, setIsFavorite] = useState(defaultChecked);
@@ -30,6 +31,7 @@ function Favorite({
         id={id}
         className="favorite sr-only"
         checked={isChecked}
+        disabled={disabled}
         onChange={() => handleChange(!isChecked)}
       />
       <label

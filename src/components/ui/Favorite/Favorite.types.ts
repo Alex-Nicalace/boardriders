@@ -9,5 +9,6 @@ export type TFavoriteProps = (
   isFramed?: boolean;
   bgColor?: 'light-gray' | 'white';
   adaptiveSize?: 'window' | 'container';
+  disabled?: boolean;
   onChange?: (value: boolean) => void;
 };
