@@ -5,7 +5,8 @@ export type TWishListState = {
 };
 
 export type TCartState = {
-  cart: number[];
+  cart: Map<number, number>;
+  totalQuantity: number;
 };
 
 export type TRootState = ReturnType<typeof store.getState>;
