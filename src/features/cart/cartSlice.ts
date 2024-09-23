@@ -1,13 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TCartState, TRootState } from '../../types';
+import { TCart, TCartState, TRootState } from '../../types';
 import { loadFromLocalStorage } from '../../utils/loadFromLocalStorage';
 
-function countTotalQuantity(cart: Map<number, number>) {
-  return [...cart.values()].reduce((acc, item) => acc + item, 0);
+function countTotalQuantity(cart: TCart) {
+  return Object.values(cart).reduce((acc, item) => acc + item, 0);
 }
 
-const initialCart: Map<number, number> =
-  loadFromLocalStorage('cart') ?? new Map();
+const initialCart: TCart = loadFromLocalStorage('cart') ?? {};
 const initialTotalQuantity = countTotalQuantity(initialCart);
 
 const initialState: TCartState = {
@@ -28,12 +27,10 @@ const cartSlice = createSlice({
       state,
       action: PayloadAction<{ productVariantId: number; count: number }[]>
     ) {
-      state.cart = new Map(
-        action.payload.map(({ productVariantId, count }) => [
-          productVariantId,
-          count,
-        ])
-      );
+      action.payload.reduce((acc, { productVariantId, count }) => {
+        acc[productVariantId] = count;
+        return acc;
+      }, state.cart);
 
       state.totalQuantity = countTotalQuantity(state.cart);
     },
@@ -48,32 +45,32 @@ const cartSlice = createSlice({
     ) {
       const key = action.payload.productVariantId;
       const count = action.payload.count ?? 1;
-      const prevQuantity = state.cart.get(key);
+      const prevQuantity = state.cart[key];
       if (prevQuantity) {
-        state.cart.set(key, prevQuantity + count);
+        state.cart[key] = prevQuantity + count;
       } else {
-        state.cart.set(key, count);
+        state.cart[key] = count;
       }
 
       state.totalQuantity = state.totalQuantity + (action.payload.count ?? 1);
     },
     incProductCount(state, action: PayloadAction<number>) {
       const key = action.payload;
-      const prevValue = state.cart.get(key);
+      const prevValue = state.cart[key];
       if (prevValue) {
-        state.cart.set(key, prevValue + 1);
+        state.cart[key] = prevValue + 1;
         state.totalQuantity++;
       }
     },
     decProductCount(state, action: PayloadAction<number>) {
       const key = action.payload;
-      const prevValue = state.cart.get(key);
+      const prevValue = state.cart[key];
       if (prevValue && prevValue > 1) {
-        state.cart.set(key, prevValue - 1);
+        state.cart[key] = prevValue - 1;
         state.totalQuantity--;
       }
       if (prevValue && prevValue === 1) {
-        state.cart.delete(key);
+        delete state.cart[key];
         state.totalQuantity--;
       }
     },
@@ -83,8 +80,8 @@ const cartSlice = createSlice({
      * @param action - экшн с id товара
      */
     removeCart(state, action: PayloadAction<number>) {
-      const countDeleted = state.cart.get(action.payload);
-      state.cart.delete(action.payload);
+      const countDeleted = state.cart[action.payload];
+      delete state.cart[action.payload];
       state.totalQuantity = state.totalQuantity - (countDeleted ?? 0);
     },
     /**
@@ -92,7 +89,7 @@ const cartSlice = createSlice({
      * @param state - state редьюсера
      */
     clearCart(state) {
-      state.cart.clear();
+      state.cart = {};
       state.totalQuantity = 0;
     },
   },

@@ -4,8 +4,10 @@ export type TWishListState = {
   wishList: number[];
 };
 
+export type TCart = { [key: number]: number };
+
 export type TCartState = {
-  cart: Map<number, number>;
+  cart: TCart;
   totalQuantity: number;
 };
 

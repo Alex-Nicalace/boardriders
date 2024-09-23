@@ -38,7 +38,7 @@ store.subscribe(function syncWithLocalStorage() {
   }
 
   if (prevCart !== currentCart) {
-    if (currentCart.length > 0) {
+    if (Object.keys(currentCart).length > 0) {
       localStorage.setItem('cart', JSON.stringify(currentCart));
     } else {
       localStorage.removeItem('cart');
