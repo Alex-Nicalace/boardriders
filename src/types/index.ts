@@ -1,2 +1,2 @@
 export * from './types';
-export type * from './store';
+export type * from './store.types';
