@@ -19,8 +19,9 @@ function ButtonWishList({
   const { id: userId } = user || {};
 
   const { favoritesIds } = useFavorites(isAuthenticated);
-  const { createFavorites } = useCreateFavorites();
-  const { deleteFavorites } = useDeleteFavorites();
+  const { createFavorites, isCreating } = useCreateFavorites();
+  const { deleteFavorites, isDeleting } = useDeleteFavorites();
+  const isPending = isCreating || isDeleting;
 
   const wishList = useAppSelector(getWishList);
   const dispatch = useAppDispatch();
@@ -63,6 +64,7 @@ function ButtonWishList({
     <Favorite
       {...props}
       checked={isWished}
+      disabled={isPending}
       onChange={() => handleChange(productId)}
     />
   );
