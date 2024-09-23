@@ -1,8 +1,7 @@
 import AccountButton from '../../../../features/authentication/AccountButton';
+import ButtonToCartPage from '../../../../features/cart/ButtonToCartPage';
 import ButtonToWishListPage from '../../../../features/wishList/ButtonToWishListPage';
 import BurgerButton from '../../../ui/BurgerButton';
-import IconButton from '../../../ui/IconButton';
-import { CartIcon } from '../../../ui/Icons';
 import Search from '../../Search';
 import './ToolbarHeader.scss';
 
@@ -25,15 +24,7 @@ const TOOLBAR_BTNS_DATA: TToolbarBtns = [
   },
   {
     name: 'cart',
-    content: (
-      <IconButton
-        className="midbar-header__link"
-        IconComponent={CartIcon}
-        to="/cart"
-      >
-        Корзина
-      </IconButton>
-    ),
+    content: <ButtonToCartPage className="midbar-header__link" />,
   },
 ];
 
