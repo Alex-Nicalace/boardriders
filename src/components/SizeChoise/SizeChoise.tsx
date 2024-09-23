@@ -11,6 +11,7 @@ type TSizeChoiseProps = {
     disabled?: boolean;
   }[];
   className?: string;
+  disabled?: boolean;
   value?: string | null;
   onChange?: (value: string) => void;
 };
@@ -18,6 +19,7 @@ function SizeChoise({
   name,
   items,
   className,
+  disabled,
   value,
   onChange = () => {},
 }: TSizeChoiseProps): JSX.Element {
@@ -35,7 +37,7 @@ function SizeChoise({
               label={item.size}
               name={name}
               type="radio"
-              disabled={item.disabled}
+              disabled={disabled === true || item.disabled}
               styleDisabled={item.isEmpty}
               title={item.isEmpty ? 'Нет в наличии' : undefined}
               value={item.value}

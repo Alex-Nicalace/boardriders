@@ -6,6 +6,7 @@ type TColorChoiseProps = {
   items: (TColor & { value: string; isEmpty?: boolean; disabled?: boolean })[];
   className?: string;
   value?: string | null;
+  disabled?: boolean;
   onChange?: (value: string) => void;
 };
 function ColorChoise({
@@ -13,6 +14,7 @@ function ColorChoise({
   items,
   className,
   value,
+  disabled,
   onChange = () => {},
 }: TColorChoiseProps): JSX.Element {
   return (
@@ -36,6 +38,7 @@ function ColorChoise({
                 checked={value !== undefined ? rest.value === value : undefined}
                 styleDisabled={isEmpty}
                 title={isEmpty ? 'Нет в наличии' : undefined}
+                disabled={disabled === true || rest.disabled}
               />
             )}
           </li>
