@@ -1,4 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import Empty from '../../components/Empty';
 import Product from '../../components/Product';
 import Spinner from '../../components/Spinner';
@@ -6,11 +7,13 @@ import { useProduct } from './useProduct';
 import { omit } from '../../utils/omit';
 import { useEffect } from 'react';
 import { useProductImages } from '../productImages/useProductImages';
+import { addCartWithToast, isProductInCart } from '../cart/cartSlice';
 
 type TProductContainerProps = {
   className?: string;
 };
 function ProductContainer({ className }: TProductContainerProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const { product, isLoading: isLoadingProduct } = useProduct();
   const { productImages, isLoading: isLoadingProductImages } =
     useProductImages();
@@ -25,6 +28,15 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
   const selectedSizeId = product?.productVariants.find(
     ({ size }) => size?.name === selectedSize
   )?.size?.sizeId;
+
+  const selecetedProductVariantId = product?.productVariants.find(
+    ({ color, size }) =>
+      color?.colorId === selectedColorId && size?.sizeId === selectedSizeId
+  )?.productVariantId;
+
+  const isInCart = useAppSelector(
+    isProductInCart(selecetedProductVariantId ?? 0)
+  );
 
   useEffect(
     function setValidParam() {
@@ -123,14 +135,22 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
     setSearchParams(searchParams);
   };
 
+  function handleAddToCart(productVariantId: number | undefined | null) {
+    if (!productVariantId) return;
+    dispatch(addCartWithToast({ productVariantId }));
+  }
+
   return (
     <Product
       className={className}
       data={data}
       selectedColor={selectedColor}
       selectedSize={selectedSize}
+      disabled={!selecetedProductVariantId}
+      isInCart={isInCart}
       onColorChange={(value) => handleChange('color', value)}
       onSizeChange={(value) => handleChange('size', value)}
+      onAddToCart={() => handleAddToCart(selecetedProductVariantId)}
     />
   );
 }
