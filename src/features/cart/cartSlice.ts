@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TCart, TCartState, TRootState } from '../../types';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
+import { TAppDispatch, TCart, TCartState, TRootState } from '../../types';
 import { loadFromLocalStorage } from '../../utils/loadFromLocalStorage';
 
 function countTotalQuantity(cart: TCart) {
@@ -45,9 +46,8 @@ const cartSlice = createSlice({
     ) {
       const key = action.payload.productVariantId;
       const count = action.payload.count ?? 1;
-      const prevQuantity = state.cart[key];
-      if (prevQuantity) {
-        state.cart[key] = prevQuantity + count;
+      if (Object.prototype.hasOwnProperty.call(state.cart, key)) {
+        state.cart[key] = state.cart[key] + count;
       } else {
         state.cart[key] = count;
       }
@@ -56,22 +56,22 @@ const cartSlice = createSlice({
     },
     incProductCount(state, action: PayloadAction<number>) {
       const key = action.payload;
-      const prevValue = state.cart[key];
-      if (prevValue) {
-        state.cart[key] = prevValue + 1;
+      if (Object.prototype.hasOwnProperty.call(state.cart, key)) {
+        state.cart[key]++;
         state.totalQuantity++;
       }
     },
     decProductCount(state, action: PayloadAction<number>) {
       const key = action.payload;
-      const prevValue = state.cart[key];
-      if (prevValue && prevValue > 1) {
-        state.cart[key] = prevValue - 1;
-        state.totalQuantity--;
-      }
-      if (prevValue && prevValue === 1) {
-        delete state.cart[key];
-        state.totalQuantity--;
+      if (Object.prototype.hasOwnProperty.call(state.cart, key)) {
+        if (state.cart[key] > 1) {
+          state.cart[key]--;
+          state.totalQuantity--;
+        }
+        if (state.cart[key] === 1) {
+          delete state.cart[key];
+          state.totalQuantity--;
+        }
       }
     },
     /**
@@ -104,10 +104,24 @@ export const {
   incProductCount,
   decProductCount,
 } = cartSlice.actions;
+export const addCartWithToast =
+  ({ productVariantId, count }: { productVariantId: number; count?: number }) =>
+  async (dispatch: TAppDispatch) => {
+    try {
+      dispatch(addCart({ productVariantId, count }));
+      toast.success('Товар добавлен в корзину');
+    } catch (error) {
+      console.error(error);
+      toast.error('Произошла ошибка при добавлении в корзину');
+    }
+  };
 
 // экспорт редьюсера
 export default cartSlice.reducer;
 
 // экспорт селекторов
-export const getCart = (state: TRootState) => state.cart.cart;
+const getCartData = (state: TRootState) => state.cart.cart;
+export const getCart = createSelector(getCartData, (cart) => cart);
 export const getTotalQuantity = (state: TRootState) => state.cart.totalQuantity;
+export const isProductInCart = (productVariantId: number) =>
+  createSelector(getCartData, (cart) => Boolean(cart[productVariantId]));
