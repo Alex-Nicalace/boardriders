@@ -1,3 +1,4 @@
+import { Link, useLocation } from 'react-router-dom';
 import './Product.scss';
 import GalleryPreview from '../GalleryPreview';
 import Rating from '../../component-library/Rating';
@@ -7,7 +8,6 @@ import {
   ShopIcon,
   StarIcon,
 } from '../ui/Icons';
-import { Link, useLocation } from 'react-router-dom';
 import Price from '../Price';
 import ColorChoise from '../ColorChoise';
 import SizeChoise from '../SizeChoise';
@@ -70,8 +70,11 @@ function Product({
   data,
   selectedColor,
   selectedSize,
+  disabled,
+  isInCart,
   onColorChange,
   onSizeChange,
+  onAddToCart,
 }: TProductProps): JSX.Element {
   const {
     id: productId,
@@ -127,6 +130,7 @@ function Product({
               className="product__favorite"
               isFramed
               productId={productId}
+              disabled={disabled}
             />
           </div>
           <h1 className="product__title">{description}</h1>
@@ -142,6 +146,7 @@ function Product({
                 className="product__color"
                 name="color"
                 items={colorList}
+                disabled={disabled}
                 value={selectedColor}
                 onChange={onColorChange}
               />
@@ -151,22 +156,38 @@ function Product({
                 className="product__size"
                 name="size"
                 items={sizeList}
+                disabled={disabled}
                 value={selectedSize}
                 onChange={onSizeChange}
               />
             )}
             <div className="product__buttons">
-              <Button
-                className="product__btn-add-card"
-                color="secondary"
-                fullWidth
-              >
-                Добавить в корзину
-              </Button>
+              {!isInCart ? (
+                <Button
+                  className="product__btn-add-card"
+                  color="secondary"
+                  fullWidth
+                  disabled={disabled}
+                  onClick={onAddToCart}
+                >
+                  Добавить в корзину
+                </Button>
+              ) : (
+                <Button
+                  className="product__btn-add-card"
+                  color="secondary"
+                  variant="outlined"
+                  fullWidth
+                  to="/cart"
+                >
+                  Перейти в корзину
+                </Button>
+              )}
               <Button
                 className="product__btn-pickup"
                 color="secondary"
                 variant="outlined"
+                disabled={disabled}
                 fullWidth
               >
                 Забрать в магазине

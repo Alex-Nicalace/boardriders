@@ -38,7 +38,10 @@ export type TProductProps = {
   };
   selectedColor?: string | null;
   selectedSize?: string | null;
+  disabled?: boolean;
+  isInCart?: boolean;
 
   onColorChange?: (value: string) => void;
   onSizeChange?: (value: string) => void;
+  onAddToCart?: () => void;
 };
