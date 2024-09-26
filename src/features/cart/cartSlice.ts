@@ -125,3 +125,6 @@ export const getCart = createSelector(getCartData, (cart) => cart);
 export const getTotalQuantity = (state: TRootState) => state.cart.totalQuantity;
 export const isProductInCart = (productVariantId: number) =>
   createSelector(getCartData, (cart) => Boolean(cart[productVariantId]));
+export const getProductVariantIds = createSelector(getCartData, (cart) =>
+  Object.keys(cart).map(Number)
+);
