@@ -7,12 +7,13 @@ type TInputNumberProps = {
   min?: number;
   max?: number;
   step?: number;
-  value?: number;
-  defaultValue?: number;
-  onChange?: (value: number | '' | '-') => void;
-};
+  onChange?: (value: number) => void;
+} & (
+  | { value: number; defaultValue?: never }
+  | { value?: never; defaultValue: number }
+);
 function InputNumber({
-  className = '',
+  className,
   min,
   max,
   step = 1,
@@ -20,7 +21,7 @@ function InputNumber({
   defaultValue,
   onChange,
 }: TInputNumberProps): JSX.Element {
-  const [value, setValue] = useState<number | '' | '-'>('');
+  const [value, setValue] = useState<number | '' | '-'>(defaultValue ?? '');
   const currentValue = valueProp || value;
 
   function setCurrentValue(newValue: number | '' | '-') {
@@ -33,7 +34,9 @@ function InputNumber({
       setValue(valueChecked);
     }
 
-    onChange?.(valueChecked);
+    if (typeof valueChecked === 'number') {
+      onChange?.(valueChecked);
+    }
   }
 
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -49,19 +52,19 @@ function InputNumber({
   }
 
   return (
-    <div className={`input-number ${className}`}>
+    <div className={['input-number', className].filter(Boolean).join(' ')}>
       <button
         className="input-number__btn input-number__btn_dec"
         onClick={() => handleClickBtn(-step)}
       ></button>
       <InputStyled
         className="input-number__input"
-        // type="number" // взникают проблемы в handleOnChange. Можно два и более минуса печатать.
+        inputMode="numeric"
         min={min}
         max={max}
         step={step}
         value={currentValue}
-        defaultValue={defaultValue}
+        // defaultValue={defaultValue}
         onChange={handleOnChange}
       />
       <button
