@@ -1,27 +1,26 @@
 import { Link } from 'react-router-dom';
 import './WareCardCart.scss';
+import { TWareCardCartProps } from './WareCardCart.types';
 import InputNumber from '../InputNumber';
 import { CloseIcon } from '../Icons';
 import { useFormaters } from '../../../Context/useFormaters';
+import { ImageSizes } from '../../../utils/types';
 
-type TWareCardCartProps = {
-  className?: string;
-  mode?: 'desktop' | 'mobile';
-  isOrdered?: boolean;
-  data: {
-    title: string;
-    img: string;
-    article: string;
-    props: { name: string; value: string }[];
-    price: number;
-    count?: number;
-  };
-};
 function WareCardCart({
   className = '',
   mode = 'desktop',
-  data: { title, article, img, props, price, count = 1 },
+  data: {
+    name,
+    manufacturerSKU,
+    imageUrl,
+    props,
+    price,
+    quantity = 1,
+    productId,
+  },
   isOrdered = false,
+  onChangeQuantity = () => {},
+  onRemove = () => {},
 }: TWareCardCartProps): JSX.Element {
   const { formaterCurrency } = useFormaters();
   const classes = [
@@ -32,24 +31,33 @@ function WareCardCart({
   ]
     .filter(Boolean)
     .join(' ');
+  const imageURL = imageUrl + ImageSizes.CardCart;
+
+  const productUrl = new URL(`/product/${productId}`, window.location.origin);
+  props.forEach(({ name, value }) => {
+    productUrl.searchParams.append(name, value);
+  });
 
   return (
     <article className={classes}>
       <h2 className="ware-card-cart__title">
-        <Link className="ware-card-cart__link" to="#">
-          {title}
+        <Link
+          className="ware-card-cart__link"
+          to={`${productUrl.pathname}${productUrl.search}`}
+        >
+          {name}
         </Link>
       </h2>
       <div className="ware-card-cart__img">
-        <img src={img} loading="lazy" alt="" />
+        <img src={imageURL} loading="lazy" alt="" />
       </div>
       <div className="ware-card-cart__article">
-        Артикул производителя: {article}
+        Артикул производителя: {manufacturerSKU}
       </div>
       <ul className="ware-card-cart__props">
-        {props.map(({ name, value }) => (
-          <li className="ware-card-cart__prop" key={name}>
-            {name}: {value}
+        {props.map(({ nameDisplay, value }) => (
+          <li className="ware-card-cart__prop" key={nameDisplay}>
+            {nameDisplay}: {value}
           </li>
         ))}
       </ul>
@@ -58,19 +66,20 @@ function WareCardCart({
           className="ware-card-cart__count"
           min={1}
           max={99}
-          defaultValue={count}
+          value={quantity}
+          onChange={onChangeQuantity}
         />
       )}
       {isOrdered && (
         <div className="ware-card-cart__count">
-          {count} x {formaterCurrency(price)}
+          {quantity} x {formaterCurrency(price)}
         </div>
       )}
       <div className="ware-card-cart__price">
-        {formaterCurrency(isOrdered ? price * count : price)}
+        {formaterCurrency(isOrdered ? price * quantity : price)}
       </div>
       {!isOrdered && (
-        <button className="ware-card-cart__btn-delete">
+        <button className="ware-card-cart__btn-delete" onClick={onRemove}>
           <CloseIcon />
         </button>
       )}
