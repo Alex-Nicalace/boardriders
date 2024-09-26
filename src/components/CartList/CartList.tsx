@@ -2,6 +2,7 @@ import './CartList.scss';
 import { useFormaters } from '../../Context/useFormaters';
 import WareCardCart, { TWareCardCartData } from '../ui/WareCardCart';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
+import { getDeclension } from '../../utils/getDeclension';
 
 type TCartListProps = {
   className?: string;
@@ -20,8 +21,16 @@ function CartList({
   const { formaterCurrency } = useFormaters();
   const { isLessMobile } = useScreenWidth();
 
-  const totalPrice = data.reduce((acc, item) => acc + item.price, 0);
-  const totalItems = data.length;
+  const total = data.reduce(
+    (acc, item) => ({
+      items: acc.items + item.quantity,
+      price: acc.price + item.price * item.quantity,
+    }),
+    {
+      items: 0,
+      price: 0,
+    }
+  );
 
   const classes = ['cart-list', isOrdered && 'cart-list_ordered', className]
     .filter(Boolean)
@@ -57,10 +66,15 @@ function CartList({
       {!isOrdered && (
         <div className="cart-list__total">
           <span className="cart-list__total-text">
-            {totalItems} товар(а) на сумму
+            {`${total.items} ${getDeclension(
+              total.items,
+              'товар',
+              'товара',
+              'товаров'
+            )} на сумму`}
           </span>
           <span className="cart-list__total-value">
-            {formaterCurrency(totalPrice)}
+            {formaterCurrency(total.price)}
           </span>
         </div>
       )}

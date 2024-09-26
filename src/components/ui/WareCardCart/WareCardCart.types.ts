@@ -6,7 +6,7 @@ export type TWareCardCartData = {
   manufacturerSKU: string;
   props: { name: string; value: string; nameDisplay?: string }[];
   price: number;
-  quantity?: number;
+  quantity: number;
 };
 export type TWareCardCartProps = {
   className?: string;
