@@ -762,6 +762,7 @@ export type Database = {
           productId: number;
           colorId: number;
           sizeId: number;
+          name: string;
           color: string;
           size: string;
           manufacturerSKU: string;
