@@ -1,32 +1,27 @@
 import './CartList.scss';
 import { useFormaters } from '../../Context/useFormaters';
-import WareCardCart from '../ui/WareCardCart';
+import WareCardCart, { TWareCardCartData } from '../ui/WareCardCart';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 
 type TCartListProps = {
   className?: string;
   isOrdered?: boolean;
-  cartData: {
-    title: string;
-    img: string;
-    article: string;
-    props: {
-      name: string;
-      value: string;
-    }[];
-    price: number;
-  }[];
+  data: TWareCardCartData[];
+  onChangeQuantity?: (id: number, quantity: number) => void;
+  onRemove?: (id: number) => void;
 };
 function CartList({
   className,
-  cartData,
+  data,
   isOrdered = false,
+  onChangeQuantity,
+  onRemove,
 }: TCartListProps): JSX.Element {
   const { formaterCurrency } = useFormaters();
   const { isLessMobile } = useScreenWidth();
 
-  const totalPrice = cartData.reduce((acc, item) => acc + item.price, 0);
-  const totalItems = cartData.length;
+  const totalPrice = data.reduce((acc, item) => acc + item.price, 0);
+  const totalItems = data.length;
 
   const classes = ['cart-list', isOrdered && 'cart-list_ordered', className]
     .filter(Boolean)
@@ -44,12 +39,16 @@ function CartList({
       )}
 
       <ul className="cart-list__list">
-        {cartData.map((item) => (
-          <li className="cart-list__item" key={item.article}>
+        {data.map((product) => (
+          <li className="cart-list__item" key={product.id}>
             <WareCardCart
-              data={item}
+              data={product}
               mode={isLessMobile ? 'mobile' : 'desktop'}
               isOrdered={isOrdered}
+              onChangeQuantity={(quantity) =>
+                onChangeQuantity?.(product.id, quantity)
+              }
+              onRemove={() => onRemove?.(product.id)}
             />
           </li>
         ))}
