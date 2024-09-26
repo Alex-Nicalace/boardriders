@@ -1,6 +1,5 @@
 import { useId } from 'react';
 import './CheckOutPage.scss';
-import CartList from '../../components/CartList';
 import ShoppingCart from '../../components/ShoppingCart';
 import PageContent from '../../components/PageContent';
 import InputStyled from '../../components/ui/InputStyled';
@@ -8,41 +7,7 @@ import { ArrowRightClassic } from '../../components/ui/Icons';
 import MakeOrder from '../../components/MakeOrder';
 import CartEmpty from '../../components/CartEmpty';
 import OrderPlaced from '../../components/OrderPlaced';
-
-const CART_DATA = [
-  {
-    title: 'Сноуборд GNU Asym Carbon Credit Btx Multicolor',
-    img: '/src/assets/img/ware-card-cart/01.png',
-    article: '19SN003',
-    props: [
-      {
-        name: 'Цвет',
-        value: 'Цветной',
-      },
-      {
-        name: 'Размер',
-        value: 'XL',
-      },
-    ],
-    price: 1290,
-  },
-  {
-    title: 'Сноуборд GNU Asym Carbon Credit Btx Multicolor',
-    img: '/src/assets/img/ware-card-cart/01.png',
-    article: '19SN003_2',
-    props: [
-      {
-        name: 'Цвет',
-        value: 'Цветной',
-      },
-      {
-        name: 'Размер',
-        value: 'XL',
-      },
-    ],
-    price: 1290,
-  },
-];
+import CartListContainer from '../../features/cart/CartListContainer';
 
 const CART_STEPS = [
   {
@@ -68,7 +33,7 @@ const CART_STEPS = [
 // type TCheckOutPageProps = { }
 function CheckOutPage(/*{ }: TCheckOutPageProps*/): JSX.Element {
   const id = useId();
-  let tempState = 2;
+  let tempState = 1;
 
   return (
     <PageContent className="check-out-page" as="main" paddingTop="50-15">
@@ -78,10 +43,7 @@ function CheckOutPage(/*{ }: TCheckOutPageProps*/): JSX.Element {
           <>
             <div className="check-out-page__cart">
               <h2 className="check-out-page__title">Корзина</h2>
-              <CartList
-                className="check-out-page__cart-list"
-                cartData={CART_DATA}
-              />
+              <CartListContainer className="check-out-page__cart-list" />
               <div className="check-out-page__wrap-bonus-promo">
                 <InputStyled
                   className="check-out-page__input-bonus"
