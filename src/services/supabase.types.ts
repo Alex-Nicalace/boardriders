@@ -36,6 +36,52 @@ export type Database = {
         };
         Relationships: [];
       };
+      cart: {
+        Row: {
+          createdAt: string;
+          id: number;
+          productVariantId: number;
+          quantity: number;
+          userId: string;
+        };
+        Insert: {
+          createdAt?: string;
+          id?: number;
+          productVariantId: number;
+          quantity: number;
+          userId: string;
+        };
+        Update: {
+          createdAt?: string;
+          id?: number;
+          productVariantId?: number;
+          quantity?: number;
+          userId?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'cart_productVariantId_fkey';
+            columns: ['productVariantId'];
+            isOneToOne: false;
+            referencedRelation: 'productVariants';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'cart_userId_fkey';
+            columns: ['userId'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'cart_userId_fkey';
+            columns: ['userId'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
       categories: {
         Row: {
           categoryTypeId: number | null;
@@ -705,6 +751,22 @@ export type Database = {
               }[]
             | null;
           brands: { id: number; name: string }[] | null;
+        }[];
+      };
+      getProductVatiants: {
+        Args: {
+          productVariantsIds: number[];
+        };
+        Returns: {
+          id: number;
+          productId: number;
+          colorId: number;
+          sizeId: number;
+          color: string;
+          size: string;
+          manufacturerSKU: string;
+          price: number;
+          imageUrl: string;
         }[];
       };
     };
