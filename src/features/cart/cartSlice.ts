@@ -116,15 +116,26 @@ export const addCartWithToast =
     }
   };
 
+export const removeCartWithToast =
+  (productVariantId: number) => async (dispatch: TAppDispatch) => {
+    try {
+      dispatch(removeCart(productVariantId));
+      toast.success('Товар удален из корзины');
+    } catch (error) {
+      console.error(error);
+      toast.error('Произошла ошибка при удалении из корзины');
+    }
+  };
+
 // экспорт редьюсера
 export default cartSlice.reducer;
 
 // экспорт селекторов
-const getCartData = (state: TRootState) => state.cart.cart;
-export const getCart = createSelector(getCartData, (cart) => cart);
+const getCartData = (state: TRootState) => state.cart;
+export const getCart = createSelector(getCartData, (cart) => cart.cart);
 export const getTotalQuantity = (state: TRootState) => state.cart.totalQuantity;
 export const isProductInCart = (productVariantId: number) =>
-  createSelector(getCartData, (cart) => Boolean(cart[productVariantId]));
+  createSelector(getCartData, (cart) => Boolean(cart.cart[productVariantId]));
 export const getProductVariantIds = createSelector(getCartData, (cart) =>
-  Object.keys(cart).map(Number)
+  Object.keys(cart.cart).map(Number)
 );
