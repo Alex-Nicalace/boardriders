@@ -6,7 +6,7 @@ import { ArrowLeftClassic } from '../ui/Icons';
 import CheckboxGroup, { CheckboxGroupContainer } from '../CheckboxGroup';
 import { RangeSelectorContainer } from '../RangeSelector';
 import Button from '../ui/Button';
-import Transition from '../../component-library/Transition';
+import { Transition } from '../../component-library/Transition';
 import { TFiltersMobileProps } from './Filters.types';
 import DataProvider from '../../features/DataProvider';
 import ColorLabel from '../ColorLabel';

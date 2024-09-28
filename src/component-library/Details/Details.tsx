@@ -1,6 +1,6 @@
 import { forwardRef, useRef, useState } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
-import Transition from '../Transition';
+import { Transition } from '../Transition';
 import { TDetailsProps } from './Details.types';
 import { TDetailsContentProps } from './Details.types';
 

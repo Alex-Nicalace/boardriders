@@ -10,7 +10,7 @@ import {
 import { createPortal } from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Popup.scss';
-import Transition, { TTransition } from '../Transition';
+import { Transition, TStateTransition } from '../Transition';
 import { useLockDocumentScroll } from '../../hooks/useLockDocumentScroll';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import {
@@ -20,7 +20,7 @@ import {
   TWindowProps,
 } from './Popup.types';
 
-const TRANSITION_STYLES: Record<TTransition, string> = {
+const TRANSITION_STYLES: Record<TStateTransition, string> = {
   entering: 'popup_opened',
   entered: 'popup_opened',
   exiting: '',

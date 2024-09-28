@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { usePrevious } from '../../hooks/usePrevious';
+import { TStateTransition, TTransitionProps } from './Transition.types';
 
-export type TTransition = 'entering' | 'entered' | 'exiting' | 'exited';
-
-function initState(toggler: boolean, appear: boolean): TTransition {
+function initState(toggler: boolean, appear: boolean): TStateTransition {
   return toggler
     ? appear
       ? 'exited'
@@ -13,20 +12,6 @@ function initState(toggler: boolean, appear: boolean): TTransition {
     : 'exited';
 }
 
-type TTransitionProps = {
-  children: React.ReactNode | ((state: TTransition) => React.ReactNode);
-  enter: boolean;
-  timeout: number;
-  appear?: boolean;
-  mountOnEnter?: boolean;
-  unmountOnExit?: boolean;
-  onEnter?: (isAppearing?: boolean) => void;
-  onEntering?: (isAppearing?: boolean) => void;
-  onEntered?: (isAppearing?: boolean) => void;
-  onExit?: () => void;
-  onExiting?: () => void;
-  onExited?: () => void;
-};
 /**
  * Генерирует эффект перехода для указанных дочерних элементов на основе состояния и указанного времени ожидания.
  *
@@ -34,7 +19,7 @@ type TTransitionProps = {
  * @param [props.enter] - Флаг указывающий на вход или выход из перехода
  * @param [props.children] - Дочерний элемент, к которому применяется эффект перехода
  * @param [props.timeout] - Длительность эффекта перехода
- * @param [props.appear] - Флаг указывающий на появление перехода
+ * @param [props.appear] - При 1-м монтировании выполнять переход или нет
  * @param [props.mountOnEnter=false] - Флаг указывающий на монтирование компонента только при входе "entered"
  * @param [props.unmountOnExit=true] - Флаг указывающий на размонтирование компонента при выходе
  * @param [props.onEnter] - Функция, вызываемая до применения статуса "entering"
@@ -59,7 +44,7 @@ function Transition({
   onExiting = () => {},
   onExited = () => {},
 }: TTransitionProps): React.ReactNode {
-  const [state, setState] = useState<TTransition>(() =>
+  const [state, setState] = useState<TStateTransition>(() =>
     initState(enter, appear)
   );
   const prevState = usePrevious(state);

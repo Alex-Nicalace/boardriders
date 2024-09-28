@@ -3,14 +3,14 @@ import './Select.scss';
 import ListOptions from './ListOptions';
 import Option from './Option';
 import { SelectContext } from './SelectContext';
-import Transition, { TTransition } from '../Transition';
+import { Transition, TStateTransition } from '../Transition';
 import {
   ISelectCustomCSSProperties,
   OptionProps,
   TSelectProps,
 } from './Select.types';
 
-const TRANSITION_STYLES: Record<TTransition, string> = {
+const TRANSITION_STYLES: Record<TStateTransition, string> = {
   entering: 'options_opened',
   entered: 'options_opened',
   exiting: '',

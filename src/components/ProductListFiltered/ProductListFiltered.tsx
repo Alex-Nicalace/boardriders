@@ -3,7 +3,10 @@ import './ProductListFiltered.scss';
 import Steps from '../ui/Steps';
 import Title from '../ui/Title';
 import ToggleButton from '../ToggleButton';
-import Transition, { TTransition } from '../../component-library/Transition';
+import {
+  Transition,
+  TStateTransition,
+} from '../../component-library/Transition';
 import Pagination from '../ui/Pagination';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import Popup from '../../component-library/Popup';
@@ -14,7 +17,7 @@ import { TProductListFilteredProps } from './ProductListFiltered.types';
 import SortBy from '../SortBy';
 import { Filters, FiltersMobile } from '../Filters';
 
-const TRANSITION_STYLES: Record<TTransition, string> = {
+const TRANSITION_STYLES: Record<TStateTransition, string> = {
   entering: '',
   entered: '',
   exiting: 'product-list-filtered_filters-hide',
