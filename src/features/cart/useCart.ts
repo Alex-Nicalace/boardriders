@@ -4,13 +4,14 @@ import { getProductVariants } from '../../services/apiProducts';
 import { useAppSelector } from '../../hooks/reduxHooks';
 import { getCart, getProductVariantIds } from './cartSlice';
 
-export function useCart() {
+export function useCart(enabled = true) {
   const productVariantIds = useAppSelector(getProductVariantIds);
   const cart = useAppSelector(getCart);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['cart', productVariantIds],
+    queryKey: ['cart'],
     queryFn: () => getProductVariants(productVariantIds),
+    enabled,
   });
 
   const products = useMemo(
