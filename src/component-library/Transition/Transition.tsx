@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { usePrevious } from '../../hooks/usePrevious';
 import { TStateTransition, TTransitionProps } from './Transition.types';
 
-function initState(toggler: boolean, appear: boolean): TStateTransition {
+function initState(appear: boolean, toggler?: boolean): TStateTransition {
   return toggler
     ? appear
       ? 'exited'
@@ -45,7 +45,7 @@ function Transition({
   onExited = () => {},
 }: TTransitionProps): React.ReactNode {
   const [state, setState] = useState<TStateTransition>(() =>
-    initState(enter, appear)
+    initState(appear, enter)
   );
   const prevState = usePrevious(state);
 
