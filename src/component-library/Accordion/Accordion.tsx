@@ -26,7 +26,7 @@ function Accordion({
 }: TAccordionProps): JSX.Element {
   const [openId, setOpenId] = useState<string[]>([]);
   const detailsRef = useOutsideClick<HTMLDivElement>(() => {
-    setOpenId([]);
+    if (openId.length) setOpenId([]);
   }, !closeOnOutsideClick);
   const { screenWidth, triggerOnWidth = 'max-width' } = responsive || {};
   const mediaQuery = useMemo(
