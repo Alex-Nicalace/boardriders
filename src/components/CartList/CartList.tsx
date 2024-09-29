@@ -1,20 +1,27 @@
 import './CartList.scss';
 import { useFormaters } from '../../Context/useFormaters';
-import WareCardCart, { TWareCardCartData } from '../ui/WareCardCart';
+import WareCardCart from '../ui/WareCardCart';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import { getDeclension } from '../../utils/getDeclension';
+import {
+  Transition,
+  TransitionGroup,
+  TStateTransition,
+} from '../../component-library/Transition';
+import { ICustomCSSProperties, TCartListProps } from './CartList.types';
 
-type TCartListProps = {
-  className?: string;
-  isOrdered?: boolean;
-  data: TWareCardCartData[];
-  onChangeQuantity?: (id: number, quantity: number) => void;
-  onRemove?: (id: number) => void;
+const TRANSITION_STYLES: Record<TStateTransition, string> = {
+  entering: '',
+  entered: '',
+  exiting: 'animate backOutLeft',
+  exited: '',
 };
+
 function CartList({
   className,
   data,
   isOrdered = false,
+  animateDuration = 1000,
   onChangeQuantity,
   onRemove,
 }: TCartListProps): JSX.Element {
@@ -36,8 +43,12 @@ function CartList({
     .filter(Boolean)
     .join(' ');
 
+  const style: ICustomCSSProperties = {
+    ...(animateDuration && { '--animate-duration': `${animateDuration}ms` }),
+  };
+
   return (
-    <div className={classes}>
+    <div className={classes} style={style}>
       {isOrdered && !isLessMobile && (
         <div className="cart-list__header">
           <span>Товар</span>
@@ -48,19 +59,30 @@ function CartList({
       )}
 
       <ul className="cart-list__list">
-        {data.map((product) => (
-          <li className="cart-list__item" key={product.id}>
-            <WareCardCart
-              data={product}
-              mode={isLessMobile ? 'mobile' : 'desktop'}
-              isOrdered={isOrdered}
-              onChangeQuantity={(quantity) =>
-                onChangeQuantity?.(product.id, quantity)
-              }
-              onRemove={() => onRemove?.(product.id)}
-            />
-          </li>
-        ))}
+        <TransitionGroup>
+          {data.map((product) => (
+            <Transition key={product.id} timeout={animateDuration}>
+              {(state) => (
+                <li
+                  className={['cart-list__item', TRANSITION_STYLES[state]]
+                    .filter(Boolean)
+                    .join(' ')}
+                  key={product.id}
+                >
+                  <WareCardCart
+                    data={product}
+                    mode={isLessMobile ? 'mobile' : 'desktop'}
+                    isOrdered={isOrdered}
+                    onChangeQuantity={(quantity) =>
+                      onChangeQuantity?.(product.id, quantity)
+                    }
+                    onRemove={() => onRemove?.(product.id)}
+                  />
+                </li>
+              )}
+            </Transition>
+          ))}
+        </TransitionGroup>
       </ul>
 
       {!isOrdered && (
