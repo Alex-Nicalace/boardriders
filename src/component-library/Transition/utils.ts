@@ -24,13 +24,13 @@ export function getChildMapping(
     mapFn && isValidElement(child) ? mapFn(child) : child;
 
   const result: TChildMapping = Object.create(null);
-  Children.forEach(children, (child) => {
-    if (!child) return;
+  Children.map(children, (c) => c).forEach((child) => {
     const key = child.key;
     if (key) {
       result[key] = mapper(child);
     }
   });
+
   return result;
 }
 
