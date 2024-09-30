@@ -1,6 +1,6 @@
 import CartList from '../../components/CartList';
 import { useAppDispatch } from '../../hooks/reduxHooks';
-import { setCart } from './cartSlice';
+import { editCart } from './cartSlice';
 import { useCart } from './useCart';
 import { useCartRemove } from './useCartRemove';
 
@@ -13,7 +13,7 @@ function CartListContainer({ className }: TCartListContainerProps) {
   if (!products) return null;
 
   function handleChangeQuantity(id: number, quantity: number) {
-    dispatch(setCart([{ productVariantId: id, count: quantity }]));
+    dispatch(editCart({ productVariantId: id, count: quantity }));
   }
 
   function handleRemove(id: number) {

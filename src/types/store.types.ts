@@ -4,10 +4,10 @@ export type TWishListState = {
   wishList: number[];
 };
 
-export type TCart = { [key: number]: number };
+export type TCartItem = { productVariantId: number; count: number };
 
 export type TCartState = {
-  cart: TCart;
+  cart: TCartItem[];
   totalQuantity: number;
 };
 

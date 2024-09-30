@@ -2,11 +2,11 @@ import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getProductVariants } from '../../services/apiProducts';
 import { useAppSelector } from '../../hooks/reduxHooks';
-import { getCart, getProductVariantIds } from './cartSlice';
+import { getCartIds, getCartMapping } from './cartSlice';
 
 export function useCart(enabled = true) {
-  const productVariantIds = useAppSelector(getProductVariantIds);
-  const cart = useAppSelector(getCart);
+  const productVariantIds = useAppSelector(getCartIds);
+  const cartMapping = useAppSelector(getCartMapping);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['cart'],
@@ -19,10 +19,10 @@ export function useCart(enabled = true) {
       data?.map((product) => {
         return {
           ...product,
-          quantity: cart[product.id],
+          quantity: cartMapping[product.id].count,
         };
       }),
-    [data, cart]
+    [data, cartMapping]
   );
 
   return { products, isLoading, error };
