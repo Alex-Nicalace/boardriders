@@ -10,12 +10,13 @@ export function useCartRemove() {
 
   const { isPending: isDeleting, mutate: removeCart } = useMutation({
     mutationFn: (id: number) => {
-      return Promise.resolve(dispatch(removeCartAction(id)));
-    },
-    onSuccess: (_, id) => {
-      queryClient.setQueryData(['cart'], (old: TCartList) =>
-        old.filter((p) => p.id !== id)
+      dispatch(removeCartAction(id));
+      queryClient.setQueryData(['cart'], (cartListOld: TCartList) =>
+        cartListOld.filter((cartItem) => cartItem.id !== id)
       );
+      return Promise.resolve();
+    },
+    onSuccess: () => {
       toast.success('Товар удален из корзины');
     },
     onError: (err) => {
