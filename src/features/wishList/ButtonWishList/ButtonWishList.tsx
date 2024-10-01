@@ -1,11 +1,12 @@
 import toast from 'react-hot-toast';
-import { addWishList, getWishList, removeWishList } from '../wishListSlise';
+import { addWishList, getWishList } from '../wishListSlise';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import Favorite, { TFavoriteProps } from '../../../components/ui/Favorite';
 import { useUser } from '../../authentication/useUser';
 import { useFavorites } from '../../favorites/useFavorites';
 import { useCreateFavorites } from '../../favorites/useCreateFavorites';
 import { useDeleteFavorites } from '../../favorites/useDeleteFavorites';
+import { useWishListRemove } from '../useWishListRemove';
 
 type TButtonWishListProps = Omit<
   TFavoriteProps,
@@ -24,6 +25,7 @@ function ButtonWishList({
   const isPending = isCreating || isDeleting;
 
   const wishList = useAppSelector(getWishList);
+  const { removeWishList } = useWishListRemove();
   const dispatch = useAppDispatch();
 
   const isWished =
@@ -35,7 +37,7 @@ function ButtonWishList({
     if (isAuthenticated) {
       deleteFavorites(productId);
     } else {
-      dispatch(removeWishList(productId));
+      removeWishList(productId);
     }
   }
 
