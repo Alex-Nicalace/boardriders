@@ -1,4 +1,3 @@
-import { useSearchParams } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAppSelector } from '../../hooks/reduxHooks';
 import { getWishList } from './wishListSlise';
@@ -9,28 +8,20 @@ import {
 } from '../../services/apiProducts';
 import { PAGE_SIZE_PRODUCTS } from '../../services/constants';
 import { useUser } from '../authentication/useUser';
+import { useSortByPage } from '../../hooks/useSortByPage';
 
 export function useWishList() {
   const queryClient = useQueryClient();
   const wishListLocal = useAppSelector(getWishList);
-  const [searchParams] = useSearchParams();
   const { isAuthenticated } = useUser();
+  const { sortBy, pageNum } = useSortByPage();
 
   // FILTERS
   const filters: TFilters[] = [
     { field: 'id', value: wishListLocal, method: 'in' },
   ];
-  // PAGE
-  const page = Number(searchParams.get('page'));
-  const pageNum = isNaN(page) || page < 1 ? 1 : page;
-  // SORT
-  const sortByString = searchParams.get('sortBy');
-  const sortByValue = !!sortByString && sortByString.split('-');
-  const sortBy = !sortByValue
-    ? undefined
-    : { field: sortByValue[0], value: sortByValue[1] };
 
-  const queryKeys = ['wishList', isAuthenticated || wishListLocal, sortBy];
+  const queryKeys = ['wishList', isAuthenticated, sortBy];
 
   const args: TGetProductsArgs = isAuthenticated
     ? {
