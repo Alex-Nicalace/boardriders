@@ -9,12 +9,13 @@ import { useWishList } from '../../features/wishList/useWishList';
 import './FavouritesPage.scss';
 import Spinner from '../../components/Spinner';
 import Empty from '../../components/Empty';
+import ErrorMessage from '../../components/ErrorMessage';
 
 // type TFavouritesPageProps = { }
 function FavouritesPage(/*{ }: TFavouritesPageProps*/): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
   const { isLessMobileSmall } = useScreenWidth();
-  const { products, isLoading, totalPages, pageNum } = useWishList();
+  const { products, isLoading, totalPages, pageNum, error } = useWishList();
 
   function handlePageChange(page: number) {
     searchParams.set('page', String(page));
@@ -37,10 +38,16 @@ function FavouritesPage(/*{ }: TFavouritesPageProps*/): JSX.Element {
             <Spinner />
           </div>
         )}
-        {!isLoading && !products?.length && (
+        {!isLoading && !products?.length && !error && (
           <Empty
             className="favourites-page__product-list"
             resource="избранные товары"
+          />
+        )}
+        {!isLoading && error && (
+          <ErrorMessage
+            className="favourites-page__product-list"
+            message={error.message}
           />
         )}
         {!isLoading && !!products?.length && (
