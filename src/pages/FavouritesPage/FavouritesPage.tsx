@@ -55,6 +55,8 @@ function FavouritesPage(/*{ }: TFavouritesPageProps*/): JSX.Element {
             <ProductList
               className="favourites-page__product-list"
               data={products}
+              isTransitionGroup
+              animateDuration={1000}
             />
             {totalPages > 1 && (
               <Pagination
