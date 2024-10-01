@@ -9,6 +9,7 @@ import { PAGE_SIZE_PRODUCTS } from '../../services/constants';
 import { useMainMenu } from '../categories/useMainMenu';
 import { useGenderCategories } from '../categories/useGenderCategories';
 import { TFilterName } from '../../components/Filters';
+import { useSortByPage } from '../../hooks/useSortByPage';
 
 const FILTER_MAPPINGS: {
   filterName: TFilterName;
@@ -58,8 +59,8 @@ export function useProducts() {
   const categoryFilters = [categoryGender, category].filter(
     (item) => item !== undefined
   );
-  const page = Number(searchParams.get('page'));
-  const pageNum = isNaN(page) || page < 1 ? 1 : page;
+
+  const { sortBy, pageNum } = useSortByPage();
 
   // FILTERS
   const filters: TFilters[] = [];
@@ -99,13 +100,6 @@ export function useProducts() {
     });
   };
   updateFilters();
-
-  // SORT
-  const sortByString = searchParams.get('sortBy');
-  const sortByValue = !!sortByString && sortByString.split('-');
-  const sortBy = !sortByValue
-    ? undefined
-    : { field: sortByValue[0], value: sortByValue[1] };
 
   const queryKeys = ['products', ...categoryFilters, filters, sortBy];
   const args: TGetProductsArgs = {
