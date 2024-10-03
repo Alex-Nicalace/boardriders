@@ -28,4 +28,8 @@
   &__content {
     padding-top: rem(40);
   }
+
+  &_disabled {
+    color: var(--dark-gray);
+  }
 }

@@ -18,7 +18,15 @@ function MakeOrderStep({
   name,
 }: TMakeOrderStepProps): JSX.Element {
   return (
-    <div className={['make-order-step', className].filter(Boolean).join(' ')}>
+    <section
+      className={[
+        'make-order-step',
+        disabled && 'make-order-step_disabled',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
       <header className="make-order-step__header">
         <StepNumber stepNum={stepNum} isDone={isDone} disabled={disabled} />
         <h3 className="make-order-step__title">{name}</h3>
@@ -27,7 +35,7 @@ function MakeOrderStep({
         )}
       </header>
       {!disabled && <div className="make-order-step__content">{children}</div>}
-    </div>
+    </section>
   );
 }
 
