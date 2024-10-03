@@ -4,29 +4,8 @@ import CartListContainer from '../../features/cart/CartListContainer';
 import MakeOrder from '../MakeOrder';
 import { ArrowRightClassic } from '../ui/Icons';
 import InputStyled from '../ui/InputStyled';
-import ShoppingCart from '../ShoppingCart';
 import { TCartProps } from './Cart.types';
-
-const CART_STEPS = [
-  {
-    stepNum: 1,
-    name: 'Доставка',
-    value: 'Бесплатно',
-    // isDone: true,
-  },
-  {
-    stepNum: 2,
-    name: 'Оплата',
-    disabled: true,
-    // isDone: true,
-  },
-  {
-    stepNum: 3,
-    name: 'Контакты',
-    disabled: true,
-    // isDone: true,
-  },
-];
+import ShoppingCartContainer from '../../features/cart/ShoppingCartContainer';
 
 function Cart({ className }: TCartProps): JSX.Element {
   const id = useId();
@@ -56,12 +35,7 @@ function Cart({ className }: TCartProps): JSX.Element {
         <MakeOrder />
       </div>
       <div className="cart__steps">
-        <ShoppingCart
-          countItems={2}
-          dataSteps={CART_STEPS}
-          totalPrice={118790}
-          points={118790}
-        />
+        <ShoppingCartContainer />
       </div>
     </div>
   );
