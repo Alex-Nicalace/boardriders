@@ -6,7 +6,7 @@ import { useCartRemove } from './useCartRemove';
 
 type TCartListContainerProps = { className?: string };
 function CartListContainer({ className }: TCartListContainerProps) {
-  const { products } = useCart(false);
+  const { products, priceTotal, quantityTotal } = useCart(false);
   const dispatch = useAppDispatch();
   const { removeCart } = useCartRemove();
 
@@ -25,6 +25,8 @@ function CartListContainer({ className }: TCartListContainerProps) {
       className={className}
       data={products}
       animateDuration={1000}
+      quantityTotal={quantityTotal}
+      priceTotal={priceTotal}
       onChangeQuantity={handleChangeQuantity}
       onRemove={handleRemove}
     />

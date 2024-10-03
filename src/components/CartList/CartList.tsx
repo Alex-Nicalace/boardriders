@@ -22,22 +22,13 @@ function CartList({
   data,
   isOrdered = false,
   animateDuration = 1000,
+  quantityTotal,
+  priceTotal,
   onChangeQuantity,
   onRemove,
 }: TCartListProps): JSX.Element {
   const { formaterCurrency } = useFormaters();
   const { isLessMobile } = useScreenWidth();
-
-  const total = data.reduce(
-    (acc, item) => ({
-      items: acc.items + item.quantity,
-      price: acc.price + item.price * item.quantity,
-    }),
-    {
-      items: 0,
-      price: 0,
-    }
-  );
 
   const classes = ['cart-list', isOrdered && 'cart-list_ordered', className]
     .filter(Boolean)
@@ -88,15 +79,15 @@ function CartList({
       {!isOrdered && (
         <div className="cart-list__total">
           <span className="cart-list__total-text">
-            {`${total.items} ${getDeclension(
-              total.items,
+            {`${quantityTotal} ${getDeclension(
+              quantityTotal,
               'товар',
               'товара',
               'товаров'
             )} на сумму`}
           </span>
           <span className="cart-list__total-value">
-            {formaterCurrency(total.price)}
+            {formaterCurrency(priceTotal)}
           </span>
         </div>
       )}

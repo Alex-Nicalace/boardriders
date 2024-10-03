@@ -5,6 +5,8 @@ export type TCartListProps = {
   isOrdered?: boolean;
   data: TWareCardCartData[];
   animateDuration?: number;
+  quantityTotal: number;
+  priceTotal: number;
   onChangeQuantity?: (id: number, quantity: number) => void;
   onRemove?: (id: number) => void;
 };
