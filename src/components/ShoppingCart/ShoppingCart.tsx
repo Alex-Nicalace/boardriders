@@ -3,8 +3,10 @@ import StepNumber from '../StepNumber';
 import Button from '../ui/Button';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import { useFormaters } from '../../Context/useFormaters';
+import { getDeclension } from '../../utils/getDeclension';
 
 type TShoppingСartProps = {
+  className?: string;
   countItems: number;
   dataSteps: {
     stepNum: number;
@@ -17,6 +19,7 @@ type TShoppingСartProps = {
   points: number;
 };
 function ShoppingCart({
+  className,
   countItems,
   dataSteps,
   totalPrice,
@@ -27,12 +30,19 @@ function ShoppingCart({
   const isCanPay = dataSteps.every(({ isDone }) => isDone);
 
   return (
-    <div className="shopping-cart">
+    <div className={['shopping-cart', className].filter(Boolean).join(' ')}>
       <div className="shopping-cart__title">
         {isLessMobile && (
           <span className="shopping-cart__label">Проверка заказа:</span>
         )}
-        <span>{countItems} товар(а)</span>
+        <span>
+          {`${countItems} ${getDeclension(
+            countItems,
+            'товар',
+            'товара',
+            'товаров'
+          )}`}
+        </span>
       </div>
 
       <ol className="shopping-cart__list">
