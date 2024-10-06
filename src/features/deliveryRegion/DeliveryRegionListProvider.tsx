@@ -1,6 +1,8 @@
 import toast from 'react-hot-toast';
 import { TDeliveryRegionListProviderProps } from './deliveryRegion.types';
 import { useDeliveryRegionList } from './useDeliveryRegionList';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { getDeliveryRegionId, setDeliveryRegion } from './deliveryRegionSlice';
 
 function DeliveryRegionListProvider({
   render,
@@ -8,6 +10,8 @@ function DeliveryRegionListProvider({
   renderError,
 }: TDeliveryRegionListProviderProps) {
   const { deliveryRegionList, isLoading, error } = useDeliveryRegionList();
+  const currentDeliveryRegionId = useAppSelector(getDeliveryRegionId);
+  const dispatch = useAppDispatch();
 
   if (isLoading) {
     return renderLoading?.();
@@ -22,7 +26,15 @@ function DeliveryRegionListProvider({
     return null;
   }
 
-  return render(deliveryRegionList);
+  function handleChangeDeliveryRegion(id: number) {
+    dispatch(setDeliveryRegion(id));
+  }
+
+  return render(
+    deliveryRegionList,
+    currentDeliveryRegionId,
+    handleChangeDeliveryRegion
+  );
 }
 
 export default DeliveryRegionListProvider;

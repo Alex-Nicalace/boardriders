@@ -5,7 +5,11 @@ type TDeliveryRegionList = Exclude<
   undefined
 >;
 export type TDeliveryRegionListProviderProps = {
-  render: (deliveryRegionList: TDeliveryRegionList) => JSX.Element;
+  render: (
+    deliveryRegionList: TDeliveryRegionList,
+    currentDeliveryRegionId?: number,
+    onChange?: (id: number) => void
+  ) => JSX.Element;
   renderLoading?: () => JSX.Element;
   renderError?: (error: Error) => JSX.Element;
 };
