@@ -15,14 +15,13 @@ function DeliveryRegion({ className }: IDeliveryRegionProps): JSX.Element {
         <span className="delivery-region__text">Ваш регион доставки:</span>
       </label>
       <DeliveryRegionListProvider
-        render={(deliveryRegionList) => (
+        render={(deliveryRegionList, currentDeliveryRegionId, handleChange) => (
           <Select
             className="delivery-region__select"
             name="delivery-region"
             id="delivery-region"
-            // value={city}
-            initValue="1"
-            // onChange={handleChangeCity}
+            value={`${currentDeliveryRegionId}`}
+            onChange={(value) => handleChange?.(Number(value))}
             iconSelect={<SelectIcon />}
           >
             {deliveryRegionList.map((item) => (
