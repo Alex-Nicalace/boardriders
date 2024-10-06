@@ -11,5 +11,9 @@ export type TCartState = {
   totalQuantity: number;
 };
 
+export type TDeliveryRegion = {
+  id: number;
+};
+
 export type TRootState = ReturnType<typeof store.getState>;
 export type TAppDispatch = typeof store.dispatch;
