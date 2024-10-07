@@ -1,7 +1,7 @@
 import './TopbarHeader.scss';
 import { PayLocation, RefundIcon, TrackIcon } from '../../ui/Icons';
-import DeliveryRegion from '../DeliveryRegion';
 import SecondaryLinks from '../SecondaryLinks';
+import DeliveryRegionContainer from '../../../features/delivery/DeliveryRegionContainer';
 
 type ITopBarHeaderProps = {
   className?: string;
@@ -11,7 +11,7 @@ function TopbarHeader({ className = '' }: ITopBarHeaderProps): JSX.Element {
   return (
     <div className={`topbar-header ${className}`}>
       <div className="topbar-header__container">
-        <DeliveryRegion className="topbar-header__delivery-region" />
+        <DeliveryRegionContainer className="topbar-header__delivery-region" />
         <SecondaryLinks />
         <ul className="topbar-header__advantages advantages-topbar-header">
           <li className="advantages-topbar-header__item">

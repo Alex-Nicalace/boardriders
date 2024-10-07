@@ -3,11 +3,11 @@ import './BurgerMenu.scss';
 import ListLinks from '../../../component-library/ListLinks';
 import Submenu from '../MainMenu/Submenu';
 import { ArrowLeftIcon } from '../../ui/Icons';
-import DeliveryRegion from '../DeliveryRegion';
 import SecondaryLinks from '../SecondaryLinks';
 import ButtonMenu from '../../ui/ButtonMenu';
 import { IMenuData } from '../MainMenu';
 import AccountEnterContainer from '../../../features/authentication/AccountEnterContainer';
+import DeliveryRegionContainer from '../../../features/delivery/DeliveryRegionContainer';
 
 type TBurgerMenuProps = {
   data: IMenuData[];
@@ -26,9 +26,12 @@ function BurgerMenu({ data, close }: TBurgerMenuProps) {
   return (
     <div className="burger-menu">
       <nav
-        className={`burger-menu__nav ${
-          expandedMenu ? 'burger-menu__nav_shifted' : ''
-        }`}
+        className={[
+          'burger-menu__nav',
+          expandedMenu && 'burger-menu__nav_shifted',
+        ]
+          .filter(Boolean)
+          .join(' ')}
       >
         <ListLinks
           linksData={data}
@@ -74,11 +77,11 @@ function BurgerMenu({ data, close }: TBurgerMenuProps) {
           </div>
         )}
       </nav>
-      <footer className="burger-menu__footer">
+      <div className="burger-menu__footer">
         <AccountEnterContainer className="burger-menu__account" />
-        <DeliveryRegion className="burger-menu__delivery-region" />
+        <DeliveryRegionContainer className="burger-menu__delivery-region" />
         <SecondaryLinks className="burger-menu__secondary-links" />
-      </footer>
+      </div>
     </div>
   );
 }
