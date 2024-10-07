@@ -6,45 +6,55 @@ import SelectLabel from '../ui/SelectLabel';
 import DeliveryCourier from '../DeliveryCourier';
 import Notification from '../Notification';
 
-const CITYS = ['Москва', 'Санкт-Петербург', 'Пенза'];
-const DELIVERY = [
+const NotAvailable = ({ message }: { message: string }) => (
+  <Notification
+    className="delivery-option__notification"
+    text={`Способ доставки «${message}» недоступен 🙄`}
+  />
+);
+const WAY_DELIVERY = [
   {
-    id: 1,
     title: 'Забрать в магазине сегодня',
     price: 'Бесплатно',
     hint: 'Зарезервируем товар, который сейчас на полках. Заказ храним 1 день',
+    content: <NotAvailable message="Забрать в магазине сегодня" />,
   },
   {
-    id: 2,
     title: 'Доставить в магазин',
     hint: 'Привезем товар в удобный вам магазин через несколько дней. Заказ храним 5 дней',
     disabled: true,
+    content: <NotAvailable message="Доставить в магазин" />,
   },
   {
-    id: 3,
     title: 'Курьером сегодня и позже',
     price: 'от 0 ₽',
     hint: 'Доставим по указанному адресу',
+    content: <DeliveryCourier />,
   },
   {
-    id: 4,
     title: 'Пункт выдачи',
     hint: 'Забрать товар в одном из пунктов выдачи',
+    content: <NotAvailable message="Пункт выдачи" />,
   },
 ];
-// type TDeliveryOptionProps = { }
-function DeliveryOption(/*{ }: TDeliveryOptionProps*/): JSX.Element {
-  const [deliveryId, setDeliveryId] = useState<number | null>(null);
+type TDeliveryOptionProps = {
+  deliveryRegionList: { id: number; name: string }[];
+};
+function DeliveryOption({
+  deliveryRegionList,
+}: TDeliveryOptionProps): JSX.Element {
+  const [selected, setSelected] = useState(-1);
   return (
     <div className="delivery-option">
       <div className="delivery-option__box-region">
         <SelectLabel className="delivery-option__region" label="Ваш город">
-          {CITYS.map((city) => (
-            <SelectLabel.Option key={city} value={city}>
-              {city}
+          {deliveryRegionList.map(({ id, name }) => (
+            <SelectLabel.Option key={id} value={`${id}`}>
+              {name}
             </SelectLabel.Option>
           ))}
         </SelectLabel>
+
         <div className="delivery-option__exclamation">
           <span>
             <ExclamationInCircleIcon />
@@ -55,16 +65,18 @@ function DeliveryOption(/*{ }: TDeliveryOptionProps*/): JSX.Element {
           </p>
         </div>
       </div>
+
       <div className="delivery-option__title">Способ доставки:</div>
+
       <ul className="delivery-option__list">
-        {DELIVERY.map(({ title, price, hint, disabled, id }) => (
+        {WAY_DELIVERY.map(({ title, price, hint, disabled }, index) => (
           <li key={title} className="delivery-option__item">
             <RadioBox
               className="delivery-option__radio"
               name="delivery"
               view="grid"
               disabled={disabled}
-              onChange={() => setDeliveryId(id)}
+              onChange={() => setSelected(index)}
             >
               <RadioBox.Title>{title}</RadioBox.Title>
               {price && <RadioBox.Price>{price}</RadioBox.Price>}
@@ -73,18 +85,8 @@ function DeliveryOption(/*{ }: TDeliveryOptionProps*/): JSX.Element {
           </li>
         ))}
       </ul>
-      {deliveryId === 3 ? (
-        <DeliveryCourier />
-      ) : (
-        deliveryId && (
-          <Notification
-            className="delivery-option__notification"
-            text={`Способ доставки «${
-              DELIVERY.find((item) => item.id === deliveryId)?.title
-            }» недоступен - не реализован 🙄`}
-          />
-        )
-      )}
+
+      {selected !== -1 && WAY_DELIVERY[selected].content}
     </div>
   );
 }
