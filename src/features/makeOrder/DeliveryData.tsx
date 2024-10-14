@@ -1,7 +1,7 @@
 import DeliveryCourierData from '../../components/DeliveryCourierData';
 import ErrorMessage from '../../components/ErrorMessage';
 import { useAppSelector } from '../../hooks/reduxHooks';
-import { getOrderDataOnStep } from '../makeOrder/makeOrderSlice';
+import { getOrderDataOnStep } from './makeOrderSlice';
 
 function DeliveryData(): JSX.Element {
   const deliveryData = useAppSelector(getOrderDataOnStep(0));

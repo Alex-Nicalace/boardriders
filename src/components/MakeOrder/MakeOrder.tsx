@@ -1,10 +1,10 @@
 import './MakeOrder.scss';
 import MakeOrderStep from '../MakeOrderStep';
 import PaymentOption from '../PaymentOption';
-import DeliveryOptionContainer from '../../features/delivery/DeliveryOptionContainer';
+import DeliveryOptionContainer from '../../features/makeOrder/DeliveryOptionContainer';
 import ContactOption from '../ContactOption';
 import ContactBuyerData from '../ContactBuyerData';
-import DeliveryData from '../../features/delivery/DeliveryData';
+import DeliveryData from '../../features/makeOrder/DeliveryData';
 
 const ELEMENTS = [
   [<DeliveryOptionContainer />, <DeliveryData />],

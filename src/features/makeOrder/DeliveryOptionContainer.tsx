@@ -2,12 +2,9 @@ import DeliveryOption, { TDeliveryForm } from '../../components/DeliveryOption';
 import ErrorMessage from '../../components/ErrorMessage';
 import Spinner from '../../components/Spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import {
-  getOrderDataOnStep,
-  setOrderFirstStep,
-} from '../makeOrder/makeOrderSlice';
-import { getDeliveryRegionId } from './deliveryRegionSlice';
-import { useDeliveryRegionList } from './useDeliveryRegionList';
+import { getOrderDataOnStep, setOrderFirstStep } from './makeOrderSlice';
+import { getDeliveryRegionId } from '../delivery/deliveryRegionSlice';
+import { useDeliveryRegionList } from '../delivery/useDeliveryRegionList';
 
 // type TDeliveryOptionContainerProps = { }
 function DeliveryOptionContainer(/*{ }: TDeliveryOptionContainerProps*/): JSX.Element {
