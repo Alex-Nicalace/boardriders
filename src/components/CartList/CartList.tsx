@@ -1,5 +1,4 @@
 import './CartList.scss';
-import { useFormaters } from '../../Context/useFormaters';
 import WareCardCart from '../ui/WareCardCart';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import { getDeclension } from '../../utils/getDeclension';
@@ -9,6 +8,7 @@ import {
   TStateTransition,
 } from '../../component-library/Transition';
 import { ICustomCSSProperties, TCartListProps } from './CartList.types';
+import { formaterCurrency } from '../../utils/formaters';
 
 const TRANSITION_STYLES: Record<TStateTransition, string> = {
   entering: '',
@@ -27,7 +27,6 @@ function CartList({
   onChangeQuantity,
   onRemove,
 }: TCartListProps): JSX.Element {
-  const { formaterCurrency } = useFormaters();
   const { isLessMobile } = useScreenWidth();
 
   const classes = ['cart-list', isOrdered && 'cart-list_ordered', className]

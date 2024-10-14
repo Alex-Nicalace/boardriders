@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import './DeliveryCourier.scss';
-import { useFormaters } from '../../Context/useFormaters';
 import { generateDateArray } from '../../utils/generateDateArray';
 import Button from '../ui/Button';
 import InputStyled from '../ui/InputStyled';
@@ -9,7 +8,10 @@ import RadioBox from '../ui/RadioBox';
 import SelectLabel, { SelectLabelControl } from '../ui/SelectLabel';
 import { MSG_REQUIRED } from '../FormAuth/constants';
 import { TDeliveryForm } from '../DeliveryOption';
-import { formaterDateWithWeekday } from '../../utils/formaters';
+import {
+  formaterCurrency,
+  formaterDateWithWeekday,
+} from '../../utils/formaters';
 
 // ! по макету выбор адреса это выпадающий список, но на данном этапе сделаю текстовый ввод
 
@@ -43,7 +45,6 @@ const TIMES = [
 
 // type TDeliveryCourierProps = { }
 function DeliveryCourier(/*{ }: TDeliveryCourierProps*/): JSX.Element {
-  const { formaterCurrency, formaterDateWithWeekday } = useFormaters();
   const {
     register,
     formState: { errors, isValid },

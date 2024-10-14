@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Price.scss';
-import { useFormaters } from '../../Context/useFormaters';
+import { formaterCurrency, formaterPercent } from '../../utils/formaters';
 
 type TPriceProps = {
   className?: string;
@@ -16,8 +16,6 @@ function Price({
   discount,
   cheaper = true,
 }: TPriceProps): JSX.Element {
-  const { formaterCurrency, formaterPercent } = useFormaters();
-
   const priceFormated = formaterCurrency(price);
   const oldPriceFormated = oldPrice && formaterCurrency(oldPrice);
   const discountFormated = discount && formaterPercent(discount);

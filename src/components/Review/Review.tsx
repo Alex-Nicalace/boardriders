@@ -1,5 +1,5 @@
-import { useFormaters } from '../../Context/useFormaters';
 import Rating from '../../component-library/Rating';
+import { formaterDate } from '../../utils/formaters';
 import { StarIcon } from '../ui/Icons';
 import './Review.scss';
 type TReviewProps = {
@@ -14,8 +14,6 @@ function Review({
   message,
   dateString,
 }: TReviewProps): JSX.Element {
-  const { formaterDate } = useFormaters();
-
   return (
     <article className="review">
       <header className="review__header">

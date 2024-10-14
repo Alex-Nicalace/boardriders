@@ -3,8 +3,8 @@ import './WareCardCart.scss';
 import { TWareCardCartProps } from './WareCardCart.types';
 import InputNumber from '../InputNumber';
 import { CloseIcon } from '../Icons';
-import { useFormaters } from '../../../Context/useFormaters';
 import { ImageSizes } from '../../../utils/types';
+import { formaterCurrency } from '../../../utils/formaters';
 
 function WareCardCart({
   className = '',
@@ -22,7 +22,6 @@ function WareCardCart({
   onChangeQuantity = () => {},
   onRemove = () => {},
 }: TWareCardCartProps): JSX.Element {
-  const { formaterCurrency } = useFormaters();
   const classes = [
     'ware-card-cart',
     mode === 'mobile' && 'ware-card-cart_mobile',

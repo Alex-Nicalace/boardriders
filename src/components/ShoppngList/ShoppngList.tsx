@@ -1,4 +1,4 @@
-import { useFormaters } from '../../Context/useFormaters';
+import { formaterCurrency } from '../../utils/formaters';
 import './ShoppngList.scss';
 
 type TDataItem = {
@@ -23,7 +23,6 @@ function ShoppngList<T extends TDataItem>({
   render = (item) => item.name,
   limitListCount = 5,
 }: TShoppngListProps<T>): JSX.Element {
-  const { formaterCurrency } = useFormaters();
   const firstElementsData = data.slice(0, limitListCount);
   const lastElementsCount = data.length - firstElementsData.length;
   const totalPrice = data.reduce((acc, item) => acc + (item.price || 0), 0);

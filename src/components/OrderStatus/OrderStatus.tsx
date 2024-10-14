@@ -1,5 +1,5 @@
-import { useFormaters } from '../../Context/useFormaters';
 import { EOrderState } from '../../types';
+import { formaterCurrency } from '../../utils/formaters';
 import OrderStateHint from '../OrderStateHint';
 import './OrderStatus.scss';
 
@@ -22,8 +22,6 @@ function OrderStatus({
   isPaid,
   mode = 'normal',
 }: TOrderStatusProps): JSX.Element {
-  const { formaterCurrency } = useFormaters();
-
   return (
     <div
       className={[

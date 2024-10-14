@@ -2,8 +2,8 @@ import './ShoppingCart.scss';
 import StepNumber from '../StepNumber';
 import Button from '../ui/Button';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
-import { useFormaters } from '../../Context/useFormaters';
 import { getDeclension } from '../../utils/getDeclension';
+import { formaterCurrency, formaterDecimal } from '../../utils/formaters';
 
 type TShoppingСartProps = {
   className?: string;
@@ -26,7 +26,6 @@ function ShoppingCart({
   points,
 }: TShoppingСartProps): JSX.Element {
   const { isLessMobile } = useScreenWidth();
-  const { formaterCurrency, formaterDecimal } = useFormaters();
   const isCanPay = dataSteps.every(({ isDone }) => isDone);
 
   return (

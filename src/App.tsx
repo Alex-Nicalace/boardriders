@@ -7,7 +7,6 @@ import CatalogPage from './pages/CatalogPage';
 import ScreenWidthProvider from './Context/ScreenWidthContext';
 import ProductPage from './pages/ProductPage';
 import CheckOutPage from './pages/CheckOutPage';
-import FormatersProvider from './Context/FormatersContext';
 import AccountPage from './pages/AccountPage';
 import FavouritesPage from './pages/FavouritesPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -92,9 +91,7 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false} />
         <GenderInitializer />
         <ScreenWidthProvider>
-          <FormatersProvider>
-            <RouterProvider router={router} />
-          </FormatersProvider>
+          <RouterProvider router={router} />
         </ScreenWidthProvider>
       </QueryClientProvider>
 

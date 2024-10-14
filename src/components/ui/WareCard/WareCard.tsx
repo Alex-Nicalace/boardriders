@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import './WareCard.scss';
-import { useFormaters } from '../../../Context/useFormaters';
 import { IWareCardProps } from './WareCard.types';
 import { ImageSizes } from '../../../utils/types';
 import ButtonWishList from '../../../features/wishList/ButtonWishList';
+import { formaterCurrency, formaterPercent } from '../../../utils/formaters';
 
 function WareCard({
   data,
@@ -19,7 +19,6 @@ function WareCard({
     images,
     id: wareId,
   } = data;
-  const { formaterCurrency, formaterPercent } = useFormaters();
   const to = `/product/${wareId}`;
   const [imgMainUrl, imgSecondUrl] = (images || [])
     .filter((url) => url !== null)

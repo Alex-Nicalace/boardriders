@@ -1,5 +1,5 @@
+import { formaterDateWithWeekday } from '../../utils/formaters';
 import './DeliveryCourierData.scss';
-import { useFormaters } from '../../Context/useFormaters';
 
 type TDeliveryCourierDataProps = {
   street: string;
@@ -19,7 +19,6 @@ function DeliveryCourierData({
   dateDelivery,
   timeDelivery,
 }: TDeliveryCourierDataProps): JSX.Element {
-  const { formaterDateWithWeekday } = useFormaters();
   const address = [
     street,
     building,

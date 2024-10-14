@@ -1,4 +1,4 @@
-import { useFormaters } from '../../Context/useFormaters';
+import { formaterDateShort } from '../../utils/formaters';
 import './PersonalInfo.scss';
 
 enum SEX {
@@ -24,8 +24,6 @@ function PersonalInfo({
   email,
   password,
 }: TPersonalInfoProps): JSX.Element {
-  const { formaterDateShort } = useFormaters();
-
   return (
     <div className={['personal-info', className].filter(Boolean).join(' ')}>
       {fullName && <p>{fullName}</p>}
