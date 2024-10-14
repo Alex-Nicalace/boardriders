@@ -3,22 +3,11 @@ import MakeOrderStep from '../MakeOrderStep';
 import PaymentOption from '../PaymentOption';
 import DeliveryOptionContainer from '../../features/delivery/DeliveryOptionContainer';
 import ContactOption from '../ContactOption';
-import DeliveryCourierData from '../DeliveryCourierData';
 import ContactBuyerData from '../ContactBuyerData';
+import DeliveryData from '../../features/delivery/DeliveryData';
 
 const ELEMENTS = [
-  [
-    <DeliveryOptionContainer />,
-    <DeliveryCourierData
-      street="ул. Ленина"
-      building="д. 1"
-      dateDelivery={new Date()}
-      timeDelivery="10:00"
-      apartment="1"
-      entrance="1"
-      floor="2"
-    />,
-  ],
+  [<DeliveryOptionContainer />, <DeliveryData />],
   [<PaymentOption />, <PaymentOption />],
   [
     <ContactOption />,
