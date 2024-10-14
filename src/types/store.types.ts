@@ -15,5 +15,56 @@ export type TDeliveryRegion = {
   id: number;
 };
 
+type TCommonDataStep = {
+  nameStep: string;
+  isDone: boolean;
+};
+
+type TDeliveryShopOut = {};
+
+type TDeliveryShopIn = {};
+
+type TDeliveryCourier = {
+  street: string;
+  building: string;
+  apartment: string;
+  entrance: string;
+  floor: string;
+  date: string;
+  time: string;
+};
+
+type TDeliveryPoint = {};
+
+export type TDeliveryMethod =
+  | 'get-in-shop'
+  | 'delivery-in-shop'
+  | 'courier'
+  | 'pick-up-point'
+  | null;
+
+export type TDeliveryData = {
+  regionDeliveryId: number | null;
+  deliveryMethod: TDeliveryMethod;
+  'get-in-shop'?: TDeliveryShopOut;
+  'delivery-in-shop'?: TDeliveryShopIn;
+  courier?: TDeliveryCourier;
+  'pick-up-point'?: TDeliveryPoint;
+};
+
+export type TDelivery = TCommonDataStep & TDeliveryData;
+
+type TPayment = TCommonDataStep & {
+  paymentMethod: 'cash' | 'card' | null;
+};
+
+type TContacts = TCommonDataStep & {
+  name: string;
+  phone: string;
+  email: string;
+  comment: string;
+  isSubscribed: boolean;
+};
+export type TMakingOrderState = [TDelivery, TPayment, TContacts];
 export type TRootState = ReturnType<typeof store.getState>;
 export type TAppDispatch = typeof store.dispatch;

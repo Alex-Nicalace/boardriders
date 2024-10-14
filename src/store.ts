@@ -2,7 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import wishListReducer from './features/wishList/wishListSlise'; // импорт редьюсера
 import genderReducer from './features/gender/genderSlice';
 import cartReducer from './features/cart/cartSlice';
-import deliveryRegionReducer from './features/deliveryRegion/deliveryRegionSlice';
+import deliveryRegionReducer from './features/delivery/deliveryRegionSlice';
+import makeOrderReducer from './features/makeOrder/makeOrderSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     gender: genderReducer,
     cart: cartReducer,
     deliveryRegion: deliveryRegionReducer,
+    makeOrder: makeOrderReducer,
   },
 });
 
