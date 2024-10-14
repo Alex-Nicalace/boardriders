@@ -33,6 +33,7 @@ function Select(props: TSelectProps): JSX.Element {
     tabIndex = 0,
     animationOptions = {},
     fullWidth,
+    onBlur,
   } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [valueInner, setValueInner] = useState<string | string[] | undefined>(
@@ -184,14 +185,15 @@ function Select(props: TSelectProps): JSX.Element {
         <div
           ref={selectWrapperRef}
           className="select__wrapper"
-          onClick={handleTriggerClick}
           tabIndex={tabIndex}
-          onKeyDown={handleTriggerKeyDown}
           role="button"
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           aria-controls={isOpen ? 'list-options' : undefined}
           aria-label={name}
+          onClick={handleTriggerClick}
+          onKeyDown={handleTriggerKeyDown}
+          onBlur={onBlur}
         >
           <div className="select__selected">{getDisplay()}</div>
           <div className="select__icon">{iconSelect}</div>

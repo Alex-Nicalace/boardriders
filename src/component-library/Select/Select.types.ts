@@ -59,6 +59,7 @@ export type TCommonSelectProps = {
     duration?: number;
   };
   fullWidth?: boolean;
+  onBlur?: (e: React.FocusEvent<HTMLDivElement, Element>) => void;
 };
 
 export type TSelectProps = (
