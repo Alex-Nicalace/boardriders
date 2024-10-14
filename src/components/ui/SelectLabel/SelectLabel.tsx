@@ -1,13 +1,9 @@
 import { useId } from 'react';
 import './SelectLabel.scss';
-import Select, { TSelectProps } from '../../../component-library/Select';
+import Select from '../../../component-library/Select';
 import { SelectIcon } from '../Icons';
+import { TSelectLabelProps } from './SelectLabel.types';
 
-type TSelectLabelProps = TSelectProps & {
-  label?: React.ReactNode;
-  isGrayLabel?: boolean;
-  labelPosition?: 'top' | 'left';
-};
 function SelectLabel({
   children,
   label,
@@ -26,6 +22,7 @@ function SelectLabel({
         props.fullWidth && 'select-label_full-width',
         isGrayLabel && 'select-label_label_gray',
         `select-label_position-label_${labelPosition}`,
+        (props.isError || props.error) && 'select-label_error',
         className,
       ]
         .filter(Boolean)
@@ -44,6 +41,7 @@ function SelectLabel({
       >
         {children}
       </Select>
+      {props.error && <p className="select-label__error">{props.error}</p>}
     </div>
   );
 }
