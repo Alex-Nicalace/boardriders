@@ -7,10 +7,6 @@
     justify-content: space-between;
     flex-wrap: wrap;
     @include adaptiveValue('row-gap', 25, 10);
-
-    &:not(:last-child) {
-      @include adaptiveValue('margin-bottom', 25, 20);
-    }
   }
   // .payment-option__item
   &__item {
@@ -34,8 +30,16 @@
   // .payment-option__pay-card
   &__pay-card {
   }
+  &__error {
+    margin-top: rem(5);
+    color: var(--red);
+    @extend %body-2;
+  }
   &__btn {
     width: percent(408, 836);
+    &:not(:first-child) {
+      @include adaptiveValue('margin-top', 25, 20);
+    }
 
     @include mobile-d {
       width: auto;
