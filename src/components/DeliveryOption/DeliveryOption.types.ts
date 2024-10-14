@@ -13,4 +13,5 @@ export type TDeliveryForm = TDeliveryData;
 export type TDeliveryOptionProps = {
   deliveryRegionList: { id: number; name: string }[];
   onSubmit?: (data: TDeliveryForm) => void;
+  defaultValues?: TDeliveryForm;
 };

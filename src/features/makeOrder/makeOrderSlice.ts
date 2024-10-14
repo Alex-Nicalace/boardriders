@@ -1,5 +1,10 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TDeliveryData, TMakingOrderState, TRootState } from '../../types';
+import {
+  TDeliveryData,
+  TMakingOrderState,
+  TOrderStepType,
+  TRootState,
+} from '../../types';
 
 const initialState: TMakingOrderState = [
   {
@@ -31,11 +36,14 @@ const makeOrder = createSlice({
     setOrderFirstStep(state, action: PayloadAction<TDeliveryData>) {
       state[0] = { ...state[0], ...action.payload, isDone: true };
     },
+    setStepNotDone(state, action: PayloadAction<number>) {
+      state[action.payload].isDone = false;
+    },
   },
 });
 
 // экспорт action creator
-export const { setOrderFirstStep } = makeOrder.actions;
+export const { setOrderFirstStep, setStepNotDone } = makeOrder.actions;
 
 // экспорт редьюсера
 export default makeOrder.reducer;
@@ -49,3 +57,11 @@ export const getMakeOrderSteps = createSelector(getMakeOrder, (state) =>
     disabled: index !== 0 && !item.isDone && !array[index - 1].isDone,
   }))
 );
+
+export const getOrderDataOnStep = <Index extends keyof TMakingOrderState>(
+  stepNum: Index
+) =>
+  createSelector(
+    getMakeOrder,
+    (state) => state[stepNum] as TOrderStepType<Index>
+  ); // Приводим к конкретному типу);

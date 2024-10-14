@@ -51,8 +51,9 @@ const WAY_DELIVERY: TWayDelivery[] = [
 function DeliveryOption({
   deliveryRegionList,
   onSubmit = () => {},
+  defaultValues,
 }: TDeliveryOptionProps): JSX.Element {
-  const formMethods = useForm<TDeliveryForm>();
+  const formMethods = useForm<TDeliveryForm>({ defaultValues });
   const { handleSubmit, register, watch } = formMethods;
   const selectedDeliveryMethod = watch('deliveryMethod');
 

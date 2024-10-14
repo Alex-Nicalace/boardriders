@@ -1,14 +1,20 @@
 import DeliveryOption, { TDeliveryForm } from '../../components/DeliveryOption';
 import ErrorMessage from '../../components/ErrorMessage';
 import Spinner from '../../components/Spinner';
-import { useAppDispatch } from '../../hooks/reduxHooks';
-import { setOrderFirstStep } from '../makeOrder/makeOrderSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import {
+  getOrderDataOnStep,
+  setOrderFirstStep,
+} from '../makeOrder/makeOrderSlice';
+import { getDeliveryRegionId } from './deliveryRegionSlice';
 import { useDeliveryRegionList } from './useDeliveryRegionList';
 
 // type TDeliveryOptionContainerProps = { }
 function DeliveryOptionContainer(/*{ }: TDeliveryOptionContainerProps*/): JSX.Element {
   const { deliveryRegionList, isLoading, error } = useDeliveryRegionList();
   const dispatch = useAppDispatch();
+  const deliveryData = useAppSelector(getOrderDataOnStep(0));
+  const regionDeliveryId = useAppSelector(getDeliveryRegionId); // взять по умолчанию регион из шапки
 
   if (isLoading) return <Spinner />;
 
@@ -21,6 +27,10 @@ function DeliveryOptionContainer(/*{ }: TDeliveryOptionContainerProps*/): JSX.El
   return (
     <DeliveryOption
       deliveryRegionList={deliveryRegionList || []}
+      defaultValues={{
+        ...deliveryData,
+        ...(!deliveryData.regionDeliveryId && { regionDeliveryId }),
+      }}
       onSubmit={handleSubmit}
     />
   );

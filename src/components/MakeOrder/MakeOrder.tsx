@@ -32,8 +32,9 @@ const ELEMENTS = [
 ];
 type TMakeOrderProps = {
   stepsData: { nameStep: string; isDone: boolean; disabled: boolean }[];
+  onChangeStep?: (numStep: number) => void;
 };
-function MakeOrder({ stepsData }: TMakeOrderProps): JSX.Element {
+function MakeOrder({ stepsData, onChangeStep }: TMakeOrderProps): JSX.Element {
   return (
     <ol className="make-order">
       {stepsData.map((item, index) => (
@@ -43,6 +44,7 @@ function MakeOrder({ stepsData }: TMakeOrderProps): JSX.Element {
             name={item.nameStep}
             isDone={item.isDone}
             disabled={item.disabled}
+            onChangeStep={() => onChangeStep?.(index)}
           >
             {ELEMENTS[index][+item.isDone]}
           </MakeOrderStep>

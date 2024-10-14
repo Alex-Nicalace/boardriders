@@ -8,6 +8,7 @@ type TMakeOrderStepProps = {
   disabled?: boolean;
   stepNum: number;
   name: string;
+  onChangeStep?: () => void;
 };
 function MakeOrderStep({
   className,
@@ -16,6 +17,7 @@ function MakeOrderStep({
   disabled,
   stepNum,
   name,
+  onChangeStep,
 }: TMakeOrderStepProps): JSX.Element {
   return (
     <section
@@ -31,7 +33,9 @@ function MakeOrderStep({
         <StepNumber stepNum={stepNum} isDone={isDone} disabled={disabled} />
         <h3 className="make-order-step__title">{name}</h3>
         {isDone && (
-          <button className="make-order-step__btn-edit">Изменить</button>
+          <button className="make-order-step__btn-edit" onClick={onChangeStep}>
+            Изменить
+          </button>
         )}
       </header>
       {!disabled && <div className="make-order-step__content">{children}</div>}
