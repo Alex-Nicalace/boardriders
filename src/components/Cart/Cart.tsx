@@ -1,11 +1,11 @@
 import { useId } from 'react';
 import './Cart.scss';
 import CartListContainer from '../../features/cart/CartListContainer';
-import MakeOrder from '../MakeOrder';
 import { ArrowRightClassic } from '../ui/Icons';
 import InputStyled from '../ui/InputStyled';
 import { TCartProps } from './Cart.types';
 import ShoppingCartContainer from '../../features/cart/ShoppingCartContainer';
+import MakeOrderContainer from '../../features/makeOrder/MakeOrderContainer';
 
 function Cart({ className }: TCartProps): JSX.Element {
   const id = useId();
@@ -32,7 +32,7 @@ function Cart({ className }: TCartProps): JSX.Element {
           />
         </div>
         <h2 className="cart__title">Оформление заказа</h2>
-        <MakeOrder />
+        <MakeOrderContainer />
       </div>
       <div className="cart__steps">
         <ShoppingCartContainer />
