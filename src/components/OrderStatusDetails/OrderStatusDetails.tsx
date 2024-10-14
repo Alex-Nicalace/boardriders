@@ -21,9 +21,12 @@ const SHIPPING_DETAILS_DATA = [
 
 const CART_DATA = [
   {
-    title: 'Сноуборд GNU Asym Carbon Credit Btx Multicolor',
-    img: '/src/assets/img/ware-card-cart/01.png',
-    article: '19SN003',
+    id: 1,
+    productId: 8,
+    name: 'Сноуборд GNU Asym Carbon Credit Btx Multicolor',
+    imageUrl: '/src/assets/img/ware-card-cart/01.png',
+    manufacturerSKU: '19SN003',
+    quantity: 1,
     props: [
       {
         name: 'Цвет',
@@ -37,9 +40,12 @@ const CART_DATA = [
     price: 1290,
   },
   {
-    title: 'Сноуборд GNU Asym Carbon Credit Btx Multicolor',
-    img: '/src/assets/img/ware-card-cart/01.png',
-    article: '19SN003_2',
+    id: 2,
+    productId: 9,
+    name: 'Сноуборд GNU Asym Carbon Credit Btx Multicolor',
+    imageUrl: '/src/assets/img/ware-card-cart/01.png',
+    manufacturerSKU: '19SN003_2',
+    quantity: 1,
     props: [
       {
         name: 'Цвет',
@@ -73,8 +79,10 @@ function OrderStatusDetails({
       />
       <CartList
         className="order-status-details__orders"
-        cartData={CART_DATA}
+        data={CART_DATA}
         isOrdered
+        quantityTotal={2}
+        priceTotal={1290}
       />
     </div>
   );

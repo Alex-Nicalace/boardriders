@@ -47,8 +47,7 @@ const PATH = '/src/assets/img/products-new/';
 const PRODUCTS_DATA: TupleIWareData3 = [
   {
     id: 1,
-    imgMainUrl: PATH + '01.png',
-    imgSecondUrl: PATH + '01-hover.png',
+    images: [PATH + '01.png', PATH + '01-hover.png'],
     name: 'LIB TECH',
     description: 'Мужской Сноуборд',
     price: 34392,
@@ -57,18 +56,16 @@ const PRODUCTS_DATA: TupleIWareData3 = [
   },
   {
     id: 2,
-    imgMainUrl: PATH + '02.png',
-    imgSecondUrl: PATH + '02-hover.png',
+    images: [PATH + '02.png', PATH + '02-hover.png'],
     name: 'LIB TECH',
     description: 'Мужской Сноуборд',
     price: 34392,
     oldPrice: 17392,
-    discount: -50,
+    discount: 0.5,
   },
   {
     id: 3,
-    imgMainUrl: PATH + '03.png',
-    imgSecondUrl: PATH + '03-hover.png',
+    images: [PATH + '03.png', PATH + '03-hover.png'],
     name: 'LIB TECH',
     description: 'Мужской Сноуборд',
     price: 34392,
