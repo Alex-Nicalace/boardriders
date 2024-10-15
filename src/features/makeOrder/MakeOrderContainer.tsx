@@ -11,7 +11,7 @@ function MakeOrderContainer(/*{ }: TMakeOrderContainerProps*/): JSX.Element {
     dispatch(setStepNotDone(stepNum));
   }
 
-  return <MakeOrder stepsData={stepsData} onChangeStep={handleChangeStep} />;
+  return <MakeOrder stepsData={stepsData} editOnStep={handleChangeStep} />;
 }
 
 export default MakeOrderContainer;
