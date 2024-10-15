@@ -62,14 +62,18 @@ export type TPaymentData = {
 
 type TPayment = TCommonDataStep & TPaymentData;
 
-type TContacts = TCommonDataStep & {
+export type TContactsData = {
   name: string;
   phone: string;
   email: string;
   comment: string;
   isSubscribed: boolean;
 };
+
+type TContacts = TCommonDataStep & TContactsData;
+
 export type TMakingOrderState = [TDelivery, TPayment, TContacts];
+
 export type TRootState = ReturnType<typeof store.getState>;
 export type TAppDispatch = typeof store.dispatch;
 

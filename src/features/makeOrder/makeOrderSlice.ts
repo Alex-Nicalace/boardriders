@@ -1,5 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
+  TContactsData,
   TDeliveryData,
   TMakingOrderState,
   TOrderStepType,
@@ -67,6 +68,13 @@ const makeOrder = createSlice({
         donedNameStep,
       };
     },
+    setOrderThreeStep(state, action: PayloadAction<TContactsData>) {
+      state[2] = {
+        ...state[2],
+        ...action.payload,
+        isDone: true,
+      };
+    },
     setStepNotDone(state, action: PayloadAction<number>) {
       state[action.payload].isDone = false;
     },
@@ -74,8 +82,12 @@ const makeOrder = createSlice({
 });
 
 // экспорт action creator
-export const { setOrderFirstStep, setOrderTwoStep, setStepNotDone } =
-  makeOrder.actions;
+export const {
+  setOrderFirstStep,
+  setOrderTwoStep,
+  setOrderThreeStep,
+  setStepNotDone,
+} = makeOrder.actions;
 
 // экспорт редьюсера
 export default makeOrder.reducer;
