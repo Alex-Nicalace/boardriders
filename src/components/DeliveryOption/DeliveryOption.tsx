@@ -3,50 +3,9 @@ import './DeliveryOption.scss';
 import { ExclamationInCircleIcon } from '../ui/Icons';
 import RadioBox from '../ui/RadioBox';
 import SelectLabel, { SelectLabelControl } from '../ui/SelectLabel';
-import DeliveryCourier from '../DeliveryCourier';
-import Notification from '../Notification';
 import { MSG_REQUIRED } from '../FormAuth/constants';
-import {
-  TDeliveryOptionProps,
-  TDeliveryForm,
-  TWayDelivery,
-} from './DeliveryOption.types';
-
-const NotAvailable = ({ message }: { message: string }) => (
-  <Notification
-    className="delivery-option__notification"
-    text={`Способ доставки «${message}» недоступен 🙄`}
-  />
-);
-const WAY_DELIVERY: TWayDelivery[] = [
-  {
-    title: 'Забрать в магазине сегодня',
-    price: 'Бесплатно',
-    hint: 'Зарезервируем товар, который сейчас на полках. Заказ храним 1 день',
-    content: <NotAvailable message="Забрать в магазине сегодня" />,
-    value: 'get-in-shop',
-  },
-  {
-    title: 'Доставить в магазин',
-    hint: 'Привезем товар в удобный вам магазин через несколько дней. Заказ храним 5 дней',
-    disabled: true,
-    content: <NotAvailable message="Доставить в магазин" />,
-    value: 'delivery-in-shop',
-  },
-  {
-    title: 'Курьером сегодня и позже',
-    price: 'от 0 ₽',
-    hint: 'Доставим по указанному адресу',
-    content: <DeliveryCourier />,
-    value: 'courier',
-  },
-  {
-    title: 'Пункт выдачи',
-    hint: 'Забрать товар в одном из пунктов выдачи',
-    content: <NotAvailable message="Пункт выдачи" />,
-    value: 'pick-up-point',
-  },
-];
+import { TDeliveryOptionProps, TDeliveryForm } from './DeliveryOption.types';
+import { WAY_DELIVERY } from './wayDeliveryConfig';
 
 function DeliveryOption({
   deliveryRegionList,

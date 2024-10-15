@@ -2,6 +2,7 @@ import { TDeliveryData, TDeliveryMethod } from '../../types';
 
 export type TWayDelivery = {
   title: string;
+  donedTitle?: string;
   price?: string;
   hint: string;
   content: JSX.Element;
