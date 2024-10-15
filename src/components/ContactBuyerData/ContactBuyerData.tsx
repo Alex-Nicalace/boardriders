@@ -16,12 +16,14 @@ function ContactBuyerData({
       <p className="contact-buyer-data__name">{name}</p>
       <p className="contact-buyer-data__phone">{phone}</p>
       <p className="contact-buyer-data__email">{email}</p>
-      <p className="contact-buyer-data__comment">
-        <span className="contact-buyer-data__comment-title">
-          Комментарий к заказу
-        </span>
-        <span className="contact-buyer-data__comment-text">{comment}</span>
-      </p>
+      {comment && (
+        <p className="contact-buyer-data__comment">
+          <span className="contact-buyer-data__comment-title">
+            Комментарий к заказу
+          </span>
+          <span className="contact-buyer-data__comment-text">{comment}</span>
+        </p>
+      )}
     </div>
   );
 }
