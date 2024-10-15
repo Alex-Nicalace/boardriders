@@ -22,6 +22,7 @@ function Cart({ className }: TCartProps): JSX.Element {
             label={<InputStyled.LabelBonus />}
             placeholder="Введите номер карты"
             hint="Номер на обратной стороне карты"
+            disabled // пока под это дело не реализлвано, но решил, что в верстке пускай будет
           />
           <InputStyled
             className="cart__input-promo"
@@ -29,6 +30,7 @@ function Cart({ className }: TCartProps): JSX.Element {
             label={<InputStyled.LabelDiscount />}
             placeholder="Введите промо код"
             buttonContent={<ArrowRightClassic />}
+            disabled // пока под это дело не реализлвано, но решил, что в верстке пускай будет
           />
         </div>
         <h2 className="cart__title">Оформление заказа</h2>
