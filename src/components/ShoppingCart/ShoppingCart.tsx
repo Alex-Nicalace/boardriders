@@ -9,8 +9,7 @@ type TShoppingСartProps = {
   className?: string;
   countItems: number;
   dataSteps: {
-    stepNum: number;
-    name: string;
+    nameStep: string;
     value?: string;
     disabled?: boolean;
     isDone?: boolean;
@@ -45,7 +44,7 @@ function ShoppingCart({
       </div>
 
       <ol className="shopping-cart__list">
-        {dataSteps.map(({ stepNum, name, value, disabled, isDone }) => (
+        {dataSteps.map(({ nameStep, value, disabled, isDone }, index) => (
           <li
             className={[
               'shopping-cart__item',
@@ -53,15 +52,15 @@ function ShoppingCart({
             ]
               .filter(Boolean)
               .join(' ')}
-            key={stepNum}
+            key={nameStep}
           >
             <StepNumber
               className="shopping-cart__step"
-              stepNum={stepNum}
+              stepNum={index + 1}
               disabled={disabled}
               isDone={isDone}
             />
-            <span className="shopping-cart__name-item">{name}</span>
+            <span className="shopping-cart__name-item">{nameStep}</span>
             {value && (
               <span className="shopping-cart__value-item">{value}</span>
             )}

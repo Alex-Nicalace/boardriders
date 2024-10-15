@@ -1,26 +1,7 @@
 import ShoppingCart from '../../components/ShoppingCart';
+import { useAppSelector } from '../../hooks/reduxHooks';
+import { getMakeOrderSteps } from '../makeOrder/makeOrderSlice';
 import { useCart } from './useCart';
-
-const CART_STEPS = [
-  {
-    stepNum: 1,
-    name: 'Доставка',
-    value: 'Бесплатно',
-    // isDone: true,
-  },
-  {
-    stepNum: 2,
-    name: 'Оплата',
-    disabled: true,
-    // isDone: true,
-  },
-  {
-    stepNum: 3,
-    name: 'Контакты',
-    disabled: true,
-    // isDone: true,
-  },
-];
 
 // Логика начисления баллов
 const calculatePoints = (totalPrice: number): number => {
@@ -33,11 +14,13 @@ function ShoppingCartContainer({
   className,
 }: TShoppingCartContainerProps): JSX.Element {
   const { priceTotal, quantityTotal } = useCart(false);
+  const orderSteps = useAppSelector(getMakeOrderSteps);
+
   return (
     <ShoppingCart
       className={className}
       countItems={quantityTotal}
-      dataSteps={CART_STEPS}
+      dataSteps={orderSteps}
       totalPrice={priceTotal}
       points={calculatePoints(priceTotal)}
     />
