@@ -1,3 +1,4 @@
+import { getMakeOrderSteps } from '../features/makeOrder/makeOrderSlice';
 import store from '../store';
 
 export type TWishListState = {
@@ -18,6 +19,7 @@ export type TDeliveryRegion = {
 type TCommonDataStep = {
   nameStep: string;
   isDone: boolean;
+  donedNameStep: string;
 };
 
 type TDeliveryShopOut = {};
@@ -54,9 +56,11 @@ export type TDeliveryData = {
 
 export type TDelivery = TCommonDataStep & TDeliveryData;
 
-type TPayment = TCommonDataStep & {
+export type TPaymentData = {
   paymentMethod: 'cash' | 'card' | null;
 };
+
+type TPayment = TCommonDataStep & TPaymentData;
 
 type TContacts = TCommonDataStep & {
   name: string;
@@ -72,3 +76,7 @@ export type TAppDispatch = typeof store.dispatch;
 // Дженерик для получения типа элемента по индексу
 export type TOrderStepType<Index extends keyof TMakingOrderState> =
   TMakingOrderState[Index];
+
+export type TGetMakeOrderStepsReturn = ReturnType<
+  typeof getMakeOrderSteps
+>[number];
