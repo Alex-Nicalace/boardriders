@@ -100,6 +100,10 @@
 
 [tuple.ts](./src/utils/types/tuple.ts) - самописная утилита для создания кортежа произвольной длины
 
+[registerMask.ts](.src/utils/registerMask/registerMask.ts) - Возвращает объект обработчиков событий для input, которые преобразуют вводимый текст в соответствии с маской.
+
+[loadFromLocalStorage.ts](.src/utils/loadFromLocalStorage.ts) - Возвращает данные из localStorage по ключу key
+
 ## Object Intl - перевод и форматирование текста на разных языках
 
 ### Intl.NumberFormat
