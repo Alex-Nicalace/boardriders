@@ -1,6 +1,9 @@
 import { getMakeOrderSteps } from '../features/makeOrder/makeOrderSlice';
 import store from '../store';
 
+export type TRootState = ReturnType<typeof store.getState>;
+export type TAppDispatch = typeof store.dispatch;
+
 export type TWishListState = {
   wishList: number[];
 };
@@ -73,9 +76,6 @@ export type TContactsData = {
 type TContacts = TCommonDataStep & TContactsData;
 
 export type TMakingOrderState = [TDelivery, TPayment, TContacts];
-
-export type TRootState = ReturnType<typeof store.getState>;
-export type TAppDispatch = typeof store.dispatch;
 
 // Дженерик для получения типа элемента по индексу
 export type TOrderStepType<Index extends keyof TMakingOrderState> =

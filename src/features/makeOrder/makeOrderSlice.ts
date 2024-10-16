@@ -9,6 +9,7 @@ import {
 } from '../../types';
 import { WAY_DELIVERY } from '../../components/DeliveryOption';
 import { PAYMENT_METHOD } from '../../components/PaymentOption';
+import { loadFromLocalStorage } from '../../utils/loadFromLocalStorage';
 
 const initialState: TMakingOrderState = [
   {
@@ -111,3 +112,10 @@ export const getOrderDataOnStep = <Index extends keyof TMakingOrderState>(
     getMakeOrder,
     (state) => state[stepNum] as TOrderStepType<Index>
   ); // Приводим к конкретному типу);
+
+export function restoreMakingOrderFromLocalStorage() {
+  const makingOrder: TMakingOrderState =
+    loadFromLocalStorage('makingOrder') ?? initialState;
+
+  return makingOrder;
+}
