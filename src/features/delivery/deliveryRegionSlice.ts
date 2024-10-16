@@ -3,7 +3,7 @@ import { TDeliveryRegion, TRootState } from '../../types';
 import { loadFromLocalStorage } from '../../utils/loadFromLocalStorage';
 
 const initialState: TDeliveryRegion = {
-  id: loadFromLocalStorage('deliveryRegion') ?? 1,
+  id: 1,
 };
 
 const deliveryRegionSlice = createSlice({
@@ -25,3 +25,8 @@ export default deliveryRegionSlice.reducer;
 // экспорт селекторов
 export const getDeliveryRegionId = (state: TRootState) =>
   state.deliveryRegion.id;
+
+export function restoreDeliveryRegionFromLocalStorage() {
+  const deliveryRegion: number = loadFromLocalStorage('deliveryRegion') ?? 1;
+  return { id: deliveryRegion };
+}

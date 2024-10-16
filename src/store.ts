@@ -1,8 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import wishListReducer from './features/wishList/wishListSlise'; // импорт редьюсера
-import genderReducer from './features/gender/genderSlice';
-import cartReducer from './features/cart/cartSlice';
-import deliveryRegionReducer from './features/delivery/deliveryRegionSlice';
+import wishListReducer, {
+  restoreWishListLocalStorage,
+} from './features/wishList/wishListSlise'; // импорт редьюсера
+import genderReducer, {
+  restoreGenderFromLocalStorage,
+} from './features/gender/genderSlice';
+import cartReducer, {
+  restoreCartFromLocalStorage,
+} from './features/cart/cartSlice';
+import deliveryRegionReducer, {
+  restoreDeliveryRegionFromLocalStorage,
+} from './features/delivery/deliveryRegionSlice';
 import makeOrderReducer from './features/makeOrder/makeOrderSlice';
 
 const store = configureStore({
@@ -12,6 +20,12 @@ const store = configureStore({
     cart: cartReducer,
     deliveryRegion: deliveryRegionReducer,
     makeOrder: makeOrderReducer,
+  },
+  preloadedState: {
+    cart: restoreCartFromLocalStorage(),
+    deliveryRegion: restoreDeliveryRegionFromLocalStorage(),
+    gender: restoreGenderFromLocalStorage(),
+    wishList: restoreWishListLocalStorage(),
   },
 });
 

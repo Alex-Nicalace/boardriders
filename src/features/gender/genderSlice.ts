@@ -3,7 +3,7 @@ import { TRootState } from '../../types';
 import { loadFromLocalStorage } from '../../utils/loadFromLocalStorage';
 
 const initialState = {
-  gender: loadFromLocalStorage<string>('categoryGender') ?? '',
+  gender: '',
 };
 
 const genderSlice = createSlice({
@@ -24,3 +24,8 @@ export default genderSlice.reducer;
 
 // экспорт селекторов
 export const getGender = (state: TRootState) => state.gender.gender;
+
+export function restoreGenderFromLocalStorage() {
+  const gender = loadFromLocalStorage<string>('categoryGender') ?? '';
+  return { gender };
+}

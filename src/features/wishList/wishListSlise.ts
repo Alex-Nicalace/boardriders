@@ -3,7 +3,7 @@ import { TRootState, TWishListState } from '../../types';
 import { loadFromLocalStorage } from '../../utils/loadFromLocalStorage';
 
 const initialState: TWishListState = {
-  wishList: loadFromLocalStorage('wishList') ?? ([] as number[]),
+  wishList: [],
 };
 
 const wishListSlice = createSlice({
@@ -53,3 +53,9 @@ export default wishListSlice.reducer;
 
 // экспорт селекторов
 export const getWishList = (state: TRootState) => state.wishList.wishList;
+
+export function restoreWishListLocalStorage() {
+  const wishList = loadFromLocalStorage<number[]>('wishList') ?? [];
+
+  return { wishList };
+}

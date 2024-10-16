@@ -7,12 +7,9 @@ function countTotalQuantity(cart: TCartItem[]) {
   return Object.values(cart).reduce((acc, item) => acc + item.count, 0);
 }
 
-const initialCart: TCartItem[] = loadFromLocalStorage('cart') ?? [];
-const initialTotalQuantity = countTotalQuantity(initialCart);
-
 const initialState: TCartState = {
-  cart: initialCart,
-  totalQuantity: initialTotalQuantity,
+  cart: [],
+  totalQuantity: 0,
 };
 
 const cartSlice = createSlice({
@@ -157,3 +154,10 @@ export const getCartMapping = createSelector(getCartData, (cart) =>
     return acc;
   }, {} as Record<number, TCartItem>)
 );
+
+export function restoreCartFromLocalStorage() {
+  const cart: TCartItem[] = loadFromLocalStorage('cart') ?? [];
+  const totalQuantity = countTotalQuantity(cart);
+
+  return { cart, totalQuantity };
+}
