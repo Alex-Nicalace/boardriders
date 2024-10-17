@@ -1,6 +1,6 @@
-import { omit } from '../../utils/omit';
 import supabase from '../supabase';
 import { Database } from '../supabase.types';
+import { transformCartData } from '../helpers/transformCartData';
 
 export async function getProductVariants(productVariantsIds: number[]) {
   const { data, error } = await supabase.rpc('getProductVatiants', {
@@ -13,7 +13,7 @@ export async function getProductVariants(productVariantsIds: number[]) {
   }
 
   const dataMapping = data.reduce((acc, item) => {
-    acc[item.id] = item;
+    acc[item.productVariantId] = item;
     return acc;
   }, {} as Record<number, Database['public']['Functions']['getProductVatiants']['Returns'][number]>);
 
@@ -22,23 +22,7 @@ export async function getProductVariants(productVariantsIds: number[]) {
     .map((id) => dataMapping[id])
     .filter(Boolean);
 
-  const products = dataSorted.map((item) => ({
-    ...omit(item, ['colorId', 'sizeId', 'color', 'size']),
-    props: [
-      {
-        name: 'color',
-        value: item.color,
-        id: item.colorId,
-        nameDisplay: 'Цвет',
-      },
-      {
-        name: 'size',
-        value: item.size,
-        id: item.sizeId,
-        nameDisplay: 'Размер',
-      },
-    ].filter(Boolean),
-  }));
+  const products = transformCartData(dataSorted);
 
   return products;
 }
