@@ -7,6 +7,31 @@ export type Json =
   | Json[];
 
 export type Database = {
+  graphql_public: {
+    Tables: {
+      [_ in never]: never;
+    };
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      graphql: {
+        Args: {
+          operationName?: string;
+          query?: string;
+          variables?: Json;
+          extensions?: Json;
+        };
+        Returns: Json;
+      };
+    };
+    Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
+      [_ in never]: never;
+    };
+  };
   public: {
     Tables: {
       brands: {
@@ -64,13 +89,6 @@ export type Database = {
             columns: ['productVariantId'];
             isOneToOne: false;
             referencedRelation: 'productVariants';
-            referencedColumns: ['id'];
-          },
-          {
-            foreignKeyName: 'cart_userId_fkey';
-            columns: ['userId'];
-            isOneToOne: false;
-            referencedRelation: 'users';
             referencedColumns: ['id'];
           },
           {
@@ -194,13 +212,6 @@ export type Database = {
             columns: ['productId'];
             isOneToOne: false;
             referencedRelation: 'products';
-            referencedColumns: ['id'];
-          },
-          {
-            foreignKeyName: 'favorites_userid_fkey';
-            columns: ['userId'];
-            isOneToOne: false;
-            referencedRelation: 'users';
             referencedColumns: ['id'];
           },
           {
@@ -398,13 +409,6 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'users';
             referencedColumns: ['id'];
-          },
-          {
-            foreignKeyName: 'productSales_userId_fkey';
-            columns: ['userId'];
-            isOneToOne: false;
-            referencedRelation: 'users';
-            referencedColumns: ['id'];
           }
         ];
       };
@@ -571,13 +575,6 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'users';
             referencedColumns: ['id'];
-          },
-          {
-            foreignKeyName: 'reviews_userid_fkey';
-            columns: ['userId'];
-            isOneToOne: false;
-            referencedRelation: 'users';
-            referencedColumns: ['id'];
           }
         ];
       };
@@ -734,6 +731,25 @@ export type Database = {
           countProduct: number;
         }[];
       };
+      getCartProducts: {
+        Args: {
+          userUUID?: string;
+        };
+        Returns: {
+          cartId: number;
+          productVariantId: number;
+          quantity: number;
+          productId: number;
+          colorId: number;
+          sizeId: number;
+          name: string;
+          color: string;
+          size: string;
+          manufacturerSKU: string;
+          price: number;
+          imageUrl: string;
+        }[];
+      };
       getMainMenu: {
         Args: {
           categoryGender: string;
@@ -758,7 +774,7 @@ export type Database = {
           productVariantsIds: number[];
         };
         Returns: {
-          id: number;
+          productVariantId: number;
           productId: number;
           colorId: number;
           sizeId: number;
@@ -860,4 +876,19 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema['Enums']
   ? PublicSchema['Enums'][PublicEnumNameOrOptions]
+  : never;
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema['CompositeTypes']
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database;
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes']
+    : never = never
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes'][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema['CompositeTypes']
+  ? PublicSchema['CompositeTypes'][PublicCompositeTypeNameOrOptions]
   : never;
