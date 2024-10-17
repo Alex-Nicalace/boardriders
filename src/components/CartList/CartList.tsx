@@ -51,22 +51,24 @@ function CartList({
       <ul className="cart-list__list">
         <TransitionGroup>
           {data.map((product) => (
-            <Transition key={product.id} timeout={animateDuration}>
+            <Transition
+              key={product.productVariantId}
+              timeout={animateDuration}
+            >
               {(state) => (
                 <li
                   className={['cart-list__item', TRANSITION_STYLES[state]]
                     .filter(Boolean)
                     .join(' ')}
-                  key={product.id}
                 >
                   <WareCardCart
                     data={product}
                     mode={isLessMobile ? 'mobile' : 'desktop'}
                     isOrdered={isOrdered}
                     onChangeQuantity={(quantity) =>
-                      onChangeQuantity?.(product.id, quantity)
+                      onChangeQuantity?.(product.productVariantId, quantity)
                     }
-                    onRemove={() => onRemove?.(product.id)}
+                    onRemove={() => onRemove?.(product.productVariantId)}
                   />
                 </li>
               )}
@@ -78,7 +80,7 @@ function CartList({
       {!isOrdered && (
         <div className="cart-list__total">
           <span className="cart-list__total-text">
-            {`${quantityTotal} ${getDeclension(
+            {`${getDeclension(
               quantityTotal,
               'товар',
               'товара',

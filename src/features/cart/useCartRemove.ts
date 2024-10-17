@@ -12,7 +12,7 @@ export function useCartRemove() {
     mutationFn: (id: number) => {
       dispatch(removeCartAction(id));
       queryClient.setQueryData(['cart'], (cartListOld: TCartList) =>
-        cartListOld.filter((cartItem) => cartItem.id !== id)
+        cartListOld.filter((cartItem) => cartItem.productVariantId !== id)
       );
       return Promise.resolve();
     },

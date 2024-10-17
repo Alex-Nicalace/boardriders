@@ -21,7 +21,7 @@ const SHIPPING_DETAILS_DATA = [
 
 const CART_DATA = [
   {
-    id: 1,
+    productVariantId: 1,
     productId: 8,
     name: 'Сноуборд GNU Asym Carbon Credit Btx Multicolor',
     imageUrl: '/src/assets/img/ware-card-cart/01.png',
@@ -40,7 +40,7 @@ const CART_DATA = [
     price: 1290,
   },
   {
-    id: 2,
+    productVariantId: 2,
     productId: 9,
     name: 'Сноуборд GNU Asym Carbon Credit Btx Multicolor',
     imageUrl: '/src/assets/img/ware-card-cart/01.png',

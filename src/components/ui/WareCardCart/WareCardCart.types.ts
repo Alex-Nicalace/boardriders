@@ -1,5 +1,6 @@
 export type TWareCardCartData = {
-  id: number;
+  cartId?: number;
+  productVariantId: number;
   productId: number;
   name: string;
   imageUrl: string;
