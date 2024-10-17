@@ -34,12 +34,7 @@ function ShoppingCart({
           <span className="shopping-cart__label">Проверка заказа:</span>
         )}
         <span>
-          {`${countItems} ${getDeclension(
-            countItems,
-            'товар',
-            'товара',
-            'товаров'
-          )}`}
+          {`${getDeclension(countItems, 'товар', 'товара', 'товаров')}`}
         </span>
       </div>
 
