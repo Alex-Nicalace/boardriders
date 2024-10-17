@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TDeliveryRegion, TRootState } from '../../types';
+import { TDeliveryRegionState, TRootState } from '../../types';
 import { loadFromLocalStorage } from '../../utils/loadFromLocalStorage';
 
-const initialState: TDeliveryRegion = {
+const initialState: TDeliveryRegionState = {
   id: 1,
 };
 

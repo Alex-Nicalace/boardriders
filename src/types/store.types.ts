@@ -4,6 +4,18 @@ import store from '../store';
 export type TRootState = ReturnType<typeof store.getState>;
 export type TAppDispatch = typeof store.dispatch;
 
+/* TRootStateManual зачем, если есть TRootState. Потребность в ручном типе возникла
+когда начал использовать middleware в configureStore. Если использовал тип TRootState
+то происходило зацикливание.
+*/
+export type TRootStateManual = {
+  cart: TCartState;
+  wishList: TWishListState;
+  gender: TGenderState;
+  deliveryRegion: TDeliveryRegionState;
+  makeOrder: TMakingOrderState;
+};
+
 export type TWishListState = {
   wishList: number[];
 };
@@ -15,8 +27,12 @@ export type TCartState = {
   totalQuantity: number;
 };
 
-export type TDeliveryRegion = {
+export type TDeliveryRegionState = {
   id: number;
+};
+
+export type TGenderState = {
+  gender: string;
 };
 
 type TCommonDataStep = {

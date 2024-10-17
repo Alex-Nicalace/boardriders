@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TRootState } from '../../types';
+import { TGenderState, TRootState } from '../../types';
 import { loadFromLocalStorage } from '../../utils/loadFromLocalStorage';
 
-const initialState = {
+const initialState: TGenderState = {
   gender: '',
 };
 
