@@ -3,42 +3,42 @@ import { getProductVariants } from '../../services/apiProducts';
 import { useAppSelector } from '../../hooks/reduxHooks';
 import { getCartIds, getCartMapping } from './cartSlice';
 import { useUser } from '../authentication/useUser';
-import { getCartProducts } from '../../services/apiCart/getCartProducts';
-import { TCartItem } from './cart.types';
+import { getCartProducts } from '../../services/apiCart';
 
 export function useCart(enabled = true) {
   const productVariantIds = useAppSelector(getCartIds);
   const cartMapping = useAppSelector(getCartMapping);
   const { isAuthenticated } = useUser();
 
-  /**
-   * Получение товаров и сопоставление с количеством
-   */
-  const getCartFromLocalStorage = async () => {
-    const data = await getProductVariants(productVariantIds);
-    return data.map((product) => {
-      return {
-        ...product,
-        quantity: cartMapping[product.productVariantId].count,
-      };
-    });
-  };
-
-  /**
-   * Получение товаров из удлаленной корзины или из локального хранилища
-   */
-  const queryFn: () => Promise<TCartItem[]> = async () =>
-    isAuthenticated ? getCartProducts() : getCartFromLocalStorage();
+  const {
+    data: productsNotAuth,
+    isLoading: isLoadingNotAuth,
+    error: errorNotAuth,
+  } = useQuery({
+    queryKey: ['cart', 'notAuthenticated'],
+    queryFn: () => getProductVariants(productVariantIds),
+    enabled: enabled && !isAuthenticated,
+  });
 
   const {
-    data: products,
-    isLoading,
-    error,
+    data: productsAuth,
+    isLoading: isLoadingAuth,
+    error: errorAuth,
   } = useQuery({
-    queryKey: ['cart', isAuthenticated],
-    queryFn,
-    enabled,
+    queryKey: ['cart', 'authenticated'],
+    queryFn: getCartProducts,
+    enabled: enabled && isAuthenticated,
   });
+
+  const isLoading = isAuthenticated ? isLoadingAuth : isLoadingNotAuth;
+  const error = isAuthenticated ? errorAuth : errorNotAuth;
+
+  const products = isAuthenticated
+    ? productsAuth
+    : productsNotAuth?.map((product) => ({
+        ...product,
+        quantity: cartMapping[product.productVariantId].count,
+      }));
 
   const { quantityTotal, priceTotal } = products?.reduce(
     (acc, item) => ({

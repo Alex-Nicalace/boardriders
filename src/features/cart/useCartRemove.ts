@@ -1,19 +1,25 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { removeCart as removeCartAction } from './cartSlice';
 import { TCartList } from './cart.types';
-import toast from 'react-hot-toast';
+import { useUser } from '../authentication/useUser';
 
 export function useCartRemove() {
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
+  const { isAuthenticated } = useUser();
 
   const { isPending: isDeleting, mutate: removeCart } = useMutation({
     mutationFn: (id: number) => {
-      dispatch(removeCartAction(id));
-      queryClient.setQueryData(['cart'], (cartListOld: TCartList) =>
-        cartListOld.filter((cartItem) => cartItem.productVariantId !== id)
-      );
+      if (!isAuthenticated) {
+        dispatch(removeCartAction(id));
+        queryClient.setQueryData(
+          ['cart', 'notAuthenticated'],
+          (cartListOld: TCartList) =>
+            cartListOld.filter((cartItem) => cartItem.productVariantId !== id)
+        );
+      }
       return Promise.resolve();
     },
     onSuccess: () => {

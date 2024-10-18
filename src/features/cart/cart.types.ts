@@ -1,10 +1,3 @@
-import { getCartProducts } from '../../services/apiCart/getCartProducts';
+import { getCartProducts } from '../../services/apiCart';
 
 export type TCartList = Awaited<ReturnType<typeof getCartProducts>>;
-
-export type TCartItem = Omit<
-  Awaited<ReturnType<typeof getCartProducts>>[number],
-  'cartId'
-> & {
-  cartId?: number;
-};
