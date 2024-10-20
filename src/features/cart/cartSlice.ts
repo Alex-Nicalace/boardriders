@@ -30,6 +30,18 @@ const cartSlice = createSlice({
         state.totalQuantity = countTotalQuantity(state.cart);
       }
     },
+    addOrEditCart(state, action: PayloadAction<TCartItem>) {
+      const { productVariantId, ...rest } = action.payload;
+      const index = state.cart.findIndex(
+        (item) => item.productVariantId === productVariantId
+      );
+      if (index === -1) {
+        state.cart.push({ productVariantId, ...rest });
+      } else {
+        state.cart[index] = { productVariantId, ...rest };
+      }
+      state.totalQuantity = countTotalQuantity(state.cart);
+    },
     addCart(
       state,
       action: PayloadAction<Omit<TCartItem, 'count'> & { count?: number }>
@@ -106,7 +118,9 @@ export const {
   clearCart,
   incProductCount,
   decProductCount,
+  addOrEditCart,
 } = cartSlice.actions;
+
 export const addCartWithToast =
   ({ productVariantId, count }: { productVariantId: number; count?: number }) =>
   async (dispatch: TAppDispatch) => {
