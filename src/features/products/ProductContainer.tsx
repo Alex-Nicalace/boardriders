@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import toast from 'react-hot-toast';
 import Empty from '../../components/Empty';
 import Product from '../../components/Product';
 import Spinner from '../../components/Spinner';
@@ -7,16 +7,18 @@ import { useProduct } from './useProduct';
 import { omit } from '../../utils/omit';
 import { useEffect } from 'react';
 import { useProductImages } from '../productImages/useProductImages';
-import { addCartWithToast, isProductInCart } from '../cart/cartSlice';
+import { useUpsertCart } from '../cart/useUpsertCart';
+import { useCartIncludesItem } from '../cart/useCartIncludesItem';
 
 type TProductContainerProps = {
   className?: string;
 };
 function ProductContainer({ className }: TProductContainerProps): JSX.Element {
-  const dispatch = useAppDispatch();
   const { product, isLoading: isLoadingProduct } = useProduct();
   const { productImages, isLoading: isLoadingProductImages } =
     useProductImages();
+
+  const { isUpserting, upsertCart } = useUpsertCart();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedColor = searchParams.get('color');
@@ -34,9 +36,7 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
       color?.colorId === selectedColorId && size?.sizeId === selectedSizeId
   )?.productVariantId;
 
-  const isInCart = useAppSelector(
-    isProductInCart(selecetedProductVariantId ?? 0)
-  );
+  const { isInCart } = useCartIncludesItem(selecetedProductVariantId ?? -1);
 
   useEffect(
     function setValidParam() {
@@ -137,7 +137,14 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
 
   function handleAddToCart(productVariantId: number | undefined | null) {
     if (!productVariantId) return;
-    dispatch(addCartWithToast({ productVariantId }));
+    upsertCart(
+      { productVariantId },
+      {
+        onSuccess() {
+          toast.success('Товар добавлен в корзину');
+        },
+      }
+    );
   }
 
   return (
@@ -146,7 +153,7 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
       data={data}
       selectedColor={selectedColor}
       selectedSize={selectedSize}
-      disabled={!selecetedProductVariantId}
+      disabled={!selecetedProductVariantId || isUpserting}
       isInCart={isInCart}
       onColorChange={(value) => handleChange('color', value)}
       onSizeChange={(value) => handleChange('size', value)}
