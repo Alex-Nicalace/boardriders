@@ -19,10 +19,10 @@ function ShoppingCartContainer({
   return (
     <ShoppingCart
       className={className}
-      countItems={quantityTotal}
+      countItems={quantityTotal || 0}
       dataSteps={orderSteps}
-      totalPrice={priceTotal}
-      points={calculatePoints(priceTotal)}
+      totalPrice={priceTotal || 0}
+      points={calculatePoints(priceTotal || 0)}
     />
   );
 }

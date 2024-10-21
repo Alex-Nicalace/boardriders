@@ -15,7 +15,7 @@ export function useCartRemove() {
       if (!isAuthenticated) {
         dispatch(removeCartAction(id));
         queryClient.setQueryData(
-          ['cart', 'notAuthenticated'],
+          ['cart', 'notAuth'],
           (cartListOld: TCartList) =>
             cartListOld.filter((cartItem) => cartItem.productVariantId !== id)
         );

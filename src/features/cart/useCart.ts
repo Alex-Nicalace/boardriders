@@ -5,6 +5,22 @@ import { getCartIds, getCartMapping } from './cartSlice';
 import { useUser } from '../authentication/useUser';
 import { getCartProducts } from '../../services/apiCart';
 
+function getCartSummary<T extends { quantity: number; price: number }>(
+  products: T[]
+) {
+  const { quantityTotal, priceTotal } = products.reduce(
+    (acc, item) => ({
+      quantityTotal: acc.quantityTotal + item.quantity,
+      priceTotal: acc.priceTotal + item.price * item.quantity,
+    }),
+    {
+      quantityTotal: 0,
+      priceTotal: 0,
+    }
+  );
+  return { products, quantityTotal, priceTotal };
+}
+
 export function useCart(enabled = true) {
   const productVariantIds = useAppSelector(getCartIds);
   const cartMapping = useAppSelector(getCartMapping);
@@ -15,7 +31,7 @@ export function useCart(enabled = true) {
     isLoading: isLoadingNotAuth,
     error: errorNotAuth,
   } = useQuery({
-    queryKey: ['cart', 'notAuthenticated'],
+    queryKey: ['cart', 'notAuth'],
     queryFn: () => getProductVariants(productVariantIds),
     enabled: enabled && !isAuthenticated,
   });
@@ -25,31 +41,27 @@ export function useCart(enabled = true) {
     isLoading: isLoadingAuth,
     error: errorAuth,
   } = useQuery({
-    queryKey: ['cart', 'authenticated'],
+    queryKey: ['cart', 'auth'],
     queryFn: getCartProducts,
+    // select - функция для обработки полученных данных. Хороша тем, что она запускается
+    // каждый раз при изменении данных
+    select: getCartSummary,
     enabled: enabled && isAuthenticated,
   });
 
   const isLoading = isAuthenticated ? isLoadingAuth : isLoadingNotAuth;
   const error = isAuthenticated ? errorAuth : errorNotAuth;
 
-  const products = isAuthenticated
+  const cartSummary = isAuthenticated
     ? productsAuth
-    : productsNotAuth?.map((product) => ({
-        ...product,
-        quantity: cartMapping[product.productVariantId].count,
-      }));
+    : // getCartSummary не нужно переносить в select, так как он вызывается только при изменении данных'
+      // возвращенных queryFn и т.о. не будет обрабатываться изменения в cartMapping
+      getCartSummary(
+        productsNotAuth?.map((product) => ({
+          ...product,
+          quantity: cartMapping[product.productVariantId].count,
+        })) ?? []
+      );
 
-  const { quantityTotal, priceTotal } = products?.reduce(
-    (acc, item) => ({
-      quantityTotal: acc.quantityTotal + item.quantity,
-      priceTotal: acc.priceTotal + item.price * item.quantity,
-    }),
-    {
-      quantityTotal: 0,
-      priceTotal: 0,
-    }
-  ) ?? { quantityTotal: 0, priceTotal: 0 };
-
-  return { products, isLoading, error, quantityTotal, priceTotal };
+  return { ...cartSummary, isLoading, error };
 }

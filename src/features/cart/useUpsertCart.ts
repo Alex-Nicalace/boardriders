@@ -5,6 +5,7 @@ import { useUser } from '../authentication/useUser';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { addOrEditCart } from './cartSlice';
 import { upsertCart as upsertCartApi } from '../../services/apiCart';
+import { TCartList } from './cart.types';
 
 export function useUpsertCart() {
   const queryClient = useQueryClient();
@@ -41,13 +42,23 @@ export function useUpsertCart() {
 
       return upsertCartApi({ productVariantId, quantity, userId });
     },
-    onSuccess: (_, { productVariantId }) => {
+    onSuccess: ({ productVariantId, quantity }) => {
       // в случае успеха обновляем кеш. invalidateQueries делает кэш не действительным, что обновляет кеш
       queryClient.invalidateQueries({ queryKey: ['totalItemsCart'] });
-      queryClient.invalidateQueries({ queryKey: ['cart'] });
       queryClient.invalidateQueries({
         queryKey: ['cartIncludesItem', productVariantId],
       });
+      // * обновляю кэш только для авторизированных пользователей
+      // * для неавторизированных количесво отражает глобальное сосотояние поэтому и так обновляется
+      if (isAuthenticated) {
+        queryClient.setQueryData(['cart', 'auth'], (cartListOld: TCartList) =>
+          cartListOld.map((cartItem) =>
+            cartItem.productVariantId === productVariantId
+              ? { ...cartItem, quantity }
+              : cartItem
+          )
+        );
+      }
     },
     onError: (err) => {
       console.error(err);
