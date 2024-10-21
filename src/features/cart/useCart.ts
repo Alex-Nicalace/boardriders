@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getProductVariants } from '../../services/apiProducts';
 import { useAppSelector } from '../../hooks/reduxHooks';
@@ -33,6 +34,16 @@ export function useCart(enabled = true) {
   } = useQuery({
     queryKey: ['cart', 'notAuth'],
     queryFn: () => getProductVariants(productVariantIds),
+    select: useCallback(
+      <T extends { productVariantId: number; price: number }>(data: T[]) =>
+        getCartSummary(
+          data.map((product) => ({
+            ...product,
+            quantity: cartMapping[product.productVariantId]?.count,
+          }))
+        ),
+      [cartMapping]
+    ),
     enabled: enabled && !isAuthenticated,
   });
 
@@ -51,17 +62,7 @@ export function useCart(enabled = true) {
 
   const isLoading = isAuthenticated ? isLoadingAuth : isLoadingNotAuth;
   const error = isAuthenticated ? errorAuth : errorNotAuth;
-
-  const cartSummary = isAuthenticated
-    ? productsAuth
-    : // getCartSummary не нужно переносить в select, так как он вызывается только при изменении данных'
-      // возвращенных queryFn и т.о. не будет обрабатываться изменения в cartMapping
-      getCartSummary(
-        productsNotAuth?.map((product) => ({
-          ...product,
-          quantity: cartMapping[product.productVariantId].count,
-        })) ?? []
-      );
+  const cartSummary = isAuthenticated ? productsAuth : productsNotAuth;
 
   return { ...cartSummary, isLoading, error };
 }
