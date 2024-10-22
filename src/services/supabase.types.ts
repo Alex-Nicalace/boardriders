@@ -223,6 +223,105 @@ export type Database = {
           }
         ];
       };
+      orderItems: {
+        Row: {
+          createdAt: string;
+          id: number;
+          orderId: number;
+          productVariantId: number;
+          quantity: number;
+          userId: string;
+        };
+        Insert: {
+          createdAt?: string;
+          id?: number;
+          orderId: number;
+          productVariantId: number;
+          quantity: number;
+          userId: string;
+        };
+        Update: {
+          createdAt?: string;
+          id?: number;
+          orderId?: number;
+          productVariantId?: number;
+          quantity?: number;
+          userId?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'orderItems_orderId_fkey';
+            columns: ['orderId'];
+            isOneToOne: false;
+            referencedRelation: 'orders';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'orderItems_productVariantId_fkey';
+            columns: ['productVariantId'];
+            isOneToOne: false;
+            referencedRelation: 'productVariants';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'orderItems_userId_fkey';
+            columns: ['userId'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      orders: {
+        Row: {
+          comment: string | null;
+          contactEmail: string;
+          contactName: string;
+          contactPhone: string;
+          createdAt: string;
+          deliveryData: Json;
+          deliveryMethod: string;
+          id: number;
+          payMethod: string;
+          status: string;
+          userId: string | null;
+        };
+        Insert: {
+          comment?: string | null;
+          contactEmail: string;
+          contactName: string;
+          contactPhone: string;
+          createdAt?: string;
+          deliveryData: Json;
+          deliveryMethod: string;
+          id?: number;
+          payMethod: string;
+          status: string;
+          userId?: string | null;
+        };
+        Update: {
+          comment?: string | null;
+          contactEmail?: string;
+          contactName?: string;
+          contactPhone?: string;
+          createdAt?: string;
+          deliveryData?: Json;
+          deliveryMethod?: string;
+          id?: number;
+          payMethod?: string;
+          status?: string;
+          userId?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'orders_userId_fkey';
+            columns: ['userId'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
       productAttributes: {
         Row: {
           id: number;
@@ -656,6 +755,22 @@ export type Database = {
       };
     };
     Functions: {
+      createOrder: {
+        Args: {
+          user_id: string;
+          deliveryMethod: string;
+          deliveryData: Json;
+          payMethod: string;
+          contactName: string;
+          contactPhone: string;
+          contactEmail: string;
+          comment: string;
+        };
+        Returns: {
+          id: number;
+          createdAt: string;
+        }[];
+      };
       getAvailableBrands: {
         Args: {
           categoriesList: string[];
