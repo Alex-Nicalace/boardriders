@@ -79,6 +79,9 @@ const makeOrder = createSlice({
     setStepNotDone(state, action: PayloadAction<number>) {
       state[action.payload].isDone = false;
     },
+    resetOrder(state) {
+      initialState.forEach((item, index) => (state[index] = item));
+    },
   },
 });
 
@@ -88,6 +91,7 @@ export const {
   setOrderTwoStep,
   setOrderThreeStep,
   setStepNotDone,
+  resetOrder,
 } = makeOrder.actions;
 
 // экспорт редьюсера
