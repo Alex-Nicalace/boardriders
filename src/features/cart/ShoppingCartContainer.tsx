@@ -1,6 +1,12 @@
+import toast from 'react-hot-toast';
 import ShoppingCart from '../../components/ShoppingCart';
 import { useAppSelector } from '../../hooks/reduxHooks';
-import { getMakeOrderSteps } from '../makeOrder/makeOrderSlice';
+import { useUser } from '../authentication/useUser';
+import {
+  getMakeOrderSteps,
+  getOrderDataOnStep,
+} from '../makeOrder/makeOrderSlice';
+import { useCreateOrder } from '../makeOrder/useCreateOrder';
 import { useCart } from './useCart';
 
 // Логика начисления баллов
@@ -15,6 +21,34 @@ function ShoppingCartContainer({
 }: TShoppingCartContainerProps): JSX.Element {
   const { priceTotal, quantityTotal } = useCart(false);
   const orderSteps = useAppSelector(getMakeOrderSteps);
+  const deliveryData = useAppSelector(getOrderDataOnStep(0));
+  const paymentData = useAppSelector(getOrderDataOnStep(1));
+  const contactsData = useAppSelector(getOrderDataOnStep(2));
+  const { user } = useUser();
+  const { isCreating, createOrder } = useCreateOrder();
+  const isCanPay = orderSteps.every(({ isDone }) => isDone);
+  const { id: userId } = user || {};
+
+  function handleCreateOrder() {
+    if (!userId) return;
+
+    const deliveryMethod = deliveryData.deliveryMethod;
+    if (!deliveryMethod || !paymentData.paymentMethod) {
+      toast.error('Не удалось создать заказ, т.к. нет необходимых данных!');
+      return;
+    }
+
+    createOrder({
+      user_id: userId,
+      deliveryMethod,
+      deliveryData: JSON.stringify(deliveryData[deliveryMethod]),
+      payMethod: paymentData.paymentMethod,
+      contactName: contactsData.name,
+      contactPhone: contactsData.phone,
+      contactEmail: contactsData.email,
+      comment: contactsData.comment,
+    });
+  }
 
   return (
     <ShoppingCart
@@ -23,6 +57,8 @@ function ShoppingCartContainer({
       dataSteps={orderSteps}
       totalPrice={priceTotal || 0}
       points={calculatePoints(priceTotal || 0)}
+      disabled={!isCanPay || isCreating}
+      onCreateOrder={handleCreateOrder}
     />
   );
 }

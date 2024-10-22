@@ -16,6 +16,8 @@ type TShoppingСartProps = {
   }[];
   totalPrice: number;
   points: number;
+  disabled?: boolean;
+  onCreateOrder?: () => void;
 };
 function ShoppingCart({
   className,
@@ -23,9 +25,10 @@ function ShoppingCart({
   dataSteps,
   totalPrice,
   points,
+  disabled,
+  onCreateOrder,
 }: TShoppingСartProps): JSX.Element {
   const { isLessMobile } = useScreenWidth();
-  const isCanPay = dataSteps.every(({ isDone }) => isDone);
 
   return (
     <div className={['shopping-cart', className].filter(Boolean).join(' ')}>
@@ -85,8 +88,9 @@ function ShoppingCart({
           variant="contained"
           color="secondary"
           nameColor="green"
-          disabled={!isCanPay}
+          disabled={disabled}
           fullWidth
+          onClick={onCreateOrder}
         >
           Оформить заказ
         </Button>
