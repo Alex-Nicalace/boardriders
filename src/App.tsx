@@ -16,6 +16,7 @@ import store from './store';
 import ProtectedRoute from './components/ProtectedRoute';
 import ErrorMessage from './components/ErrorMessage';
 import GenderInitializer from './features/gender/GenderInitializer';
+import OrderPlaced from './components/OrderPlaced';
 
 // Создание клиента
 const queryClient = new QueryClient({
@@ -60,10 +61,6 @@ const router = createBrowserRouter([
             element: <ProductPage />,
           },
           {
-            path: 'cart',
-            element: <CheckOutPage />,
-          },
-          {
             path: 'wishlist',
             element: <FavouritesPage />,
           },
@@ -76,6 +73,33 @@ const router = createBrowserRouter([
                 element: <AccountPage />,
               },
             ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: '/cart',
+    element: <AppLayout useHeaderCart />,
+    errorElement: <ErrorMessage isGoBack isHeightScreen />,
+    children: [
+      {
+        errorElement: <ErrorMessage />,
+        children: [
+          {
+            index: true,
+            element: <CheckOutPage />,
+          },
+          {
+            path: 'order-placed',
+            element: (
+              <OrderPlaced
+                numOrder={1}
+                email={'email'}
+                phone={'phone'}
+                comment={'comment'}
+              />
+            ),
           },
         ],
       },
