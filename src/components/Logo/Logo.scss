@@ -1,0 +1,9 @@
+@import '/src/styles/global-scss.scss';
+
+.logo {
+  // .logo__img
+  &__img {
+    @include adaptiveValue('width', 243, 150);
+    height: auto;
+  }
+}
