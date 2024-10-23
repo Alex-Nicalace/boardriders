@@ -1,10 +1,8 @@
-import { Link } from 'react-router-dom';
-
 import './MidbarHeader.scss';
-import logo from '../../../assets/icons/logo.png';
 import { useScreenWidth } from '../../../Context/useScreenWidthContext';
 import ToolbarHeader from './ToolbarHeader';
 import GenderCategoryNavContainer from '../../../features/categories/GenderCategoryNavContainer';
+import Logo from '../../Logo';
 
 type TMidbarHeaderProps = {
   className?: string;
@@ -20,15 +18,8 @@ function MidbarHeader({ className }: TMidbarHeaderProps): JSX.Element {
 
           {isLessTablet && <ToolbarHeader buttons={['burger', 'search']} />}
 
-          <Link to="/" className="midbar-header__logo">
-            <img
-              src={logo}
-              alt="Логотип бренда Boardriders"
-              className="midbar-header__logo-img"
-              width={242}
-              height={50}
-            />
-          </Link>
+          <Logo className="midbar-header__logo" />
+
           {!isLessTablet ? (
             <ToolbarHeader
               className="midbar-header__right-toolbar"
