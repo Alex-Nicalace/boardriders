@@ -4,8 +4,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import DeliveryRegion from '../../components/Header/DeliveryRegion/DeliveryRegion';
 import toast from 'react-hot-toast';
 
-type TDeliveryRegionContainerProps = { className?: string };
-function DeliveryRegionContainer({ className }: TDeliveryRegionContainerProps) {
+type TDeliveryRegionContainerProps = { className?: string; label?: string };
+function DeliveryRegionContainer({
+  className,
+  label,
+}: TDeliveryRegionContainerProps) {
   const { deliveryRegionList, isLoading, error } = useDeliveryRegionList();
   const currentDeliveryRegionId = useAppSelector(getDeliveryRegionId);
   const dispatch = useAppDispatch();
@@ -28,6 +31,7 @@ function DeliveryRegionContainer({ className }: TDeliveryRegionContainerProps) {
       className={className}
       selected={`${currentDeliveryRegionId}`}
       list={deliveryRegionList}
+      label={label}
       onChange={handleChangeDeliveryRegion}
     />
   );

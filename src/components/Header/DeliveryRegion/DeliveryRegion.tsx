@@ -6,6 +6,7 @@ interface IDeliveryRegionProps {
   className?: string;
   selected: string;
   list: { id: number; name: string }[];
+  label?: string;
   onChange: (id: string) => void;
 }
 
@@ -13,13 +14,14 @@ function DeliveryRegion({
   className,
   selected,
   list,
+  label = 'Ваш регион доставки:',
   onChange,
 }: IDeliveryRegionProps): JSX.Element {
   return (
     <div className={['delivery-region', className].filter(Boolean).join(' ')}>
       <label htmlFor="delivery-region" className="delivery-region__label">
         <LocationIcon className="delivery-region__icon" />
-        <span className="delivery-region__text">Ваш регион доставки:</span>
+        <span className="delivery-region__text">{label}</span>
       </label>
       <Select
         className="delivery-region__select"
