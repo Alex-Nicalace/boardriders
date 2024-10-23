@@ -7,8 +7,10 @@ import LoginOrRegister from '../LoginOrRegister';
 import { useGenderCategories } from '../../features/categories/useGenderCategories';
 import Spinner from '../Spinner';
 import { ScrollToAnchor, ScrollToTop } from '../../component-library/Scroll';
+import HeaderCartContainer from '../../features/authentication/HeaderCartContainer';
 
-function AppLayout(): JSX.Element {
+type TAppLayoutProps = { useHeaderCart?: boolean };
+function AppLayout({ useHeaderCart }: TAppLayoutProps): JSX.Element {
   const { isLoading } = useGenderCategories();
 
   if (isLoading) return <Spinner />;
@@ -17,7 +19,7 @@ function AppLayout(): JSX.Element {
     <Popup>
       <ScrollToTop />
       <ScrollToAnchor />
-      <Header />
+      {useHeaderCart ? <HeaderCartContainer /> : <Header />}
       <Outlet />
       <Footer />
 
