@@ -16,7 +16,7 @@ import store from './store';
 import ProtectedRoute from './components/ProtectedRoute';
 import ErrorMessage from './components/ErrorMessage';
 import GenderInitializer from './features/gender/GenderInitializer';
-import OrderPlaced from './components/OrderPlaced';
+import OrderPlacedContainer from './features/makeOrder/OrderPlacedContainer';
 
 // Создание клиента
 const queryClient = new QueryClient({
@@ -91,15 +91,8 @@ const router = createBrowserRouter([
             element: <CheckOutPage />,
           },
           {
-            path: 'order-placed',
-            element: (
-              <OrderPlaced
-                numOrder={1}
-                email={'email'}
-                phone={'phone'}
-                comment={'comment'}
-              />
-            ),
+            path: 'order-placed/:orderId',
+            element: <OrderPlacedContainer />,
           },
         ],
       },
