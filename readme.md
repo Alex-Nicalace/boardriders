@@ -46,9 +46,9 @@
 
 [Pagination](./src/components/ui/Pagination/Pagination.tsx) - пагинация
 
-[ScrollToTop.tsx](./src/component-library/Scroll/ScrollToTop.tsx) - Компонент, который при каждом изменении пути в URL прокручивает страницу вверх.
+[ScrollToTop.tsx](./src/component-library/Scroll/ScrollToTop.tsx) - Компонент, который при каждом изменении пути в URL прокручивает страницу вверх. Есть готовый компонент из `react-router-dom` — `<ScrollRestoration />`. Когда делал свою реализацию не знал про наличие этого компонента. У `<ScrollRestoration />` есть ограничение на использование - маршрутизатор данных. Так что мой тоже может пригодится.
 
-[ScrollToAnchor.tsx](./src/component-library/Scroll/ScrollToAnchor.tsx) - Компонент, который прокручивает страницу к элементу, указанному в URL по хешу
+[ScrollToAnchor.tsx](./src/component-library/Scroll/ScrollToAnchor.tsx) - Компонент, который прокручивает страницу к элементу, указанному в URL по хешу. Этот функционла есть в готовый компонент из `react-router-dom` — `<ScrollRestoration />`
 
 ## Хуки
 
@@ -117,3 +117,9 @@
 ## react-query
 
 `queryClient.prefetchQuery` - предварительная подгрузка страницы. [useReviews](./src/features/reviews/useReviews.ts)
+
+## Компоненты `react-router-dom`
+
+### ScrollRestoration
+
+`<ScrollRestoration />` — это компонент, отвечающий за управление прокруткой страниц при навигации в приложении. Он сбрасывает позицию при попадании на новый маршрут, восстанавливает позицию прокрутки при возвращении на предыдущие страницы или обновлении приложения, что улучшает пользовательский опыт.

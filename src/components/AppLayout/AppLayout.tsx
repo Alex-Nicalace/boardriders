@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 import Footer from '../Footer';
 import Header from '../Header';
 import Popup from '../../component-library/Popup';
@@ -6,7 +6,6 @@ import ModalWrap from '../ModalWrap';
 import LoginOrRegister from '../LoginOrRegister';
 import { useGenderCategories } from '../../features/categories/useGenderCategories';
 import Spinner from '../Spinner';
-import { ScrollToAnchor, ScrollToTop } from '../../component-library/Scroll';
 import HeaderCartContainer from '../../features/authentication/HeaderCartContainer';
 
 type TAppLayoutProps = { useHeaderCart?: boolean };
@@ -17,8 +16,7 @@ function AppLayout({ useHeaderCart }: TAppLayoutProps): JSX.Element {
 
   return (
     <Popup>
-      <ScrollToTop />
-      <ScrollToAnchor />
+      <ScrollRestoration />
       {useHeaderCart ? <HeaderCartContainer /> : <Header />}
       <Outlet />
       <Footer />
