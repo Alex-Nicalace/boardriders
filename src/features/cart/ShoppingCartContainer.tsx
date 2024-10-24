@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import ShoppingCart from '../../components/ShoppingCart';
 import { useAppSelector } from '../../hooks/reduxHooks';
@@ -19,6 +20,7 @@ type TShoppingCartContainerProps = { className?: string };
 function ShoppingCartContainer({
   className,
 }: TShoppingCartContainerProps): JSX.Element {
+  const navigate = useNavigate();
   const { priceTotal, quantityTotal } = useCart(false);
   const orderSteps = useAppSelector(getMakeOrderSteps);
   const deliveryData = useAppSelector(getOrderDataOnStep(0));
@@ -38,16 +40,23 @@ function ShoppingCartContainer({
       return;
     }
 
-    createOrder({
-      user_id: userId,
-      deliveryMethod,
-      deliveryData: JSON.stringify(deliveryData[deliveryMethod]),
-      payMethod: paymentData.paymentMethod,
-      contactName: contactsData.name,
-      contactPhone: contactsData.phone,
-      contactEmail: contactsData.email,
-      comment: contactsData.comment,
-    });
+    createOrder(
+      {
+        user_id: userId,
+        deliveryMethod,
+        deliveryData: JSON.stringify(deliveryData[deliveryMethod]),
+        payMethod: paymentData.paymentMethod,
+        contactName: contactsData.name,
+        contactPhone: contactsData.phone,
+        contactEmail: contactsData.email,
+        comment: contactsData.comment,
+      },
+      {
+        onSuccess: ({ id }) => {
+          navigate(`/cart/order-placed/${id}`);
+        },
+      }
+    );
   }
 
   return (
