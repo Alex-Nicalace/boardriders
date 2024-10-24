@@ -33,7 +33,7 @@ function CheckboxGroupContainer({
 
     searchParams.delete('page');
 
-    setSearchParams(searchParams);
+    setSearchParams(searchParams, { preventScrollReset: true });
   }
 
   return (

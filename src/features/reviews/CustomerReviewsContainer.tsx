@@ -42,7 +42,7 @@ function CustomerReviewsContainer({
 
   function handlePageChange(page: number) {
     searchParams.set('pageReviews', String(page));
-    setSearchParams(searchParams);
+    setSearchParams(searchParams, { preventScrollReset: true });
   }
 
   return (

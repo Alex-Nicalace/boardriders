@@ -25,7 +25,7 @@ function RangeSelectorContainer({
     searchParams.set('minPrice', newMinPrice.toString());
     searchParams.set('maxPrice', newMaxPrice.toString());
     searchParams.delete('page');
-    setSearchParams(searchParams);
+    setSearchParams(searchParams, { preventScrollReset: true });
   }
 
   useEffect(
@@ -36,7 +36,7 @@ function RangeSelectorContainer({
       if (Number(minPriceSelected) < min || Number(maxPriceSelected) > max) {
         searchParams.delete('minPrice');
         searchParams.delete('maxPrice');
-        setSearchParams(searchParams);
+        setSearchParams(searchParams, { preventScrollReset: true });
       }
     },
     [

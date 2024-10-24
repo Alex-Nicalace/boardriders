@@ -66,7 +66,10 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
         if (size) searchParams.set('size', size);
       }
 
-      setSearchParams(searchParams, { replace: true });
+      setSearchParams(searchParams, {
+        replace: true,
+        preventScrollReset: true,
+      });
     },
     [product, selectedColorId, selectedSizeId, searchParams, setSearchParams]
   );
@@ -132,7 +135,7 @@ function ProductContainer({ className }: TProductContainerProps): JSX.Element {
       }
     }
 
-    setSearchParams(searchParams);
+    setSearchParams(searchParams, { preventScrollReset: true });
   };
 
   function handleAddToCart(productVariantId: number | undefined | null) {
