@@ -4,7 +4,7 @@ import Title from '../ui/Title';
 
 type TOrderPlacedProps = {
   className?: string;
-  numOrder: number;
+  numOrder: string;
   email: string;
   phone: string;
   info?: string;

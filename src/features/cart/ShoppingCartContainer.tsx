@@ -1,14 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import ShoppingCart from '../../components/ShoppingCart';
-import { useAppSelector } from '../../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { useUser } from '../authentication/useUser';
 import {
   getMakeOrderSteps,
   getOrderDataOnStep,
+  resetOrder,
 } from '../makeOrder/makeOrderSlice';
 import { useCreateOrder } from '../makeOrder/useCreateOrder';
 import { useCart } from './useCart';
+import { clearCart } from './cartSlice';
 
 // Логика начисления баллов
 const calculatePoints = (totalPrice: number): number => {
@@ -26,16 +28,27 @@ function ShoppingCartContainer({
   const deliveryData = useAppSelector(getOrderDataOnStep(0));
   const paymentData = useAppSelector(getOrderDataOnStep(1));
   const contactsData = useAppSelector(getOrderDataOnStep(2));
-  const { user } = useUser();
+  const { user, isAuthenticated } = useUser();
+  const dispatch = useAppDispatch();
   const { isCreating, createOrder } = useCreateOrder();
   const isCanPay = orderSteps.every(({ isDone }) => isDone);
   const { id: userId } = user || {};
 
   function handleCreateOrder() {
-    if (!userId) return;
+    if (!isAuthenticated) {
+      navigate('/cart/order-placed', {
+        state: {
+          contactPhone: contactsData.phone,
+          contactEmail: contactsData.email,
+        },
+      });
+      dispatch(resetOrder());
+      dispatch(clearCart());
+      return;
+    }
 
     const deliveryMethod = deliveryData.deliveryMethod;
-    if (!deliveryMethod || !paymentData.paymentMethod) {
+    if (!userId || !deliveryMethod || !paymentData.paymentMethod) {
       toast.error('Не удалось создать заказ, т.к. нет необходимых данных!');
       return;
     }

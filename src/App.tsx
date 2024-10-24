@@ -91,7 +91,7 @@ const router = createBrowserRouter([
             element: <CheckOutPage />,
           },
           {
-            path: 'order-placed/:orderId',
+            path: 'order-placed/:orderId?',
             element: <OrderPlacedContainer />,
           },
         ],
