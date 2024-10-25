@@ -16,6 +16,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: rem(15);
+    flex-wrap: wrap;
 
     &:not(:first-child) {
       margin-top: rem(15);

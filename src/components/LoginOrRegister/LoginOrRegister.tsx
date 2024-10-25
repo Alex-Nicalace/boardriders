@@ -6,6 +6,17 @@ import { TabPanel } from '../../component-library/Tabs';
 import FormLoginContainer from '../../features/authentication/FormLoginContainer';
 import FormRegistrationContainer from '../../features/authentication/FormRegistrationContainer';
 
+const TABS = [
+  {
+    title: 'Вход',
+    Component: FormLoginContainer,
+  },
+  {
+    title: 'Регистрация',
+    Component: FormRegistrationContainer,
+  },
+];
+
 type TLoginOrRegisterProps = {
   className?: string;
   onSuccess?: () => void;
@@ -19,49 +30,18 @@ function LoginOrRegister({
   const { isLessTablet } = useScreenWidth();
   const [activeTab, setActiveTab] = useState(initialTab);
 
-  const panels = [
-    <FormLoginContainer
-      key={0}
-      className="login-or-register__form"
-      withTitle
-      onSuccessLogin={onSuccess}
-    />,
-    <FormRegistrationContainer
-      key={1}
-      className="login-or-register__form"
-      withTitle
-      onSuccessRegister={onSuccess}
-    />,
-  ];
-
-  const tabs = [
-    {
-      title: 'Вход',
-      element: (
-        <FormLoginContainer
-          key={0}
-          className="login-or-register__form"
-          onSuccessLogin={onSuccess}
-        />
-      ),
-    },
-    {
-      title: 'Регистрация',
-      element: (
-        <FormRegistrationContainer
-          key={1}
-          className="login-or-register__form"
-          onSuccessRegister={onSuccess}
-        />
-      ),
-    },
-  ];
-
   return (
     <div className={['login-or-register', className].filter(Boolean).join(' ')}>
       {!isLessTablet && (
         <div className="login-or-register__forms">
-          {panels.map((element) => element)}
+          {TABS.map(({ Component, title }) => (
+            <Component
+              key={title}
+              className="login-or-register__form"
+              withTitle
+              onSuccessLogin={onSuccess}
+            />
+          ))}
         </div>
       )}
       {isLessTablet && (
@@ -72,13 +52,13 @@ function LoginOrRegister({
             onChange={setActiveTab}
             variant="second"
           >
-            {tabs.map(({ title }) => (
+            {TABS.map(({ title }) => (
               <TabsBlock.Tab key={title} label={title} />
             ))}
           </TabsBlock>
-          {tabs.map(({ element, title }, index) => (
+          {TABS.map(({ Component, title }, index) => (
             <TabPanel key={title} index={index} value={activeTab}>
-              {element}
+              <Component onSuccessLogin={onSuccess} />
             </TabPanel>
           ))}
         </div>
