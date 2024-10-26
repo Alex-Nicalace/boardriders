@@ -5,7 +5,7 @@ import Pagination from '../../components/ui/Pagination';
 import ProductList from '../../components/ProductList';
 import Title from '../../components/ui/Title';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
-import { useWishList } from '../../features/wishList/useWishList';
+import { useWishListProducts } from '../../features/wishList/useWishListProducts';
 import './FavouritesPage.scss';
 import Spinner from '../../components/Spinner';
 import Empty from '../../components/Empty';
@@ -15,7 +15,8 @@ import ErrorMessage from '../../components/ErrorMessage';
 function FavouritesPage(/*{ }: TFavouritesPageProps*/): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
   const { isLessMobileSmall } = useScreenWidth();
-  const { products, isLoading, totalPages, pageNum, error } = useWishList();
+  const { products, isLoading, totalPages, pageNum, error } =
+    useWishListProducts();
 
   function handlePageChange(page: number) {
     searchParams.set('page', String(page));

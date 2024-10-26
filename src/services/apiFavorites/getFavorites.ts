@@ -14,7 +14,8 @@ export async function getFavorites() {
     throw new Error('Favorites could not be loaded');
   }
 
-  const favoritesIds = new Set(favorites.map((favorite) => favorite.productId));
+  // const favoritesIds = new Set(favorites.map((favorite) => favorite.productId));
+  const productIds = favorites.map((favorite) => favorite.productId);
 
-  return { favorites, favoritesIds, count };
+  return { productIds, count };
 }

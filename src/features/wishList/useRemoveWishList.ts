@@ -4,21 +4,32 @@ import toast from 'react-hot-toast';
 import { removeWishList as removeWishListAction } from './wishListSlise';
 import { TWishList } from './wishList.types';
 import { useSortByPage } from '../../hooks/useSortByPage';
+import { useUser } from '../authentication/useUser';
+import { deleteFavorites } from '../../services/apiFavorites';
+import { Tables } from '../../services/supabase.types';
 
-export function useWishListRemove() {
+export function useRemoveWishList() {
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
   const { sortBy, pageNum } = useSortByPage();
+  const { isAuthenticated } = useUser();
 
   const { isPending: isDeleting, mutate: removeWishList } = useMutation({
-    mutationFn: (id: number) => {
-      dispatch(removeWishListAction(id));
+    mutationFn: (productId: number): Promise<Partial<Tables<'favorites'>>> => {
+      if (!isAuthenticated) {
+        dispatch(removeWishListAction(productId));
+        return Promise.resolve({ productId });
+      }
+
+      return deleteFavorites(productId);
+    },
+    onSuccess: ({ productId }) => {
       queryClient.setQueryData(
-        ['wishList', false, sortBy, pageNum],
+        ['wishList', 'products', isAuthenticated, sortBy, pageNum],
         (wishListtOld: TWishList) => {
           const wishListtOldLength = wishListtOld.products.length;
           const wishList = wishListtOld.products.filter(
-            (wishListItem) => wishListItem.id !== id
+            (wishListItem) => wishListItem.id !== productId
           );
           const quantityDeleted = wishListtOldLength - wishList.length;
           return {
@@ -27,10 +38,9 @@ export function useWishListRemove() {
           };
         }
       );
-      return Promise.resolve();
-    },
-    onSuccess: () => {
-      toast.success('Товар удален из избранного');
+      queryClient.invalidateQueries({
+        queryKey: ['wishList', 'productIds', isAuthenticated],
+      });
     },
     onError: (err) => {
       console.error(err);

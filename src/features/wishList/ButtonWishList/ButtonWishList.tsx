@@ -1,58 +1,28 @@
-import toast from 'react-hot-toast';
-import { addWishList, getWishList } from '../wishListSlise';
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import Favorite, { TFavoriteProps } from '../../../components/ui/Favorite';
-import { useUser } from '../../authentication/useUser';
-import { useFavorites } from '../../favorites/useFavorites';
-import { useCreateFavorites } from '../../favorites/useCreateFavorites';
-import { useDeleteFavorites } from '../../favorites/useDeleteFavorites';
-import { useWishListRemove } from '../useWishListRemove';
+import { useRemoveWishList } from '../useRemoveWishList';
+import { useUpsertWishList } from '../useUpsertWishList';
+import { useWishList } from '../useWishList';
 
 type TButtonWishListProps = Omit<
   TFavoriteProps,
   'checked' | 'defaultChecked' | 'onChange'
 > & { productId: number };
-function ButtonWishList({
-  productId,
-  ...props
-}: TButtonWishListProps): JSX.Element {
-  const { isAuthenticated, user } = useUser();
-  const { id: userId } = user || {};
+function ButtonWishList({ productId, ...props }: TButtonWishListProps) {
+  const { productIds: wishListProductIds } = useWishList();
+  const { upsertWishList, isUpserting } = useUpsertWishList();
+  const { removeWishList, isDeleting } = useRemoveWishList();
+  const isPending = isUpserting || isDeleting;
 
-  const { favoritesIds } = useFavorites(isAuthenticated);
-  const { createFavorites, isCreating } = useCreateFavorites();
-  const { deleteFavorites, isDeleting } = useDeleteFavorites();
-  const isPending = isCreating || isDeleting;
+  if (!wishListProductIds) return null;
 
-  const wishList = useAppSelector(getWishList);
-  const { removeWishList } = useWishListRemove();
-  const dispatch = useAppDispatch();
-
-  const isWished =
-    isAuthenticated && favoritesIds
-      ? favoritesIds.has(productId)
-      : wishList.includes(productId);
+  const isWished = wishListProductIds.includes(productId);
 
   function deleteWishList(productId: number) {
-    if (isAuthenticated) {
-      deleteFavorites(productId);
-    } else {
-      removeWishList(productId);
-    }
+    removeWishList(productId);
   }
 
   function createWishList(productId: number) {
-    if (isAuthenticated) {
-      if (!userId) {
-        toast.error(
-          'Не удалось добавить в избранное, т.к. нет данных пользователя!'
-        );
-        return;
-      }
-      createFavorites({ productId, userId });
-    } else {
-      dispatch(addWishList(productId));
-    }
+    upsertWishList(productId);
   }
 
   function handleChange(productId: number) {

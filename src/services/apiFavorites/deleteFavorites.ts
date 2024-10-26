@@ -1,13 +1,17 @@
 import supabase from '../supabase';
 
 export async function deleteFavorites(productId: number) {
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from('favorites')
     .delete()
-    .eq('productId', productId);
+    .eq('productId', productId)
+    .select()
+    .single();
 
   if (error) {
     console.error(error);
     throw new Error('Favorites could not be deleted');
   }
+
+  return data;
 }

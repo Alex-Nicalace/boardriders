@@ -18,8 +18,8 @@ export function useLogout() {
       queryClient.invalidateQueries({ queryKey: ['user'] });
 
       // todo: надо удалить только то, что касается аунтифицироанныйх данных
-      queryClient.removeQueries({ queryKey: ['wishList', true] });
-      queryClient.removeQueries({ queryKey: ['favorites'] });
+      queryClient.removeQueries({ queryKey: ['wishList'] });
+      queryClient.removeQueries({ queryKey: ['cart'] });
     },
     onError: (err) => {
       console.error(err);

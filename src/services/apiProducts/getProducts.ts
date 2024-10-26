@@ -9,6 +9,7 @@ export async function getProducts({
   isFavorite = false,
   sortBy,
   page,
+  limit,
 }: TGetProductsArgs) {
   const query = supabase
     .from('products')
@@ -70,6 +71,10 @@ export async function getProducts({
     const from = (page - 1) * PAGE_SIZE_PRODUCTS;
     const to = page * PAGE_SIZE_PRODUCTS - 1;
     query.range(from, to);
+  }
+
+  if (limit) {
+    query.limit(limit);
   }
 
   const { data, error, count } = await query;

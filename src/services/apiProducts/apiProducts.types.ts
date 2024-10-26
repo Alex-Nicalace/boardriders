@@ -30,4 +30,5 @@ export type TGetProductsArgs = {
   isFavorite?: boolean;
   sortBy?: { field: string; value: string };
   page?: number;
+  limit?: number;
 };
