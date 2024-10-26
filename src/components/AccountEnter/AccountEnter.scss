@@ -23,10 +23,11 @@
     align-items: center;
     justify-content: space-between;
     font-weight: 500;
-    font-size: 12px;
+    font-size: rem(12);
   }
   // .account-enter__greeting
   &__greeting {
+    font-size: inherit;
   }
   // .account-enter__btn-exit
   &__btn-exit {

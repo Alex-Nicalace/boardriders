@@ -78,7 +78,10 @@ function BurgerMenu({ data, close }: TBurgerMenuProps) {
         )}
       </nav>
       <div className="burger-menu__footer">
-        <AccountEnterContainer className="burger-menu__account" />
+        <AccountEnterContainer
+          className="burger-menu__account"
+          onClickGreeting={close}
+        />
         <DeliveryRegionContainer className="burger-menu__delivery-region" />
         <SecondaryLinks className="burger-menu__secondary-links" />
       </div>
