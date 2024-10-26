@@ -38,7 +38,12 @@
     text-align: right;
   }
   // .stat-card__target
-  &__target {
+  &__target,
+  &__target:visited,
+  &__target:link {
+    // под этим классом возможен тег <a> (ссылка)
+    //:first-letter работает только для блочных элементов
+    display: inline-block;
     font-weight: 500;
     font-size: rem(12);
     line-height: 1.67;

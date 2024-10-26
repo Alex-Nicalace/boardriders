@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import { QuestionInCircleIcon } from '../ui/Icons';
 import './StatCard.scss';
+import React from 'react';
 
 type TStatCardProps = {
   children?: React.ReactNode;
   className?: string;
   title: string;
-  hint?: string;
+  hint?: React.ReactNode;
   tooltip?: string;
   labelTarget: string;
   toTarget?: string;
