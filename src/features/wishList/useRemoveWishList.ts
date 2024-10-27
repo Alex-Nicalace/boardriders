@@ -41,6 +41,9 @@ export function useRemoveWishList() {
       queryClient.invalidateQueries({
         queryKey: ['wishList', 'productIds', isAuthenticated],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['wishList', 'products', isAuthenticated, 'favouriteList3'],
+      });
     },
     onError: (err) => {
       console.error(err);

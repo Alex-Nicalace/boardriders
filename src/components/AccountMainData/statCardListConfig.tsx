@@ -1,6 +1,6 @@
 import ShoppngListContainer from '../../features/cart/ShoppngListContainer';
+import FavouriteListContainer from '../../features/wishList/FavouriteListContainer';
 import AddressList from '../AddressList';
-import FavouriteList, { TupleIWareData3 } from '../FavouriteList';
 import OrderStatusList from '../OrderStatusList';
 import PersonalInfo from '../PersonalInfo';
 
@@ -27,37 +27,6 @@ const PERSONAL_INFO = {
   email: 'ivanov@gmail.com',
 };
 
-const PATH = '/src/assets/img/products-new/';
-const PRODUCTS_DATA: TupleIWareData3 = [
-  {
-    id: 1,
-    images: [PATH + '01.png', PATH + '01-hover.png'],
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-  {
-    id: 2,
-    images: [PATH + '02.png', PATH + '02-hover.png'],
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: 17392,
-    discount: 0.5,
-  },
-  {
-    id: 3,
-    images: [PATH + '03.png', PATH + '03-hover.png'],
-    name: 'LIB TECH',
-    description: 'Мужской Сноуборд',
-    price: 34392,
-    oldPrice: null,
-    discount: null,
-  },
-];
-
 export const STAT_CARD_LIST = [
   {
     title: 'корзина',
@@ -75,7 +44,7 @@ export const STAT_CARD_LIST = [
     title: 'Избранное',
     labelTarget: 'перейти в избранное',
     toTarget: '/wishlist',
-    element: <FavouriteList data={PRODUCTS_DATA} />,
+    element: <FavouriteListContainer />,
   },
   {
     title: 'Личная информация',

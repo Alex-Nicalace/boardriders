@@ -10,7 +10,8 @@ import { PAGE_SIZE_PRODUCTS } from '../../services/constants';
 import { useUser } from '../authentication/useUser';
 import { useSortByPage } from '../../hooks/useSortByPage';
 
-export function useWishListProducts() {
+export function useWishListProducts(params?: { useFavouriteList3?: boolean }) {
+  const { useFavouriteList3 } = params ?? {};
   const queryClient = useQueryClient();
   const wishListLocal = useAppSelector(getWishList);
   const { isAuthenticated } = useUser();
@@ -21,13 +22,19 @@ export function useWishListProducts() {
     { field: 'id', value: wishListLocal, method: 'in' },
   ];
 
-  const queryKeys = ['wishList', 'products', isAuthenticated, sortBy];
+  const queryKeys = [
+    'wishList',
+    'products',
+    isAuthenticated,
+    useFavouriteList3 ? 'favouriteList3' : sortBy,
+  ];
 
   const args: TGetProductsArgs = isAuthenticated
     ? {
         page: pageNum,
         sortBy,
         isFavorite: true,
+        ...(useFavouriteList3 && { limit: 3 }),
       }
     : {
         page: pageNum,
