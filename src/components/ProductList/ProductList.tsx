@@ -1,18 +1,11 @@
 import {
   Transition,
   TransitionGroup,
-  TStateTransition,
 } from '../../component-library/Transition';
+import { TRANSITION_STYLES_ZOOMOUT } from '../../constants';
 import WareCard from '../ui/WareCard';
 import './ProductList.scss';
 import { ICustomCSSProperties, TProductListProps } from './ProductList.types';
-
-const TRANSITION_STYLES: Record<TStateTransition, string> = {
-  entering: '',
-  entered: '',
-  exiting: 'animate zoomOut',
-  exited: '',
-};
 
 function ProductList({
   className,
@@ -42,7 +35,10 @@ function ProductList({
               {(state) => (
                 <li
                   key={item.id}
-                  className={['product-list__item', TRANSITION_STYLES[state]]
+                  className={[
+                    'product-list__item',
+                    TRANSITION_STYLES_ZOOMOUT[state],
+                  ]
                     .filter(Boolean)
                     .join(' ')}
                 >

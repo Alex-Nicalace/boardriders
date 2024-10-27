@@ -5,17 +5,10 @@ import { getDeclension } from '../../utils/getDeclension';
 import {
   Transition,
   TransitionGroup,
-  TStateTransition,
 } from '../../component-library/Transition';
 import { ICustomCSSProperties, TCartListProps } from './CartList.types';
 import { formaterCurrency } from '../../utils/formaters';
-
-const TRANSITION_STYLES: Record<TStateTransition, string> = {
-  entering: '',
-  entered: '',
-  exiting: 'animate backOutLeft',
-  exited: '',
-};
+import { TRANSITION_STYLES_BACKOUTLEFT } from '../../constants';
 
 function CartList({
   className,
@@ -57,7 +50,10 @@ function CartList({
             >
               {(state) => (
                 <li
-                  className={['cart-list__item', TRANSITION_STYLES[state]]
+                  className={[
+                    'cart-list__item',
+                    TRANSITION_STYLES_BACKOUTLEFT[state],
+                  ]
                     .filter(Boolean)
                     .join(' ')}
                 >
