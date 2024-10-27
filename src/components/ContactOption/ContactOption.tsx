@@ -5,7 +5,7 @@ import InputStyled from '../ui/InputStyled';
 import Checkbox from '../ui/Checkbox';
 import Button from '../ui/Button';
 import { TContactsData } from '../../types';
-import { MSG_REQUIRED } from '../FormAuth/constants';
+import { MSG_REQUIRED } from '../../constants';
 import { registerMask } from '../../utils/registerMask';
 
 type TContactOptionProps = {

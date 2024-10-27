@@ -6,7 +6,7 @@ import Button from '../ui/Button';
 import InputStyled from '../ui/InputStyled';
 import RadioBox from '../ui/RadioBox';
 import SelectLabel, { SelectLabelControl } from '../ui/SelectLabel';
-import { MSG_REQUIRED } from '../FormAuth/constants';
+import { MSG_REQUIRED } from '../../constants';
 import { TDeliveryForm } from '../DeliveryOption';
 import {
   formaterCurrency,

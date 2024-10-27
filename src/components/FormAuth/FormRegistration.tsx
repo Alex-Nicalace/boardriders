@@ -4,7 +4,7 @@ import Checkbox from '../ui/Checkbox';
 import InputPasword from '../ui/InputPasword';
 import InputStyled from '../ui/InputStyled';
 import Button from '../ui/Button';
-import { MSG_REQUIRED, PASSWORD_MIN_LENGTH } from './constants';
+import { MSG_REQUIRED, PASSWORD_MIN_LENGTH } from '../../constants';
 import { TFormRegistrationProps, TInputsRegistartion } from './FormAuth.types';
 
 function FormRegistration({

@@ -3,7 +3,7 @@ import './DeliveryOption.scss';
 import { ExclamationInCircleIcon } from '../ui/Icons';
 import RadioBox from '../ui/RadioBox';
 import SelectLabel, { SelectLabelControl } from '../ui/SelectLabel';
-import { MSG_REQUIRED } from '../FormAuth/constants';
+import { MSG_REQUIRED } from '../../constants';
 import { TDeliveryOptionProps, TDeliveryForm } from './DeliveryOption.types';
 import { WAY_DELIVERY } from './wayDeliveryConfig';
 

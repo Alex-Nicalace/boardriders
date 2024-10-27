@@ -5,7 +5,7 @@ import Checkbox from '../ui/Checkbox';
 import InputPasword from '../ui/InputPasword';
 import InputStyled from '../ui/InputStyled';
 import Button from '../ui/Button';
-import { MSG_REQUIRED } from './constants';
+import { MSG_REQUIRED } from '../../constants';
 import { TFormLoginProps, TInputsLogin } from './FormAuth.types';
 
 function FormLogin({
