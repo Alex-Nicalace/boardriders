@@ -18,7 +18,7 @@ function FavouriteList({ className, data }: TFavouriteListProps): JSX.Element {
     <ul className={['favourite-list', className].filter(Boolean).join(' ')}>
       <TransitionGroup>
         {data.map((product) => (
-          <Transition key={product.id} timeout={1000}>
+          <Transition key={product.id} timeout={1000} appear>
             {(state) => (
               <li
                 className={[

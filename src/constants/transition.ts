@@ -8,7 +8,9 @@ export const TRANSITION_STYLES_BACKOUTLEFT: Record<TStateTransition, string> = {
 };
 
 export const TRANSITION_STYLES_ZOOMOUT: Record<TStateTransition, string> = {
-  entering: '',
+  // .sr-only чтобы в FavouriteList при появлении нового элемента
+  // была задержка видимости перед анимацией удаления
+  entering: 'sr-only',
   entered: '',
   exiting: 'animate zoomOut',
   exited: '',
