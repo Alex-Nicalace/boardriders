@@ -1,5 +1,5 @@
 import supabase from '../supabase';
-import { PAGE_SIZE_COMMENTS } from '../constants';
+import { PAGE_SIZE_COMMENTS } from '../../constants/';
 
 export async function getReviews({
   productId,

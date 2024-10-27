@@ -6,7 +6,7 @@ import {
   TFilters,
   TGetProductsArgs,
 } from '../../services/apiProducts';
-import { PAGE_SIZE_PRODUCTS } from '../../services/constants';
+import { PAGE_SIZE_PRODUCTS } from '../../constants';
 import { useUser } from '../authentication/useUser';
 import { useSortByPage } from '../../hooks/useSortByPage';
 

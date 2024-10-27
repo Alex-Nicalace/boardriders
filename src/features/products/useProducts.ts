@@ -5,7 +5,7 @@ import {
   TFilters,
   TGetProductsArgs,
 } from '../../services/apiProducts';
-import { PAGE_SIZE_PRODUCTS } from '../../services/constants';
+import { PAGE_SIZE_PRODUCTS } from '../../constants';
 import { useMainMenu } from '../categories/useMainMenu';
 import { useGenderCategories } from '../categories/useGenderCategories';
 import { TFilterName } from '../../components/Filters';

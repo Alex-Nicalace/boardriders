@@ -1,7 +1,7 @@
 import supabase from '../supabase';
 import { omit } from '../../utils/omit';
 import { TGetProductsArgs, TProducts } from './apiProducts.types';
-import { PAGE_SIZE_PRODUCTS } from '../constants';
+import { PAGE_SIZE_PRODUCTS } from '../../constants';
 
 export async function getProducts({
   categoryFilters = [],

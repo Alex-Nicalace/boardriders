@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { getReviews } from '../../services/apiReviews';
-import { PAGE_SIZE_COMMENTS } from '../../services/constants';
+import { PAGE_SIZE_COMMENTS } from '../../constants';
 
 export function useReviews() {
   const params = useParams();
