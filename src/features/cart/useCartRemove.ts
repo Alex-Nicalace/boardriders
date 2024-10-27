@@ -22,10 +22,14 @@ export function useCartRemove() {
     },
     onSuccess: ({ productVariantId }) => {
       const queryKey = ['cart', isAuthenticated ? 'auth' : 'notAuth'];
-      queryClient.setQueryData(queryKey, (cartListOld: TCartList) =>
-        cartListOld.filter(
-          (cartItem) => cartItem.productVariantId !== productVariantId
-        )
+      queryClient.setQueryData(
+        queryKey,
+        (cartListOld: TCartList | undefined) => {
+          if (!cartListOld) return cartListOld;
+          return cartListOld.filter(
+            (cartItem) => cartItem.productVariantId !== productVariantId
+          );
+        }
       );
       toast.success('Товар удален из корзины');
       queryClient.invalidateQueries({ queryKey: ['totalItemsCart'] });

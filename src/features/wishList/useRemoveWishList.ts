@@ -26,7 +26,8 @@ export function useRemoveWishList() {
     onSuccess: ({ productId }) => {
       queryClient.setQueryData(
         ['wishList', 'products', isAuthenticated, sortBy, pageNum],
-        (wishListtOld: TWishList) => {
+        (wishListtOld: TWishList | undefined) => {
+          if (!wishListtOld) return wishListtOld;
           const wishListtOldLength = wishListtOld.products.length;
           const wishList = wishListtOld.products.filter(
             (wishListItem) => wishListItem.id !== productId
