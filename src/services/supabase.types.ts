@@ -284,7 +284,7 @@ export type Database = {
           id: number;
           payMethod: string;
           status: string;
-          userId: string | null;
+          userId: string;
         };
         Insert: {
           comment?: string | null;
