@@ -230,6 +230,8 @@ export type Database = {
           orderId: number;
           productVariantId: number;
           quantity: number;
+          totalPrice: number;
+          unitPrice: number;
           userId: string;
         };
         Insert: {
@@ -238,6 +240,8 @@ export type Database = {
           orderId: number;
           productVariantId: number;
           quantity: number;
+          totalPrice?: number;
+          unitPrice?: number;
           userId: string;
         };
         Update: {
@@ -246,6 +250,8 @@ export type Database = {
           orderId?: number;
           productVariantId?: number;
           quantity?: number;
+          totalPrice?: number;
+          unitPrice?: number;
           userId?: string;
         };
         Relationships: [
@@ -284,6 +290,7 @@ export type Database = {
           id: number;
           payMethod: string;
           status: string;
+          totalPrice: number;
           userId: string;
         };
         Insert: {
@@ -296,8 +303,9 @@ export type Database = {
           deliveryMethod: string;
           id?: number;
           payMethod: string;
-          status: string;
-          userId?: string | null;
+          status?: string;
+          totalPrice?: number;
+          userId?: string;
         };
         Update: {
           comment?: string | null;
@@ -310,7 +318,8 @@ export type Database = {
           id?: number;
           payMethod?: string;
           status?: string;
-          userId?: string | null;
+          totalPrice?: number;
+          userId?: string;
         };
         Relationships: [
           {
