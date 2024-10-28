@@ -32,10 +32,10 @@ function ShoppngListContainer({
 function Quantity() {
   const { quantityTotal } = useCartStat(false);
 
-  if (!quantityTotal) return null;
-
   return (
-    <span>{getDeclension(quantityTotal, 'товар', 'товара', 'товаров')}</span>
+    <span>
+      {getDeclension(quantityTotal || 0, 'товар', 'товара', 'товаров')}
+    </span>
   );
 }
 
