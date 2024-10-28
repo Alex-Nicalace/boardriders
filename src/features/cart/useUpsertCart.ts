@@ -51,12 +51,16 @@ export function useUpsertCart() {
       // * обновляю кэш только для авторизированных пользователей
       // * для неавторизированных количесво отражает глобальное сосотояние поэтому и так обновляется
       if (isAuthenticated) {
-        queryClient.setQueryData(['cart', 'auth'], (cartListOld: TCartList) =>
-          cartListOld.map((cartItem) =>
-            cartItem.productVariantId === productVariantId
-              ? { ...cartItem, quantity }
-              : cartItem
-          )
+        queryClient.setQueryData(
+          ['cart', 'auth'],
+          (cartListOld: TCartList | undefined) => {
+            if (!cartListOld) return cartListOld;
+            return cartListOld.map((cartItem) =>
+              cartItem.productVariantId === productVariantId
+                ? { ...cartItem, quantity }
+                : cartItem
+            );
+          }
         );
       }
     },
