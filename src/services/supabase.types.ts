@@ -893,6 +893,27 @@ export type Database = {
           brands: { id: number; name: string }[] | null;
         }[];
       };
+      getOrderProductsById: {
+        Args: {
+          orderID: number;
+          userUUID?: string;
+        };
+        Returns: {
+          orderItemsId: number;
+          productVariantId: number;
+          quantity: number;
+          unitPrice: number;
+          totalPrice: number;
+          productId: number;
+          colorId: number;
+          sizeId: number;
+          name: string;
+          color: string;
+          size: string;
+          manufacturerSKU: string;
+          imageUrl: string;
+        }[];
+      };
       getProductVatiants: {
         Args: {
           productVariantsIds: number[];

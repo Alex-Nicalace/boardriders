@@ -12,17 +12,18 @@ import { TRANSITION_STYLES_BACKOUTLEFT } from '../../constants';
 
 function CartList({
   className,
-  data,
-  isOrdered = false,
   animateDuration = 1000,
-  quantityTotal,
-  priceTotal,
   onChangeQuantity,
   onRemove,
+  ...props
 }: TCartListProps): JSX.Element {
   const { isLessMobile } = useScreenWidth();
 
-  const classes = ['cart-list', isOrdered && 'cart-list_ordered', className]
+  const classes = [
+    'cart-list',
+    props.isOrdered && 'cart-list_ordered',
+    className,
+  ]
     .filter(Boolean)
     .join(' ');
 
@@ -32,7 +33,7 @@ function CartList({
 
   return (
     <div className={classes} style={style}>
-      {isOrdered && !isLessMobile && (
+      {props.isOrdered && !isLessMobile && (
         <div className="cart-list__header">
           <span>Товар</span>
           <span></span>
@@ -43,7 +44,7 @@ function CartList({
 
       <ul className="cart-list__list">
         <TransitionGroup>
-          {data.map((product) => (
+          {props.data.map((product) => (
             <Transition
               key={product.productVariantId}
               timeout={animateDuration}
@@ -58,9 +59,9 @@ function CartList({
                     .join(' ')}
                 >
                   <WareCardCart
-                    data={product}
+                    data={product as any}
                     mode={isLessMobile ? 'mobile' : 'desktop'}
-                    isOrdered={isOrdered}
+                    isOrdered={props.isOrdered}
                     onChangeQuantity={(quantity) =>
                       onChangeQuantity?.(product.productVariantId, quantity)
                     }
@@ -73,18 +74,18 @@ function CartList({
         </TransitionGroup>
       </ul>
 
-      {!isOrdered && (
+      {!props.isOrdered && (
         <div className="cart-list__total">
           <span className="cart-list__total-text">
             {`${getDeclension(
-              quantityTotal,
+              props.quantityTotal,
               'товар',
               'товара',
               'товаров'
             )} на сумму`}
           </span>
           <span className="cart-list__total-value">
-            {formaterCurrency(priceTotal)}
+            {formaterCurrency(props.priceTotal)}
           </span>
         </div>
       )}

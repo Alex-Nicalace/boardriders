@@ -1,4 +1,4 @@
-export type TWareCardCartData = {
+type TWareCardCartBaseData = {
   cartId?: number;
   productVariantId: number;
   productId: number;
@@ -6,15 +6,31 @@ export type TWareCardCartData = {
   imageUrl: string;
   manufacturerSKU: string;
   props: { name: string; value: string; nameDisplay?: string }[];
-  price: number;
   quantity: number;
+};
+export type TWareCardCartData = TWareCardCartBaseData & {
+  price: number;
+  unitPrice?: never;
+  totalPrice?: never;
+};
+
+export type TWareCardCartDataOrdered = TWareCardCartBaseData & {
+  price?: never;
+  unitPrice: number;
+  totalPrice: number;
 };
 export type TWareCardCartProps = {
   className?: string;
   mode?: 'desktop' | 'mobile';
-  isOrdered?: boolean;
-  data: TWareCardCartData;
-
   onChangeQuantity?: (quantity: number) => void;
   onRemove?: () => void;
-};
+} & (
+  | {
+      isOrdered?: false;
+      data: TWareCardCartData;
+    }
+  | {
+      isOrdered: true;
+      data: TWareCardCartDataOrdered;
+    }
+);

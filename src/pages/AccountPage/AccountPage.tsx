@@ -5,13 +5,13 @@ import PageContent from '../../components/PageContent';
 import Title from '../../components/ui/Title';
 import TabsBlock from '../../components/TabsBlock';
 import AccountMainData from '../../components/AccountMainData';
-import AccountOrderData from '../../components/AccountOrderData';
 import AccountPersanalData from '../../components/AccountPersanalData';
 import AccountAddressData from '../../components/AccountAddressData';
+import AccountOrderDataContainer from '../../features/makeOrder/AccountOrderDataContainer';
 
 const TABS = [
   { label: 'Главная', content: <AccountMainData /> },
-  { label: 'Мои заказы', content: <AccountOrderData /> },
+  { label: 'Мои заказы', content: <AccountOrderDataContainer /> },
   { label: 'Личная информация', content: <AccountPersanalData /> },
   { label: 'Мои адреса', content: <AccountAddressData /> },
   { label: 'Подписка на новости', content: <>не реализовано</> },
@@ -29,7 +29,6 @@ function AccountPage({ className }: TAccountPageProps): JSX.Element {
       className={['account-page', className].filter(Boolean).join(' ')}
       paddingTop="50-15"
     >
-      {/* <div className="account-page__container"> */}
       <Title className="account-page__title" as="h1" withContainer>
         Мой аккаунт
       </Title>

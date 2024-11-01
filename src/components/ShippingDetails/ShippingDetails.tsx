@@ -1,14 +1,10 @@
-import { Fragment, ReactNode } from 'react';
+import { Fragment } from 'react';
 import './ShippingDetails.scss';
-
-type TShippingDetailsData = {
-  key: string;
-  value: ReactNode;
-}[];
+import { TShippingDetailsData } from './ShippingDetails.types';
 
 type TShippingDetailsProps = {
   className?: string;
-  data: TShippingDetailsData;
+  data: TShippingDetailsData[];
   mode?: 'compact' | 'normal';
 };
 function ShippingDetails({

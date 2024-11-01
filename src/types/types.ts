@@ -1,9 +1,7 @@
-export enum EOrderState {
-  'Отменен',
-  'Возврат',
-  'Заказ передан в службу доставки',
-  'Переадресация товара в магазин',
-}
+import { statusOrder } from '../constants';
+
+export type TStatusOrderKey = keyof typeof statusOrder;
+
 interface ILinkData {
   title: string;
   to: string;
@@ -25,3 +23,19 @@ export interface IMenuData extends ILinkData {
     };
   };
 }
+
+export type TDeliveryMethod =
+  | 'get-in-shop'
+  | 'delivery-in-shop'
+  | 'courier'
+  | 'pick-up-point';
+
+export type TKeyDeliveryCourierData =
+  | 'apartment'
+  | 'building'
+  | 'entrance'
+  | 'floor'
+  | 'street'
+  | 'time';
+
+export type TDeliveryCourierData = Record<TKeyDeliveryCourierData, string>;

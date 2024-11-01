@@ -1,9 +1,18 @@
 import supabase from '../supabase';
+import { Tables } from '../supabase.types';
 
-export async function getOrderById(id: number) {
+export async function getOrderById<
+  T extends Tables<'orders'>,
+  K extends keyof T
+>(
+  id: number,
+  fields?: K[] | K
+): Promise<Pick<T, K extends undefined ? keyof T : K>> {
+  const fieldsArr = Array.isArray(fields) ? fields : [fields ?? '*'];
+
   const { data, error } = await supabase
     .from('orders')
-    .select('*')
+    .select(fieldsArr.join(', '))
     .eq('id', id)
     .single();
 
@@ -12,5 +21,5 @@ export async function getOrderById(id: number) {
     throw new Error('Order could not be loaded');
   }
 
-  return data;
+  return data as any;
 }

@@ -1,4 +1,5 @@
-import { EOrderState } from '../../types';
+import { statusOrder } from '../../constants';
+import { TStatusOrderKey } from '../../types';
 import { LocationIcon } from '../ui/Icons';
 import './OrderStateHint.scss';
 
@@ -9,7 +10,7 @@ interface ICustomCSSProperties extends React.CSSProperties {
 
 type TOrderStateHintProps = {
   className?: string;
-  state: EOrderState;
+  state: TStatusOrderKey;
   iconWidth?: number;
   iconHeight?: number;
 };
@@ -19,7 +20,8 @@ function OrderStateHint({
   iconWidth,
   iconHeight,
 }: TOrderStateHintProps): JSX.Element {
-  const colorIcon = state === 0 ? 'gray' : state === 1 ? 'black' : 'red';
+  const colorIcon =
+    state === 'canceled' ? 'gray' : state === 'returned' ? 'black' : 'red';
   const style: ICustomCSSProperties = {
     ...(iconWidth && { '--order-state-hint-icon-width': `${iconWidth}px` }),
     ...(iconHeight && { '--order-state-hint-icon-height': `${iconHeight}px` }),
@@ -33,7 +35,7 @@ function OrderStateHint({
       <LocationIcon
         className={`order-state-hint__icon order-state-hint__icon_${colorIcon}`}
       />{' '}
-      {EOrderState[state]}
+      {statusOrder[state]}
     </span>
   );
 }

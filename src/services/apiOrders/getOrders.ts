@@ -2,7 +2,18 @@ import supabase from '../supabase';
 import { TGetOrdersArgs } from './apiOrders.types';
 
 export async function getOrders({ page, pageSize }: TGetOrdersArgs) {
-  const query = supabase.from('orders').select('*', { count: 'exact' });
+  const query = supabase
+    .from('orders')
+    .select(
+      `
+    id, 
+    status, 
+    payMethod, 
+    totalPrice
+    `,
+      { count: 'exact' }
+    )
+    .order('createdAt', { ascending: false });
 
   // RANGE
   if (page) {

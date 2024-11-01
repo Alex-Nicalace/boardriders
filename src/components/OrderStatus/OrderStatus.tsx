@@ -1,27 +1,17 @@
-import { EOrderState } from '../../types';
+import { isTStatusOrderKey } from '../../utils/assertionFunc';
 import { formaterCurrency } from '../../utils/formaters';
 import OrderStateHint from '../OrderStateHint';
 import './OrderStatus.scss';
+import { TOrderStatusProps } from './OrderStatus.types';
 
-export type TOrderStatusData = {
-  code: string;
-  status: EOrderState;
-  price: number;
-  isPaid: boolean;
-};
-
-type TOrderStatusProps = {
-  className?: string;
-  mode?: 'compact' | 'large' | 'normal';
-} & TOrderStatusData;
 function OrderStatus({
   className,
-  code,
-  status,
-  price,
-  isPaid,
+  data,
   mode = 'normal',
 }: TOrderStatusProps): JSX.Element {
+  const { id, status, totalPrice, payMethod } = data;
+  if (!isTStatusOrderKey(status)) throw new Error('Invalid state');
+
   return (
     <div
       className={[
@@ -33,16 +23,18 @@ function OrderStatus({
         .filter(Boolean)
         .join(' ')}
     >
-      <span className="order-status__code">{code}</span>
+      <span className="order-status__code">{id}</span>
       <OrderStateHint
         className="order-status__status"
         state={status}
         iconWidth={mode === 'large' ? 16 : undefined}
         iconHeight={mode === 'large' ? 23 : undefined}
       />
-      <span className="order-status__price">{formaterCurrency(price)}</span>
+      <span className="order-status__price">
+        {formaterCurrency(totalPrice)}
+      </span>
       <span className="order-status__is-paid">
-        {isPaid ? 'Оплачен' : 'Не оплачен'}
+        {payMethod === 'cash' ? 'Оплачен' : 'Не оплачен'}
       </span>
     </div>
   );

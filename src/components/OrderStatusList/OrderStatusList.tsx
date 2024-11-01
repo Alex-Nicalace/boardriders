@@ -19,9 +19,9 @@ function OrderStatusList({ className, data }: TOrderListProps): JSX.Element {
       className={['order-status-list', className].filter(Boolean).join(' ')}
     >
       {data.map((item) => (
-        <li key={item.code}>
+        <li key={item.id}>
           <OrderStatus
-            {...item}
+            data={item}
             mode={width && width < 500 ? 'compact' : undefined}
           />
         </li>

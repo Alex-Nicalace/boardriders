@@ -21,6 +21,20 @@ function PaginationInput({
   totalPages,
   onPageChange = () => {},
 }: TPaginationInputProps): JSX.Element {
+  function handlerPerPageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = Number(
+      e.target.value.replace(/\D|^0+(?=\d+)/g, '').slice(-2)
+    );
+    onPerPageChange(value);
+  }
+
+  function handlerPageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const prevValue = Number(e.target.value.replace(/\D|^0+(?=\d+)/g, ''));
+    const value =
+      prevValue > totalPages ? totalPages : prevValue < 1 ? 1 : prevValue;
+    onPageChange(value);
+  }
+
   return (
     <div className={['pagination-input', className].filter(Boolean).join(' ')}>
       {!hideSizeBox && (
@@ -29,8 +43,9 @@ function PaginationInput({
           <div className="pagination-input__input-box">
             <input
               className="pagination-input__input"
+              inputMode="numeric"
               value={itemsPerPage}
-              onChange={(e) => onPerPageChange(Number(e.target.value))}
+              onChange={handlerPerPageChange}
             />
             <span className="pagination-input__text">из {totalItems}</span>
           </div>
@@ -50,8 +65,9 @@ function PaginationInput({
           <div className="pagination-input__input-box">
             <input
               className="pagination-input__input"
+              inputMode="numeric"
               value={currentPage}
-              onChange={(e) => onPageChange(Number(e.target.value))}
+              onChange={handlerPageChange}
             />
             <span className="pagination-input__text">из {totalPages}</span>
           </div>

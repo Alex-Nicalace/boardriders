@@ -7,25 +7,18 @@ import { ImageSizes } from '../../../utils/types';
 import { formaterCurrency } from '../../../utils/formaters';
 
 function WareCardCart({
-  className = '',
+  className,
   mode = 'desktop',
-  data: {
-    name,
-    manufacturerSKU,
-    imageUrl,
-    props,
-    price,
-    quantity = 1,
-    productId,
-  },
-  isOrdered = false,
   onChangeQuantity = () => {},
   onRemove = () => {},
+  ...args
 }: TWareCardCartProps): JSX.Element {
+  const { imageUrl, productId, props, name, manufacturerSKU, quantity } =
+    args.data;
   const classes = [
     'ware-card-cart',
     mode === 'mobile' && 'ware-card-cart_mobile',
-    isOrdered && 'ware-card-cart_ordered',
+    args.isOrdered && 'ware-card-cart_ordered',
     className,
   ]
     .filter(Boolean)
@@ -60,7 +53,7 @@ function WareCardCart({
           </li>
         ))}
       </ul>
-      {!isOrdered && (
+      {!args.isOrdered && (
         <InputNumber
           className="ware-card-cart__count"
           min={1}
@@ -69,15 +62,17 @@ function WareCardCart({
           onChange={onChangeQuantity}
         />
       )}
-      {isOrdered && (
+      {args.isOrdered && (
         <div className="ware-card-cart__count">
-          {quantity} x {formaterCurrency(price)}
+          {quantity} x {formaterCurrency(args.data.unitPrice)}
         </div>
       )}
       <div className="ware-card-cart__price">
-        {formaterCurrency(isOrdered ? price * quantity : price)}
+        {formaterCurrency(
+          args.isOrdered ? args.data.totalPrice : args.data.price
+        )}
       </div>
-      {!isOrdered && (
+      {!args.isOrdered && (
         <button className="ware-card-cart__btn-delete" onClick={onRemove}>
           <CloseIcon />
         </button>

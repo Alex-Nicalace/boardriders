@@ -1,6 +1,6 @@
 import { useLocation, useParams } from 'react-router-dom';
 import OrderPlaced from '../../components/OrderPlaced';
-import { useOrder } from './useOrder';
+import { useOrderPlaced } from './useOrderPlaced';
 import ErrorMessage from '../../components/ErrorMessage';
 import Spinner from '../../components/Spinner';
 import Empty from '../../components/Empty';
@@ -12,7 +12,7 @@ function OrderPlacedContainer({ className }: TOrderPlacedContainerProps) {
   const { state } = useLocation();
   const { orderId } = useParams();
   const numericOrderId = !Number.isNaN(orderId) ? Number(orderId) : undefined;
-  const { order, isLoading, error } = useOrder(numericOrderId);
+  const { order, isLoading, error } = useOrderPlaced(numericOrderId);
 
   if (!isAuthenticated)
     return (

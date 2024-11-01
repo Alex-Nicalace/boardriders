@@ -1,5 +1,6 @@
 import { getMakeOrderSteps } from '../features/makeOrder/makeOrderSlice';
 import store from '../store';
+import { TDeliveryMethod } from './types';
 
 export type TRootState = ReturnType<typeof store.getState>;
 export type TAppDispatch = typeof store.dispatch;
@@ -57,16 +58,9 @@ type TDeliveryCourier = {
 
 type TDeliveryPoint = {};
 
-export type TDeliveryMethod =
-  | 'get-in-shop'
-  | 'delivery-in-shop'
-  | 'courier'
-  | 'pick-up-point'
-  | null;
-
 export type TDeliveryData = {
   regionDeliveryId: number | null;
-  deliveryMethod: TDeliveryMethod;
+  deliveryMethod: TDeliveryMethod | null;
   'get-in-shop'?: TDeliveryShopOut;
   'delivery-in-shop'?: TDeliveryShopIn;
   courier?: TDeliveryCourier;

@@ -1,13 +1,10 @@
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import Accordion from '../../component-library/Accordion';
-import OrderStatus, { TOrderStatusData } from '../OrderStatus';
-import OrderStatusDetails from '../OrderStatusDetails';
+import OrderStatusDetailsContainer from '../../features/makeOrder/OrderStatusDetailsContainer';
+import OrderStatus from '../OrderStatus';
 import './OrderStatusAccordion.scss';
+import { TOrderStatusAccordionProps } from './OrderStatusAccordion.types';
 
-type TOrderStatusAccordionProps = {
-  className?: string;
-  data: TOrderStatusData[];
-};
 function OrderStatusAccordion({
   className,
   data,
@@ -27,8 +24,8 @@ function OrderStatusAccordion({
     >
       {data.map((item) => (
         <Accordion.Item
-          key={item.code}
-          id={item.code}
+          key={item.id}
+          id={item.id.toString()}
           summaryNode={(open) => (
             <>
               {(!isLessMobile || (open && isLessMobile)) && (
@@ -41,13 +38,13 @@ function OrderStatusAccordion({
               {!open && (
                 <OrderStatus
                   className="order-status-accordion__status"
-                  {...item}
+                  data={item}
                   mode={isLessMobile ? 'compact' : 'large'}
                 />
               )}
             </>
           )}
-          contentNode={<OrderStatusDetails />}
+          contentNode={<OrderStatusDetailsContainer orderId={item.id} />}
         />
       ))}
     </Accordion>

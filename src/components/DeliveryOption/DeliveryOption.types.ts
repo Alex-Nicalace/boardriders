@@ -7,7 +7,7 @@ export type TWayDelivery = {
   hint: string;
   content: JSX.Element;
   disabled?: boolean;
-  value: Exclude<TDeliveryMethod, null>;
+  value: TDeliveryMethod;
 };
 export type TDeliveryForm = TDeliveryData;
 
