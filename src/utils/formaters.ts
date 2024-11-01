@@ -14,6 +14,14 @@ export const formaterDate = new Intl.DateTimeFormat('ru', {
   year: 'numeric',
 }).format;
 
+export const formaterDateTime = new Intl.DateTimeFormat('ru', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+}).format;
+
 export const formaterDateShort = new Intl.DateTimeFormat('ru', {
   day: 'numeric',
   month: '2-digit',
