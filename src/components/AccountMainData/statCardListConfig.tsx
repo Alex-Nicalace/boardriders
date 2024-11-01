@@ -1,16 +1,8 @@
 import ShoppngListContainer from '../../features/cart/ShoppngListContainer';
+import OrderStatusListContainer from '../../features/makeOrder/OrderStatusListContainer';
 import FavouriteListContainer from '../../features/wishList/FavouriteListContainer';
 import AddressList from '../AddressList';
-import OrderStatusList from '../OrderStatusList';
 import PersonalInfo from '../PersonalInfo';
-
-const ORDER_STATUS = [
-  { code: '195455-222546-ANU', status: 2, price: 118570, isPaid: true },
-  { code: '295455-222546-ANU', status: 2, price: 45258, isPaid: true },
-  { code: '395455-222546-ANU', status: 0, price: 1544, isPaid: false },
-  { code: '495455-222546-ANU', status: 1, price: 1545, isPaid: false },
-  { code: '595455-222546-ANU', status: 2, price: 45285, isPaid: true },
-];
 
 const ADDRESS_LIST = [
   'Россия, Московская обл., Москва, ул. Лизы Чайкиной, 1, кв 11 69006',
@@ -38,7 +30,7 @@ export const STAT_CARD_LIST = [
   {
     title: 'заказы',
     labelTarget: 'все заказы',
-    element: <OrderStatusList data={ORDER_STATUS} />,
+    element: <OrderStatusListContainer />,
   },
   {
     title: 'Избранное',
