@@ -9,19 +9,31 @@ import AccountPersanalData from '../../components/AccountPersanalData';
 import AccountAddressData from '../../components/AccountAddressData';
 import AccountOrderDataContainer from '../../features/makeOrder/AccountOrderDataContainer';
 
-const TABS = [
-  { label: 'Главная', content: <AccountMainData /> },
-  { label: 'Мои заказы', content: <AccountOrderDataContainer /> },
-  { label: 'Личная информация', content: <AccountPersanalData /> },
-  { label: 'Мои адреса', content: <AccountAddressData /> },
-  { label: 'Подписка на новости', content: <>не реализовано</> },
-];
-
 type TAccountPageProps = {
   className?: string;
 };
 function AccountPage({ className }: TAccountPageProps): JSX.Element {
   const [currentTab, setCurrentTab] = useState(0);
+
+  const handleTabChange = (index: number) => {
+    setCurrentTab(index);
+    const el = document.querySelector('.account-page__tabs');
+    if (!el) return;
+
+    // прокручиваем страницу вверх до табов
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const tabs = [
+    {
+      label: 'Главная',
+      content: <AccountMainData setActiveTab={handleTabChange} />,
+    },
+    { label: 'Мои заказы', content: <AccountOrderDataContainer /> },
+    { label: 'Личная информация', content: <AccountPersanalData /> },
+    { label: 'Мои адреса', content: <AccountAddressData /> },
+    { label: 'Подписка на новости', content: <>не реализовано</> },
+  ];
 
   return (
     <PageContent
@@ -37,13 +49,13 @@ function AccountPage({ className }: TAccountPageProps): JSX.Element {
         value={currentTab}
         onChange={setCurrentTab}
       >
-        {TABS.map(({ label }) => (
+        {tabs.map(({ label }) => (
           <TabsBlock.Tab key={label} label={label} />
         ))}
       </TabsBlock>
       <div className="account-page__container">
         <div className="account-page__tabs-panels">
-          {TABS.map(({ label, content }, index) => (
+          {tabs.map(({ label, content }, index) => (
             <TabPanel key={label} index={index} value={currentTab}>
               {content}
             </TabPanel>
