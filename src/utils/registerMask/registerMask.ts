@@ -1,8 +1,24 @@
 import { TApplyMaskFn, TRegisterMaskFn } from './registerMask.types';
 
 /**
- * Возвращает объект обработчиков событий для input,
- * которые преобразуют вводимый текст в соответствии с маской.
+ * Регистрация маски ввода для HTMLInputElement на основе заданной маски.
+ *
+ * @param mask - Строка, представляющая маску, где символ '_' считается цифрой и заменяется на введённую цифру.
+ * @param options - Объект с опциональными параметрами:
+ *   - isHideMask: boolean, указывает, нужно ли скрывать часть маски после ввода.
+ *   - setValue: функция, которая вызывается с текущим значением input после применения маски.
+ *
+ * @returns Объект с обработчиками событий onChange, onBlur, onFocus и onKeyDown, которые применяют маску к элементу input.
+ *
+ * Пример использования:
+ *
+ * ```typescript
+ * const mask = "+_ (___) ___-__-__";
+ * const options = { isHideMask: true, setValue: console.log };
+ * const handlers = registerMask(mask, options);
+ *
+ * <input type="text" onChange={handlers.onChange} onBlur={handlers.onBlur} onFocus={handlers.onFocus} onKeyDown={handlers.onKeyDown} />
+ * ```
  */
 export const registerMask: TRegisterMaskFn = (
   mask: string,

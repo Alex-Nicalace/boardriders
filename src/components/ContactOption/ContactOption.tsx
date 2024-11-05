@@ -5,7 +5,12 @@ import InputStyled from '../ui/InputStyled';
 import Checkbox from '../ui/Checkbox';
 import Button from '../ui/Button';
 import { TContactsData } from '../../types';
-import { MSG_REQUIRED } from '../../constants';
+import {
+  EMAIL_REGEX,
+  MSG_REQUIRED,
+  PHONE_MASK,
+  PHONE_REGEX,
+} from '../../constants';
 import { registerMask } from '../../utils/registerMask';
 
 type TContactOptionProps = {
@@ -24,9 +29,7 @@ function ContactOption({
     watch,
   } = useForm<TContactsData>({ defaultValues });
 
-  const telMask = '+7 (___) ___-__-__';
-
-  const { onChange, onBlur, onFocus } = registerMask(telMask, {
+  const { onChange, onBlur, onFocus } = registerMask(PHONE_MASK, {
     setValue: (value) => setValue('phone', value, { shouldValidate: true }),
   });
 
@@ -51,7 +54,7 @@ function ContactOption({
       <InputStyled
         className="contact-option__phone"
         label="Телефон для SMS уведомлений"
-        placeholder={telMask}
+        placeholder={PHONE_MASK}
         isGrayLabel
         type="tel"
         {...register('phone', {
@@ -59,7 +62,7 @@ function ContactOption({
           onChange,
           onBlur,
           pattern: {
-            value: /^\+\d \(\d{3}\) \d{3}-\d{2}-\d{2}$/,
+            value: PHONE_REGEX,
             message: 'Некорректный телефон',
           },
         })}
@@ -77,7 +80,7 @@ function ContactOption({
         {...register('email', {
           required: MSG_REQUIRED,
           pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            value: EMAIL_REGEX,
             message: 'Некорректный email',
           },
         })}

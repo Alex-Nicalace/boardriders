@@ -50,6 +50,8 @@
 
 [ScrollToAnchor.tsx](./src/component-library/Scroll/ScrollToAnchor.tsx) - Компонент, который прокручивает страницу к элементу, указанному в URL по хешу. Этот функционла есть в готовый компонент из `react-router-dom` — `<ScrollRestoration />`
 
+[InputDate.tsx](src/components/ui/InputDate/InputDate.tsx) - Компонент ввода даты. Ввод компонентов даты по отдельности, 3 инпута.
+
 ## Хуки
 
 ### Стандартные хуки
