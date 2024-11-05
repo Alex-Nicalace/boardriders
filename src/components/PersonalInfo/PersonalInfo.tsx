@@ -1,33 +1,24 @@
 import { formaterDateShort } from '../../utils/formaters';
 import './PersonalInfo.scss';
 
-enum SEX {
-  Женский,
-  Мужской,
-}
-
 type TPersonalInfoProps = {
   className?: string;
-  fullName?: string;
-  sex?: SEX;
-  dateBirth?: Date;
-  phone?: string;
-  email?: string;
-  password?: string;
+  data: {
+    fullName?: string;
+    sex?: string;
+    dateBirth?: Date;
+    phone?: string;
+    email?: string;
+    password?: string;
+  };
 };
-function PersonalInfo({
-  className,
-  fullName,
-  sex,
-  dateBirth,
-  phone,
-  email,
-  password,
-}: TPersonalInfoProps): JSX.Element {
+function PersonalInfo({ className, data }: TPersonalInfoProps): JSX.Element {
+  const { fullName, sex, dateBirth, phone, email, password } = data;
+
   return (
     <div className={['personal-info', className].filter(Boolean).join(' ')}>
       {fullName && <p>{fullName}</p>}
-      {sex && <p>{SEX[sex]}</p>}
+      {sex && <p>{sex}</p>}
       {dateBirth && <p>{formaterDateShort(dateBirth)}</p>}
       {phone && <p>{phone}</p>}
       {email && <p>{email}</p>}
