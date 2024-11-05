@@ -1,22 +1,6 @@
-import { ReactNode, useId, useRef, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import './InputDate.scss';
-import { CustomError } from '../../../utils/CustomError';
-
-class InputDateError extends CustomError {}
-
-type TPartsDate = [string, string, string];
-
-type TInputDateProps = {
-  className?: string;
-  label?: ReactNode;
-  error?: ReactNode;
-  hint?: ReactNode;
-  id?: string;
-  name?: string;
-  defaultValue?: Date | null;
-  // value?: Date;
-  onChange?: (value: Date | null) => void;
-};
+import { InputDateError, TInputDateProps, TPartsDate } from './InputDate.types';
 
 // * компонент делал смотря структуру InputText.tsx
 
@@ -66,6 +50,18 @@ function convertArrayToDate([day, month, preYear]: TPartsDate) {
   return date;
 }
 
+const DATE_PARTS = [
+  {
+    placeholder: 'дд.',
+  },
+  {
+    placeholder: 'мм.',
+  },
+  {
+    placeholder: 'гг.',
+  },
+];
+
 function InputDate({
   className,
   label,
@@ -73,8 +69,10 @@ function InputDate({
   error,
   hint,
   defaultValue,
-  onChange,
   name,
+  disabled,
+  onChange,
+  onBlur,
 }: TInputDateProps): JSX.Element {
   const [partsDate, setPartsDate] = useState<TPartsDate>(() => {
     if (defaultValue) {
@@ -87,18 +85,6 @@ function InputDate({
   const initId = useId();
   const id = propId || initId;
   const itemsRef = useRef<Map<number, HTMLInputElement> | null>(null);
-
-  const dateParts = [
-    {
-      placeholder: 'дд.',
-    },
-    {
-      placeholder: 'мм.',
-    },
-    {
-      placeholder: 'гг.',
-    },
-  ];
 
   /**
    * Возвращает Map itemsRef, инициализируя ее, если она не существует.
@@ -222,11 +208,20 @@ function InputDate({
     }
   }
 
+  function handleBlur(e: React.FocusEvent<HTMLDivElement, Element>) {
+    const isBlur =
+      e.relatedTarget instanceof HTMLInputElement &&
+      ![...getMapItemsRef().values()].includes(e.relatedTarget);
+
+    isBlur && onBlur?.(e);
+  }
+
   return (
     <div
       className={['input-date', isInvalid && 'input-date_invalid', className]
         .filter(Boolean)
         .join(' ')}
+      onBlur={handleBlur}
     >
       <input
         className="input-date__value"
@@ -235,35 +230,34 @@ function InputDate({
         aria-hidden
         tabIndex={-1}
         defaultValue={date ? date.toISOString().split('T')[0] : ''}
+        disabled={disabled}
       />
-      {(label || error) && (
-        <div className="input-date__box-label">
-          {label && (
-            <label htmlFor={id} className="input-date__label">
-              {label}
-            </label>
-          )}
-          {error && <p className="input-date__error">{error}</p>}
-        </div>
+      {label && (
+        <label htmlFor={id} className="input-date__label">
+          {label}
+        </label>
       )}
       <div className="input-date__box-inputs">
-        {dateParts.map(({ placeholder }, index) => (
+        {DATE_PARTS.map(({ placeholder }, index) => (
           <input
             key={index}
             className="input-date__input"
-            id={index === 0 ? id : undefined}
-            placeholder={placeholder}
-            value={partsDate[index]}
-            onChange={(e) => handleOnChange(e, index)}
-            onKeyDown={(e) => handleOnKeyDown(e, index)}
             ref={(node) =>
               getMapItemsRef().set(index, node as HTMLInputElement)
             }
             tabIndex={index === 0 ? 0 : -1}
+            id={index === 0 ? id : undefined}
+            placeholder={placeholder}
+            value={partsDate[index]}
+            disabled={disabled}
+            inputMode="numeric"
+            onChange={(e) => handleOnChange(e, index)}
+            onKeyDown={(e) => handleOnKeyDown(e, index)}
           />
         ))}
       </div>
-      {hint && <p className="input-date__hint">{hint}</p>}
+      {hint && !error && <p className="input-date__hint">{hint}</p>}
+      {error && <p className="input-date__error">{error}</p>}
     </div>
   );
 }

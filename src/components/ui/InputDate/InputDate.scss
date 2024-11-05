@@ -1,6 +1,9 @@
 @import '/src/styles/global-scss.scss';
 
 .input-date {
+  display: flex;
+  flex-direction: column;
+  row-gap: rem(5);
   --input-date-border-color: var(--gray);
   width: rem(190);
   outline: none;
@@ -14,17 +17,16 @@
       --input-date-border-color: var(--black);
     }
   }
-  // .input-date__box-label
-  &__box-label {
-    margin-bottom: rem(5);
-  }
   // .input-date__label
   &__label {
+    // margin-bottom: rem(5);
     @extend %caption;
     color: var(--dark-gray);
   }
   // .input-date__error
   &__error {
+    @extend %caption-1;
+    color: var(--red);
   }
   // .input-date__value
   &__value {

@@ -1,4 +1,5 @@
 import InputDate from './InputDate';
+import InputDateControl from './InputDateControl';
 
 export default InputDate;
-export * from './InputDate';
+export { InputDateControl };
