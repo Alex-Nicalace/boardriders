@@ -5,12 +5,11 @@ import Title from '../ui/Title';
 import './AccountPersanalData.scss';
 import ToggleablePersonaData from '../ToggleablePersonaData';
 import TabsBlock from '../TabsBlock';
+import { TAccountPersanalDataProps } from './AccountPersanalData.types';
 
-type TAccountPersanalDataProps = {
-  className?: string;
-};
 function AccountPersanalData({
   className,
+  data,
 }: TAccountPersanalDataProps): JSX.Element {
   const [activeTab, setActiveTab] = useState(0);
   const [isEditPersonalData, setIsEditPersonalData] = useState(false);
@@ -22,6 +21,7 @@ function AccountPersanalData({
       content: (
         <ToggleablePersonaData
           mode="personal-data"
+          values={data}
           isEdit={isEditPersonalData}
           onToggle={setIsEditPersonalData}
         />
@@ -32,6 +32,7 @@ function AccountPersanalData({
       content: (
         <ToggleablePersonaData
           mode="change-password"
+          values={{ oldPassword: '*'.repeat(15) }}
           isEdit={isEditPassword}
           onToggle={setIsEditPassword}
         />

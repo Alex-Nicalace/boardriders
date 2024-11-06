@@ -9,6 +9,9 @@ export type TSignupParams = TLoginParams & {
 
 export type TUserMetaData = {
   fullName?: string;
+  firstName?: string;
+  lastName?: string;
+  middleName?: string;
   avatar?: string;
   dateBirth?: string;
   phone?: string;

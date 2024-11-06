@@ -24,6 +24,7 @@ function FormPersanalData({
   className,
   mode,
   disabled,
+  values,
   onSubmit,
 }: TFormPersanalDataProps): JSX.Element {
   const {
@@ -33,7 +34,7 @@ function FormPersanalData({
     formState: { errors },
     setValue,
     watch,
-  } = useForm<TFormInputs<typeof mode>>();
+  } = useForm({ values });
 
   function onSubmitHandle(data: TFormInputs<typeof mode>) {
     onSubmit?.(data);
@@ -98,7 +99,7 @@ function FormPersanalData({
               label="Дата рождения*"
               disabled={disabled}
               control={control}
-              name="birthday"
+              name="dateBirth"
               rules={{ required: MSG_REQUIRED }}
             />
           </div>

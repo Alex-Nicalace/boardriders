@@ -1,4 +1,4 @@
 import ToggleablePersonaData from './ToggleablePersonaData';
+export type * from './ToggleablePersonaData.types';
 
 export default ToggleablePersonaData;
-export * from './ToggleablePersonaData';

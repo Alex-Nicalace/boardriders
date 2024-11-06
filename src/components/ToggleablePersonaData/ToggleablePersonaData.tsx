@@ -1,34 +1,35 @@
-import { ComponentProps } from 'react';
 import './ToggleablePersonaData.scss';
 import FormPersanalData from '../FormPersanalData';
 import PersonalInfo from '../PersonalInfo';
+import { formaterDateShort } from '../../utils/formaters';
+import {
+  TKeysForPersonalInfo,
+  TToggleablePersonaDataProps,
+} from './ToggleablePersonaData.types';
 
-const PERSONAL_INFO = {
-  fullName: 'Иванов Иван Иванович',
-  sex: 1,
-  dateBirth: new Date('1988-10-15'),
-  phone: '+7 (950) 145 22 55',
-  email: 'ivanov@gmail.com',
-};
-const PERSONAL_PASSWORD = {
-  password: '12345678',
-};
+const KEYS_FOR_PERSONAL_INFO: TKeysForPersonalInfo[] = [
+  'fullName',
+  'sex',
+  'dateBirth',
+  'phone',
+  'email',
+];
 
-type TMode = ComponentProps<typeof FormPersanalData>['mode'];
-type TToggleablePersonaDataProps = {
-  className?: string;
-  mode: TMode;
-  isEdit: boolean;
-  onToggle?: (value: boolean) => void;
-};
 function ToggleablePersonaData({
   className,
-  mode,
   isEdit,
   onToggle,
+  ...props
 }: TToggleablePersonaDataProps): JSX.Element {
-  const personalInfoProps =
-    mode === 'personal-data' ? PERSONAL_INFO : PERSONAL_PASSWORD;
+  const personalInfoProps = (
+    props.mode === 'personal-data'
+      ? KEYS_FOR_PERSONAL_INFO.map((item) =>
+          props.values[item] instanceof Date
+            ? formaterDateShort(props.values[item])
+            : props.values[item]
+        )
+      : [props.values.oldPassword]
+  ).filter((item): item is string => Boolean(item));
 
   return (
     <div
@@ -38,15 +39,15 @@ function ToggleablePersonaData({
     >
       {isEdit ? (
         <FormPersanalData
+          {...props}
           className="toggleable-persona-data__form"
-          mode={mode}
           onSubmit={() => onToggle?.(false)}
         />
       ) : (
         <>
           <PersonalInfo
             className="toggleable-persona-data__personal-info"
-            {...personalInfoProps}
+            data={personalInfoProps}
           />
           <button
             className="toggleable-persona-data__btn"

@@ -5,9 +5,9 @@ import PageContent from '../../components/PageContent';
 import Title from '../../components/ui/Title';
 import TabsBlock from '../../components/TabsBlock';
 import AccountMainData from '../../components/AccountMainData';
-import AccountPersanalData from '../../components/AccountPersanalData';
 import AccountAddressData from '../../components/AccountAddressData';
 import AccountOrderDataContainer from '../../features/makeOrder/AccountOrderDataContainer';
+import AccountPersanalDataContainer from '../../features/authentication/AccountPersanalDataContainer';
 
 type TAccountPageProps = {
   className?: string;
@@ -30,7 +30,7 @@ function AccountPage({ className }: TAccountPageProps): JSX.Element {
       content: <AccountMainData setActiveTab={handleTabChange} />,
     },
     { label: 'Мои заказы', content: <AccountOrderDataContainer /> },
-    { label: 'Личная информация', content: <AccountPersanalData /> },
+    { label: 'Личная информация', content: <AccountPersanalDataContainer /> },
     { label: 'Мои адреса', content: <AccountAddressData /> },
     { label: 'Подписка на новости', content: <>не реализовано</> },
   ];
