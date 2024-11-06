@@ -1,8 +1,10 @@
+import AccounPersanalDataProvider from '../../features/authentication/AccounPersanalDataProvider';
 import ShoppngListContainer from '../../features/cart/ShoppngListContainer';
 import OrderStatusListContainer from '../../features/makeOrder/OrderStatusListContainer';
 import FavouriteListContainer from '../../features/wishList/FavouriteListContainer';
+import { formaterDateShort } from '../../utils/formaters';
 import AddressList from '../AddressList';
-import PersonalInfo from '../PersonalInfo';
+import PersonalInfo, { KEYS_FOR_PERSONAL_INFO } from '../PersonalInfo';
 import StatCard from '../StatCard';
 import './AccountMainData.scss';
 
@@ -11,15 +13,6 @@ const ADDRESS_LIST = [
   'Россия, Московская обл., Москва, ул. Академика Королева, 12, кв 52 56004',
   'Россия, Московская обл., Москва, пр. Ленина, 5, кв 36 235561',
 ];
-
-const PERSONAL_INFO = {
-  fullName: 'Иванов Иван Иванович',
-  sex: 1,
-  password: '12345678',
-  dateBirth: new Date('1988-10-15'),
-  phone: '+7 (950) 145 22 55',
-  email: 'ivanov@gmail.com',
-};
 
 type TAccountMainDataProps = { setActiveTab: (tab: number) => void };
 function AccountMainData({ setActiveTab }: TAccountMainDataProps): JSX.Element {
@@ -47,9 +40,21 @@ function AccountMainData({ setActiveTab }: TAccountMainDataProps): JSX.Element {
       title: 'Личная информация',
       labelTarget: 'Редактировать',
       element: (
-        <PersonalInfo
-          className="account-main-data__personal-info"
-          {...PERSONAL_INFO}
+        <AccounPersanalDataProvider
+          render={(personalData) => {
+            const data = KEYS_FOR_PERSONAL_INFO.map((item) =>
+              personalData[item] instanceof Date
+                ? formaterDateShort(personalData[item])
+                : personalData[item]
+            ).filter((item): item is string => Boolean(item));
+            data.push(`Пароль: ${'*'.repeat(15)}`);
+            return (
+              <PersonalInfo
+                className="account-main-data__personal-info"
+                data={data}
+              />
+            );
+          }}
         />
       ),
       onClickTarget: () => setActiveTab(2),

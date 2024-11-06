@@ -1,19 +1,8 @@
 import './ToggleablePersonaData.scss';
 import FormPersanalData from '../FormPersanalData';
-import PersonalInfo from '../PersonalInfo';
+import PersonalInfo, { KEYS_FOR_PERSONAL_INFO } from '../PersonalInfo';
 import { formaterDateShort } from '../../utils/formaters';
-import {
-  TKeysForPersonalInfo,
-  TToggleablePersonaDataProps,
-} from './ToggleablePersonaData.types';
-
-const KEYS_FOR_PERSONAL_INFO: TKeysForPersonalInfo[] = [
-  'fullName',
-  'sex',
-  'dateBirth',
-  'phone',
-  'email',
-];
+import { TToggleablePersonaDataProps } from './ToggleablePersonaData.types';
 
 function ToggleablePersonaData({
   className,
