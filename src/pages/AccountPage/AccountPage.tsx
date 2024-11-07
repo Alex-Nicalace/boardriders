@@ -7,7 +7,6 @@ import TabsBlock from '../../components/TabsBlock';
 import AccountMainData from '../../components/AccountMainData';
 import AccountAddressData from '../../components/AccountAddressData';
 import AccountOrderDataContainer from '../../features/makeOrder/AccountOrderDataContainer';
-import AccounPersanalDataProvider from '../../features/authentication/AccounPersanalDataProvider';
 import AccountPersanalData from '../../components/AccountPersanalData';
 
 type TAccountPageProps = {
@@ -33,13 +32,7 @@ function AccountPage({ className }: TAccountPageProps): JSX.Element {
     { label: 'Мои заказы', content: <AccountOrderDataContainer /> },
     {
       label: 'Личная информация',
-      content: (
-        <AccounPersanalDataProvider
-          render={(data) => (
-            <AccountPersanalData className={className} data={data} />
-          )}
-        />
-      ),
+      content: <AccountPersanalData />,
     },
     { label: 'Мои адреса', content: <AccountAddressData /> },
     { label: 'Подписка на новости', content: <>не реализовано</> },

@@ -9,34 +9,17 @@ import { TAccountPersanalDataProps } from './AccountPersanalData.types';
 
 function AccountPersanalData({
   className,
-  data,
 }: TAccountPersanalDataProps): JSX.Element {
   const [activeTab, setActiveTab] = useState(0);
-  const [isEditPersonalData, setIsEditPersonalData] = useState(false);
-  const [isEditPassword, setIsEditPassword] = useState(false);
   const { isLessMobile } = useScreenWidth();
   const tabs = [
     {
       label: 'Личные данные',
-      content: (
-        <ToggleablePersonaData
-          mode="personal-data"
-          values={data}
-          isEdit={isEditPersonalData}
-          onToggle={setIsEditPersonalData}
-        />
-      ),
+      content: <ToggleablePersonaData mode="personal-data" />,
     },
     {
       label: 'Пароль',
-      content: (
-        <ToggleablePersonaData
-          mode="change-password"
-          values={{ oldPassword: '*'.repeat(15) }}
-          isEdit={isEditPassword}
-          onToggle={setIsEditPassword}
-        />
-      ),
+      content: <ToggleablePersonaData mode="change-password" />,
     },
   ];
 

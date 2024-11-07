@@ -14,7 +14,12 @@ export type TUserMetaData = {
   middleName?: string;
   avatar?: string;
   dateBirth?: string;
+  sex?: string;
+
   phone?: string;
   email?: string;
-  sex?: string;
+};
+
+export type TUpdateCurrentUserArgs = TUserMetaData & {
+  password?: string;
 };

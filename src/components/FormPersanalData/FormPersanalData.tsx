@@ -6,8 +6,6 @@ import './FormPersanalData.scss';
 import Button from '../ui/Button';
 import InputPasword from '../ui/InputPasword';
 import {
-  TChangePasswordInputs,
-  TFormInputs,
   TFormPersanalDataProps,
   TPersanalDataInputs,
 } from './FormPersanalData.types';
@@ -36,7 +34,7 @@ function FormPersanalData({
     watch,
   } = useForm({ values });
 
-  function onSubmitHandle(data: TFormInputs<typeof mode>) {
+  function onSubmitHandle(data: TPersanalDataInputs) {
     onSubmit?.(data);
   }
 
@@ -146,21 +144,15 @@ function FormPersanalData({
             disabled={disabled}
             defaultPasswordShow
             {...register('oldPassword', { required: MSG_REQUIRED })}
-            error={
-              (errors as FieldErrors<TChangePasswordInputs>).oldPassword
-                ?.message
-            }
+            error={errors.oldPassword?.message}
           />
           <InputPasword
             label={`Новый пароль (мин. ${PASSWORD_MIN_LENGTH} символов)*`}
             isGrayLabel
             fullWidth
             disabled={disabled}
-            error={
-              (errors as FieldErrors<TChangePasswordInputs>).newPassword
-                ?.message
-            }
-            {...register('newPassword', {
+            error={errors.password?.message}
+            {...register('password', {
               required: MSG_REQUIRED,
               minLength: {
                 value: PASSWORD_MIN_LENGTH,
@@ -173,20 +165,16 @@ function FormPersanalData({
             isGrayLabel
             disabled={disabled}
             fullWidth
-            error={
-              (errors as FieldErrors<TChangePasswordInputs>).confirmPassword
-                ?.message
-            }
+            error={errors.confirmPassword?.message}
             {...register('confirmPassword', {
               required: MSG_REQUIRED,
               validate: (value, formValues) =>
-                value === (formValues as TChangePasswordInputs).newPassword ||
-                'Пароли не совпадают',
+                value === formValues.password || 'Пароли не совпадают',
             })}
           />
         </>
       )}
-      <Button className="form-persanal-data__btn" fullWidth>
+      <Button className="form-persanal-data__btn" fullWidth disabled={disabled}>
         {mode === 'personal-data' && 'Сохранить'}
         {mode === 'change-password' && ' Изменить пароль'}
       </Button>

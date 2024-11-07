@@ -41,7 +41,7 @@ function AccountMainData({ setActiveTab }: TAccountMainDataProps): JSX.Element {
       labelTarget: 'Редактировать',
       element: (
         <AccounPersanalDataProvider
-          render={(personalData) => {
+          render={({ data: personalData }) => {
             const data = KEYS_FOR_PERSONAL_INFO.map((item) =>
               personalData[item] instanceof Date
                 ? formaterDateShort(personalData[item])

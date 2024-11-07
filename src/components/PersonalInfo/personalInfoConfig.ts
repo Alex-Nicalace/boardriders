@@ -1,6 +1,6 @@
-import { TKeysForPersonalInfo } from '../ToggleablePersonaData';
+import { TKeysAccounPersonalData } from '../../features/authentication/authentication.types';
 
-export const KEYS_FOR_PERSONAL_INFO: TKeysForPersonalInfo[] = [
+export const KEYS_FOR_PERSONAL_INFO: TKeysAccounPersonalData[] = [
   'fullName',
   'sex',
   'dateBirth',

@@ -1,11 +1,10 @@
 export type TFormPersanalDataProps = {
   className?: string;
+  mode: 'personal-data' | 'change-password';
+  values: TPersanalDataInputs;
   disabled?: boolean;
-  onSubmit?: (data: TFormInputs<TFormPersanalDataProps['mode']>) => void;
-} & (
-  | { mode: 'personal-data'; values: TPersanalDataInputs }
-  | { mode: 'change-password'; values: TChangePasswordInputs }
-);
+  onSubmit?: (data: TPersanalDataInputs) => void;
+};
 
 export type TPersanalDataInputs = {
   firstName?: string;
@@ -15,15 +14,8 @@ export type TPersanalDataInputs = {
   phone?: string;
   email?: string;
   dateBirth?: Date | null;
-};
 
-export type TChangePasswordInputs = {
   oldPassword?: string;
-  newPassword?: string;
+  password?: string;
   confirmPassword?: string;
 };
-
-// Типизация формы на основе значения mode
-export type TFormInputs<T> = T extends 'personal-data'
-  ? TPersanalDataInputs
-  : TChangePasswordInputs;
