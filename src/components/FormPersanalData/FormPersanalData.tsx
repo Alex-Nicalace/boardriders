@@ -143,16 +143,16 @@ function FormPersanalData({
             isGrayLabel
             disabled={disabled}
             defaultPasswordShow
-            {...register('oldPassword', { required: MSG_REQUIRED })}
-            error={errors.oldPassword?.message}
+            {...register('currentPassword', { required: MSG_REQUIRED })}
+            error={errors.currentPassword?.message}
           />
           <InputPasword
             label={`Новый пароль (мин. ${PASSWORD_MIN_LENGTH} символов)*`}
             isGrayLabel
             fullWidth
             disabled={disabled}
-            error={errors.password?.message}
-            {...register('password', {
+            error={errors.newPassword?.message}
+            {...register('newPassword', {
               required: MSG_REQUIRED,
               minLength: {
                 value: PASSWORD_MIN_LENGTH,
@@ -169,7 +169,7 @@ function FormPersanalData({
             {...register('confirmPassword', {
               required: MSG_REQUIRED,
               validate: (value, formValues) =>
-                value === formValues.password || 'Пароли не совпадают',
+                value === formValues.newPassword || 'Пароли не совпадают',
             })}
           />
         </>

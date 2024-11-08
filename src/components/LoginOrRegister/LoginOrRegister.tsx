@@ -40,6 +40,7 @@ function LoginOrRegister({
               className="login-or-register__form"
               withTitle
               onSuccessLogin={onSuccess}
+              onSuccessRegister={onSuccess}
             />
           ))}
         </div>
@@ -58,7 +59,10 @@ function LoginOrRegister({
           </TabsBlock>
           {TABS.map(({ Component, title }, index) => (
             <TabPanel key={title} index={index} value={activeTab}>
-              <Component onSuccessLogin={onSuccess} />
+              <Component
+                onSuccessLogin={onSuccess}
+                onSuccessRegister={onSuccess}
+              />
             </TabPanel>
           ))}
         </div>

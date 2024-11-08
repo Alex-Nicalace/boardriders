@@ -20,6 +20,14 @@ export type TUserMetaData = {
   email?: string;
 };
 
-export type TUpdateCurrentUserArgs = TUserMetaData & {
-  password?: string;
-};
+export type TUpdateCurrentUserArgs = TUserMetaData &
+  (
+    | {
+        currentPassword: string;
+        newPassword: string;
+      }
+    | {
+        currentPassword?: never;
+        newPassword?: never;
+      }
+  );

@@ -15,7 +15,7 @@ export type TPersanalDataInputs = {
   email?: string;
   dateBirth?: Date | null;
 
-  oldPassword?: string;
-  password?: string;
+  currentPassword?: string;
+  newPassword?: string;
   confirmPassword?: string;
 };
