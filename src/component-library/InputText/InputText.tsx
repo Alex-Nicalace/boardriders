@@ -18,6 +18,7 @@ const InputText = forwardRef<
       className,
       bemBlockName = 'input-text',
       fullWidth = false,
+      positionError = 'top-right',
       ...props
     },
     ref
@@ -43,7 +44,9 @@ const InputText = forwardRef<
                 {label}
               </label>
             )}
-            {error && <p className={`${bemBlockName}__error`}>{error}</p>}
+            {error && positionError === 'top-right' && (
+              <p className={`${bemBlockName}__error`}>{error}</p>
+            )}
           </div>
         )}
         <div className={`${bemBlockName}__wrap`}>
@@ -80,7 +83,11 @@ const InputText = forwardRef<
             </div>
           )}
         </div>
-        {hint && <p className={`${bemBlockName}__hint`}>{hint}</p>}
+        {error && positionError === 'bottom' ? (
+          <p className={`${bemBlockName}__error`}>{error}</p>
+        ) : (
+          hint && <p className={`${bemBlockName}__hint`}>{hint}</p>
+        )}
       </div>
     );
   }

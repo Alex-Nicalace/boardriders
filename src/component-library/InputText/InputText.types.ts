@@ -9,6 +9,7 @@ export type TInputTextCommonProps = {
   hint?: React.ReactNode;
   bemBlockName?: string;
   fullWidth?: boolean;
+  positionError?: 'top-right' | 'bottom';
 };
 
 type TInputProps = React.DetailedHTMLProps<
