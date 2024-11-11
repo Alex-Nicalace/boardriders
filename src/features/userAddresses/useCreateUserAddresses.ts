@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { createUserAddresses as createUserAddressesApi } from '../../services/apiUserAddresses/createUserAddresses';
+import { createUserAddresses as createUserAddressesApi } from '../../services/apiUserAddresses';
 import { TUserAddresses } from './userAddresses.types';
 
 export function useCreateUserAddresses() {

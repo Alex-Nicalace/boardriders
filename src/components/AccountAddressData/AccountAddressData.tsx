@@ -30,12 +30,23 @@ function AccountAddressData({
   data,
   isPending,
   createAddress,
+  updateAddress,
 }: TAccountAddressDataProps): JSX.Element {
   const handleCreateAddress =
     (close: () => void) => (address: TFormAddressInputs) => {
       createAddress(address, {
         onSuccess: () => close(),
       });
+    };
+
+  const handleUpdateAddress =
+    (close: () => void, id: number) => (row: TFormAddressInputs) => {
+      updateAddress(
+        { id, row },
+        {
+          onSuccess: () => close(),
+        }
+      );
     };
 
   return (
@@ -79,6 +90,7 @@ function AccountAddressData({
                       <FormAddress
                         addressToEdit={address}
                         disabled={isPending}
+                        onSubmit={handleUpdateAddress(close, address.id)}
                       />
                     </ModalWrap>
                   )}

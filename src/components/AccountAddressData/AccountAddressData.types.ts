@@ -1,4 +1,5 @@
 import { useCreateUserAddresses } from '../../features/userAddresses/useCreateUserAddresses';
+import { useUpdateUserAddresses } from '../../features/userAddresses/useUpdateUserAddresses';
 
 export type TAddress = {
   apartment: string | null;
@@ -20,4 +21,7 @@ export type TAccountAddressDataProps = {
   createAddress: ReturnType<
     typeof useCreateUserAddresses
   >['createUserAddresses'];
+  updateAddress: ReturnType<
+    typeof useUpdateUserAddresses
+  >['updateUserAddresses'];
 };
