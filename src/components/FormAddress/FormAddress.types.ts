@@ -11,5 +11,6 @@ export type TFormAddressInputs = {
 export type TFormAddressProps = {
   className?: string;
   addressToEdit?: TFormAddressInputs;
+  disabled?: boolean;
   onSubmit?: (data: TFormAddressInputs) => void;
 };

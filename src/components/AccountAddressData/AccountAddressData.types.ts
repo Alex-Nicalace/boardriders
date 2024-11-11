@@ -1,3 +1,5 @@
+import { useCreateUserAddresses } from '../../features/userAddresses/useCreateUserAddresses';
+
 export type TAddress = {
   apartment: string | null;
   city: string;
@@ -14,4 +16,8 @@ export type TKeysAddress = keyof TAddress;
 export type TAccountAddressDataProps = {
   className?: string;
   data: TAddress[];
+  isPending?: boolean;
+  createAddress: ReturnType<
+    typeof useCreateUserAddresses
+  >['createUserAddresses'];
 };

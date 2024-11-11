@@ -1,7 +1,10 @@
 import supabase from '../supabase';
 
 export async function getUserAddresses() {
-  const { data, error } = await supabase.from('userAddresses').select('*');
+  const { data, error } = await supabase
+    .from('userAddresses')
+    .select('*')
+    .order('createdAt');
 
   if (error) {
     console.error(error);

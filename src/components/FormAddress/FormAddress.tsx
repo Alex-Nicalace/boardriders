@@ -12,6 +12,7 @@ import { MSG_REQUIRED } from '../../constants';
 function FormAddress({
   className,
   addressToEdit,
+  disabled,
   onSubmit = () => {},
 }: TFormAddressProps): JSX.Element {
   const { isLessMobileSmall } = useScreenWidth();
@@ -29,7 +30,7 @@ function FormAddress({
       onSubmit={handleSubmit(onSubmit)}
     >
       <h1 className="form-address__title">Добавить адрес</h1>
-      <div className="form-address__fields">
+      <fieldset className="form-address__fields" disabled={disabled}>
         <InputStyled
           label="Страна"
           isGrayLabel
@@ -71,9 +72,11 @@ function FormAddress({
             {...register('apartment')}
           />
         </div>
-      </div>
+      </fieldset>
       <div className="form-address__btn">
-        <Button fullWidth>Добавить</Button>
+        <Button fullWidth disabled={disabled}>
+          {addressToEdit ? 'Сохранить' : 'Добавить'}
+        </Button>
       </div>
     </form>
   );

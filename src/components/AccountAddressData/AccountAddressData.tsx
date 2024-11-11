@@ -1,5 +1,5 @@
 import Popup from '../../component-library/Popup';
-import FormAddress from '../FormAddress';
+import FormAddress, { TFormAddressInputs } from '../FormAddress';
 import ModalWrap from '../ModalWrap';
 import Title from '../ui/Title';
 import './AccountAddressData.scss';
@@ -28,7 +28,16 @@ function formaterAddress(address: TAddress) {
 function AccountAddressData({
   className,
   data,
+  isPending,
+  createAddress,
 }: TAccountAddressDataProps): JSX.Element {
+  const handleCreateAddress =
+    (close: () => void) => (address: TFormAddressInputs) => {
+      createAddress(address, {
+        onSuccess: () => close(),
+      });
+    };
+
   return (
     <div
       className={['account-address-data', className].filter(Boolean).join(' ')}
@@ -67,7 +76,10 @@ function AccountAddressData({
                   windowName="address-edit"
                   render={(close) => (
                     <ModalWrap close={close} withDecorFrame>
-                      <FormAddress addressToEdit={address} />
+                      <FormAddress
+                        addressToEdit={address}
+                        disabled={isPending}
+                      />
                     </ModalWrap>
                   )}
                   transitionEffect={['fade']}
@@ -95,7 +107,10 @@ function AccountAddressData({
         windowName="address-add"
         render={(close) => (
           <ModalWrap close={close} withDecorFrame>
-            <FormAddress />
+            <FormAddress
+              disabled={isPending}
+              onSubmit={handleCreateAddress(close)}
+            />
           </ModalWrap>
         )}
         transitionEffect={['fade']}
