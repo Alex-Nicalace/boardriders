@@ -1,4 +1,5 @@
 import { useCreateUserAddresses } from '../../features/userAddresses/useCreateUserAddresses';
+import { useDeleteUserAddresses } from '../../features/userAddresses/useDeleteUserAddresses';
 import { useUpdateUserAddresses } from '../../features/userAddresses/useUpdateUserAddresses';
 
 export type TAddress = {
@@ -24,4 +25,7 @@ export type TAccountAddressDataProps = {
   updateAddress: ReturnType<
     typeof useUpdateUserAddresses
   >['updateUserAddresses'];
+  deleteAddress: ReturnType<
+    typeof useDeleteUserAddresses
+  >['deleteUserAddresses'];
 };

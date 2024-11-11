@@ -3,6 +3,7 @@ import Empty from '../../components/Empty';
 import ErrorMessage from '../../components/ErrorMessage';
 import Spinner from '../../components/Spinner';
 import { useCreateUserAddresses } from './useCreateUserAddresses';
+import { useDeleteUserAddresses } from './useDeleteUserAddresses';
 import { useUpdateUserAddresses } from './useUpdateUserAddresses';
 import { useUserAddresses } from './useUserAddresses';
 
@@ -11,7 +12,8 @@ function AccountAddressDataContainer(/*{ }: TAccountAddressDataContainerProps*/)
   const { userAddresses = [], isLoading, error } = useUserAddresses();
   const { createUserAddresses, isCreating } = useCreateUserAddresses();
   const { updateUserAddresses, isUpdating } = useUpdateUserAddresses();
-  const isPending = isCreating || isUpdating;
+  const { deleteUserAddresses, isDeleting } = useDeleteUserAddresses();
+  const isPending = isCreating || isUpdating || isDeleting;
 
   if (isLoading) return <Spinner />;
 
@@ -25,6 +27,7 @@ function AccountAddressDataContainer(/*{ }: TAccountAddressDataContainerProps*/)
       isPending={isPending}
       createAddress={createUserAddresses}
       updateAddress={updateUserAddresses}
+      deleteAddress={deleteUserAddresses}
     />
   );
 }

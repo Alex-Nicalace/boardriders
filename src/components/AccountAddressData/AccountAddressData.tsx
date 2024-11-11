@@ -31,6 +31,7 @@ function AccountAddressData({
   isPending,
   createAddress,
   updateAddress,
+  deleteAddress,
 }: TAccountAddressDataProps): JSX.Element {
   const handleCreateAddress =
     (close: () => void) => (address: TFormAddressInputs) => {
@@ -80,7 +81,10 @@ function AccountAddressData({
                   )}
                 />
                 {/* // TODO: добавить модальное окно */}
-                <button className="account-address-data__btn-edit">
+                <button
+                  className="account-address-data__btn-edit"
+                  onClick={() => deleteAddress(address.id)}
+                >
                   Удалить
                 </button>
                 <Popup.Window
