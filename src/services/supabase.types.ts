@@ -704,6 +704,53 @@ export type Database = {
         };
         Relationships: [];
       };
+      userAddresses: {
+        Row: {
+          apartment: string | null;
+          city: string;
+          country: string;
+          createdAt: string;
+          house: string;
+          id: number;
+          index: string;
+          region: string | null;
+          street: string;
+          userId: string;
+        };
+        Insert: {
+          apartment?: string | null;
+          city: string;
+          country: string;
+          createdAt?: string;
+          house: string;
+          id?: number;
+          index: string;
+          region?: string | null;
+          street: string;
+          userId?: string;
+        };
+        Update: {
+          apartment?: string | null;
+          city?: string;
+          country?: string;
+          createdAt?: string;
+          house?: string;
+          id?: number;
+          index?: string;
+          region?: string | null;
+          street?: string;
+          userId?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'userAddresses_userId_fkey';
+            columns: ['userId'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
     };
     Views: {
       productImagesPrimary: {

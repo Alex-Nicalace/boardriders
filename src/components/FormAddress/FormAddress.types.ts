@@ -1,11 +1,11 @@
 export type TFormAddressInputs = {
   country: string;
-  region: string;
+  region: string | null;
   city: string;
   street: string;
   index: string;
   house: string;
-  apartment: string;
+  apartment: string | null;
 };
 
 export type TFormAddressProps = {

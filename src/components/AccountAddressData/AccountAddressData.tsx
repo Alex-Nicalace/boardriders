@@ -3,25 +3,39 @@ import FormAddress from '../FormAddress';
 import ModalWrap from '../ModalWrap';
 import Title from '../ui/Title';
 import './AccountAddressData.scss';
+import {
+  TAccountAddressDataProps,
+  TAddress,
+  TKeysAddress,
+} from './AccountAddressData.types';
 
-const ADDRESS_DATA = [
-  'Россия, Московская область, 08131, г. Москва, ул. Академика Королева, д. 12',
-  'Россия, Московская область, 08131, г. Москва, ул. Клары Цеткин, д. 8',
-];
+function formaterAddress(address: TAddress) {
+  const addressKeys: TKeysAddress[] = [
+    'country',
+    'region',
+    'index',
+    'city',
+    'street',
+    'house',
+    'apartment',
+  ];
+  return addressKeys
+    .map((key) => address[key])
+    .filter(Boolean)
+    .join(', ');
+}
 
-type TAccountAddressDataProps = {
-  className?: string;
-};
 function AccountAddressData({
   className,
+  data,
 }: TAccountAddressDataProps): JSX.Element {
   return (
     <div
       className={['account-address-data', className].filter(Boolean).join(' ')}
     >
       <ul className="account-address-data__list">
-        {ADDRESS_DATA.map((address, index) => (
-          <li className="account-address-data__item" key={address}>
+        {data.map((address, index) => (
+          <li className="account-address-data__item" key={address.id}>
             <Title
               className="account-address-data__title"
               as="h2"
@@ -29,7 +43,9 @@ function AccountAddressData({
             >
               {`Адрес ${index + 1}`}
             </Title>
-            <p className="account-address-data__text">{address}</p>
+            <p className="account-address-data__text">
+              {formaterAddress(address)}
+            </p>
             <div className="account-address-data__btns">
               <Popup>
                 <Popup.Open
@@ -47,7 +63,6 @@ function AccountAddressData({
                 <button className="account-address-data__btn-edit">
                   Удалить
                 </button>
-                {/* // TODO: надо подумать что передавать в редактируемое окно */}
                 <Popup.Window
                   windowName="address-edit"
                   render={(close) => (
