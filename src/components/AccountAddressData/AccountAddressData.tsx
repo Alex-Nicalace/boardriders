@@ -3,27 +3,8 @@ import FormAddress, { TFormAddressInputs } from '../FormAddress';
 import ModalWrap from '../ModalWrap';
 import Title from '../ui/Title';
 import './AccountAddressData.scss';
-import {
-  TAccountAddressDataProps,
-  TAddress,
-  TKeysAddress,
-} from './AccountAddressData.types';
-
-function formaterAddress(address: TAddress) {
-  const addressKeys: TKeysAddress[] = [
-    'country',
-    'region',
-    'index',
-    'city',
-    'street',
-    'house',
-    'apartment',
-  ];
-  return addressKeys
-    .map((key) => address[key])
-    .filter(Boolean)
-    .join(', ');
-}
+import { TAccountAddressDataProps } from './AccountAddressData.types';
+import { formaterAddress } from './formaterAddress';
 
 function AccountAddressData({
   className,

@@ -7,7 +7,8 @@ import TabsBlock from '../../components/TabsBlock';
 import AccountMainData from '../../components/AccountMainData';
 import AccountOrderDataContainer from '../../features/makeOrder/AccountOrderDataContainer';
 import AccountPersanalData from '../../components/AccountPersanalData';
-import AccountAddressDataContainer from '../../features/userAddresses/AccountAddressDataContainer';
+import AccountAddressDataProvider from '../../features/userAddresses/AccountAddressDataProvider';
+import AccountAddressData from '../../components/AccountAddressData';
 
 type TAccountPageProps = {
   className?: string;
@@ -34,7 +35,28 @@ function AccountPage({ className }: TAccountPageProps): JSX.Element {
       label: 'Личная информация',
       content: <AccountPersanalData />,
     },
-    { label: 'Мои адреса', content: <AccountAddressDataContainer /> },
+    {
+      label: 'Мои адреса',
+      content: (
+        <AccountAddressDataProvider
+          render={(
+            data,
+            isPending,
+            createUserAddresses,
+            updateUserAddresses,
+            deleteUserAddresses
+          ) => (
+            <AccountAddressData
+              data={data}
+              isPending={isPending}
+              createAddress={createUserAddresses}
+              updateAddress={updateUserAddresses}
+              deleteAddress={deleteUserAddresses}
+            />
+          )}
+        />
+      ),
+    },
     { label: 'Подписка на новости', content: <>не реализовано</> },
   ];
 

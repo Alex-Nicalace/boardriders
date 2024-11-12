@@ -1,18 +1,14 @@
 import AccounPersanalDataProvider from '../../features/authentication/AccounPersanalDataProvider';
 import ShoppngListContainer from '../../features/cart/ShoppngListContainer';
 import OrderStatusListContainer from '../../features/makeOrder/OrderStatusListContainer';
+import AccountAddressDataProvider from '../../features/userAddresses/AccountAddressDataProvider';
 import FavouriteListContainer from '../../features/wishList/FavouriteListContainer';
 import { formaterDateShort } from '../../utils/formaters';
+import { formaterAddress } from '../AccountAddressData';
 import AddressList from '../AddressList';
 import PersonalInfo, { KEYS_FOR_PERSONAL_INFO } from '../PersonalInfo';
 import StatCard from '../StatCard';
 import './AccountMainData.scss';
-
-const ADDRESS_LIST = [
-  'Россия, Московская обл., Москва, ул. Лизы Чайкиной, 1, кв 11 69006',
-  'Россия, Московская обл., Москва, ул. Академика Королева, 12, кв 52 56004',
-  'Россия, Московская обл., Москва, пр. Ленина, 5, кв 36 235561',
-];
 
 type TAccountMainDataProps = { setActiveTab: (tab: number) => void };
 function AccountMainData({ setActiveTab }: TAccountMainDataProps): JSX.Element {
@@ -62,7 +58,14 @@ function AccountMainData({ setActiveTab }: TAccountMainDataProps): JSX.Element {
     {
       title: 'Адреса',
       labelTarget: 'Редактировать',
-      element: <AddressList data={ADDRESS_LIST} />,
+      element: (
+        <AccountAddressDataProvider
+          render={(data) => {
+            const formatedData = data.map((item) => formaterAddress(item));
+            return <AddressList data={formatedData} />;
+          }}
+        />
+      ),
       onClickTarget: () => setActiveTab(3),
     },
   ];

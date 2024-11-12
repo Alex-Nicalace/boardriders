@@ -1,14 +1,15 @@
-import AccountAddressData from '../../components/AccountAddressData';
 import Empty from '../../components/Empty';
 import ErrorMessage from '../../components/ErrorMessage';
 import Spinner from '../../components/Spinner';
 import { useCreateUserAddresses } from './useCreateUserAddresses';
 import { useDeleteUserAddresses } from './useDeleteUserAddresses';
+import { TAccountAddressDataProviderProps } from './userAddresses.types';
 import { useUpdateUserAddresses } from './useUpdateUserAddresses';
 import { useUserAddresses } from './useUserAddresses';
 
-// type TAccountAddressDataContainerProps = { }
-function AccountAddressDataContainer(/*{ }: TAccountAddressDataContainerProps*/): JSX.Element {
+function AccountAddressDataProvider({
+  render,
+}: TAccountAddressDataProviderProps): JSX.Element {
   const { userAddresses = [], isLoading, error } = useUserAddresses();
   const { createUserAddresses, isCreating } = useCreateUserAddresses();
   const { updateUserAddresses, isUpdating } = useUpdateUserAddresses();
@@ -22,14 +23,16 @@ function AccountAddressDataContainer(/*{ }: TAccountAddressDataContainerProps*/)
   if (!userAddresses?.length) return <Empty resource="адреса" />;
 
   return (
-    <AccountAddressData
-      data={userAddresses}
-      isPending={isPending}
-      createAddress={createUserAddresses}
-      updateAddress={updateUserAddresses}
-      deleteAddress={deleteUserAddresses}
-    />
+    <>
+      {render(
+        userAddresses,
+        isPending,
+        createUserAddresses,
+        updateUserAddresses,
+        deleteUserAddresses
+      )}
+    </>
   );
 }
 
-export default AccountAddressDataContainer;
+export default AccountAddressDataProvider;
