@@ -1,5 +1,3 @@
-@import '/src/styles/global-scss.scss';
-
 .address-list {
   @include adaptiveValue('margin-top', 25, 10);
 

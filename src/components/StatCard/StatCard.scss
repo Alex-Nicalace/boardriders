@@ -1,5 +1,3 @@
-@import '/src/styles/global-scss.scss';
-
 .stat-card {
   min-height: rem(415);
   @include adaptiveValue('--padding-inline', 40, 20);

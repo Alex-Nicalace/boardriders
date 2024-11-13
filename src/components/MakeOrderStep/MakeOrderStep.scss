@@ -1,5 +1,3 @@
-@import '/src/styles/global-scss.scss';
-
 .make-order-step {
   @include adaptiveValue('padding', 25, 20);
   border: rem(2) solid var(--gray);

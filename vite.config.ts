@@ -14,4 +14,11 @@ export default defineConfig({
     svgr(),
     checker({ typescript: true }),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "src/styles/global-scss.scss";`,
+      },
+    },
+  },
 });

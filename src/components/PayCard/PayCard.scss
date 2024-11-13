@@ -1,5 +1,3 @@
-@import '/src/styles/global-scss.scss';
-
 .pay-card {
   // width: rem(68);
   @include adaptiveValue('width', 68, 53);

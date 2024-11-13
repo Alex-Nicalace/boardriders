@@ -1,4 +1,3 @@
-@use 'sass:math';
 //* Percent
 @function percent($px, $from) {
   $result: math.div($px, $from) * 100%;

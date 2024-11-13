@@ -1,12 +1,14 @@
-// * Подключение функций
-@import 'common/functions';
-//* Подключение переменных
-@import 'variables';
-//* Подключение миксинов
-@import 'common/mixins';
-//* Подключение шаблонов универсальных
-@import 'common/templates';
-//* Подключение шаблонов текущего проекта
-@import 'templates';
-// * Подключение миксинов брейкпоинтов
-@import 'common/breakpoints';
+@use 'sass:math';
+
+// * Подключение функций (SCSS переиспользуемый)
+@import './common/functions';
+//* Подключение переменных (SCSS под этот проект)
+@import './variables';
+//* Подключение миксинов (SCSS переиспользуемый)
+@import './common/mixins';
+//* Подключение шаблонов универсальных (SCSS переиспользуемый)
+@import './common/templates';
+//* Подключение шаблонов (SCSS под этот проект)
+@import './templates';
+// * Подключение миксинов брейкпоинтов (SCSS переиспользуемый)
+@import './common/breakpoints';

@@ -1,5 +1,3 @@
-@import '/src/styles/global-scss.scss';
-
 .cart-empty {
   @include adaptiveValue('padding-top', 150, 75);
   @include adaptiveValue('padding-bottom', 110, 30);

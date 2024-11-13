@@ -1,5 +1,3 @@
-@import '/src/styles/global-scss.scss';
-
 .delivery-courier {
   &__wrap-title {
     @include adaptiveValue('margin-top', 40, 20);

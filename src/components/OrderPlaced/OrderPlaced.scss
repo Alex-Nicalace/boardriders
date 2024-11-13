@@ -1,5 +1,3 @@
-@import '/src/styles/global-scss.scss';
-
 .order-placed {
   @include adaptiveValue('padding-top', 120, 75);
   @include adaptiveValue('padding-bottom', 85, 30);

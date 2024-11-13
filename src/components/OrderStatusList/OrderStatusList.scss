@@ -1,5 +1,3 @@
-@import '/src/styles/global-scss.scss';
-
 .order-status-list {
   @include adaptiveValue('padding-top', 10, 5);
 }

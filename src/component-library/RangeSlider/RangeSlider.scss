@@ -1,9 +1,6 @@
-@use 'sass:math';
-@import '/src/styles/global-scss.scss';
-
 .range-slider {
   $height-slider: 25;
-  padding: rem(math.div($height-slider, 2)) 0;
+  padding: calc(#{rem($height-slider)} / 2) 0;
   position: relative;
   // height: rem(4);
   color: var(--red);

@@ -1,5 +1,3 @@
-@import '/src/styles/global-scss.scss';
-
 .ware-card-cart {
   @include adaptiveValue('padding', 40, 20, $containerWidth, 992, 1);
   @include adaptiveValue('padding-left', 27, 7, $containerWidth, 992, 1);
