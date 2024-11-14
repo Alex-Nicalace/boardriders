@@ -39,6 +39,14 @@
     max-width: rem(184);
     flex-grow: 1;
   }
+  &__wrap-label {
+    display: flex;
+    justify-content: center;
+  }
+  &__error {
+    @extend %caption-1;
+    color: var(--red);
+  }
 
   &-column {
     &:focus-within {
@@ -74,6 +82,14 @@
     }
     &__btn {
       min-width: rem(278);
+    }
+    &__wrap-label {
+      display: flex;
+      justify-content: center;
+    }
+    &__error {
+      @extend %caption-1;
+      color: var(--red);
     }
   }
 }

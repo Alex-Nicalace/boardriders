@@ -8,40 +8,13 @@ import Pagination from '../ui/Pagination';
 import Title from '../ui/Title';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
 import Spinner from '../Spinner';
+import { TCustomerReviewsProps } from './CustomerReviews.types';
 
-type TCustomerReviewsProps = {
-  className?: string;
-  data: {
-    reviews: {
-      list?: {
-        id: number;
-        comment: string | null;
-        insertedAt: string;
-        rating: number;
-        users: {
-          fullname: string | null;
-        } | null;
-      }[];
-      total?: number | null;
-      pages?: number | null;
-      page?: number | null;
-      isLoading?: boolean;
-    };
-    reviewsStatistics: {
-      list: {
-        rating: number;
-        count: number;
-      }[];
-      isLoading?: boolean;
-    };
-  };
-
-  onPageChange?: (page: number) => void;
-};
 function CustomerReviews({
   className,
   data,
   onPageChange,
+  onSubmit,
 }: TCustomerReviewsProps): JSX.Element {
   const { isLessTablet, isLessMobile, isLessMobileSmall } = useScreenWidth();
   const { reviews, reviewsStatistics } = data;
@@ -74,6 +47,7 @@ function CustomerReviews({
           <InputReview
             className="customer-reviews__input"
             type={isLessTablet ? 'column' : 'row'}
+            onSubmit={onSubmit}
           />
           {reviews.isLoading ? (
             <Spinner />

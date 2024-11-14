@@ -2,6 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import CustomerReviews from '../../components/CustomerReviews';
 import { useReviews } from './useReviews';
 import { useReviewsStatistics } from './useReviewsStatistics';
+import { TInputReviewForm } from '../../components/InputReview';
 
 type TCustomerReviewsContainerProps = {
   className?: string;
@@ -45,11 +46,16 @@ function CustomerReviewsContainer({
     setSearchParams(searchParams, { preventScrollReset: true });
   }
 
+  function handleSubmit(data: TInputReviewForm) {
+    console.log(data);
+  }
+
   return (
     <CustomerReviews
       className={className}
       data={data}
       onPageChange={handlePageChange}
+      onSubmit={handleSubmit}
     />
   );
 }
