@@ -4,6 +4,12 @@ import BlogCard from '../ui/BlogCard';
 
 import './BlogsSlider.scss';
 import ButtonSlider from '../ui/ButtonSlider';
+import img1 from '../../assets/img/blogs-slider/01.jpg';
+import img2 from '../../assets/img/blogs-slider/02.jpg';
+import img3 from '../../assets/img/blogs-slider/03.jpg';
+import imgSmall1 from '../../assets/img/blogs-slider/01-small.jpg';
+import imgSmall2 from '../../assets/img/blogs-slider/02-small.jpg';
+import imgSmall3 from '../../assets/img/blogs-slider/03-small.jpg';
 
 const DATA_SLIDER = [
   {
@@ -28,16 +34,16 @@ const DATA_SLIDER = [
       sources: [
         {
           media: '(min-width: 768px)',
-          srcSet: '/src/assets/img/blogs-slider/01.jpg',
+          srcSet: img1,
         },
         {
           media: '(max-width: 767px)',
-          srcSet: '/src/assets/img/blogs-slider/01-small.jpg',
+          srcSet: imgSmall1,
         },
       ],
       img: {
         alt: 'image of blog',
-        src: '/src/assets/img/blogs-slider/01.jpg',
+        src: img1,
         className: 'blog-card__img',
       },
     },
@@ -58,16 +64,16 @@ const DATA_SLIDER = [
       sources: [
         {
           media: '(min-width: 768px)',
-          srcSet: '/src/assets/img/blogs-slider/02.jpg',
+          srcSet: img2,
         },
         {
           media: '(max-width: 767px)',
-          srcSet: '/src/assets/img/blogs-slider/02-small.jpg',
+          srcSet: imgSmall2,
         },
       ],
       img: {
         alt: 'image of blog',
-        src: '/src/assets/img/blogs-slider/02.jpg',
+        src: img2,
         className: 'blog-card__img',
       },
     },
@@ -85,16 +91,16 @@ const DATA_SLIDER = [
       sources: [
         {
           media: '(min-width: 768px)',
-          srcSet: '/src/assets/img/blogs-slider/03.jpg',
+          srcSet: img3,
         },
         {
           media: '(max-width: 767px)',
-          srcSet: '/src/assets/img/blogs-slider/03-small.jpg',
+          srcSet: imgSmall3,
         },
       ],
       img: {
         alt: 'image of blog',
-        src: '/src/assets/img/blogs-slider/03.jpg',
+        src: img3,
         className: 'blog-card__img',
       },
     },

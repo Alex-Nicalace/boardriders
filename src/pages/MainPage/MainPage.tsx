@@ -10,6 +10,8 @@ import PageContent from '../../components/PageContent';
 import NewProductsSlider from '../../features/products/NewProductsSlider';
 import PopularProductsSlider from '../../features/products/PopularProductsSlider';
 import LinksBrandsContainer from '../../features/brands/LinksBrandsContainer';
+import img1 from '../../assets/img/promotion/01.jpg';
+import img1Small from '../../assets/img/promotion/01-small.jpg';
 
 // interface IMainPageProps {}
 function MainPage(): JSX.Element {
@@ -37,16 +39,16 @@ function MainPage(): JSX.Element {
         sources={[
           {
             media: '(min-width: 768px)',
-            srcSet: '/src/assets/img/promotion/01.jpg',
+            srcSet: img1,
           },
           {
             media: '(max-width: 767px)',
-            srcSet: '/src/assets/img/promotion/01-small.jpg',
+            srcSet: img1Small,
           },
         ]}
         img={{
           alt: 'promotion',
-          src: '/src/assets/img/promotion/01-small.jpg',
+          src: img1Small,
         }}
       />
       <div className="main-page__box-slider-ware">

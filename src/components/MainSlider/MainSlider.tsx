@@ -1,32 +1,35 @@
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
-
 import 'swiper/scss';
 import './MainSlider.scss';
 import { MainSliderButtons } from './MainSliderButtons';
 import { useScreenWidth } from '../../Context/useScreenWidthContext';
+import img1 from '../../assets/img/main-slider/01.jpg';
+import img2 from '../../assets/img/main-slider/02.jpg';
+import img3 from '../../assets/img/main-slider/03.jpg';
+import img4 from '../../assets/img/main-slider/04.webp';
+import imgSmall2 from '../../assets/img/main-slider/02-small.jpg';
 
-const PATH = '/src/assets/img/main-slider/';
 const DATA_SLIDES = [
   {
-    img: '01.jpg',
+    img: img1,
     to: '#',
     title: 'Lib Tech',
   },
   {
-    img: '02.jpg',
-    imgSmall: '02-small.jpg',
+    img: img2,
+    imgSmall: imgSmall2,
     to: '#',
     title: 'Winter Sale до -70%',
   },
   {
-    img: '03.jpg',
+    img: img3,
     to: '#',
     title: 'Winter Sale до -30%',
   },
   {
-    img: '04.webp',
+    img: img4,
     to: '#',
     title: 'Winter Sale до -20%',
   },
@@ -71,11 +74,11 @@ function MainSlider({ className = '' }: IMainSliderProps): JSX.Element {
                 <picture>
                   <source
                     media="(max-width: 991px)"
-                    srcSet={PATH + (slideData.imgSmall || slideData.img)}
+                    srcSet={slideData.imgSmall || slideData.img}
                   />
                   <img
                     className="main-slider__img"
-                    src={PATH + slideData.img}
+                    src={slideData.img}
                     alt="изображение слайда"
                   />
                 </picture>
