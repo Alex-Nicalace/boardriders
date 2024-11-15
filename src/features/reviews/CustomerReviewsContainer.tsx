@@ -4,6 +4,8 @@ import { useReviews } from './useReviews';
 import { useReviewsStatistics } from './useReviewsStatistics';
 import { TInputReviewForm } from '../../components/InputReview';
 import { useCreateReviews } from './useCreateReviews';
+import { useUser } from '../authentication/useUser';
+import toast from 'react-hot-toast';
 
 type TCustomerReviewsContainerProps = {
   className?: string;
@@ -23,6 +25,7 @@ function CustomerReviewsContainer({
     useReviewsStatistics();
   const [searchParams, setSearchParams] = useSearchParams();
   const { createReviews, isCreating } = useCreateReviews(productId);
+  const { isAuthenticated } = useUser();
 
   const data = {
     reviews: {
@@ -50,6 +53,10 @@ function CustomerReviewsContainer({
   }
 
   function handleSubmit(data: TInputReviewForm, onSuccess?: () => void) {
+    if (!isAuthenticated)
+      return toast.error(
+        'Комментарии могут оставлять только зарегистрированные пользователи'
+      );
     createReviews(data, {
       onSuccess: () => {
         handlePageChange(1);
