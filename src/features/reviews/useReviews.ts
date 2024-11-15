@@ -38,5 +38,5 @@ export function useReviews() {
     });
   }
 
-  return { reviews, isLoading, error, count, totalPage, pageNum };
+  return { reviews, isLoading, error, count, totalPage, pageNum, productId };
 }

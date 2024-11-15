@@ -3,6 +3,7 @@ import CustomerReviews from '../../components/CustomerReviews';
 import { useReviews } from './useReviews';
 import { useReviewsStatistics } from './useReviewsStatistics';
 import { TInputReviewForm } from '../../components/InputReview';
+import { useCreateReviews } from './useCreateReviews';
 
 type TCustomerReviewsContainerProps = {
   className?: string;
@@ -16,10 +17,12 @@ function CustomerReviewsContainer({
     isLoading: isLoadingReviews,
     totalPage,
     pageNum,
+    productId,
   } = useReviews();
   const { reviewsStatistics, isLoading: isLoadingStatistics } =
     useReviewsStatistics();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { createReviews, isCreating } = useCreateReviews(productId);
 
   const data = {
     reviews: {
@@ -46,14 +49,20 @@ function CustomerReviewsContainer({
     setSearchParams(searchParams, { preventScrollReset: true });
   }
 
-  function handleSubmit(data: TInputReviewForm) {
-    console.log(data);
+  function handleSubmit(data: TInputReviewForm, onSuccess?: () => void) {
+    createReviews(data, {
+      onSuccess: () => {
+        handlePageChange(1);
+        onSuccess?.();
+      },
+    });
   }
 
   return (
     <CustomerReviews
       className={className}
       data={data}
+      dasbledInput={isCreating}
       onPageChange={handlePageChange}
       onSubmit={handleSubmit}
     />

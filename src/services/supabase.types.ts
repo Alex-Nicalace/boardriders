@@ -659,7 +659,7 @@ export type Database = {
           insertedAt?: string;
           productId: number;
           rating: number;
-          userId: string;
+          userId?: string;
         };
         Update: {
           comment?: string | null;

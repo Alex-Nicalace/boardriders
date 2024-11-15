@@ -26,6 +26,7 @@ export type TCustomerReviewsProps = {
       isLoading?: boolean;
     };
   };
+  dasbledInput?: boolean;
 
   onPageChange?: (page: number) => void;
   onSubmit?: (data: TInputReviewForm) => void;

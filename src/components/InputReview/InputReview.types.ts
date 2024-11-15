@@ -1,10 +1,11 @@
 export type TInputReviewProps = {
   className?: string;
   type?: 'row' | 'column';
-  onSubmit?: (data: TInputReviewForm) => void;
+  disabled?: boolean;
+  onSubmit?: (data: TInputReviewForm, onSaccess?: () => void) => void;
 };
 
 export type TInputReviewForm = {
-  review: string;
+  comment: string;
   rating: number;
 };

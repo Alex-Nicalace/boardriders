@@ -10,7 +10,8 @@ import { TInputReviewForm, TInputReviewProps } from './InputReview.types';
 function InputReview({
   className,
   type = 'row',
-  onSubmit = () => {},
+  disabled,
+  onSubmit,
 }: TInputReviewProps): JSX.Element {
   const { isLessTablet } = useScreenWidth();
   const {
@@ -18,25 +19,36 @@ function InputReview({
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<TInputReviewForm>();
+    reset,
+  } = useForm<TInputReviewForm>({ defaultValues: { rating: 0 } });
   const bemBlockName = `input-review${type === 'column' ? '-column' : ''}`;
 
+  function handleFormSubmit(data: TInputReviewForm) {
+    onSubmit?.(data, reset);
+  }
+
   return (
-    <form className={className} onSubmit={handleSubmit(onSubmit)}>
+    <form className={className} onSubmit={handleSubmit(handleFormSubmit)}>
       <InputText
         bemBlockName={bemBlockName}
         placeholder="Оставьте отзыв"
+        disabled={disabled}
         endAdornment={
           <>
             <Controller
               name="rating"
               control={control}
-              rules={{ required: 'Укажите оценку' }}
-              render={({ field: { value, onChange } }) => (
+              rules={{
+                required: 'Укажите оценку',
+                min: { value: 1, message: 'Укажите оценку' },
+              }}
+              disabled={disabled}
+              render={({ field: { value, onChange, disabled } }) => (
                 <Rating
                   rating={value}
                   onChangeRating={onChange}
                   className={`${bemBlockName}__rating`}
+                  disabled={disabled}
                   iconActiveElement={
                     <StarIcon fill="#EB5757" stroke="#EB5757" />
                   }
@@ -49,11 +61,13 @@ function InputReview({
                 />
               )}
             />
-            <Button className={`${bemBlockName}__btn`}>Отправить</Button>
+            <Button className={`${bemBlockName}__btn`} disabled={disabled}>
+              Отправить
+            </Button>
           </>
         }
-        {...register('review', { required: 'Заполните поле "Отзыв"' })}
-        error={errors.review?.message || errors.rating?.message}
+        {...register('comment', { required: 'Заполните поле "Отзыв"' })}
+        error={errors.comment?.message || errors.rating?.message}
       />
     </form>
   );

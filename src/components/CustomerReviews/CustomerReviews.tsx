@@ -14,6 +14,7 @@ function CustomerReviews({
   className,
   data,
   onPageChange,
+  dasbledInput,
   onSubmit,
 }: TCustomerReviewsProps): JSX.Element {
   const { isLessTablet, isLessMobile, isLessMobileSmall } = useScreenWidth();
@@ -47,6 +48,7 @@ function CustomerReviews({
           <InputReview
             className="customer-reviews__input"
             type={isLessTablet ? 'column' : 'row'}
+            disabled={dasbledInput}
             onSubmit={onSubmit}
           />
           {reviews.isLoading ? (
@@ -72,7 +74,6 @@ function CustomerReviews({
                 totalPages={reviews.pages || 0}
                 visiblePageNumbers={isLessMobileSmall ? 3 : 4}
                 onPageChange={onPageChange}
-                // isShowNavigationButtons={!isLessMobileSmall}
               />
             </div>
           )}
