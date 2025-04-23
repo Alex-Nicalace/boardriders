@@ -30,12 +30,12 @@ function MainPage(): JSX.Element {
         </Title>
         <NewProductsSlider className="main-page__slider-ware" />
         <div className="main-page__container main-page__button-more">
-          <Button to="#">Показать больше</Button>
+          <Button to="catalog">Показать больше</Button>
         </div>
       </div>
       <Promotion
         className="main-page__promotion"
-        to="#"
+        to="catalog"
         sources={[
           {
             media: '(min-width: 768px)',

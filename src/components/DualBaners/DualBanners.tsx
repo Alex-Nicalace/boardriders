@@ -1,8 +1,10 @@
 import ListLinks from '../../component-library/ListLinks';
 import Banner from '../ui/Banner';
-import './DualBanners.scss';
+
 import img1 from '../../assets/img/dual-banners/01.jpg';
 import img2 from '../../assets/img/dual-banners/02.jpg';
+
+import './DualBanners.scss';
 
 const BANNERS_DATA = [
   {
@@ -27,8 +29,8 @@ function DualBanners({ className = '' }: TDualBanersProps): JSX.Element {
           listProps={{ className: 'dual-baners__list' }}
           itemProps={{ className: 'dual-baners__item' }}
           renderToItem={(value) => {
-            const { img, to, title } = value;
-            return <Banner img={img} title={title} to={to} />;
+            const { img, title } = value;
+            return <Banner img={img} title={title} to={`catalog`} />;
           }}
         />
       </div>

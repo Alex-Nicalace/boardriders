@@ -23,7 +23,7 @@ function JoinAndSubscrube({
           imgBg={imgBgJoin}
           text="Зарабатывайте баллы и получайте преимущества"
           actionElement={
-            <Button to="#" variant="reverse">
+            <Button variant="reverse" disabled>
               Вступить в клуб
             </Button>
           }
